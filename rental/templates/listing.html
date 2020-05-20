@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+    <p>{{ paginator.has_next }}</p>
+    <div class="container">
+        <div class="row justify-content-center">
+            {% for house in houses %}
+            <div class="card col-3 m-1">
+                <div class="card-body">
+                    <div class="card-text">
+                    {{ house.title }}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% if forloop.counter|divisibleby:"6" or forloop.last %}
+        </div> <!--end row-->
+        {% endif %}
+    </div>
+    <div class="container">
+    <div class="row justify-content-center">
+    {% if is_paginated %}
+      {% if page_obj.has_previous %}
+        <a class="btn btn-outline-info mb-4" href="?q={{searchq}}&page=1">First</a>
+        <a class="btn btn-outline-info mb-4" href="?q={{searchq}}&page={{ page_obj.previous_page_number }}">Previous</a>
+      {% endif %}
+
+      {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+          <a class="btn btn-info mb-4" href="?q={{searchq}}&page={{ num }}">{{ num }}</a>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+          <a class="btn btn-outline-info mb-4" href="?q={{searchq}}&page={{ num }}">{{ num }}</a>
+        {% endif %}
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+        <a class="btn btn-outline-info mb-4" href="?q={{searchq}}&page={{ page_obj.next_page_number }}">Next</a>
+        <a class="btn btn-outline-info mb-4" href="?q={{searchq}}&page={{ page_obj.paginator.num_pages }}">Last</a>
+      {% endif %}
+    {% endif %}
+    </div>
+    </div>
+
+{% endblock content %}

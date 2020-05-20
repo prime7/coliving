@@ -4,23 +4,10 @@ from django.core.validators import MinValueValidator,MaxValueValidator
 from datetime import datetime
 from django.utils.text import slugify
 from django.db.models.signals import pre_save
-
-class House(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
-    title = models.CharField(max_length=150)
-    description = models.CharField(max_length=1000)
-    duration = models.IntegerField(validators=[MinValueValidator(0),MaxValueValidator(30)], help_text="Duration for new lease in months")
-    earliest_move_in = models.DateField(default=datetime.now)
-    latest_move_out = models.DateField(default=datetime.now)
-    monthly_rent = models.DecimalField(max_digits=10, decimal_places=2, null=True)
-    slug = models.SlugField(unique=True)
-    
-    def __str__(self):
-        return self.title
+from django.urls import reverse
 
 
 class Address(models.Model):
-    house = models.ForeignKey(House,on_delete=models.CASCADE)
     lat = models.DecimalField(max_digits=22, decimal_places=16)
     lng = models.DecimalField(max_digits=22, decimal_places=16)
     address = models.CharField(max_length=100, null=True)
@@ -28,6 +15,21 @@ class Address(models.Model):
     def __str__(self):
         return self.address
 
+class House(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    address = models.ForeignKey(Address,on_delete=models.CASCADE)
+    title = models.CharField(max_length=150)
+    description = models.CharField(max_length=1000)
+    duration = models.IntegerField(validators=[MinValueValidator(0),MaxValueValidator(30)], help_text="Duration for new lease in months")
+    earliest_move_in = models.DateField(default=datetime.now)
+    latest_move_out = models.DateField(default=datetime.now)
+    monthly_rent = models.DecimalField(max_digits=10, decimal_places=2, null=True)
+    slug = models.SlugField(unique=True,blank=True)
+    
+    def __str__(self):
+        return self.title
+    # def get_absolute_url(self):
+    #     return reverse('list-detail', kwargs={'slug': self.slug})
 
 
 def create_slug(instance,new_slug = None):
