@@ -4,16 +4,18 @@
     <div class="container">
         <div class="row justify-content-center">
             {% for house in houses %}
-            <div class="card col-3 m-1">
+            <div class="card col-3 m-4">
                 <div class="card-body">
                     <div class="card-text">
-                    {{ house.title }}
+                      <a href="{% url 'list-detail' house.slug %}">
+                      {{ house.title }}
+                      </a>
                     </div>
                 </div>
             </div>
             {% endfor %}
         {% if forloop.counter|divisibleby:"6" or forloop.last %}
-        </div> <!--end row-->
+        </div>
         {% endif %}
     </div>
     <div class="container">

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView,DetailView
 from .models import House
 from django.db.models import Q,F
 
@@ -19,3 +19,17 @@ class RentalListView(ListView):
                 houses = houses.filter(Q(title__icontains=query)|Q(description__icontains=query)).distinct().order_by('-earliest_move_in')
                 return render(request, self.template_name, {'houses': houses})
         return super().get(request, *args, **kwargs)
+
+class RentalDetailView(DetailView):
+    model = House
+    template_name = "list-detail.html"
+    context_object_name = "house"
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        houses = House.objects.all()
+
+        context.update({
+            'houses' : houses ,
+        })
+        return context
