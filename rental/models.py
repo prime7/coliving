@@ -24,19 +24,33 @@ class House(models.Model):
     duration = models.IntegerField(validators=[MinValueValidator(0),MaxValueValidator(30)], help_text="Duration for new lease in months")
     earliest_move_in = models.DateField(default=datetime.now)
     latest_move_out = models.DateField(default=datetime.now)
-    monthly_rent = models.DecimalField(max_digits=10, decimal_places=2, null=True)
+    monthly_rent = models.DecimalField(max_digits=10, decimal_places=2, null=True,help_text="In Cad")
     slug = models.SlugField(unique=True,blank=True)
 
     lat = models.DecimalField(max_digits=22, decimal_places=16)
     lng = models.DecimalField(max_digits=22, decimal_places=16)
     address = models.CharField(max_length=100, null=True)
+    zip_code = models.CharField(max_length=10, null=True)
+    city = models.CharField(max_length=55, null=True)
+    state = models.CharField(max_length=55, null=True)
+
+    has_dishwasher = models.BooleanField(default=False, null=True)
+    pets_allowed = models.BooleanField(default=False, null=True)
+    heating = models.BooleanField(default=False, null=True)
+    has_closet = models.BooleanField(default=False, null=True)
+    is_furnished = models.BooleanField(default=False, null=True)
+    is_partially_furnished = models.BooleanField(default=False, null=True)
     
     def __str__(self):
         return self.title
+    
+    @property
     def get_gallery(self):
-        return Image.objects.all().filter(house=self.pk)
+        return Image.objects.filter(house=self.pk)
+    
+    @property
     def get_thumbnail(self):
-        cover = self.get_gallery().first()
+        cover = self.get_gallery.first()
         try:
             return cover.src.url
         except AttributeError:

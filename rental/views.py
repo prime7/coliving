@@ -20,6 +20,7 @@ class RentalListView(ListView):
         if request.GET:
             houses = House.objects.all()
             query = request.GET["q"]
+            print(houses)
             if query:
                 houses = houses.filter(Q(title__icontains=query)|Q(description__icontains=query)).distinct().order_by('-earliest_move_in')
                 return render(request, self.template_name, {'houses': houses})
@@ -38,15 +39,6 @@ class RentalDetailView(DetailView):
             'houses' : houses ,
         })
         return context
-
-# class RentalCreateView(LoginRequiredMixin, CreateView):
-#     model = House
-#     form_class = HouseCreateForm
-#     template_name = 'listing-create.html'
-
-#     def form_valid(self, form):
-#         form.instance.user = self.request.user
-#         return super().form_valid(form)
 
 
 class UserRentalListView(ListView):

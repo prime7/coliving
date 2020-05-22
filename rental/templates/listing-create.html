@@ -7,12 +7,91 @@
         <form method="POST" class="col-md-10 offset-md-1 card">
             {% csrf_token %}
             <fieldset class="form-group">
-                {% crispy form %}
-                <input type="file" name="images" accept="image/*" multiple required>
-                <div class="form-group">
+                <div class="form-row">
+                    <div class="form-group col-md-12 m-0">
+                      {{ form.title|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12 m-0">
+                      {{ form.description|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12 m-0">
+                      {{ form.address|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4 m-0">
+                      {{ form.city|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-4 m-0">
+                      {{ form.zip_code|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-4 m-0">
+                      {{ form.state|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-3 m-0">
+                      {{ form.duration|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-3 m-0">
+                      {{ form.monthly_rent|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-3 m-0">
+                      {{ form.earliest_move_in|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-3 m-0">
+                      {{ form.latest_move_out|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6 m-0">
+                      {{ form.lat|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-6 m-0">
+                      {{ form.lng|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-2 m-0">
+                      {{ form.has_dishwasher|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-2 m-0">
+                      {{ form.pets_allowed|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-2 m-0">
+                      {{ form.heating|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-2 m-0">
+                      {{ form.has_closet|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-2 m-0">
+                      {{ form.is_furnished|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-2 m-0">
+                      {{ form.is_partially_furnished|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4 offset-md-4">
+                        <input class="form-group" type="file" name="images" accept="image/*" multiple required>
+                    </div>
+                </div>
+                <div class="form-group text-center">
                     <button class="btn btn-outline-info" type="submit">Create</button>
                 </div>
             </fieldset>
+
+
+            <!-- <fieldset class="form-group">
+                <input class="form-group" type="file" name="images" accept="image/*" multiple required>
+                <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit">Create</button>
+                </div>
+            </fieldset> -->
         </form>
     </div>
 </div>
