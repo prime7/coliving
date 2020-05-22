@@ -5,8 +5,17 @@ from datetime import datetime
 from django.utils.text import slugify
 from django.db.models.signals import pre_save
 from django.urls import reverse
-from PIL import Image
+import uuid
+from io import BytesIO
+from os.path import splitext
+from django.core.files.base import ContentFile
+from PIL import Image as PILImage
+from resizeimage import resizeimage
+from resizeimage.imageexceptions import ImageSizeError
 
+
+def upload_image_path(instance, filename):
+    return "listing/{}/{}".format(instance.house.pk, filename)
 
 class House(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
@@ -17,7 +26,6 @@ class House(models.Model):
     latest_move_out = models.DateField(default=datetime.now)
     monthly_rent = models.DecimalField(max_digits=10, decimal_places=2, null=True)
     slug = models.SlugField(unique=True,blank=True)
-    featured_image = models.ImageField(default="default-listing.jpg",upload_to="listing")
 
     lat = models.DecimalField(max_digits=22, decimal_places=16)
     lng = models.DecimalField(max_digits=22, decimal_places=16)
@@ -25,19 +33,51 @@ class House(models.Model):
     
     def __str__(self):
         return self.title
-    
+    def get_gallery(self):
+        return Image.objects.all().filter(house=self.pk)
+    def get_thumbnail(self):
+        cover = self.get_gallery().first()
+        try:
+            return cover.src.url
+        except AttributeError:
+            return None
     def get_absolute_url(self):
         return reverse('listing-detail', kwargs={'slug': self.slug})
-    
+
+
+class Image(models.Model):
+    house = models.ForeignKey(House, on_delete=models.CASCADE)
+    src = models.ImageField(upload_to=upload_image_path,verbose_name='Image')
+
+    def __str__(self):
+        return self.house.title
+
     def save(self, **kwargs):
-        super().save()
-        img = Image.open(self.featured_image.path)
-        if img.height > 500 or img.width > 500:
-            output_size = (500, 500)
-            img.thumbnail(output_size)
-            img.save(self.featured_image.path)
+        name = uuid.uuid4()
+        _, extension = splitext(self.src.name)
+        pil_image = PILImage.open(self.src)
+        img_format = pil_image.format
+        image_io = BytesIO()
+        pil_image.save(
+            image_io, format=img_format
+        )
+        try:
+            new_image = resizeimage.resize_cover(pil_image, [1000, 1000])
+            new_image_io = BytesIO()
+            new_image.save(new_image_io, format=img_format)
+            self.src.save(
+                '%s%s' % (name, extension),
+                content=ContentFile(new_image_io.getvalue()),
+                save=False
+            )
+        except ImageSizeError:
+            self.src.save(
+                '%s%s' % (name, extension),
+                content=ContentFile(image_io.getvalue()),
+                save=False
+            )
 
-
+        super(Image, self).save(**kwargs)
 
 
 def create_slug(instance,new_slug = None):

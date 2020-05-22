@@ -1,7 +1,7 @@
 from django.shortcuts import render,get_object_or_404
 from django.views.generic import ListView,DetailView,CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .models import House,User
+from .models import House,User,Image
 from django.db.models import Q,F
 from django.contrib.auth.decorators import login_required
 from .forms import HouseCreateForm
@@ -39,37 +39,14 @@ class RentalDetailView(DetailView):
         })
         return context
 
-class RentalCreateView(LoginRequiredMixin, CreateView):
-    model = House
-    form_class = HouseCreateForm
-    template_name = 'listing-create.html'
+# class RentalCreateView(LoginRequiredMixin, CreateView):
+#     model = House
+#     form_class = HouseCreateForm
+#     template_name = 'listing-create.html'
 
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
-
-# @login_required
-# def rentalCreate(request):
-#     if request.method == 'POST':
-#         a_form = AddressCreateForm(request.POST, request.FILES or None)
-#         h_form = HouseCreateForm(request.POST,instance=request.user.profile)
-#         if a_form.is_valid() and h_form.is_valid():
-#             a = a_form.save()
-#             h = h_form.save(commit=False)
-#             obj = get_object_or_404(Address,id=a.id)
-#             h.address = obj
-#             h.save()
-#             messages.success(request, f'Your have successfully created listing')
-#             return redirect('listing-create')
-
-#     else:
-#         h_form = HouseCreateForm()
-
-#     context = {
-#         'h_form': h_form
-#     }
-
-#     return render(request, "listing-create.html", context)
+#     def form_valid(self, form):
+#         form.instance.user = self.request.user
+#         return super().form_valid(form)
 
 
 class UserRentalListView(ListView):
@@ -81,4 +58,18 @@ class UserRentalListView(ListView):
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
         return House.objects.filter(user=user).order_by('-earliest_move_in')
+    
+class RentalCreateView(LoginRequiredMixin, CreateView):
+    model = House
+    form_class = HouseCreateForm
+    template_name = "listing-create.html"
+    context_object_name = "form"
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        obj = form.save()
+        files = self.request.FILES.getlist('images')
+        for f in files:
+            Image.objects.create(house=obj,src=f)
+        return super().form_valid(form)
     

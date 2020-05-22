@@ -4,7 +4,7 @@
         <div class="row justify-content-center">
             {% for house in houses %}
             <div class="card col-3 m-0 p-0">
-                <img class="card-img-top" src="{{house.featured_image.url }}" alt="Card image cap">
+                <img class="card-img-top" src="{{house.get_thumbnail }}" alt="Card image cap">
                 <div class="card-body">
                     <div class="card-text">
                       <a href="{% url 'listing-detail' house.slug %}">
