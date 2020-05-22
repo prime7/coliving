@@ -1,10 +1,9 @@
 from django import forms
-from .models import Address,House
+from .models import House
 
-class AddressCreateForm(forms.ModelForm):
-    class Meta:
-        model = Address
-        fields = ['lat','lng','address',]
+
+class DateInput(forms.DateInput):
+    input_type = 'date'
 
 class HouseCreateForm(forms.ModelForm):
     class Meta:
@@ -15,5 +14,11 @@ class HouseCreateForm(forms.ModelForm):
             'duration',
             'earliest_move_in',
             'latest_move_out',
-            'monthly_rent'
+            'monthly_rent',
+            'lat',
+            'lng',
+            'address'
         ]
+        widgets = {
+            'earliest_move_in': DateInput(attrs={'type': 'date'}),
+        }

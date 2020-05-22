@@ -1,14 +1,20 @@
 {% extends "base.html" %}
 {% block content %}
-    <p>{{ paginator.has_next }}</p>
     <div class="container">
         <div class="row justify-content-center">
             {% for house in houses %}
-            <div class="card col-3 m-4">
+            <div class="card col-3 m-0 p-0">
+                <img class="card-img-top" src="{{house.featured_image.url }}" alt="Card image cap">
                 <div class="card-body">
                     <div class="card-text">
-                      <a href="{% url 'list-detail' house.slug %}">
+                      <a href="{% url 'listing-detail' house.slug %}">
                       {{ house.title }}
+                      </a>
+                    </div>
+                    <hr/>
+                    <div class="card-text">
+                      <a href="{% url 'listing-user' house.user.username %}">
+                      {{ house.user.email }}
                       </a>
                     </div>
                 </div>

@@ -2,11 +2,9 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="container">
-  <div class="row justify-content-sm-center">
-    <div class="col-sm-10 col-md-6">
-    <div class="card">
+  <div class="row">
+    <div class="col-md-6 offset-md-3 card">
       <div class="media">
-        <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
         <div class="media-body">
           <h2 class="account-heading">{{ user.username }}</h2>
           <p class="text-secondary">{{ user.email }}</p>
@@ -23,7 +21,6 @@
               <button class="btn btn-outline-info" type="submit">Update</button>
           </div>
       </form>
-    </div>
     </div>
     </div>
     </div>
