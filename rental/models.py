@@ -44,13 +44,11 @@ class House(models.Model):
     def __str__(self):
         return self.title
     
-    @property
     def get_gallery(self):
         return Image.objects.filter(house=self.pk)
     
-    @property
     def get_thumbnail(self):
-        cover = self.get_gallery.first()
+        cover = self.get_gallery().first()
         try:
             return cover.src.url
         except AttributeError:

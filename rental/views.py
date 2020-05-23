@@ -60,8 +60,11 @@ class RentalCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         obj = form.save()
+        print(obj)
         files = self.request.FILES.getlist('images')
+        print(files)
         for f in files:
+            print(f)
             Image.objects.create(house=obj,src=f)
         return super().form_valid(form)
     
