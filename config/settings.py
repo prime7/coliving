@@ -134,3 +134,12 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/login'
+
+
+if DEBUG:
+    STRIPE_PUBLISHABLE_KEY = 'pk_test_LjiJbtnynD8nBoTMpiLn6nmd00DyA1ZmR8'
+    STRIPE_SECRET_KEY = 'sk_test_TTNiWBi7sZDBXY8jZB6YZKxY00JoSTen7D'
+
+else:
+    STRIPE_PUBLISHABLE_KEY = ''
+    STRIPE_SECRET_KEY = ''
