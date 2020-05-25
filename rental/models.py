@@ -43,12 +43,21 @@ class House(models.Model):
     
     def __str__(self):
         return self.title
+
+    @property
+    def get_monthly_rent(self):
+        return "$"+str(self.monthly_rent)+"/month"
+    @property
+    def get_address(self):
+        return self.address+" "+self.city+" "+self.state
     
+    @property
     def get_gallery(self):
         return Image.objects.filter(house=self.pk)
     
+    @property
     def get_thumbnail(self):
-        cover = self.get_gallery().first()
+        cover = self.get_gallery.first()
         try:
             return cover.src.url
         except AttributeError:
@@ -109,3 +118,12 @@ def pre_save_post_receiver(sender,instance,*args,**kwargs):
     
 
 pre_save.connect(pre_save_post_receiver,sender=House)
+
+
+class Lead(models.Model):
+    email = models.EmailField()
+    phone_number = models.CharField(max_length=13)
+    link = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.email

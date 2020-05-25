@@ -1,12 +1,115 @@
 {% extends "base.html" %}
 {% block content %}
-    <div class="container">
+    <div class="container mt-3 mb-5">
         <div class="row">
-            <div class="card col-md-4 offset-md-4">
-                <div class="row">{{ house.title }}</div>
-                <div class="row">{{ house.earliest_move_in }}</div>
-                <div class="row">{{ house.latest_move_out }}</div>
-                <div class="row">{{ house.monthly_rent }}$</div>
+            <div class="card col-md-12">
+                <div id="carouselExampleInterval" class="carousel slide mb-5" data-ride="carousel">
+                    <div class="carousel-inner" style="height: 450px;">
+                        {% for image in house.get_gallery %}
+                        <div class="carousel-item {% if forloop.first %} active {% endif %}" data-interval="10000">
+                            <img src="{{ image.src.url }}" class="d-block w-100" alt="...">
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Next</span>
+                    </a>
+                </div>
+                <div class="row">
+                    <div class="col-8">
+                        <h2>{{ house.title }}</h2>
+                        <p>{{ house.get_address }}</p>
+                        <h2>Description</h2>
+                        <small>{{ house.description }}</small>
+                        <div class="card p-2 mb-4">
+                            <h5>Amenities</h5>
+                            <ul>
+                            {% if house.has_dishwasher %}
+                                <li>Dishwasher</li>
+                            {% endif %}
+                            {% if house.pets_allowed %}
+                                <li>Pets allowed</li>
+                            {% endif %}
+                            {% if house.heating %}
+                                <li>Heating Included</li>
+                            {% endif %}
+                            {% if house.has_closet %}
+                                <li>Closet</li>
+                            {% endif %}
+                            {% if house.is_furnished %}
+                                <li>Fully Furnished</li>
+                            {% elif house.is_partially_furnished %}
+                                <li>Partially Furnished</li>
+                            {% endif %}
+                            </ul>
+                        </div>
+                        <div class="card p-2 mb-5">
+                            <small>Uploaded by : 
+                              <a href="{% url 'listing-user' house.user.username %}">{{ house.user.profile.name }}</a>
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-4 card pt-4">
+                        <h2>{{ house.get_monthly_rent}}</h2>
+                        <hr>
+                        <h2>Availabilty</h2>
+                        <div class="row no-gutters">
+                            <p class="col-md-4">Duration</p>
+                            <p class="col-md-4 offset-md-4"> {{house.duration}} months</p>
+                        </div>
+                        <div class="row no-gutters">
+                            <p class="col-md-4">Earliest move in</p>
+                            <p class="col-md-4 offset-md-4"> {{house.earliest_move_in}}</p>
+                        </div>
+                        <div class="row no-gutters">
+                            <p class="col-md-4">Earliest move out</p>
+                            <p class="col-md-4 offset-md-4"> {{house.latest_move_out}}</p>
+                        </div>
+                        <hr/>
+                        <div class="row no-gutters p-2">
+                            <i class="fas fa-redo">Option to re-sign</i>
+                        </div>
+                        <div class="row no-gutters p-2">
+                            <button class="btn btn-warning btn-lg btn-block" data-toggle="modal" data-target="#staticBackdrop">Connect</button>
+                            <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="staticBackdropLabel">Get lister detail</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label for="inputEmail">Your Email</label>
+                                                <input type="email" class="form-control" id="inputEmail" required name="email">
+                                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputPhone">Your Phone Number</label>
+                                                <input type="number" class="form-control" id="inputPhone" required name="phone">
+                                                <small id="emailHelp" class="form-text text-muted">We'll never share your phone number with anyone else.</small>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Connect</button>
+                                        </div>
+                                    </form>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
