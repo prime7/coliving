@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 def home(request):
-    return render(request,"base.html")
+    return render(request,"home.html")
 
 
 def signup(request):

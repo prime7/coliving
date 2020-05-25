@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     'accounts',
     'rental',
+    'memberships',
 
     'crispy_forms',
 ]
@@ -67,6 +68,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'memberships.context_processors.get_user_membership',
             ],
         },
     },
@@ -123,7 +125,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static_root'), ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
@@ -141,5 +145,5 @@ if DEBUG:
     STRIPE_SECRET_KEY = 'sk_test_TTNiWBi7sZDBXY8jZB6YZKxY00JoSTen7D'
 
 else:
-    STRIPE_PUBLISHABLE_KEY = ''
-    STRIPE_SECRET_KEY = ''
+    STRIPE_PUBLISHABLE_KEY = 'pk_test_LjiJbtnynD8nBoTMpiLn6nmd00DyA1ZmR8'
+    STRIPE_SECRET_KEY = 'sk_test_TTNiWBi7sZDBXY8jZB6YZKxY00JoSTen7D'

@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+	<h1>Select a membership</h1>
+	<p class="lead">Quickly build an effective pricing table for your potential customers with this Bootstrap example. It’s built with default Bootstrap components and utilities with little customization.</p>
+</div>
+<div class="container">
+	<div class="card-deck mb-3 text-center">
+		{% for object in object_list %}
+		<div class="card mb-4 shadow-sm">
+			<div class="card-header">
+				<h4>{{ object.membership_type }}</h4>
+			</div>
+			<div class="card-body">
+			<h1 class="card-title pricing-card-title">${{ object.price }} <small class="text-muted">/ mo</small></h1>
+			{% if object.membership_type != 'Free' %}
+				<ul class="list-unstyled mt-3 mb-4">
+					<li>10 users included</li>
+					<li>2 GB of storage</li>
+					<li>Email support</li>
+					<li>Help center access</li>
+				</ul>
+			{% endif %}
+			{% if object.membership_type == 'Free' %}
+				<ul class="list-unstyled mt-3 mb-4">
+					<li>10 users included</li>
+					<li>2 GB of storage</li>
+					<li>Email support</li>
+					<li>Help center access</li>
+				</ul>
+			{% endif %}
+			{% if object.membership_type == 'Free' %}
+				<small>Already Selected</small>
+			{% endif %}
+			{% if object.membership_type != 'Free' %}
+				<form method="POST" action="{% url 'memberships:select' %}">
+					{% csrf_token %}
+					{% if object.membership_type != current_membership %}
+						<button class="btn btn-lg btn-block btn-warning">Select</button>
+					{% else %}
+						<small class="text-dark">This is your current membership</small>
+					{% endif %}
+					<input type="hidden" name="membership_type" value="{{ object.membership_type }}">
+				</form>			
+			{% endif %}	
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+</div>
+
+
+
+{% endblock content %}

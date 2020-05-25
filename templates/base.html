@@ -35,7 +35,7 @@
     {% if title %}
         <title>QuoteShack - {{ title }}</title>
     {% else %}
-        <title>QuoteShack</title>
+        <title>QuoteShack | The easiest way to sublet your lease</title>
     {% endif %}
   </head>
   <body>
@@ -53,13 +53,17 @@
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
               {% if user.is_authenticated %}
-              <a class="nav-item nav-link m-2" href="{% url 'listing' %}">Listing</a>
               <a class="nav-item nav-link m-2" href="{% url 'listing-create' %}">Create</a>
               <a class="nav-item nav-link m-2" href="{% url 'profile' %}">Profile</a>
+              <a class="nav-item nav-link m-2" href="{% url 'listing' %}">Listing</a>
               <a class="nav-item nav-link m-2" href="{% url 'logout' %}">Logout</a>
+              {% if membership == 'Free' %}
+                <a class="nav-item nav-link m-2 btn btn-warning text-dark" href="{% url 'memberships:select' %}">Become a Landlord</a>
+              {% endif %}
               {% else %}
-                <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
-                <a class="nav-item nav-link" href="{% url 'signup' %}">Register</a>
+                <a class="nav-item nav-link m-2" href="{% url 'listing' %}">Listing</a>
+                <a class="nav-item nav-link m-2" href="{% url 'login' %}">Login</a>
+                <a class="nav-item nav-link m-2" href="{% url 'signup' %}">Register</a>
               {% endif %}
             </div>
           </div>
