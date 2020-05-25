@@ -45,7 +45,7 @@ class RentalDetailView(DetailView):
 
         if not Lead.objects.filter(email=email,phone_number=phone_number,link=link).exists():
             Lead.objects.create(email=email,phone_number=phone_number,link=link)
-
+        # TODO: Send email about the lister
         return self.render_to_response(context=context)
 
 class UserRentalListView(ListView):
@@ -58,7 +58,7 @@ class UserRentalListView(ListView):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
         return House.objects.filter(user=user).order_by('-earliest_move_in')
     
-class RentalCreateView(LoginRequiredMixin, CreateView):
+class RentalCreateView(LoginRequiredMixin,UserPassesTestMixin, CreateView):
     model = House
     form_class = HouseCreateForm
     template_name = "listing-create.html"
@@ -71,4 +71,14 @@ class RentalCreateView(LoginRequiredMixin, CreateView):
         for f in files:
             Image.objects.create(house=obj,src=f)
         return super().form_valid(form)
+
+    def test_func(self):
+        from memberships.views import get_user_membership
+        if get_user_membership(self.request).membership.membership_type == 'Free':
+            return False
+        return True
+
+    def handle_no_permission(self):
+        # return redirect("memberships:select")
+        return render(self.request,"upgrade-membership.html")
     
