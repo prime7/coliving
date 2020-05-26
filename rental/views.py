@@ -4,9 +4,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import House,User,Image,Lead
 from django.db.models import Q,F
 from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from .forms import HouseCreateForm
 from django.contrib import messages
 from django.shortcuts import render, redirect
+
 
 class RentalListView(ListView):
     model = House
@@ -58,6 +60,9 @@ class UserRentalListView(ListView):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
         return House.objects.filter(user=user).order_by('-earliest_move_in')
     
+
+
+@method_decorator(login_required(login_url='/login'), name='dispatch')
 class RentalCreateView(LoginRequiredMixin,UserPassesTestMixin, CreateView):
     model = House
     form_class = HouseCreateForm
@@ -79,6 +84,5 @@ class RentalCreateView(LoginRequiredMixin,UserPassesTestMixin, CreateView):
         return True
 
     def handle_no_permission(self):
-        # return redirect("memberships:select")
         return render(self.request,"upgrade-membership.html")
     

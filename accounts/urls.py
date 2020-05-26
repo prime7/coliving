@@ -3,12 +3,13 @@ from accounts import views
 from django.contrib.auth import views as auth_views
 
 
+app_name = 'accounts'
 urlpatterns = [
     path('',views.home, name="home"),
     path('signup/',views.signup,name="signup"),
-    path('profile-detail/', views.profileDetail, name='profile-detail'),
-    path('profile-membership/', views.profileMembership, name='profile-membership'),
-    path('profile-lease/', views.ProfileLease.as_view(), name='profile-lease'),
+    path('profile-detail/', views.profileDetail, name='detail'),
+    path('profile-membership/', views.profileMembership, name='membership'),
+    path('profile-lease/', views.ProfileLease.as_view(), name='lease'),
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='logout.html'), name='logout'),
     path('password-reset/',auth_views.PasswordResetView.as_view(template_name='password_reset.html'),name='password_reset'),

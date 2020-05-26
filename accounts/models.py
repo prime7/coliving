@@ -6,6 +6,7 @@ from django.dispatch import receiver
 from time import time
 from django.utils.text import slugify
 
+
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True)
     username = models.SlugField(unique=True,blank=True)
@@ -32,6 +33,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 class Profile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE, related_name='profile')
     name = models.CharField(max_length=50)
+    # TODO: Add profile pic and mobile number and mobile number varified field
 
     def __str__(self):
         return f'{self.user.email}s Profile'

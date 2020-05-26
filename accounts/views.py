@@ -9,6 +9,9 @@ from django.contrib import messages
 from django.views.generic import ListView
 from rental.models import House
 from memberships.views import get_user_membership,get_user_subscription
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+
 
 def home(request):
     return render(request,"home.html")
@@ -52,7 +55,6 @@ def profileDetail(request):
 def profileMembership(request):
     user_membership = get_user_membership(request)
     user_subscription = get_user_subscription(request)
-    print(user_membership.membership)
     context = {
         'user_membership': user_membership,
         'user_subscription': user_subscription
@@ -60,7 +62,7 @@ def profileMembership(request):
     return render(request, 'profile-membership.html', context)
 
 
-class ProfileLease(ListView):
+class ProfileLease(LoginRequiredMixin ,ListView):
     model = House
     template_name = 'profile-leases.html'
     context_object_name = 'houses'

@@ -3,6 +3,7 @@ from .validators import validateEmail
 from .models import Profile
 from django.contrib.auth.password_validation import validate_password
 
+
 class UserRegisterForm(forms.Form):
     email = forms.EmailField(validators=[validateEmail],label='Email')
     password1 = forms.CharField(validators=[validate_password],widget=forms.PasswordInput(),label='Password')
@@ -15,7 +16,6 @@ class UserRegisterForm(forms.Form):
 
         if password != confirm_password:
             raise forms.ValidationError("passwords does not match")
-
 
 
 class ProfileUpdateForm(forms.ModelForm):
