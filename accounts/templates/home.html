@@ -2,5 +2,64 @@
 {% load crispy_forms_tags %}    
 
 {% block content %}
-HomePage
+<div class="text-dark text-center bg">
+    <div class="container">
+      <div class="row section-margin">
+        <div class="col-xl-9 mx-auto">
+          <h1 class="mb-5">The easiest way to sublet or get out of your lease, and it's 100% free for listers.</h1>
+        </div>
+        <div class="col-md-10 col-lg-8 col-xl-7 mx-auto searchBar">
+          <form method='GET' action="{% url 'listing' %}">
+            <div class="form-row">
+              <div class="col-12 col-md-9 mb-2 mb-md-0">
+                <input type='text' class="form-control form-control-lg" name='q' placeholder='Search Listings' value='{{ request.GET.q }}'>
+              </div>
+              <div class="col-12 col-md-3">
+                <button type="submit" class="btn btn-block btn-lg btn-primary">Search</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+</div>
+<section class="bg-light text-center section-margin">
+  <div class="container">
+    <div class="row ">
+      <div class="col-lg-4">
+        <div class="mx-auto mb-5 mb-lg-0 mb-lg-3">
+            <i class="fas fa-desktop m-auto text-primary home-icons"></i>
+          <h3>Fully Responsive</h3>
+          <p class="lead mb-0">This theme will look great on any device, no matter the size!</p>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="mx-auto mb-5 mb-lg-0 mb-lg-3">
+            <i class="fas fa-layer-group m-auto text-primary home-icons"></i>
+          <h3>Bootstrap 4 Ready</h3>
+          <p class="lead mb-0">Featuring the latest build of the new Bootstrap 4 framework!</p>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="mx-auto mb-0 mb-lg-3">
+            <i class="fas fa-check m-auto text-primary home-icons"></i>
+          <h3>Easy to Use</h3>
+          <p class="lead mb-0">Ready to use with your own content, or customize the source files!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="page-section section-margin" id="about">
+  <div class="container">
+      <div class="row justify-content-center">
+          <div class="col-lg-8 text-center">
+              <h2 class="text-dark mt-0">We've got what you need!</h2>
+              <hr class="divider light my-4">
+              <p class="text-dark-50 mb-4">Start Bootstrap has everything you need to get your new website up and running in no time! Choose one of our open source, free to download, and easy to use themes! No strings attached!</p>
+              <a class="btn btn-lg btn-warning">Get Started!</a>
+          </div>
+      </div>
+  </div>
+</section>
 {% endblock content %}

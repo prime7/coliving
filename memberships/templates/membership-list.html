@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-	<h1>Select a membership</h1>
-	<p class="lead">Quickly build an effective pricing table for your potential customers with this Bootstrap example. It’s built with default Bootstrap components and utilities with little customization.</p>
+<div class="container">
+	<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+		<h1>Select a membership</h1>
+		<p class="lead">Quickly build an effective pricing table for your potential customers with this Bootstrap example. It’s built with default Bootstrap components and utilities with little customization.</p>
+	</div>
 </div>
 <div class="container">
 	<div class="card-deck mb-3 text-center">
@@ -16,18 +18,21 @@
 			<h1 class="card-title pricing-card-title">${{ object.price }} <small class="text-muted">/ mo</small></h1>
 			{% if object.membership_type != 'Free' %}
 				<ul class="list-unstyled mt-3 mb-4">
-					<li>10 users included</li>
+					<li>Full service without hiring anyone</li>
 					<li>2 GB of storage</li>
-					<li>Email support</li>
-					<li>Help center access</li>
+					<li>24/7 Customer Support</li>
+					<li>Security Deposit Gurantee<small><sup>Coming Soon</sup></small></li>
+					<li>Messaging<small><sup>Coming Soon</sup></small></li>
 				</ul>
-			{% endif %}
-			{% if object.membership_type == 'Free' %}
+				{% endif %}
+				{% if object.membership_type == 'Free' %}
 				<ul class="list-unstyled mt-3 mb-4">
-					<li>10 users included</li>
-					<li>2 GB of storage</li>
+					<li>Basic listings</li>
+					<li>Free Service</li>
+					<li>Tenant Verifications</li>
 					<li>Email support</li>
-					<li>Help center access</li>
+					<li>Security Deposit Gurantee<small><sup>Coming Soon</sup></small></li>
+					<li>Messaging<small><sup>Coming Soon</sup></small></li>
 				</ul>
 			{% endif %}
 			{% if object.membership_type == 'Free' %}

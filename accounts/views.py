@@ -27,7 +27,7 @@ def signup(request):
             user.save()
             user = authenticate(email=email,password=password1)
             login(request, user)    
-            return HttpResponseRedirect(reverse('home'))
+            return HttpResponseRedirect(reverse('accounts:home'))
     else:
         form = UserRegisterForm()
     return render(request, 'signup.html', {'form': form})

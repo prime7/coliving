@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -5,11 +6,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Fontawesome -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
     <script src="https://kit.fontawesome.com/7521df1375.js" crossorigin="anonymous"></script> 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style>
         body{
-            padding-top: 80px;
+            padding-top: 77px;
             line-height: 1.5;
             background: #fafafa;
         }
@@ -72,7 +74,7 @@
                 <a class="nav-item nav-link m-2" href="{% url 'listing' %}">Listing</a>
                 <a class="nav-item nav-link m-2" href="{% url 'accounts:login' %}">Login</a>
                 <a class="nav-item nav-link m-2" href="{% url 'accounts:signup' %}">Register</a>
-                <a class="nav-item nav-link m-2 btn btn-warning text-dark" href="{% url 'memberships:select' %}">Become a Landlord</a>
+                <a class="nav-item nav-link m-2 btn btn-warning text-dark" href="{% url 'accounts:signup' %}">Become a Landlord</a>
               {% endif %}
             </div>
           </div>
@@ -80,6 +82,7 @@
       </nav>
 
     
+    {% block content %}
     <div class="container">
       <div class="row justify-content-center align-items-center">
         {% if messages %}
@@ -89,9 +92,22 @@
             </div>
           {% endfor %}
         {% endif %}
-        {% block content %}{% endblock %}
       </div>
     </div>
+    {% endblock %}
+    <footer class="footer py-4 mt-5 ">
+      <div class="container">
+          <div class="row align-items-center">
+              <div class="col-lg-4 text-lg-left">Copyright © Your Website 2020</div>
+              <div class="col-lg-4 my-3 my-lg-0">
+                  <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
+                  <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
+                  <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
+              </div>
+              <div class="col-lg-4 text-lg-right"><a class="mr-3" href="#!">Privacy Policy</a><a href="#!">Terms of Use</a></div>
+          </div>
+      </div>
+    </footer>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

@@ -80,7 +80,7 @@ class RentalCreateView(LoginRequiredMixin,UserPassesTestMixin, CreateView):
     def test_func(self):
         from memberships.views import get_user_membership
         if get_user_membership(self.request).membership.membership_type == 'Free':
-            return False
+            return True
         return True
 
     def handle_no_permission(self):

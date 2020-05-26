@@ -1,0 +1,33 @@
+.bg {
+    background-color: #212529;
+    background-image: url('/static/img/back.jpg');
+    height: 100vh; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-shadow: 1 1px black;
+}
+
+.section-margin{
+    margin-top: 25vh;
+}
+.home-icons {
+    font-size: 4.5rem;
+    color: white;
+}
+
+@keyframes float {
+	0% {
+		transform: translatey(0px);
+	}
+	50% {
+		transform: translatey(-10px);
+	}
+	100% {
+		transform: translatey(0px);
+	}
+}
+
+.searchBar{
+    animation: float 3s ease-in-out infinite;
+}
