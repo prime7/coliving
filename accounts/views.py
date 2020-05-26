@@ -6,6 +6,9 @@ from .forms import UserRegisterForm,ProfileUpdateForm
 from .models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.views.generic import ListView
+from rental.models import House
+from memberships.views import get_user_membership,get_user_subscription
 
 def home(request):
     return render(request,"home.html")
@@ -28,7 +31,7 @@ def signup(request):
 
 
 @login_required
-def profile(request):
+def profileDetail(request):
     if request.method == 'POST':
         p_form = ProfileUpdateForm(request.POST,instance=request.user.profile)
         if p_form.is_valid():
@@ -43,4 +46,25 @@ def profile(request):
         'p_form': p_form
     }
 
-    return render(request, 'profile.html', context)
+    return render(request, 'profile-detail.html', context)
+
+@login_required
+def profileMembership(request):
+    user_membership = get_user_membership(request)
+    user_subscription = get_user_subscription(request)
+    print(user_membership.membership)
+    context = {
+        'user_membership': user_membership,
+        'user_subscription': user_subscription
+    }
+    return render(request, 'profile-membership.html', context)
+
+
+class ProfileLease(ListView):
+    model = House
+    template_name = 'profile-leases.html'
+    context_object_name = 'houses'
+    paginate_by = 5
+
+    def get_queryset(self):
+        return House.objects.filter(user=self.request.user).order_by('-earliest_move_in')

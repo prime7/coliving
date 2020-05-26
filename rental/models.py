@@ -40,6 +40,9 @@ class House(models.Model):
     has_closet = models.BooleanField(default=False, null=True)
     is_furnished = models.BooleanField(default=False, null=True)
     is_partially_furnished = models.BooleanField(default=False, null=True)
+
+    # TODO: Uploaded at model add
+    # TODO: option to re-sign
     
     def __str__(self):
         return self.title

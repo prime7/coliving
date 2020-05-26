@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-md-3 card p-4">
+      <ul>
+        <li><a href="{% url 'profile-detail' %}">Personal Details</a></li>
+        <li><a href="{% url 'profile-membership' %}">Account Details</a></li>
+        <li><a href="{% url 'profile-lease' %}">My Leases</a></li>
+      </ul>
+    </div>
+    <div class="col-md-6 offset-1">
+      <div class="card card p-3">
+        {% if user_membership.membership.membership_type == 'Free' %}
+          <p>You don't have an active membership plan. 
+            <a href="{% url 'memberships:select' %}">Check them out here</a>
+          </p>
+        {% elif user_subscription.active != False %}
+          <h4>Current Membership: {{ user_membership.membership.membership_type }} <hr> 
+          <small>Member since {{ user_subscription.get_created_date }}</small></h4>
+          <p>Next payment due: {{ user_subscription.get_next_billing_date }}</p> <hr>
+					<a href="{% url 'memberships:cancel' %}">Cancel subscription</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
