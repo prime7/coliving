@@ -10,7 +10,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 
 
-class RentalListView(ListView):
+class LeaseListView(ListView):
     model = House
     template_name = "listing.html"
     paginate_by = 6
@@ -26,13 +26,13 @@ class RentalListView(ListView):
                 return render(request, self.template_name, {'houses': houses})
         return super().get(request, *args, **kwargs)
 
-class RentalDetailView(DetailView):
+class LeaseDetailView(DetailView):
     model = House
     template_name = "listing-detail.html"
 
     def post(self,request,*args,**kwargs):
         self.object = self.get_object()
-        context = context = super(RentalDetailView, self).get_context_data(**kwargs)
+        context = context = super(LeaseDetailView, self).get_context_data(**kwargs)
         messages.info(request, 'Please check your email inbox')
         
         email = request.POST['email']
@@ -50,7 +50,7 @@ class RentalDetailView(DetailView):
         # TODO: Send email about the lister
         return self.render_to_response(context=context)
 
-class UserRentalListView(ListView):
+class UserLeaseListView(ListView):
     model = House
     template_name = 'listing-user.html'
     context_object_name = 'houses'
@@ -63,7 +63,7 @@ class UserRentalListView(ListView):
 
 
 @method_decorator(login_required(login_url='/login'), name='dispatch')
-class RentalCreateView(LoginRequiredMixin,UserPassesTestMixin, CreateView):
+class LeaseCreateView(LoginRequiredMixin,UserPassesTestMixin, CreateView):
     model = House
     form_class = HouseCreateForm
     template_name = "listing-create.html"

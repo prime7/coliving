@@ -1,10 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
     <div class="container">
+        <div class="row justify-content-center mt-4">
+          {% include "includes/search.html" %}
+        </div>
+    </div>
+    <div class="container">
         <div class="row justify-content-center">
             {% for house in houses %}
             <div class="card col-md-3 col-sm-12 m-4 p-0">
-                <img class="card-img-top" src="{{house.get_thumbnail }}" style="min-height: 250px;" alt="Card image cap">
+                <img class="card-img-top" src="{{ house.get_thumbnail }}" style="min-height: 250px;" alt="Card image cap">
                 <div class="card-body m-0 p-0">
                     <div class="card-text m-2">
                       <small>{{ house.monthly_rent }}$/month</small>
@@ -19,8 +24,12 @@
                     </div>
                     <hr/>
                     <div class="card-text m-2">
-                      <small>Uploaded by : 
-                        <a href="{% url 'listing-user' house.user.username %}">{{ house.user.profile.name }}</a>
+                      <small>Uploaded by :
+                        {% if house.user.profile.name %} 
+                          <a href="{% url 'listing-user' house.user.username %}">{{ house.user.profile.name }}</a>
+                        {% else %}
+                          <a href="{% url 'listing-user' house.user.username %}">{{ house.user.username }}</a>
+                        {% endif %}
                       </small>
                     </div>
                 </div>

@@ -7,7 +7,7 @@ from .models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.views.generic import ListView
-from rental.models import House
+from leases.models import House
 from memberships.views import get_user_membership,get_user_subscription
 from django.contrib.auth.mixins import LoginRequiredMixin
 

@@ -31,3 +31,11 @@
 .searchBar{
     animation: float 3s ease-in-out infinite;
 }
+
+/* HOME SECTION */
+
+
+/* CREATE LISTING SECTION  */
+.section-margin-create-listing{
+    margin-top: 100px;
+}
