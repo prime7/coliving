@@ -1,11 +1,15 @@
 .bg {
     background-color: #212529;
-    background-image: url('/static/img/back.jpg');
+    /* background-image: url('/static/img/back.jpg'); */
+    background: linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6) ), url('/static/img/back.jpg');;
     height: 100vh; 
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     text-shadow: 1 1px black;
+    -webkit-background-size: cover;
+    -moz-background-size:  cover;
+    -o-background-size: cover;
 }
 
 .section-margin{
@@ -36,6 +40,10 @@
 
 
 /* CREATE LISTING SECTION  */
-.section-margin-create-listing{
-    margin-top: 100px;
+
+
+
+/* Common */
+.box-shadow{
+    box-shadow: -1px 3px 12px rgba(187, 195, 197, 0.6);
 }

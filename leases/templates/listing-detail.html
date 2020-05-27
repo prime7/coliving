@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-    <div class="container mt-3 mb-5">
+    <div class="container mt-3 mb-5 box-shadow">
         <div class="row">
             <div class="card col-md-12">
                 <div id="carouselExampleInterval" class="carousel slide mb-5" data-ride="carousel">
@@ -50,7 +50,11 @@
                         </div>
                         <div class="card p-2 mb-5">
                             <small>Uploaded by : 
-                              <a href="{% url 'listing-user' house.user.username %}">{{ house.user.profile.name }}</a>
+                                {% if house.user.profile.name %} 
+                                    <a href="{% url 'listing-user' house.user.username %}">{{ house.user.profile.name }}</a>
+                                {% else %}
+                                    <a href="{% url 'listing-user' house.user.username %}">{{ house.user.username }}</a>
+                                {% endif %}
                             </small>
                         </div>
                     </div>
