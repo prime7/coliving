@@ -3,6 +3,7 @@ from decouple import config, Csv
 from .database import *
 from .stripe import *
 from .aws import *
+from .email import *
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 

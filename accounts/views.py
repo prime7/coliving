@@ -27,7 +27,7 @@ def signup(request):
             user.save()
             user = authenticate(email=email,password=password1)
             login(request, user)    
-            return HttpResponseRedirect(reverse('accounts:home'))
+            return HttpResponseRedirect(reverse('home'))
     else:
         form = UserRegisterForm()
     return render(request, 'signup.html', {'form': form})
@@ -39,8 +39,8 @@ def profileDetail(request):
         p_form = ProfileUpdateForm(request.POST,instance=request.user.profile)
         if p_form.is_valid():
             p_form.save()
-            messages.success(request, f'Your account has been updated!')
-            return redirect('profile')
+            messages.success(request, 'Your account has been updated!')
+            return redirect('profile-detail')
 
     else:
         p_form = ProfileUpdateForm(instance=request.user.profile)

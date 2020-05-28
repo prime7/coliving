@@ -2,20 +2,20 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="container">
-  <div class="row mt-5">
-    <div class="col-md-3 card p-4">
+  <div class="row mt-5 mb-5">
+    <div class="col-md-3 card p-4 box-shadow">
       <ul>
-        <li><a href="{% url 'accounts:detail' %}">Personal Details</a></li>
-        <li><a href="{% url 'accounts:membership' %}">Account Details</a></li>
-        <li><a href="{% url 'accounts:lease' %}">My Leases</a></li>
+        <li><a href="{% url 'profile-detail' %}">Personal Details</a></li>
+        <li><a href="{% url 'profile-membership' %}">Account Details</a></li>
+        <li><a href="{% url 'profile-lease' %}">My Leases</a></li>
       </ul>
     </div>
     <div class="col-md-6 offset-1">
-      <div class="card card p-3">
+      <div class="card card p-3 box-shadow">
         <div class="media">
           <div class="media-body">
-            <p class="text-secondary">Username : {{ user.username }}</p>
-            <p class="text-secondary">Email : {{ user.email }}</p>
+            <small class="text-secondary">Username : {{ user.username }}</small><br>
+            <small class="text-secondary">Email : {{ user.email }}</small>
           </div>
         </div>
         <form method="POST" enctype="multipart/form-data">
