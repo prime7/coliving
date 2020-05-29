@@ -94,3 +94,7 @@ test.txt
 # git rm --cached -r name_of_file
 media/
 static/
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
