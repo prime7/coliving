@@ -11,4 +11,5 @@ INSTALLED_APPS = [
     'memberships',
 
     'crispy_forms',
+    'storages',
 ]
