@@ -34,7 +34,7 @@ input[type="number"] {
 .bg {
     background-color: #212529;
     /* background-image: url('/static/img/back.jpg'); */
-    background: linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6) ), url('/static/img/back.jpg');;
+    background: linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6) ), url('/static/img/background.jpg');;
     height: 100vh; 
     background-position: center;
     background-repeat: no-repeat;
