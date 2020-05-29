@@ -4,6 +4,7 @@ from .database import *
 from .stripe import *
 from .aws import *
 from .email import *
+from .apps import *
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -14,20 +15,7 @@ DEBUG = config('DEBUG', default=True, cast=bool)
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
 
-    'accounts',
-    'leases',
-    'memberships',
-
-    'crispy_forms',
-]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
