@@ -34,7 +34,7 @@ def get_selected_membership(request):
 
 class MembershipSelectView(LoginRequiredMixin, ListView):
     model = Membership
-    template_name = "membership-list.html"
+    template_name = "memberships/membership-list.html"
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -93,7 +93,7 @@ def PaymentView(request):
         'selected_membership': selected_membership
     }
 
-    return render(request, "membership_payment.html", context)
+    return render(request, "memberships/membership_payment.html", context)
 
 @login_required
 def updateTransactionRecords(request, subscription_id):
@@ -140,4 +140,4 @@ def cancelSubscription(request):
         request, "Successfully cancelled membership. We have sent an email")
     # sending an email here
 
-    return redirect(reverse('memberships:select'))
+    return redirect(reverse('memberships/memberships:select'))

@@ -14,7 +14,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 def home(request):
-    return render(request,"home.html")
+    return render(request,"accounts/home.html")
 
 
 def signup(request):
@@ -30,7 +30,7 @@ def signup(request):
             return HttpResponseRedirect(reverse('home'))
     else:
         form = UserRegisterForm()
-    return render(request, 'signup.html', {'form': form})
+    return render(request, 'accounts/signup.html', {'form': form})
 
 
 @login_required
@@ -49,7 +49,7 @@ def profileDetail(request):
         'p_form': p_form
     }
 
-    return render(request, 'profile-detail.html', context)
+    return render(request, 'accounts/profile-detail.html', context)
 
 @login_required
 def profileMembership(request):
@@ -59,12 +59,12 @@ def profileMembership(request):
         'user_membership': user_membership,
         'user_subscription': user_subscription
     }
-    return render(request, 'profile-membership.html', context)
+    return render(request, 'accounts/profile-membership.html', context)
 
 
 class ProfileLease(LoginRequiredMixin ,ListView):
     model = House
-    template_name = 'profile-leases.html'
+    template_name = 'accounts/profile-leases.html'
     context_object_name = 'houses'
     paginate_by = 5
 

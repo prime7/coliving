@@ -12,7 +12,7 @@ from django.shortcuts import render, redirect
 
 class LeaseListView(ListView):
     model = House
-    template_name = "listing.html"
+    template_name = "leases/listing.html"
     paginate_by = 6
     context_object_name = 'houses'
     queryset = House.objects.all().order_by('-earliest_move_in')
@@ -28,7 +28,7 @@ class LeaseListView(ListView):
 
 class LeaseDetailView(DetailView):
     model = House
-    template_name = "listing-detail.html"
+    template_name = "leases/listing-detail.html"
 
     def post(self,request,*args,**kwargs):
         self.object = self.get_object()
@@ -52,7 +52,7 @@ class LeaseDetailView(DetailView):
 
 class UserLeaseListView(ListView):
     model = House
-    template_name = 'listing-user.html'
+    template_name = 'leases/listing-user.html'
     context_object_name = 'houses'
     paginate_by = 5
 
@@ -66,7 +66,7 @@ class UserLeaseListView(ListView):
 class LeaseCreateView(LoginRequiredMixin,UserPassesTestMixin, CreateView):
     model = House
     form_class = HouseCreateForm
-    template_name = "listing-create.html"
+    template_name = "leases/listing-create.html"
     context_object_name = "form"
 
     def form_valid(self, form):
@@ -84,5 +84,5 @@ class LeaseCreateView(LoginRequiredMixin,UserPassesTestMixin, CreateView):
         return True
 
     def handle_no_permission(self):
-        return render(self.request,"upgrade-membership.html")
+        return render(self.request,"leases/upgrade-membership.html")
     
