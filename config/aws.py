@@ -14,7 +14,7 @@ AWS_DEFAULT_ACL = None
 AWS_STATIC_LOCATION = 'static'
 
 
-if config('DEBUG'): 
+if config('DEBUG')=='True': 
     STATIC_URL = '/static/'
     STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
     MEDIA_URL = '/media/'   
