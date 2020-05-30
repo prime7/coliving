@@ -14,10 +14,10 @@ AWS_DEFAULT_ACL = None
 AWS_STATIC_LOCATION = 'static'
 
 
-if config('DEBUG'):
+if config('DEBUG'): 
     STATIC_URL = '/static/'
     STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
-    MEDIA_URL = '/media/'
+    MEDIA_URL = '/media/'   
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 else:
     STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, AWS_STATIC_LOCATION)
