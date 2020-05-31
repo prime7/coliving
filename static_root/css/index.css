@@ -48,6 +48,9 @@ input[type="number"] {
 .section-margin{
     margin-top: 25vh;
 }
+.small-margin{
+    margin-bottom: 75px;
+}
 .home-icons {
     font-size: 4.5rem;
     color: white;
