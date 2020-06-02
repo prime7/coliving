@@ -29,5 +29,6 @@ class HouseCreateForm(forms.ModelForm):
         ]
         widgets = {
             'earliest_move_in': DateInput(attrs={'type': 'date'}),
+            'latest_move_out': DateInput(attrs={'type': 'date'}),
             'title': forms.TextInput(attrs={'placeholder':"Small"}),
         }

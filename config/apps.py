@@ -9,6 +9,7 @@ INSTALLED_APPS = [
     'accounts',
     'leases',
     'memberships',
+    'agreements',
 
     'crispy_forms',
     'storages',
