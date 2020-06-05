@@ -17,6 +17,14 @@
             <li>Agreement created - {{ object.agreement_created }}</li>
             <li>Etc. more will be listed according to the agreement details created by landlord</li>
         </ul>
+        <div class="container">
+            <form method="POST">
+                {% csrf_token %}
+                <input type="checkbox" id="agreed" name="agree" required>
+                <label for="agreed">I have read the agreement and agree with it.</label><br>
+                <button type="submit" class="btn btn-success">Agree</button>
+            </form>
+        </div>
     </div>
 </div>
 {% endblock content %}

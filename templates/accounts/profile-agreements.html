@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% load crispy_forms_tags %}
 {% block content %}
 <div class="container">
   <div class="row mt-2 mb-5">
@@ -14,13 +13,13 @@
       </ul>
     </div>
     <div class="col-md-6">
-    {% for house in houses%}
-      <div class="card p-3 m-3 box-shadow">
-        <a href="{% url 'listing-detail' house.slug %}">
-          {{ house.title }}
-        </a>
-      </div>
-    {% endfor %}
+      {% for agreement in agreements %}
+        <div class="card p-3 m-3 box-shadow">
+          <a href="{% url 'agreement-detail' agreement.slug %}">
+            {{ agreement.slug }}
+          </a>
+        </div>
+      {% endfor %}
     </div>
   </div>
 </div>
