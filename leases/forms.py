@@ -18,8 +18,6 @@ class HouseCreateForm(forms.ModelForm):
             'latest_move_out',
             'duration',
             'monthly_rent',
-            'lat',
-            'lng',
             'has_dishwasher',
             'pets_allowed',
             'heating',

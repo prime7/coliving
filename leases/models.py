@@ -28,8 +28,6 @@ class House(models.Model):
     slug = models.SlugField(unique=True,blank=True)
     uploaded_at = models.DateField(auto_now=True)
 
-    lat = models.DecimalField(max_digits=22, decimal_places=16)
-    lng = models.DecimalField(max_digits=22, decimal_places=16)
     address = models.CharField(max_length=100, null=True)
     zip_code = models.CharField(max_length=10, null=True)
     city = models.CharField(max_length=55, null=True)
