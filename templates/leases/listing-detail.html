@@ -4,10 +4,10 @@
         <div class="row">
             <div class="card col-md-12">
                 <div id="carouselExampleInterval" class="carousel slide mb-5" data-ride="carousel">
-                    <div class="carousel-inner" style="height: 450px;">
+                    <div class="carousel-inner">
                         {% for image in house.get_gallery %}
                         <div class="carousel-item {% if forloop.first %} active {% endif %}" data-interval="10000">
-                            <img src="{{ image.src.url }}" class="d-block w-100" alt="...">
+                            <img src="{{ image.src.url }}" class="listing-header-image" alt="...">
                         </div>
                         {% endfor %}
                     </div>
@@ -75,9 +75,12 @@
                             <p class="col-md-4 offset-md-4"> {{house.latest_move_out}}</p>
                         </div>
                         <hr/>
+                        {% if house.resign %}
                         <div class="row no-gutters p-2">
-                            <i class="fas fa-redo">Option to re-sign</i>
+                            <i class="fas fa-redo text-success"> Option to re-sign</i>
+                            <i class="fas fa-info-circle ml-auto" data-toggle="tooltip" data-placement="top" title="When the sublease ends you can sign a new lease directly with the landlord"></i>
                         </div>
+                        {% endif %}
                         <div class="row no-gutters p-2 mb-3">
                             <button class="btn btn-warning btn-lg btn-block" data-toggle="modal" data-target="#staticBackdrop">Connect</button>
                             <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
