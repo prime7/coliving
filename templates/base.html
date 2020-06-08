@@ -26,14 +26,18 @@
         <ul class="navbar-nav ml-auto">
           {% if user.is_authenticated %}
             <li class="nav-item"><a class="nav-item m-2 btn btn-outline-warning" href="{% url 'listing-create' %}">List Your Place</a></li>
-            <li class="nav-item"><a class="nav-item nav-link m-2" href="{% url 'profile-detail' %}">Dashboard</a></li>
             <li class="nav-item"><a class="nav-item nav-link m-2" href="{% url 'listing' %}">Listing</a></li>
             
             <li class="nav-item dropdown">
               <img src="{{ user.profile.profile_pic.url }}" width="60" height="60" class="rounded-circle nav-item nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="false" aria-expanded="true"/>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="{% url 'profile-detail' %}">Profile Detail</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{% url 'profile-membership' %}">Membership Details</a>
+                <a class="dropdown-item" href="{% url 'profile-lease' %}">My Listings</a>
+                {% if membership == 'Landlord' %}
+                  <a class="dropdown-item" href="{% url 'profile-agreements' %}">My Agreements</a>
+                {% endif %}
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
               </div>

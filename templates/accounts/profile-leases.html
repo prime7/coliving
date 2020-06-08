@@ -2,17 +2,6 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="container">
-  <div class="row mt-2 mb-5">
-    <div class="col-md-3 card p-3 m-3 box-shadow">
-      <ul>
-        <li><a href="{% url 'profile-detail' %}">Personal Details</a></li>
-        <li><a href="{% url 'profile-membership' %}">Account Details</a></li>
-        <li><a href="{% url 'profile-lease' %}">My Leases</a></li>
-        {% if membership == 'Landlord' %}
-          <li><a href="{% url 'profile-agreements' %}">My Agreements</a></li>
-        {% endif %}
-      </ul>
-    </div>
     <div class="col-md-6">
     {% for house in houses%}
       <div class="card p-3 m-3 box-shadow">
