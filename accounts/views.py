@@ -49,7 +49,7 @@ def profileDetail(request):
         'p_form': p_form
     }
 
-    return render(request, 'accounts/profile-detail.html', context)
+    return render(request, 'profiles/detail.html', context)
 
 @login_required
 def profileMembership(request):
@@ -59,12 +59,12 @@ def profileMembership(request):
         'user_membership': user_membership,
         'user_subscription': user_subscription
     }
-    return render(request, 'accounts/profile-membership.html', context)
+    return render(request, 'profiles/membership.html', context)
 
 
 class ProfileLease(LoginRequiredMixin ,ListView):
     model = House
-    template_name = 'accounts/profile-leases.html'
+    template_name = 'profiles/leases.html'
     context_object_name = 'houses'
     paginate_by = 5
 
