@@ -5,6 +5,13 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from time import time
 from django.utils.text import slugify
+from PIL import Image
+import uuid
+from os.path import splitext
+from io import BytesIO
+from resizeimage import resizeimage
+from resizeimage.imageexceptions import ImageSizeError
+from django.core.files.base import ContentFile
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -33,10 +40,38 @@ class User(AbstractBaseUser, PermissionsMixin):
 class Profile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE, related_name='profile')
     name = models.CharField(max_length=50)
+    profile_pic = models.ImageField(default='default-profile.jpg', upload_to='profile_pics')
     # TODO: Add profile pic and mobile number and mobile number varified field
 
     def __str__(self):
         return f'{self.user.email}s Profile'
+    
+    def save(self, **kwargs):
+        name = uuid.uuid4()
+        _, extension = splitext(self.src.name)
+        pil_image = PILImage.open(self.src)
+        img_format = pil_image.format
+        image_io = BytesIO()
+        pil_image.save(
+            image_io, format=img_format
+        )
+        try:
+            new_image = resizeimage.resize_cover(pil_image, [1000, 1000])
+            new_image_io = BytesIO()
+            new_image.save(new_image_io, format=img_format)
+            self.src.save(
+                '%s%s' % (name, extension),
+                content=ContentFile(new_image_io.getvalue()),
+                save=False
+            )
+        except ImageSizeError:
+            self.src.save(
+                '%s%s' % (name, extension),
+                content=ContentFile(image_io.getvalue()),
+                save=False
+            )
+
+        super(Image, self).save(**kwargs)
 
 
 @receiver(post_save, sender=User)
