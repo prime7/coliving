@@ -30,8 +30,8 @@
             <!-- Navbar Right Side -->
             <div class="navbar-nav ml-auto">
               {% if user.is_authenticated %}
-              <a class="nav-item nav-link m-2" href="{% url 'listing-create' %}">Create</a>
-              <a class="nav-item nav-link m-2" href="{% url 'profile-detail' %}">Profile</a>
+              <a class="nav-item m-2 btn btn-outline-warning" href="{% url 'listing-create' %}">List Your Place</a>
+              <a class="nav-item nav-link m-2" href="{% url 'profile-detail' %}">Dashboard</a>
               <a class="nav-item nav-link m-2" href="{% url 'listing' %}">Listing</a>
               <a class="nav-item nav-link m-2" href="{% url 'logout' %}">Logout</a>
                 {% if membership == 'Free' %}
