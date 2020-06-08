@@ -26,6 +26,7 @@ class House(models.Model):
     latest_move_out = models.DateField(default=datetime.now)
     monthly_rent = models.DecimalField(max_digits=10, decimal_places=2, null=True,help_text="In Cad")
     slug = models.SlugField(unique=True,blank=True)
+    uploaded_at = models.DateField(auto_now=True)
 
     lat = models.DecimalField(max_digits=22, decimal_places=16)
     lng = models.DecimalField(max_digits=22, decimal_places=16)
@@ -34,15 +35,13 @@ class House(models.Model):
     city = models.CharField(max_length=55, null=True)
     state = models.CharField(max_length=55, null=True)
 
+    resign = models.BooleanField(default=False,null=True,help_text="When the sublease ends you can sign a new lease directly with the landlord")
     has_dishwasher = models.BooleanField(default=False, null=True)
     pets_allowed = models.BooleanField(default=False, null=True)
     heating = models.BooleanField(default=False, null=True)
     has_closet = models.BooleanField(default=False, null=True)
     is_furnished = models.BooleanField(default=False, null=True)
     is_partially_furnished = models.BooleanField(default=False, null=True)
-
-    # TODO: Uploaded at model add
-    # TODO: option to re-sign
     
     def __str__(self):
         return self.title
