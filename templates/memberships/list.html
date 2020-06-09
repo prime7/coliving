@@ -4,7 +4,7 @@
 <div class="container">
 	<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
 		<h1>Select a membership</h1>
-		<p class="lead">Quickly build an effective pricing table for your potential customers with this Bootstrap example. It’s built with default Bootstrap components and utilities with little customization.</p>
+		<p class="lead">If you want anything personalized, contact us.</p>
 	</div>
 </div>
 <div class="container">
@@ -19,13 +19,12 @@
 			{% if object.membership_type != 'Free' %}
 				<ul class="list-unstyled mt-3 mb-4">
 					<li>Full service without hiring anyone</li>
-					<li>2 GB of storage</li>
 					<li>24/7 Customer Support</li>
 					<li>Security Deposit Gurantee<small><sup>Coming Soon</sup></small></li>
 					<li>Messaging<small><sup>Coming Soon</sup></small></li>
 				</ul>
-				{% endif %}
-				{% if object.membership_type == 'Free' %}
+			{% endif %}
+			{% if object.membership_type == 'Free' %}
 				<ul class="list-unstyled mt-3 mb-4">
 					<li>Basic listings</li>
 					<li>Free Service</li>
@@ -34,9 +33,9 @@
 					<li>Security Deposit Gurantee<small><sup>Coming Soon</sup></small></li>
 					<li>Messaging<small><sup>Coming Soon</sup></small></li>
 				</ul>
-			{% endif %}
-			{% if object.membership_type == 'Free' %}
-				<small>Already Selected</small>
+				{% if current_membership == 'Free' %}
+					<small>This is your current membership</small>
+				{% endif %}
 			{% endif %}
 			{% if object.membership_type != 'Free' %}
 				<form method="POST" action="{% url 'memberships:select' %}">

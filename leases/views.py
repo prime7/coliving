@@ -84,5 +84,5 @@ class LeaseCreateView(LoginRequiredMixin,UserPassesTestMixin, CreateView):
         return True
 
     def handle_no_permission(self):
-        return render(self.request,"leases/upgrade-membership.html")
+        return render(self.request,"memberships/upgrade-membership.html")
     

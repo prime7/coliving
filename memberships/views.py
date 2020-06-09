@@ -34,12 +34,13 @@ def get_selected_membership(request):
 
 class MembershipSelectView(LoginRequiredMixin, ListView):
     model = Membership
-    template_name = "memberships/membership-list.html"
+    template_name = "memberships/list.html"
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
         current_membership = get_user_membership(self.request)
         context['current_membership'] = str(current_membership.membership)
+        print(context)
         return context
 
     def post(self, request, **kwargs):
@@ -140,4 +141,4 @@ def cancelSubscription(request):
         request, "Successfully cancelled membership. We have sent an email")
     # sending an email here
 
-    return redirect(reverse('memberships/memberships:select'))
+    return redirect(reverse('memberships:select'))
