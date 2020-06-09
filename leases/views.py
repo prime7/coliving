@@ -1,5 +1,5 @@
 from django.shortcuts import render,get_object_or_404
-from django.views.generic import ListView,DetailView,CreateView,UpdateView
+from django.views.generic import ListView,DetailView,CreateView,UpdateView,View
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import House,User,Image,Lead
 from django.db.models import Q,F

@@ -5,7 +5,7 @@
   <div class="col-md-8 offset-2">
     <div class="card mt-3 box-shadow">
       <div class="card-header">
-        Past Listings
+        Active Listings
       </div>
       <ul class="list-group list-group-flush">
         {% for house in active_houses %}
@@ -17,11 +17,8 @@
                 </a>
               </div>
               <div class="col-4">
-                <form method="POST">
-                  {% csrf_token %}
-                  <a href="{% url 'listing-update' house.slug %}" class="btn btn-outline-success">Update</a>
-                  <input type="submit" value="Deactivate" class="btn btn-outline-success"/>
-                </form>
+                <a href="{% url 'listing-update' house.slug %}" class="btn btn-outline-success">Update</a>
+                <a href="#" class="btn btn-outline-success">Deactivate</a>
               </div>
             </div>
           </li>
