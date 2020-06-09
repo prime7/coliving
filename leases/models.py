@@ -26,7 +26,9 @@ class House(models.Model):
     latest_move_out = models.DateField(default=datetime.now)
     monthly_rent = models.DecimalField(max_digits=10, decimal_places=2, null=True,help_text="In Cad")
     slug = models.SlugField(unique=True,blank=True)
-    uploaded_at = models.DateField(auto_now=True)
+    uploaded_at = models.DateField(auto_now=True,auto_now_add=False)
+    updated_at = models.DateField(auto_now=False,auto_now_add=True)
+    rented = models.BooleanField(default=False)
 
     address = models.CharField(max_length=100, null=True)
     zip_code = models.CharField(max_length=10, null=True)

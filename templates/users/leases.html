@@ -2,12 +2,20 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="container">
-    <div class="col-md-6">
+    <div class="col-md-8 offset-2">
     {% for house in houses%}
       <div class="card p-3 m-3 box-shadow">
-        <a href="{% url 'listing-detail' house.slug %}">
-          {{ house.title }}
-        </a>
+        <div class="row">
+          <div class="col-8">
+            <a href="{% url 'listing-detail' house.slug %}">
+              {{ house.title }}
+            </a>
+          </div>
+          <div class="col-4">
+            <a href="{% url 'listing-update' house.slug %}" class="btn btn-outline-success">Update</a>
+            <a href="{% url 'listing-update' house.slug %}" class="btn btn-outline-success">Deactivate</a>
+          </div>
+        </div>
       </div>
     {% endfor %}
     </div>

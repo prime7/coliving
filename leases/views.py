@@ -1,5 +1,5 @@
 from django.shortcuts import render,get_object_or_404
-from django.views.generic import ListView,DetailView,CreateView
+from django.views.generic import ListView,DetailView,CreateView,UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import House,User,Image,Lead
 from django.db.models import Q,F
@@ -98,3 +98,18 @@ class LeaseCreateView(LoginRequiredMixin,UserPassesTestMixin, CreateView):
     def handle_no_permission(self):
         return render(self.request,"memberships/upgrade-membership.html")
     
+
+class LeaseUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
+    model = House
+    form_class = HouseCreateForm
+    template_name = "leases/update.html"
+    
+    def form_valid(self,form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        house = self.get_object()
+        if self.request.user == house.user:
+            return True
+        return False

@@ -8,7 +8,7 @@ class ImageInline(admin.StackedInline):
     extra = 0
 
 class HouseAdmin(admin.ModelAdmin):
-    readonly_fields = ('slug','user',)
+    readonly_fields = ('slug','user','uploaded_at','updated_at',)
     inlines = [ImageInline, ]
 
 class LeadAdmin(admin.ModelAdmin):
