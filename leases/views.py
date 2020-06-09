@@ -8,6 +8,8 @@ from django.utils.decorators import method_decorator
 from .forms import HouseCreateForm
 from django.contrib import messages
 from django.shortcuts import render, redirect
+from django.template.loader import render_to_string
+from django.core.mail import send_mail
 
 
 class LeaseListView(ListView):
@@ -47,7 +49,17 @@ class LeaseDetailView(DetailView):
 
         if not Lead.objects.filter(email=email,phone_number=phone_number,link=link).exists():
             Lead.objects.create(email=email,phone_number=phone_number,link=link)
-        # TODO: Send email about the lister
+        lister_name = context['object'].user.email
+        lister_phone = context['object'].user.profile.mobile_number
+
+        message = render_to_string('emails/connect_lister.html', {
+            'email': email,
+            'lister_phone': lister_phone,
+            'lister_name': lister_name,
+            'link': link
+        })
+        send_mail('Lister information for leasing',message,settings.EMAIL_HOST_USER, [email],  fail_silently=False,)
+
         return self.render_to_response(context=context)
 
 class UserLeaseListView(ListView):
