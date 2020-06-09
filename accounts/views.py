@@ -34,13 +34,13 @@ def signup(request):
 
 
 @login_required
-def profileDetail(request):
+def userDetail(request):
     if request.method == 'POST':
         p_form = ProfileUpdateForm(request.POST,instance=request.user.profile)
         if p_form.is_valid():
             p_form.save()
             messages.success(request, 'Your account has been updated!')
-            return redirect('profile-detail')
+            return redirect('user-detail')
 
     else:
         p_form = ProfileUpdateForm(instance=request.user.profile)
@@ -49,22 +49,22 @@ def profileDetail(request):
         'p_form': p_form
     }
 
-    return render(request, 'profiles/detail.html', context)
+    return render(request, 'users/detail.html', context)
 
 @login_required
-def profileMembership(request):
+def userMembership(request):
     user_membership = get_user_membership(request)
     user_subscription = get_user_subscription(request)
     context = {
         'user_membership': user_membership,
         'user_subscription': user_subscription
     }
-    return render(request, 'profiles/membership.html', context)
+    return render(request, 'users/membership.html', context)
 
 
-class ProfileLease(LoginRequiredMixin ,ListView):
+class UserLease(LoginRequiredMixin ,ListView):
     model = House
-    template_name = 'profiles/leases.html'
+    template_name = 'users/leases.html'
     context_object_name = 'houses'
     paginate_by = 5
 

@@ -12,6 +12,7 @@ from io import BytesIO
 from resizeimage import resizeimage
 from resizeimage.imageexceptions import ImageSizeError
 from django.core.files.base import ContentFile
+from django.core.validators import RegexValidator
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -33,15 +34,18 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def save(self, *args, **kwargs):
         strtime = "".join(str(time()).split("."))
-        string = "%s%s" % (self.email.split("@")[0],strtime[3:])
+        string = "%s%s" % (self.email.split("@")[0],strtime[:3])
         self.username = slugify(string)
         super(User, self).save()
+
+PHONE_REGEX = RegexValidator(regex='\d{9,13}$',message="Phone Number must be without +")
 
 class Profile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE, related_name='profile')
     name = models.CharField(max_length=50)
     profile_pic = models.ImageField(default='default-profile.jpg', upload_to='profile_pics')
-    # TODO: Add profile pic and mobile number and mobile number varified field
+    mobile_number = models.CharField(validators=[PHONE_REGEX], max_length=13, blank=True)
+    mobile_number_varified = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.user.email}s Profile'

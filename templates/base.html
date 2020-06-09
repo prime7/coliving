@@ -31,16 +31,16 @@
             <li class="nav-item dropdown">
               <img src="{{ user.profile.profile_pic.url }}" width="60" height="60" class="rounded-circle nav-item nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="false" aria-expanded="true"/>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="{% url 'profile-detail' %}">Profile Detail</a>
+                <a class="dropdown-item" href="{% url 'user-detail' %}">Profile Detail</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="{% url 'profile-membership' %}">Membership Details</a>
+                <a class="dropdown-item" href="{% url 'user-membership' %}">Membership Details</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{% url 'listing-create' %}">Create Listing</a>
-                <a class="dropdown-item" href="{% url 'profile-lease' %}">My Listings</a>
+                <a class="dropdown-item" href="{% url 'user-lease' %}">My Listings</a>
                 <div class="dropdown-divider"></div>
                 {% if membership == 'Landlord' %}
                   <a class="dropdown-item" href="{% url 'agreement-create' %}">Create Agreement</a>
-                  <a class="dropdown-item" href="{% url 'profile-agreements' %}">My Agreements</a>
+                  <a class="dropdown-item" href="{% url 'user-agreements' %}">My Agreements</a>
                 {% endif %}
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>

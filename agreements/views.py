@@ -45,7 +45,7 @@ class AgreementDetailView(LoginRequiredMixin,UserPassesTestMixin,DetailView):
     
 class AgreementListView(ListView):
     model = Agreement
-    template_name = 'accounts/profile-agreements.html'
+    template_name = 'users/agreements.html'
     context_object_name = 'agreements'
     paginate_by = 5
 
