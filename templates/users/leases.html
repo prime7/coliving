@@ -2,22 +2,46 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="container">
-    <div class="col-md-8 offset-2">
-    {% for house in houses%}
-      <div class="card p-3 m-3 box-shadow">
-        <div class="row">
-          <div class="col-8">
-            <a href="{% url 'listing-detail' house.slug %}">
-              {{ house.title }}
-            </a>
-          </div>
-          <div class="col-4">
-            <a href="{% url 'listing-update' house.slug %}" class="btn btn-outline-success">Update</a>
-            <a href="{% url 'listing-update' house.slug %}" class="btn btn-outline-success">Deactivate</a>
-          </div>
-        </div>
+  <div class="col-md-8 offset-2">
+    <div class="card mt-3 box-shadow">
+      <div class="card-header">
+        Past Listings
       </div>
-    {% endfor %}
+      <ul class="list-group list-group-flush">
+        {% for house in active_houses %}
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-8">
+                <a href="{% url 'listing-detail' house.slug %}">
+                  {{ house.title }}
+                </a>
+              </div>
+              <div class="col-4">
+                <form method="POST">
+                  {% csrf_token %}
+                  <a href="{% url 'listing-update' house.slug %}" class="btn btn-outline-success">Update</a>
+                  <input type="submit" value="Deactivate" class="btn btn-outline-success"/>
+                </form>
+              </div>
+            </div>
+          </li>
+        {% empty %}
+          <li class="list-group-item">You don't have any Deactive Listing</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="card mt-3">
+      <div class="card-header">
+        Past Listings
+      </div>
+      <ul class="list-group list-group-flush">
+        {% for house in inactive_houses %}
+          <li class="list-group-item">{{ house.title }} - Created at {{ house.uploaded_at }}</li>
+        {% empty %}
+          <li class="list-group-item">You don't have any Deactive Listing</li>
+        {% endfor %}
+      </ul>
     </div>
   </div>
 </div>

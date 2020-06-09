@@ -17,6 +17,17 @@ from resizeimage.imageexceptions import ImageSizeError
 def upload_image_path(instance, filename):
     return "listing/{}/{}".format(instance.house.pk, filename)
 
+class HouseManager(models.Manager):
+    def active(self):
+        return super(HouseManager,self).filter(rented=False).order_by('-earliest_move_in')
+    def inactive(self):
+        return super(HouseManager,self).filter(rented=True).order_by('-earliest_move_in')
+        
+    def active_by_user(self,user):
+        return super(HouseManager,self).filter(user=user,rented=False).order_by('-earliest_move_in')
+    def inactive_by_user(self,user):
+        return super(HouseManager,self).filter(user=user,rented=True).order_by('-earliest_move_in')
+
 class House(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     title = models.CharField(max_length=150)
@@ -43,6 +54,9 @@ class House(models.Model):
     is_furnished = models.BooleanField(default=False, null=True)
     is_partially_furnished = models.BooleanField(default=False, null=True)
     
+
+    objects = HouseManager()
+
     def __str__(self):
         return self.title
 
