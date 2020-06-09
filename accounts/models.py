@@ -46,34 +46,11 @@ class Profile(models.Model):
     profile_pic = models.ImageField(default='default-profile.jpg', upload_to='profile_pics')
     mobile_number = models.CharField(validators=[PHONE_REGEX], max_length=13, blank=True)
     mobile_number_varified = models.BooleanField(default=False)
+    bio = models.CharField(max_length = 400,blank=True,help_text="Describe about yourself in short")
 
     def __str__(self):
         return f'{self.user.email}s Profile'
     
-    def save(self, **kwargs):
-        name = uuid.uuid4()
-        _, extension = splitext(self.profile_pic.name)
-        pil_image = PILImage.open(self.profile_pic)
-        img_format = pil_image.format
-        image_io = BytesIO()
-        pil_image.save(image_io, format=img_format)
-        try:
-            new_image = resizeimage.resize_cover(pil_image, [500, 500])
-            new_image_io = BytesIO()
-            new_image.save(new_image_io, format=img_format)
-            self.profile_pic.save(
-                '%s%s' % (name, extension),
-                content=ContentFile(new_image_io.getvalue()),
-                save=False
-            )
-        except ImageSizeError:
-            self.profile_pic.save(
-                '%s%s' % (name, extension),
-                content=ContentFile(image_io.getvalue()),
-                save=False
-            )
-
-        super(Profile,self).save(**kwargs)
 
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, *args, **kwargs):
