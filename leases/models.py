@@ -13,6 +13,10 @@ from PIL import Image as PILImage
 from resizeimage import resizeimage
 from resizeimage.imageexceptions import ImageSizeError
 
+RENTAL_TYPE = (
+    (1,"Using Us"),
+    (2,"Other Platform"),
+)
 
 def upload_image_path(instance, filename):
     return "listing/{}/{}".format(instance.house.pk, filename)
@@ -40,6 +44,7 @@ class House(models.Model):
     uploaded_at = models.DateField(auto_now=True,auto_now_add=False)
     updated_at = models.DateField(auto_now=False,auto_now_add=True)
     rented = models.BooleanField(default=False)
+    rental_status = models.IntegerField(choices=RENTAL_TYPE,null=True,blank=True)
 
     address = models.CharField(max_length=100, null=True)
     zip_code = models.CharField(max_length=10, null=True)

@@ -62,6 +62,24 @@ class LeaseDetailView(DetailView):
 
         return self.render_to_response(context=context)
 
+class LeaseDeactivateView(DetailView):
+    model = House
+    template_name = "leases/listing-deactivate.html"
+
+    def post(self,request,*args,**kwargs):
+        self.object = self.get_object()
+        context = context = super(LeaseDeactivateView, self).get_context_data(**kwargs)
+        
+        status = request.POST['status']
+        if status == "1":
+            self.object.rental_status = 1
+        elif status == "2":
+            self.object.rental_status = 2
+
+        self.object.rented = True
+        self.object.save()
+        return redirect("user-lease")
+
 class UserLeaseListView(ListView):
     model = House
     template_name = 'leases/listing-user.html'
