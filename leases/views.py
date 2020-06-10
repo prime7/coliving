@@ -66,7 +66,6 @@ class UserLeaseListView(ListView):
     model = House
     template_name = 'leases/listing-user.html'
     context_object_name = 'houses'
-    paginate_by = 5
 
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
