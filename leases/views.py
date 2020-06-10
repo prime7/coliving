@@ -17,11 +17,11 @@ class LeaseListView(ListView):
     template_name = "leases/listing.html"
     paginate_by = 6
     context_object_name = 'houses'
-    queryset = House.objects.all().order_by('-earliest_move_in')
+    queryset = House.objects.active()
     
     def get(self, request, *args, **kwargs):
         if request.GET:
-            houses = House.objects.all()
+            houses = House.objects.active()
             query = request.GET["q"]
             if query:
                 houses = houses.filter(Q(title__icontains=query)|Q(description__icontains=query)).distinct().order_by('-earliest_move_in')
@@ -87,7 +87,7 @@ class UserLeaseListView(ListView):
 
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
-        return House.objects.filter(user=user).order_by('-earliest_move_in')
+        return House.objects.active_by_user(user)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
