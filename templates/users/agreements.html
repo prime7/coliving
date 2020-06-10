@@ -1,15 +1,72 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 {% block content %}
 <div class="container">
-  <div class="row mt-2 mb-5">
-    <div class="col-md-6">
-      {% for agreement in agreements %}
-        <div class="card p-3 m-3 box-shadow">
-          <a href="{% url 'agreement-detail' agreement.slug %}">
-            {{ agreement.slug }}
-          </a>
-        </div>
-      {% endfor %}
+  <div class="col-md-8 offset-2">
+    <div class="card mt-3 box-shadow">
+      <div class="card-header text-secondary">
+        Processing
+      </div>
+      <ul class="list-group list-group-flush">
+        {% for agreement in processing %}
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-8">
+                Agreement no - {{ agreement.slug }}
+              </div>
+              <div class="col-4">
+                <a href="{% url 'agreement-detail' agreement.slug %}" class="btn btn-outline-success">See Detail</a>
+              </div>
+            </div>
+          </li>
+        {% empty %}
+          <li class="list-group-item">You don't have any agreement that is in processing stage</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="card mt-3 box-shadow">
+      <div class="card-header text-success">
+        Active
+      </div>
+      <ul class="list-group list-group-flush">
+        {% for agreement in active %}
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-8">
+                Agreement no - {{ agreement.slug }}
+              </div>
+              <div class="col-4">
+                <a href="{% url 'agreement-detail' agreement.slug %}" class="btn btn-outline-success">See Detail</a>
+              </div>
+            </div>
+          </li>
+        {% empty %}
+          <li class="list-group-item">You don't have any agreement that is in processing stage</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="card mt-3 mb-3 box-shadow">
+      <div class="card-header text-danger">
+        Inactive
+      </div>
+      <ul class="list-group list-group-flush">
+        {% for agreement in inactive %}
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-8">
+                Agreement no - {{ agreement.slug }}
+              </div>
+              <div class="col-4">
+                <a href="{% url 'agreement-detail' agreement.slug %}" class="btn btn-outline-success">See Detail</a>
+              </div>
+            </div>
+          </li>
+        {% empty %}
+          <li class="list-group-item">You don't have any agreement that is in processing stage</li>
+        {% endfor %}
+      </ul>
     </div>
   </div>
 </div>

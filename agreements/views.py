@@ -46,12 +46,13 @@ class AgreementDetailView(LoginRequiredMixin,UserPassesTestMixin,DetailView):
 class AgreementListView(ListView):
     model = Agreement
     template_name = 'users/agreements.html'
-    context_object_name = 'agreements'
-    paginate_by = 5
 
-    def get_queryset(self):
-        landlord = self.request.user
-        return Agreement.objects.filter(landlord=landlord).order_by('-agreement_created')
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['processing'] = Agreement.objects.processing(self.request.user)
+        context['active'] = Agreement.objects.active(self.request.user)
+        context['inactive'] = Agreement.objects.inactive(self.request.user)
+        return context
 
 
 class AgreementSignView(UserPassesTestMixin,DetailView):

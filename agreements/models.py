@@ -61,6 +61,19 @@ IMPROVICE_PROPERTY = (
     (2,"No"),
     (3,"Yes with landlords consent"),
 )
+AGREEMENT_STATUS = (
+    (1,"Processing"),
+    (2,"Active"),
+    (3,"Inactive"),
+)
+class AgreementManager(models.Manager):
+    def processing(self,user):
+        return super(AgreementManager,self).filter(landlord=user,status=1).order_by('-agreement_created')
+    def active(self,user):
+        return super(AgreementManager,self).filter(landlord=user,status=2).order_by('-agreement_created')
+    def inactive(self,user):
+        return super(AgreementManager,self).filter(landlord=user,status=3).order_by('-agreement_created')
+
 
 class Agreement(models.Model):
     landlord = models.ForeignKey(User,on_delete=models.CASCADE)
@@ -87,9 +100,12 @@ class Agreement(models.Model):
     sublease = models.IntegerField(choices=BOOLEAN_FIELD,default=2)
     renew = models.IntegerField(choices=BOOLEAN_FIELD,default=2)
     tenants_email = models.CharField(max_length=100)
-    tenant_agreed = models.BooleanField(default=False)
     slug = models.SlugField(unique=True)
+
+    status = models.IntegerField(choices=AGREEMENT_STATUS,default=1)
     
+    objects = AgreementManager()
+
     def __str__(self):
         return self.slug
 
