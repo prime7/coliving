@@ -70,6 +70,12 @@ class UserLeaseListView(ListView):
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
         return House.objects.filter(user=user).order_by('-earliest_move_in')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['user'] = User.objects.get(email=self.request.user.email)
+        return context
+
     
 
 

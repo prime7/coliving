@@ -47,6 +47,7 @@ class Profile(models.Model):
     mobile_number = models.CharField(validators=[PHONE_REGEX], max_length=13, blank=True)
     mobile_number_varified = models.BooleanField(default=False)
     bio = models.CharField(max_length = 400,blank=True,help_text="Describe about yourself in short")
+    registered_at = models.DateField(auto_now=True)
 
     def __str__(self):
         return f'{self.user.email}s Profile'
