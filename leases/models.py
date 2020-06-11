@@ -67,7 +67,7 @@ class House(models.Model):
 
     @property
     def get_monthly_rent(self):
-        return "$"+str(self.monthly_rent)+"/month"
+        return "$"+str(self.monthly_rent)+"/mo"
     @property
     def get_address(self):
         return self.address+" "+self.city+" "+self.state

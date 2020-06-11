@@ -48,30 +48,51 @@
                             {% endif %}
                             </ul>
                         </div>
-                        <div class="card p-2 mb-5">
-                            <small>Uploaded by : 
-                                {% if house.user.profile.name %} 
-                                    <a href="{% url 'listing-user' house.user.username %}">{{ house.user.profile.name }}</a>
-                                {% else %}
-                                    <a href="{% url 'listing-user' house.user.username %}">{{ house.user.username }}</a>
-                                {% endif %}
-                            </small>
+                        <div class="card">
+                            <div class="card-header">
+                                Lister
+                            </div>
+                            <div class="card-body">
+                                <!-- <small>Uploaded by : 
+                                    {% if house.user.profile.name %} 
+                                        <a href="{% url 'listing-user' house.user.username %}">{{ house.user.profile.name }}</a>
+                                    {% else %}
+                                        <a href="{% url 'listing-user' house.user.username %}">{{ house.user.username }}</a>
+                                    {% endif %}
+                                </small> -->
+                                <div class="row">
+                                    <div class="col-2">
+                                        <img src="{{ house.user.profile.profile_pic.url }}" width="50" height="50" class="rounded-circle" href="#"/>
+                                    </div>
+                                    <div class="col-6">
+                                        {% if house.user.profile.name %}
+                                            <div class="row">{{ house.user.profile.name }}</div>
+                                        {% else %}
+                                            <div class="row">{{ house.user.username }}</div>
+                                        {% endif %}
+                                        <div class="row text-muted">{{ house.user.date_joined|date }}</div>
+                                    </div>
+                                    <div class="col-3">
+                                        <a href="{% url 'listing-user' house.user.username %}" class="btn btn-outline-success">View Profile</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-12 card pt-4">
-                        <h2>{{ house.get_monthly_rent}}</h2>
+                        <h3>{{ house.get_monthly_rent}}</h3>
                         <hr>
-                        <h2>Availabilty</h2>
+                        <h3>Availabilty</h3>
                         <div class="row no-gutters">
-                            <p class="col-md-4">Duration</p>
+                            <p class="col-md-4 text-muted">Duration</p>
                             <p class="col-md-4 offset-md-4"> {{house.duration}} months</p>
                         </div>
                         <div class="row no-gutters">
-                            <p class="col-md-4">Earliest move in</p>
+                            <p class="col-md-4 text-muted">Earliest move in</p>
                             <p class="col-md-4 offset-md-4"> {{house.earliest_move_in}}</p>
                         </div>
                         <div class="row no-gutters">
-                            <p class="col-md-4">Earliest move out</p>
+                            <p class="col-md-4 text-muted">Earliest move out</p>
                             <p class="col-md-4 offset-md-4"> {{house.latest_move_out}}</p>
                         </div>
                         <hr/>
