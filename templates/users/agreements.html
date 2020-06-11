@@ -5,7 +5,7 @@
   <div class="col-md-8 offset-2">
     <div class="card mt-3 box-shadow">
       <div class="card-header text-secondary">
-        Processing
+        Processing <i class="fas fa-info-circle ml-auto" data-toggle="tooltip" data-placement="bottom" title="These agreements are not yet signed by the tenants."></i>
       </div>
       <ul class="list-group list-group-flush">
         {% for agreement in processing %}
@@ -20,14 +20,14 @@
             </div>
           </li>
         {% empty %}
-          <li class="list-group-item">You don't have any agreement that is in processing stage</li>
+          <li class="list-group-item text-muted">You don't have any agreement that is in processing stage</li>
         {% endfor %}
       </ul>
     </div>
 
     <div class="card mt-3 box-shadow">
       <div class="card-header text-success">
-        Active
+        Active <i class="fas fa-info-circle ml-auto" data-toggle="tooltip" data-placement="bottom" title="These agreements are signed by the tenants and currently active."></i>
       </div>
       <ul class="list-group list-group-flush">
         {% for agreement in active %}
@@ -42,14 +42,14 @@
             </div>
           </li>
         {% empty %}
-          <li class="list-group-item">You don't have any agreement that is in processing stage</li>
+          <li class="list-group-item text-muted">You don't have any agreement that is in processing stage</li>
         {% endfor %}
       </ul>
     </div>
 
     <div class="card mt-3 mb-3 box-shadow">
       <div class="card-header text-danger">
-        Inactive
+        Inactive <i class="fas fa-info-circle ml-auto" data-toggle="tooltip" data-placement="bottom" title="These agreements are inactive."></i>
       </div>
       <ul class="list-group list-group-flush">
         {% for agreement in inactive %}
@@ -64,7 +64,7 @@
             </div>
           </li>
         {% empty %}
-          <li class="list-group-item">You don't have any agreement that is in processing stage</li>
+          <li class="list-group-item text-muted">You don't have any agreement that is in processing stage</li>
         {% endfor %}
       </ul>
     </div>

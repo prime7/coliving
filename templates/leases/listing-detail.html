@@ -26,40 +26,35 @@
                         <p>{{ house.get_address }}</p>
                         <h2>Description</h2>
                         <small>{{ house.description }}</small>
-                        <div class="card p-2 mb-4">
-                            <h5>Amenities</h5>
-                            <ul>
-                            {% if house.has_dishwasher %}
-                                <li>Dishwasher</li>
-                            {% endif %}
-                            {% if house.pets_allowed %}
-                                <li>Pets allowed</li>
-                            {% endif %}
-                            {% if house.heating %}
-                                <li>Heating Included</li>
-                            {% endif %}
-                            {% if house.has_closet %}
-                                <li>Closet</li>
-                            {% endif %}
-                            {% if house.is_furnished %}
-                                <li>Fully Furnished</li>
-                            {% elif house.is_partially_furnished %}
-                                <li>Partially Furnished</li>
-                            {% endif %}
-                            </ul>
+                        <div class="card mt-3 mb-3">
+                            <div class="card-body">
+                                <h5>Amenities</h5>
+                                <ul>
+                                    {% if house.has_dishwasher %}
+                                        <li>Dishwasher</li>
+                                    {% endif %}
+                                    {% if house.pets_allowed %}
+                                        <li>Pets allowed</li>
+                                    {% endif %}
+                                    {% if house.heating %}
+                                        <li>Heating Included</li>
+                                    {% endif %}
+                                    {% if house.has_closet %}
+                                        <li>Closet</li>
+                                    {% endif %}
+                                    {% if house.is_furnished %}
+                                        <li>Fully Furnished</li>
+                                    {% elif house.is_partially_furnished %}
+                                        <li>Partially Furnished</li>
+                                    {% endif %}
+                                </ul>
+                            </div>
                         </div>
                         <div class="card">
                             <div class="card-header">
                                 Lister
                             </div>
                             <div class="card-body">
-                                <!-- <small>Uploaded by : 
-                                    {% if house.user.profile.name %} 
-                                        <a href="{% url 'listing-user' house.user.username %}">{{ house.user.profile.name }}</a>
-                                    {% else %}
-                                        <a href="{% url 'listing-user' house.user.username %}">{{ house.user.username }}</a>
-                                    {% endif %}
-                                </small> -->
                                 <div class="row">
                                     <div class="col-2">
                                         <img src="{{ house.user.profile.profile_pic.url }}" width="50" height="50" class="rounded-circle" href="#"/>
@@ -70,7 +65,7 @@
                                         {% else %}
                                             <div class="row">{{ house.user.username }}</div>
                                         {% endif %}
-                                        <div class="row text-muted">{{ house.user.date_joined|date }}</div>
+                                        <div class="row text-muted">Joined in {{ house.user.date_joined|date }}</div>
                                     </div>
                                     <div class="col-3">
                                         <a href="{% url 'listing-user' house.user.username %}" class="btn btn-outline-success">View Profile</a>
