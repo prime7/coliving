@@ -3,20 +3,33 @@
 
 {% block content %}
 <div class="container">
-    <div class="row py-4 px-4">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <h1>Agreement - {{ object.slug }}</h1>
-                </div>
+    <div class="row">
+        <div class="card col-md-8 offset-2 p-0 mt-5">
+            <div class="card-header">
+                Agreement - {{ object.slug }}
+            </div>
+            <ul>
+                <li>Landlord's email - {{ object.landlord.email }}</li>
+                <li>Landlord's name - {{ object.landlord.name }}</li>
+                <li>Agreement created - {{ object.agreement_created }}</li>
+                <li>Etc. more will be listed according to the agreement details created by landlord</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="card col-md-8 offset-2 p-0 mt-5">
+            <div class="card-header">
+                Agreement Status
+            </div>
+            <div class="card-body">
+                <div>Created at : {{ object.agreement_created }}</div>
+                {% if object.status == 1 %}
+                    <i class="far fa-dot-circle text-danger"></i> Agreement is yet to be signed
+                {% elif object.status == 2 %}
+                    <i class="far fa-dot-circle text-success"></i> Agreement confirmed by {{ object.tenant_name }} at {{ object.signed_on|date }}
+                {% endif %}
             </div>
         </div>
-        <ul>
-            <li>Landlord's email - {{ object.landlord.email }}</li>
-            <li>Landlord's name - {{ object.landlord.name }}</li>
-            <li>Agreement created - {{ object.agreement_created }}</li>
-            <li>Etc. more will be listed according to the agreement details created by landlord</li>
-        </ul>
     </div>
 </div>
 {% endblock content %}

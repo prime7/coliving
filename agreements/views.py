@@ -7,7 +7,7 @@ from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
 from accounts.models import User
 from django.contrib import messages
-
+from datetime import datetime
 
 class AgreementCreateView(LoginRequiredMixin,UserPassesTestMixin, CreateView):
     model = Agreement
@@ -64,6 +64,7 @@ class AgreementSignView(UserPassesTestMixin,DetailView):
         self.object = self.get_object()
         if request.POST['agree'] == "1":
             self.object.status = 2
+            self.object.signed_on = datetime.now()
             self.object.save()
             messages.success(request, 'You have successfully signed the contract')
             return redirect('home')
