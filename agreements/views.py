@@ -6,6 +6,7 @@ from .forms import AgreementCreateForm
 from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
 from accounts.models import User
+from django.contrib import messages
 
 
 class AgreementCreateView(LoginRequiredMixin,UserPassesTestMixin, CreateView):
@@ -59,5 +60,20 @@ class AgreementSignView(UserPassesTestMixin,DetailView):
     model = Agreement
     template_name = "agreements/agreement-sign.html"
 
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if request.POST['agree'] == "1":
+            self.object.status = 2
+            self.object.save()
+            messages.success(request, 'You have successfully signed the contract')
+            return redirect('home')
+        return self.render_to_response(context={})
+
     def test_func(self):
+        obj = self.get_object()
+        if obj.tenants_email != self.request.user.email or obj.status != 1:
+            return False
         return True
+
+    def handle_no_permission(self):
+        return redirect('home')

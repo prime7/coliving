@@ -6,7 +6,6 @@ from datetime import datetime
 from django.urls import reverse
 
 
-
 PROPERTY_TYPE = (
     (1,'Home'),
     (2,'Basement'),
@@ -99,9 +98,9 @@ class Agreement(models.Model):
     improvements = models.IntegerField(choices=IMPROVICE_PROPERTY,default=2)
     sublease = models.IntegerField(choices=BOOLEAN_FIELD,default=2)
     renew = models.IntegerField(choices=BOOLEAN_FIELD,default=2)
-    tenants_email = models.CharField(max_length=100)
+    tenants_email = models.EmailField(max_length=100)
     slug = models.SlugField(unique=True)
-
+    signed_on = models.DateTimeField(null=True)
     status = models.IntegerField(choices=AGREEMENT_STATUS,default=1)
     
     objects = AgreementManager()
@@ -113,7 +112,9 @@ class Agreement(models.Model):
         return reverse('agreement-detail', kwargs={'slug': self.slug})
 
     def save(self,*args, **kwargs):
-        strtime = "".join(str(datetime.now()).split("."))
-        string = "%s" % (strtime[10:])
-        self.slug = slugify(string)
-        super(Agreement, self).save()
+        if not self.id:
+            now = datetime.now()
+            string = now.strftime("%d%m%Y%H%M%S")
+            self.slug = slugify(string)
+        
+        super(Agreement, self).save(*args, **kwargs)
