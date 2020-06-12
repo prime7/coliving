@@ -18,6 +18,19 @@ RENTAL_TYPE = (
     (2,"Other Platform"),
 )
 
+CITY_TYPE = (
+    (1,'Vancouver'),
+    (2,'Burnaby'),
+    (3,'Richmond'),
+    (4,'Coquitlam'),
+    (5,'New Westminster'),
+    (6,'Surrey'),
+)
+
+PROVINCE_TYPE = (
+    ('BC','British Columbia'),
+)
+
 def upload_image_path(instance, filename):
     return "listing/{}/{}".format(instance.house.pk, filename)
 
@@ -48,8 +61,8 @@ class House(models.Model):
 
     address = models.CharField(max_length=100, null=True)
     zip_code = models.CharField(max_length=10, null=True)
-    city = models.CharField(max_length=55, null=True)
-    state = models.CharField(max_length=55, null=True)
+    city = models.IntegerField(choices=CITY_TYPE, null=True,help_text="Currently we are limited to these cities")
+    province = models.CharField(choices=PROVINCE_TYPE, null=True,help_text="Currently we are limited to these provinces",max_length=10)
 
     resign = models.BooleanField(default=False,null=True,help_text="When the sublease ends you can sign a new lease directly with the landlord")
     has_dishwasher = models.BooleanField(default=False, null=True)
@@ -70,7 +83,7 @@ class House(models.Model):
         return "$"+str(self.monthly_rent)+"/mo"
     @property
     def get_address(self):
-        return self.address+" "+self.city+" "+self.state
+        return self.address+" "+self.city+" "+self.province
     
     @property
     def get_gallery(self):

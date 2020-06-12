@@ -13,7 +13,7 @@ class HouseCreateForm(forms.ModelForm):
             'address', 
             'zip_code',
             'city',
-            'state',
+            'province',
             'earliest_move_in',
             'latest_move_out',
             'duration',
