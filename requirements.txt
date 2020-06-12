@@ -1,6 +1,7 @@
 boto3==1.13.19
 Django==2.1.1
 django-crispy-forms==1.9.1
+django-resized==0.3.11
 django-storages==1.9.1
 Pillow==7.1.2
 psycopg2-binary==2.8.3

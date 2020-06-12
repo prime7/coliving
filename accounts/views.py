@@ -35,7 +35,7 @@ def signup(request):
 @login_required
 def userDetail(request):
     if request.method == 'POST':
-        p_form = ProfileUpdateForm(request.POST,instance=request.user.profile)
+        p_form = ProfileUpdateForm(request.POST,request.FILES,instance=request.user.profile)
         if p_form.is_valid():
             p_form.save()
             messages.success(request, 'Your account has been updated!')

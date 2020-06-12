@@ -2,6 +2,9 @@ from django import forms
 from .validators import validateEmail
 from .models import Profile
 from django.contrib.auth.password_validation import validate_password
+from django.utils.safestring import mark_safe
+from django import forms
+
 
 
 class UserRegisterForm(forms.Form):
@@ -18,7 +21,18 @@ class UserRegisterForm(forms.Form):
             raise forms.ValidationError("passwords does not match")
 
 
+class ImagePreviewWidget(forms.widgets.FileInput):
+    def render(self, name, value, attrs=None, **kwargs):
+        input_html = super().render(name, value, attrs=None, **kwargs)
+        img_html = mark_safe(f'<br><img src="{value.url}" class="img-fluid" width="120" height="120"/>')
+        return f'{input_html}{img_html}'
+
+
+
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['name','profile_pic','mobile_number','bio',]
+        widgets = {
+            'profile_pic': ImagePreviewWidget(),
+        }

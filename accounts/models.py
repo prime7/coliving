@@ -13,7 +13,7 @@ from resizeimage import resizeimage
 from resizeimage.imageexceptions import ImageSizeError
 from django.core.files.base import ContentFile
 from django.core.validators import RegexValidator
-
+from django_resized import ResizedImageField
 
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True)
@@ -43,7 +43,7 @@ PHONE_REGEX = RegexValidator(regex='\d{9,13}$',message="Phone Number must be wit
 class Profile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE, related_name='profile')
     name = models.CharField(max_length=50)
-    profile_pic = models.ImageField(default='default-profile.jpg', upload_to='profile_pics')
+    profile_pic = ResizedImageField(size=[640, 480], upload_to='profile_pics',force_format='PNG')
     mobile_number = models.CharField(validators=[PHONE_REGEX], max_length=13, blank=True)
     mobile_number_varified = models.BooleanField(default=False)
     bio = models.CharField(max_length = 400,blank=True,help_text="Describe about yourself in short")
@@ -57,4 +57,7 @@ class Profile(models.Model):
 def create_profile(sender, instance, created, *args, **kwargs):
     if created:
         profile = Profile(user=instance)
-        profile.save()
+
+@receiver(post_save, sender=User)
+def save_profile(sender, instance, created, *args, **kwargs):
+    instance.profile.save()
