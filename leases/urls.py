@@ -1,6 +1,13 @@
 from django.urls import path
-from .views import LeaseListView,LeaseDetailView,UserLeaseListView,LeaseCreateView,LeaseUpdateView,LeaseDeactivateView
-
+from .views import (
+    LeaseListView,
+    LeaseDetailView,
+    UserLeaseListView,
+    LeaseCreateView,
+    LeaseUpdateView,
+    LeaseDeactivateView,
+    LeaseFavouriteView
+)
 
 urlpatterns = [
     path('listing/', LeaseListView.as_view(),name='listing'),
@@ -9,4 +16,5 @@ urlpatterns = [
     path('listing/<slug>/', LeaseDetailView.as_view(), name='listing-detail'),
     path('listing/<slug>/update/', LeaseUpdateView.as_view(), name='listing-update'),
     path('listing/<slug>/deactivate/', LeaseDeactivateView.as_view(), name='listing-deactivate'),
+    path('listing/<int:id>/favourite/', LeaseFavouriteView.as_view(), name='listing-favourite'),
 ]

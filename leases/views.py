@@ -10,6 +10,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 from django.core.mail import send_mail
+from django.http import HttpResponse
 
 
 class LeaseListView(ListView):
@@ -31,6 +32,12 @@ class LeaseListView(ListView):
 class LeaseDetailView(DetailView):
     model = House
     template_name = "leases/listing-detail.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        house = self.get_object()
+        context['is_favourite'] = house.favourites.filter(id=self.request.user.id).exists()
+        return context
 
     def post(self,request,*args,**kwargs):
         self.object = self.get_object()
@@ -79,6 +86,17 @@ class LeaseDeactivateView(DetailView):
         self.object.rented = True
         self.object.save()
         return redirect("user-lease")
+
+class LeaseFavouriteView(View):
+    def get(self, request, *args, **kwargs):
+        id = kwargs.get('id',None)
+        house = get_object_or_404(House,id=id)
+        if house.favourites.filter(id=request.user.id).exists():
+            house.favourites.remove(request.user)
+        else:
+            house.favourites.add(request.user)
+        
+        return redirect('listing-detail', slug=house.slug)
 
 class UserLeaseListView(ListView):
     model = House

@@ -22,7 +22,18 @@
                 </div>
                 <div class="row">
                     <div class="col-md-8 col-sm-12">
-                        <h2>{{ house.title }}</h2>
+                        <div class="container">
+                            <div class="row">
+                                <h2 class="mr-auto">{{ house.title|title }}</h2>
+                                <a href="{% url 'listing-favourite' house.id %}" style="align-self: center;">
+                                    {% if is_favourite %}
+                                        <i class="fas fa-heart ml-auto fa-lg m-2"></i>
+                                    {% else %}
+                                        <i class="far fa-heart ml-auto fa-lg m-2"></i>
+                                    {% endif %}
+                                </a>
+                            </div>
+                        </div>
                         <p>{{ house.get_address }}</p>
                         <h2>Description</h2>
                         <small>{{ house.description }}</small>

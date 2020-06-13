@@ -72,6 +72,7 @@ class House(models.Model):
     is_furnished = models.BooleanField(default=False, null=True)
     is_partially_furnished = models.BooleanField(default=False, null=True)
     
+    favourites = models.ManyToManyField(User,related_name='favourites',blank=True)
 
     objects = HouseManager()
 
@@ -83,7 +84,7 @@ class House(models.Model):
         return "$"+str(self.monthly_rent)+"/mo"
     @property
     def get_address(self):
-        return self.address+" "+self.city+" "+self.province
+        return self.address+" "+ dict(CITY_TYPE)[self.city] +" "+dict(PROVINCE_TYPE)[self.province]
     
     @property
     def get_gallery(self):
