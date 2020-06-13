@@ -93,6 +93,7 @@ class Agreement(models.Model):
     vaping_allowed = models.IntegerField(choices=BOOLEAN_FIELD,default=2)
     pets_allowed = models.IntegerField(choices=BOOLEAN_FIELD,default=2)
     monthly_rent = models.IntegerField(default=0)
+    security_deposit = models.IntegerField(default=0)
     utility_cost = models.IntegerField(choices=UTILITY_COST,default=1)
     maintenance_cost = models.IntegerField(choices=BOOLEAN_FIELD,default=2)
     improvements = models.IntegerField(choices=IMPROVICE_PROPERTY,default=2)
@@ -110,6 +111,10 @@ class Agreement(models.Model):
 
     def get_absolute_url(self):
         return reverse('agreement-detail', kwargs={'slug': self.slug})
+
+    @property
+    def get_monthly_rent(self):
+        return "$"+str(self.monthly_rent)
 
     def save(self,*args, **kwargs):
         if not self.id:

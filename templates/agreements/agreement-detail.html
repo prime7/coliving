@@ -8,12 +8,175 @@
             <div class="card-header">
                 Agreement - {{ object.slug }}
             </div>
-            <ul>
-                <li>Landlord's email - {{ object.landlord.email }}</li>
-                <li>Landlord's name - {{ object.landlord.name }}</li>
-                <li>Agreement created - {{ object.agreement_created }}</li>
-                <li>Etc. more will be listed according to the agreement details created by landlord</li>
-            </ul>
+            <div class="card-body">
+                <ul>
+                    <li>THIS LEASE (the "Lease") dated {{ object.signed_on|date }} between {{ object.landlord.profile.name }} (the "Landlord") -AND- {{ object.tenant_name }} (the "Tenant") (individually the "Party" and collectively the "Parties")</li>
+
+                    <li>IN CONSIDERATION OF the Landlord leasing certain premises to the Tenant and other valuable
+                        consideration, the receipt and sufficiency of which consideration is hereby acknowledged, the Parties agree
+                        as follows:</li>
+                </ul>
+                <ol>
+                    
+                    <legend>Leased Property</legend> 
+                    <li>The Landlord agrees to rent to the Tenant the apartment,for use as residential premises only.</li>
+                    <li>Subject to the provisions of this Lease, apart from the Tenant, 
+                        {% if object.other_occupants_allowed == 2 %}
+                        no other persons will live in the Property without the prior written permission of the Landlord.</li>
+                        {% else %}
+                        other persons can live in the Property.</li>
+                        {% endif %}
+                    
+                    {% if object.other_occupants_allowed == 2 %}
+                        <li>No guests of the Tenants may occupy the Property for longer than one week without the prior written
+                        consent of the Landlord.</li>
+                    {% endif %}
+
+                    {% if object.pets_allowed == 2 %}
+                        <li>No animals are allowed to be kept in or about the Property.</li>
+                    {% endif %}
+
+                    {% if object.parking_access == 2 %}
+                        <li>Parking space is not provided under the terms of this Lease and no vehicle may park on or about the
+                        Property.</li>
+                    {% endif %}
+
+                    {% if object.smoking_allowed == 2 %}
+                        <li>The Tenant and members of Tenant's household will not smoke anywhere in the Property nor permit
+                        any guests or visitors to smoke in the Property.</li>
+                    {% endif %}
+
+                    {% if object.vaping_allowed == 2 %}
+                        <li>The Tenant and members of Tenant's household will not vape anywhere in the Property nor permit
+                            any guests or visitors to vape in the Property.</li>
+                    {% endif %}
+                    
+                    
+                    <legend>Term</legend> 
+                    <li>The term of the Lease commences at {{ object.lease_start_date}} and ends {{ object.lease_end_date }}</li>
+                    <li>Any notice to terminate this tenancy must comply with the applicable legislation of the Province of
+                        {{ object.get_province_display }} (the "Act")./li>
+                    
+                    
+                    <legend>Rent</legend> 
+                    <li>Subject to the provisions of this Lease, the rent for the Property is {{ object.get_monthly_rent }} per month (the "Rent").</li>
+                    <li>The Tenant will pay the Rent on or before the first (1st) day of each and every month of the term of
+                        this Lease to the Landlord by cash, cheque, direct debit from a bank or other financial institution or e-transfer.</li>
+                    <li>The Landlord may increase the Rent for the Property upon providing to the Tenant such notice as
+                        required by the Act.</li>
+                    
+                    
+                    <legend>Security Deposit</legend>    
+                    <li>On execution of this Lease, the Tenant will pay the Landlord a security deposit of ${{ object.security_deposit }} (the "Security Deposit").</li>
+                    <li>The Landlord will return the Security Deposit at the end of this tenancy, less such deductions as
+                        provided in this Lease but no deduction will be made for damage due to reasonable wear and tear nor
+                        for any deduction prohibited by the Act.</li>
+                    <li>During the term of this Lease or after its termination, the Landlord may charge the Tenant or make
+                        deductions from the Security Deposit for any or all of the following:
+                        <ol type="a">
+                            <li>repair of walls due to plugs, large nails or any unreasonable number of holes in the walls
+                                including the repainting of such damaged walls;</li>
+                            <li>repainting required to repair the results of any other improper use or excessive damage by the Tenant;</li>
+                            <li>unplugging toilets, sinks and drains;</li>
+                            <li>replacing damaged or missing doors, windows, screens, mirrors or light fixtures;</li>
+                            <li>repairing cuts, burns, or water damage to linoleum, rugs, and other areas;</li>
+                            <li>any other repairs or cleaning due to any damage beyond normal wear and tear caused or
+                                permitted by the Tenant or by any person whom the Tenant is responsible for;</li>
+                            <li>the cost of extermination where the Tenant or the Tenant's guests have brought or allowed
+                                insects into the Property or building;</li>
+                            <li>repairs and replacement required where windows are left open which have caused plumbing to
+                                freeze, or rain or water damage to floors or walls;</li>
+                            <li>any other purpose allowed under this Lease or the Act.</li>
+                        </ol>
+                    </li>
+                    <li>The Tenant may not use the Security Deposit as payment for the Rent.</li>
+                    <li>Within the time period required by the Act and after the termination of this tenancy, the Landlord will
+                        deliver or mail the Security Deposit less any proper deductions or with further demand for payment
+                        to: {{ object.tenant_name }}, or at such other place as the
+                        Tenant may advise.</li>
+                    
+                    
+                    <legend>Inspections</legend>
+                    <li>The Parties will complete, sign and date an inspection report at the beginning and at the end of this
+                        tenancy.</li>
+                    <li>At all reasonable times during the term of this Lease and any renewal of this Lease, the Landlord and
+                        its agents may enter the Property to make inspections or repairs, or to show the Property to
+                        prospective tenants or purchasers in compliance with the Act.</li>
+                    
+                    
+                    <legend>Tenant Improvements</legend>
+                    <li>The Tenant will obtain written permission from the Landlord before doing any of the following:</li>
+                        <ol type="a">
+                            <li>applying adhesive materials, or inserting nails or hooks in walls or ceilings other than two small
+                                picture hooks per wall;</li>
+                            <li>painting, wallpapering, redecorating or in any way significantly altering the appearance of the
+                                Property;</li>
+                            <li>removing or adding walls, or performing any structural alterations;</li>
+                            <li>installing a waterbed(s);</li>
+                            <li>changing the amount of heat or power normally used on the Property as well as installing
+                                additional electrical wiring or heating units;</li>
+                            <li>placing or exposing or allowing to be placed or exposed anywhere inside or outside the Property
+                                any placard, notice or sign for advertising or any other purpose; or</li>
+                            <li>affixing to or erecting upon or near the Property any radio or TV antenna or tower.</li>
+                        </ol>
+                    
+
+                    <legend>Utilities and Other Charges</legend>
+                    <li>
+                    {% if object.utility_cost == 1 %}
+                    The Tenant is responsible for the payment of all utilities in relation to the Property.
+                    {% elif object.utility_cost == 2 %}
+                    The Tenant is not responsible for the payment of all utilities in relation to the Property.
+                    {% else %}
+                    The Tenant will share the payment of all utilities in relation to the Property.
+                    {% endif %} 
+                    </li>
+
+                    <legend>Insurance</legend>
+                    <li>The Tenant is hereby advised and understands that the personal property of the Tenant is not insured
+                        by the Landlord for either damage or loss, and the Landlord assumes no liability for any such loss.</li>
+                    <li>The Tenant is not responsible for insuring the Landlord's contents and furnishings in or about the
+                        Property for either damage or loss, and the Tenant assumes no liability for any such loss.</li>
+
+
+                    <legend>Attorney Fees</legend>
+                    <li>In the event that any action is filed in relation to this Lease, the unsuccessful Party in the action will
+                        pay to the successful Party, in addition to all the sums that either Party may be called on to pay, a
+                        reasonable sum for the successful Party's attorney fees.</li>
+
+
+                    <legend>Amendment of Lease</legend>
+                    <li>This Lease may only be amended or modified by a written document executed by the Parties.</li>
+
+
+                    <legend>Assignment and Subletting</legend>
+                    {% if object.sublease == 2 %}
+                    <li>Without the prior, express, and written consent of the Landlord, the Tenant will not
+                        sublet or grant any concession or licence to use the Property or any part of the Property.</li>
+                    {% endif %} 
+                    {% if object.renew == 2 %}
+                    <li>Tenant will not have an option to renew this lease after the expiration of this lease.</li>
+                    {% endif %} 
+
+                    <legend>Rules and Regulations</legend>
+                    <li>The Tenant will obey all rules and regulations of the Landlord regarding the Property.</li>
+
+                    <legend>Address for Notice</legend>
+                    <li>For any matter relating to this tenancy, the Tenant may be contacted at the Property or through the
+                        phone number below:</li>
+                        <ol type="a">
+                            <li>Name: {{ object.tenant_name}}</li>
+                            <li>Phone: {{ object.tenant_phone_number}}</li>
+                        </ol>
+                    
+                    <li>For any matter relating to this tenancy, whether during or after this tenancy has been terminated, the
+                        Landlord's address for notice is:</li>
+                        <ol type="a">
+                            <li>Name: {{object.landlord.profile.name}} </li>
+                            <li>Phone: {{object.landlord_phone}} </li>
+                        </ol>
+                </ol>
+            </div>
         </div>
     </div>
     <div class="row">

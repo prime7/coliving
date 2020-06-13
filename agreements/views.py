@@ -8,6 +8,9 @@ from django.shortcuts import get_object_or_404
 from accounts.models import User
 from django.contrib import messages
 from datetime import datetime
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
 
 class AgreementCreateView(LoginRequiredMixin,UserPassesTestMixin, CreateView):
     model = Agreement
@@ -55,7 +58,7 @@ class AgreementListView(ListView):
         context['inactive'] = Agreement.objects.inactive(self.request.user)
         return context
 
-
+@method_decorator(login_required(login_url='/login'), name='dispatch')
 class AgreementSignView(UserPassesTestMixin,DetailView):
     model = Agreement
     template_name = "agreements/agreement-sign.html"

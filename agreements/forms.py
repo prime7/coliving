@@ -60,8 +60,9 @@ class AgreementCreateForm(forms.ModelForm):
                 css_class='form-row'
             ),
             Row(
-                Column('monthly_rent', css_class='form-group col-md-6 mb-0'),
-                Column('utility_cost', css_class='form-group col-md-6 mb-0'),
+                Column('monthly_rent', css_class='form-group col-md-4 mb-0'),
+                Column('security_deposit', css_class='form-group col-md-4 mb-0'),
+                Column('utility_cost', css_class='form-group col-md-4 mb-0'),
                 css_class='form-row'
             ),
             Row(
@@ -99,6 +100,7 @@ class AgreementCreateForm(forms.ModelForm):
             'vaping_allowed',
             'pets_allowed',
             'monthly_rent',
+            'security_deposit',
             'utility_cost',
             'maintenance_cost',
             'improvements',
@@ -132,6 +134,7 @@ class AgreementCreateForm(forms.ModelForm):
             'vaping_allowed':"Is vaping allowed indoors?",
             'pets_allowed':"Is pets allowed?",
             'monthly_rent':"What is the monthly rent?",
+            'security_deposit':"How much do you want as security deposit?",
             'utility_cost':"Who is responsible for paying utility cost?",
             'maintenance_cost':"Will the tenant be responsible for any maintenance?",
             'improvements':"Will the tenant be allowed to make any improvements to the property?",
