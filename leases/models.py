@@ -24,7 +24,7 @@ CITY_TYPE = (
     (3,'Richmond'),
     (4,'Coquitlam'),
     (5,'New Westminster'),
-    (6,'Surrey'),
+    (6,'Surrey')
 )
 
 PROVINCE_TYPE = (
