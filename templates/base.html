@@ -39,6 +39,7 @@
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{% url 'listing-create' %}">Create Listing</a>
                 <a class="dropdown-item" href="{% url 'user-lease' %}">My Listings</a>
+                <a class="dropdown-item" href="{% url 'user-favourites' %}">Favourite Listings</a>
                 <div class="dropdown-divider"></div>
                 {% if membership == 'Landlord' %}
                   <a class="dropdown-item" href="{% url 'agreement-create' %}">Create Agreement</a>

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-2">
+            {% for house in houses %}
+            <div class="card m-4 box-shadow">
+                <img class="card-img-top" src="{{house.get_thumbnail }}" style="min-height: 250px;" alt="Card image cap">
+                    <div class="card-body">
+                    <div class="card-text">
+                        <small>{{ house.get_monthly_rent }} | {{ house.get_city_display }}</small>
+                        <br>
+                        <div class="container">
+                            <div class="row">
+                                <a href="{% url 'listing-detail' house.slug %}">{{ house.title|title }}</a>
+                                <a href="{% url 'listing-favourite' house.id %}" class="ml-auto">
+                                    <button class="btn btn-danger btn-sm">Remove from favourites</button>
+                                </a>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="jumbotron">
+                <div class="container text-center">
+                    <h3>You don't have any favourite listing yet</h3>
+                    <a href="{% url 'listing' %}">
+                        <button class="btn btn-success btn-lg">Search for listing</button>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

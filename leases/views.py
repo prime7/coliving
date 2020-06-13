@@ -112,6 +112,15 @@ class UserLeaseListView(ListView):
         context['user'] = User.objects.get(email=self.request.user.email)
         return context
 
+
+class LeaseFavouriteListView(ListView):
+    model = House
+    template_name = 'users/favourites.html'
+    context_object_name = 'houses'
+
+    def get_queryset(self):
+        user = self.request.user 
+        return user.favourites.all()
     
 
 
