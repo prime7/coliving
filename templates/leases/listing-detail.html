@@ -61,7 +61,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="card">
+                        <div class="card mb-3">
                             <div class="card-header">
                                 Lister
                             </div>
@@ -85,60 +85,62 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 col-sm-12 card pt-4">
-                        <h3>{{ house.get_monthly_rent}}</h3>
-                        <hr>
-                        <h3>Availabilty</h3>
-                        <div class="row no-gutters">
-                            <p class="col-md-4 text-muted">Duration</p>
-                            <p class="col-md-4 offset-md-4"> {{house.duration}} months</p>
-                        </div>
-                        <div class="row no-gutters">
-                            <p class="col-md-4 text-muted">Earliest move in</p>
-                            <p class="col-md-4 offset-md-4"> {{house.earliest_move_in}}</p>
-                        </div>
-                        <div class="row no-gutters">
-                            <p class="col-md-4 text-muted">Earliest move out</p>
-                            <p class="col-md-4 offset-md-4"> {{house.latest_move_out}}</p>
-                        </div>
-                        <hr/>
-                        {% if house.resign %}
-                        <div class="row no-gutters p-2">
-                            <i class="fas fa-redo text-success"> Option to re-sign</i>
-                            <i class="fas fa-info-circle ml-auto" data-toggle="tooltip" data-placement="top" title="When the sublease ends you can sign a new lease directly with the landlord"></i>
-                        </div>
-                        {% endif %}
-                        <div class="row no-gutters p-2 mb-3">
-                            <button class="btn btn-warning btn-lg btn-block" data-toggle="modal" data-target="#staticBackdrop">Connect</button>
-                            <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="staticBackdropLabel">Get lister detail</h5>
-                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                      </button>
+                    <div class="col-md-4 col-sm-12">
+                        <div class="card p-4">
+                            <h3>{{ house.get_monthly_rent}}</h3>
+                            <hr>
+                            <h3>Availabilty</h3>
+                            <div class="row no-gutters">
+                                <p class="col-md-4 text-muted">Duration</p>
+                                <p class="col-md-4 offset-md-4"> {{house.duration}} months</p>
+                            </div>
+                            <div class="row no-gutters">
+                                <p class="col-md-4 text-muted">Earliest move in</p>
+                                <p class="col-md-4 offset-md-4"> {{house.earliest_move_in}}</p>
+                            </div>
+                            <div class="row no-gutters">
+                                <p class="col-md-4 text-muted">Earliest move out</p>
+                                <p class="col-md-4 offset-md-4"> {{house.latest_move_out}}</p>
+                            </div>
+                            <hr/>
+                            {% if house.resign %}
+                            <div class="row no-gutters p-2">
+                                <i class="fas fa-redo text-success"> Option to re-sign</i>
+                                <i class="fas fa-info-circle ml-auto" data-toggle="tooltip" data-placement="top" title="When the sublease ends you can sign a new lease directly with the landlord"></i>
+                            </div>
+                            {% endif %}
+                            <div class="row no-gutters p-2 mb-3">
+                                <button class="btn btn-warning btn-lg btn-block" data-toggle="modal" data-target="#staticBackdrop">Connect</button>
+                                <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                        <h5 class="modal-title" id="staticBackdropLabel">Get lister detail</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                        <form method="POST">
+                                            {% csrf_token %}
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <label for="inputEmail">Your Email</label>
+                                                    <input type="email" class="form-control" id="inputEmail" required name="email">
+                                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="inputPhone">Your Phone Number</label>
+                                                    <input type="number" class="form-control" id="inputPhone" required name="phone">
+                                                    <small id="emailHelp" class="form-text text-muted">We'll never share your phone number with anyone else.</small>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">Connect</button>
+                                            </div>
+                                        </form>
                                     </div>
-                                    <form method="POST">
-                                        {% csrf_token %}
-                                        <div class="modal-body">
-                                            <div class="form-group">
-                                                <label for="inputEmail">Your Email</label>
-                                                <input type="email" class="form-control" id="inputEmail" required name="email">
-                                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="inputPhone">Your Phone Number</label>
-                                                <input type="number" class="form-control" id="inputPhone" required name="phone">
-                                                <small id="emailHelp" class="form-text text-muted">We'll never share your phone number with anyone else.</small>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-primary">Connect</button>
-                                        </div>
-                                    </form>
-                                  </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

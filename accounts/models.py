@@ -43,11 +43,17 @@ PHONE_REGEX = RegexValidator(regex='\d{9,13}$',message="Phone Number must be wit
 class Profile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE, related_name='profile')
     name = models.CharField(max_length=50)
-    profile_pic = ResizedImageField(size=[640, 480], upload_to='profile_pics',force_format='PNG')
+    profile_pic = ResizedImageField(size=[640, 480], upload_to='profile_pics',force_format='PNG',default='default-profile.jpg')
     mobile_number = models.CharField(validators=[PHONE_REGEX], max_length=13, blank=True)
     mobile_number_varified = models.BooleanField(default=False)
     bio = models.CharField(max_length = 400,blank=True,help_text="Describe about yourself in short")
     registered_at = models.DateField(auto_now=True)
+    verification_doc = ResizedImageField(size=[1200, 1200], upload_to='verifications',force_format='PNG',null=True,blank=True)
+    verified = models.BooleanField(default=False)
+
+    @property
+    def is_profile_ready(self):
+        return self.verified
 
     def __str__(self):
         return f'{self.user.email}s Profile'
