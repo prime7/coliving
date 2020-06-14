@@ -69,6 +69,7 @@ class LeaseDetailView(DetailView):
 
         return self.render_to_response(context=context)
 
+@method_decorator(login_required(login_url='/login'), name='dispatch')
 class LeaseDeactivateView(DetailView):
     model = House
     template_name = "leases/listing-deactivate.html"
@@ -87,6 +88,7 @@ class LeaseDeactivateView(DetailView):
         self.object.save()
         return redirect("user-lease")
 
+@method_decorator(login_required(login_url='/login'), name='dispatch')
 class LeaseFavouriteView(View):
     def get(self, request, *args, **kwargs):
         id = kwargs.get('id',None)
@@ -97,6 +99,9 @@ class LeaseFavouriteView(View):
             house.favourites.add(request.user)
         
         return redirect('listing-detail', slug=house.slug)
+
+
+@method_decorator(login_required(login_url='/login'), name='dispatch')
 class UserLeaseApplicationView(DetailView):
     model = House
     template_name = 'users/applications.html'
@@ -123,6 +128,7 @@ class UserLeaseListView(ListView):
         return context
 
 
+@method_decorator(login_required(login_url='/login'), name='dispatch')
 class LeaseFavouriteListView(ListView):
     model = House
     template_name = 'users/favourites.html'
