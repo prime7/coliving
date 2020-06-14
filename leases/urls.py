@@ -6,7 +6,8 @@ from .views import (
     LeaseCreateView,
     LeaseUpdateView,
     LeaseDeactivateView,
-    LeaseFavouriteView
+    LeaseFavouriteView,
+    UserLeaseApplicationView
 )
 
 urlpatterns = [
@@ -16,5 +17,6 @@ urlpatterns = [
     path('listing/<slug>/', LeaseDetailView.as_view(), name='listing-detail'),
     path('listing/<slug>/update/', LeaseUpdateView.as_view(), name='listing-update'),
     path('listing/<slug>/deactivate/', LeaseDeactivateView.as_view(), name='listing-deactivate'),
+    path('listing/<slug>/application/', UserLeaseApplicationView.as_view(), name='listing-application'),
     path('listing/<int:id>/favourite/', LeaseFavouriteView.as_view(), name='listing-favourite'),
 ]

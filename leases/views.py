@@ -97,6 +97,16 @@ class LeaseFavouriteView(View):
             house.favourites.add(request.user)
         
         return redirect('listing-detail', slug=house.slug)
+class UserLeaseApplicationView(DetailView):
+    model = House
+    template_name = 'users/applications.html'
+
+    def get_context_data(self,**kwargs):
+        context = super().get_context_data(**kwargs)
+        slug = self.kwargs.get('slug')
+        house = House.objects.get(slug=slug)
+        context['applications'] = house.applications.all()
+        return context
 
 class UserLeaseListView(ListView):
     model = House

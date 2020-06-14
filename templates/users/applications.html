@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+    <div class="row mt-5 mb-5">
+        <div class="col-md-4">
+            <div class="card shadow p-3">
+                <a href="{% url 'user-lease' %}">
+                    <i class="fas fa-long-arrow-alt-left fa-lg" style="align-self: center;"></i>
+                </a>
+                <h5>{{ object.title|title }}</h5>
+                <small>Created at : {{ object.uploaded_at }}</small>
+                <hr>
+                <h5>Total applicants: {{ applications|length }}</h5>
+            </div>
+        </div>
+        <div class="col-md-8">
+            {% for application in applications %}
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img src="{{ application.profile.profile_pic.url }}" class="card-img" style="max-height: 250px;" alt="Profile Picture">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-header">
+                            <div class="row no-gutters">
+                                <h5 class="card-title mr-auto">{{ application.profile.get_name|title }}</h5>
+                                {% if application.profile.verified %}
+                                <i class="fas fa-check text-center text-success mb-2"></i>
+                                {% else %}
+                                <i class="far fa-times-circle text-danger mb-2"></i> 
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text"><small>Email: {{ application.email }}</small></p>
+                            <p class="card-text"><small>Phone: {{ application.profile.mobile_number }}</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="jumbotron">
+                <div class="container text-center">
+                    <h4>We are working hard to get suitable tenants for you.</h4>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

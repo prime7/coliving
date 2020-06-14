@@ -44,6 +44,9 @@ class HouseManager(models.Manager):
         return super(HouseManager,self).filter(user=user,rented=False).order_by('-earliest_move_in')
     def inactive_by_user(self,user):
         return super(HouseManager,self).filter(user=user,rented=True).order_by('-earliest_move_in')
+    # def applicants(self,slug):
+    #     return super(HouseManager,self).filter(slug=slug).applications.all()
+    
 
 class House(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
@@ -73,6 +76,7 @@ class House(models.Model):
     is_partially_furnished = models.BooleanField(default=False, null=True)
     
     favourites = models.ManyToManyField(User,related_name='favourites',blank=True)
+    applications = models.ManyToManyField(User,related_name='applications',blank=True)
 
     objects = HouseManager()
 

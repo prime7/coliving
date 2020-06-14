@@ -54,6 +54,11 @@ class Profile(models.Model):
     @property
     def is_profile_ready(self):
         return self.verified
+    @property
+    def get_name(self):
+        if self.name:
+            return self.name
+        return self.user.email.split('@')[0]
 
     def __str__(self):
         return f'{self.user.email}s Profile'
