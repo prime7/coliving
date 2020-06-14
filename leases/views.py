@@ -1,5 +1,5 @@
 from django.shortcuts import render,get_object_or_404
-from django.views.generic import ListView,DetailView,CreateView,UpdateView,View
+from django.views.generic import ListView,DetailView,CreateView,UpdateView,View,FormView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import House,User,Image,Lead
 from django.db.models import Q,F
@@ -11,6 +11,7 @@ from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 from django.core.mail import send_mail
 from django.http import HttpResponse
+from accounts.forms import ProfileConnectForm
 
 
 class LeaseListView(ListView):
@@ -29,13 +30,15 @@ class LeaseListView(ListView):
                 return render(request, self.template_name, {'houses': houses})
         return super().get(request, *args, **kwargs)
 
-class LeaseDetailView(DetailView):
+class LeaseDetailView(FormView,DetailView):
     model = House
     template_name = "leases/listing-detail.html"
+    form_class = ProfileConnectForm
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         house = self.get_object()
+        context['form'] = ProfileConnectForm(instance=self.request.user.profile)
         context['is_favourite'] = house.favourites.filter(id=self.request.user.id).exists()
         return context
 
@@ -100,7 +103,6 @@ class LeaseFavouriteView(View):
         
         return redirect('listing-detail', slug=house.slug)
 
-
 @method_decorator(login_required(login_url='/login'), name='dispatch')
 class UserLeaseApplicationView(DetailView):
     model = House
@@ -137,8 +139,6 @@ class LeaseFavouriteListView(ListView):
     def get_queryset(self):
         user = self.request.user 
         return user.favourites.all()
-    
-
 
 @method_decorator(login_required(login_url='/login'), name='dispatch')
 class LeaseCreateView(LoginRequiredMixin,UserPassesTestMixin, CreateView):
@@ -164,7 +164,6 @@ class LeaseCreateView(LoginRequiredMixin,UserPassesTestMixin, CreateView):
     def handle_no_permission(self):
         return render(self.request,"memberships/upgrade-membership.html")
     
-
 class LeaseUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
     model = House
     form_class = HouseCreateForm

@@ -36,3 +36,8 @@ class ProfileUpdateForm(forms.ModelForm):
         widgets = {
             'profile_pic': ImagePreviewWidget(),
         }
+
+class ProfileConnectForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['name','mobile_number','bio']
