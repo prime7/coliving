@@ -36,14 +36,14 @@ def upload_image_path(instance, filename):
 
 class HouseManager(models.Manager):
     def active(self):
-        return super(HouseManager,self).filter(rented=False).order_by('-earliest_move_in')
+        return super(HouseManager,self).filter(rented=False,active=True).order_by('-earliest_move_in')
     def inactive(self):
-        return super(HouseManager,self).filter(rented=True).order_by('-earliest_move_in')
+        return super(HouseManager,self).filter(rented=True,active=True).order_by('-earliest_move_in')
         
     def active_by_user(self,user):
-        return super(HouseManager,self).filter(user=user,rented=False).order_by('-earliest_move_in')
+        return super(HouseManager,self).filter(user=user,rented=False,active=True).order_by('-earliest_move_in')
     def inactive_by_user(self,user):
-        return super(HouseManager,self).filter(user=user,rented=True).order_by('-earliest_move_in')
+        return super(HouseManager,self).filter(user=user,rented=True,active=True).order_by('-earliest_move_in')
     # def applicants(self,slug):
     #     return super(HouseManager,self).filter(slug=slug).applications.all()
     
@@ -60,6 +60,7 @@ class House(models.Model):
     uploaded_at = models.DateField(auto_now=True,auto_now_add=False)
     updated_at = models.DateField(auto_now=False,auto_now_add=True)
     rented = models.BooleanField(default=False)
+    active = models.BooleanField(default=True)
     rental_status = models.IntegerField(choices=RENTAL_TYPE,null=True,blank=True)
 
     address = models.CharField(max_length=100, null=True)
@@ -153,6 +154,9 @@ def create_slug(instance,new_slug = None):
 
 def pre_save_post_receiver(sender,instance,*args,**kwargs):
     if not instance.slug:
+        from memberships.context_processors import get_user_membership
+        # if get_user_membership(instance.user) != 'Landlord':
+        #     instance.rented = False
         instance.slug = create_slug(instance)
     
 

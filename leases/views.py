@@ -150,6 +150,12 @@ class LeaseCreateView(LoginRequiredMixin,UserPassesTestMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         obj = form.save()
+        
+        from memberships.context_processors import get_user_membership,is_landlord
+        if not is_landlord(self.request):
+            obj.rented = True
+            obj.save()
+
         files = self.request.FILES.getlist('images')
         for f in files:
             Image.objects.create(house=obj,src=f)
