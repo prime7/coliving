@@ -145,7 +145,7 @@ def create_slug(instance,new_slug = None):
         return create_slug(instance,new_slug=new_slug)
     return slug
 
-def pre_save_post_receiver(sender,instance,*args,**kwargs):
+def pre_save_house_receiver(sender,instance,*args,**kwargs):
     if not instance.slug:
         from memberships.context_processors import get_user_membership
         # if get_user_membership(instance.user) != 'Landlord':
@@ -153,7 +153,7 @@ def pre_save_post_receiver(sender,instance,*args,**kwargs):
         instance.slug = create_slug(instance)
     
 
-pre_save.connect(pre_save_post_receiver,sender=House)
+pre_save.connect(pre_save_house_receiver,sender=House)
 
 
 class Lead(models.Model):

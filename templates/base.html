@@ -28,7 +28,7 @@
             <li class="nav-item"><a class="nav-item nav-link m-2" href="{% url 'listing' %}">Listings</a></li>
             <li class="nav-item"><a class="nav-item m-2 btn btn-outline-warning" href="{% url 'listing-create' %}">List Your Place</a></li>
             {% if membership == 'Free' %}
-              <li class="nav-item"><a class="nav-link m-2 btn btn-warning text-dark" href="{% url 'memberships:select' %}">Become a Landlord</a></li>
+              <li class="nav-item"><a class="nav-item m-2 btn btn-outline-warning" href="{% url 'memberships:select' %}">Pricing</a></li>
             {% endif %}
             <li class="nav-item dropdown">
               <img src="{{ user.profile.profile_pic.url }}" width="60" height="60" class="rounded-circle nav-item nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="false" aria-expanded="true"/>

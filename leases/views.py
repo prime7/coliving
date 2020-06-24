@@ -25,8 +25,17 @@ class LeaseListView(ListView):
         if request.GET:
             houses = House.objects.active()
             query = request.GET["q"]
+            if query=='vancouver':
+                query = 1
+            elif query == 'toronto':
+                query = 2
+            elif query == 'seattle':
+                query = 3
+            elif query == 'newyork':
+                query = 4
+
             if query:
-                houses = houses.filter(Q(title__icontains=query)|Q(description__icontains=query)).distinct().order_by('-earliest_move_in')
+                houses = houses.filter(Q(title__icontains=query)|Q(city__icontains=query)|Q(description__icontains=query)).distinct().order_by('-earliest_move_in')
                 return render(request, self.template_name, {'houses': houses})
         return super().get(request, *args, **kwargs)
 

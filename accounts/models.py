@@ -33,7 +33,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.email
 
     def save(self, *args, **kwargs):
-        strtime = "".join(str(time()).split("."))
+        strtime = "".join(str(time()).split(".")[1])
         string = "%s%s" % (self.email.split("@")[0],strtime[:3])
         self.username = slugify(string)
         super(User, self).save()

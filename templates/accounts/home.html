@@ -112,7 +112,9 @@
         <div class="card card box-shadow">
           <img class="card-img-top" src="{% static 'img/toronto.jpg' %}" style="min-height: 250px;" alt="Card image cap"/>
           <div class="card-body">
-            <button class="btn btn-outline-warning btn-lg">Toronto</button>
+            <a href="{% url 'listing' %}?q=toronto">
+              <button class="btn btn-outline-warning btn-lg">Toronto</button>
+            </a>
           </div>
         </div>
       </div>
@@ -120,7 +122,9 @@
         <div class="card box-shadow">
           <img class="card-img-top" src="{% static 'img/vancouver.jpg' %}" style="min-height: 250px;" alt="Card image cap"/>
           <div class="card-body">
-            <button class="btn btn-outline-warning btn-lg">Vancouver</button>
+            <a href="{% url 'listing' %}?q=vancouver">
+              <button class="btn btn-outline-warning btn-lg">Vancouver</button>
+            </a>
           </div>
         </div>
       </div>
@@ -130,7 +134,9 @@
         <div class="card box-shadow">
           <img class="card-img-top" src="{% static 'img/seattle.jpg' %}" style="min-height: 250px;" alt="Card image cap"/>
           <div class="card-body">
-            <button class="btn btn-outline-warning btn-lg">Seattle</button>
+            <a href="{% url 'listing' %}?q=seattle">
+              <button class="btn btn-outline-warning btn-lg">Seattle</button>
+            </a>
           </div>
         </div>
       </div>
@@ -138,7 +144,9 @@
         <div class="card box-shadow">
           <img class="card-img-top" src="{% static 'img/newyork.jpg' %}" style="min-height: 250px;" alt="Card image cap"/>
           <div class="card-body">
-            <button class="btn btn-outline-warning btn-lg">New York</button>
+            <a href="{% url 'listing' %}?q=newyork">
+              <button class="btn btn-outline-warning btn-lg">New York</button>
+            </a>
           </div>
         </div>
       </div>
