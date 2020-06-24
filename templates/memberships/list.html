@@ -2,8 +2,8 @@
 
 {% block content %}
 <div class="container">
-	<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-		<h1>Select a membership</h1>
+	<div class="pricing-header pt-5 pb-5 mx-auto text-center">
+		<h1>Choose the plan that fits you best.</h1>
 		<p class="lead">If you want anything personalized, contact us.</p>
 	</div>
 </div>
@@ -15,28 +15,38 @@
 				<h4>{{ object.membership_type }}</h4>
 			</div>
 			<div class="card-body">
-			<h1 class="card-title pricing-card-title">${{ object.price }} <small class="text-muted">/ mo</small></h1>
-			{% if object.membership_type != 'Free' %}
+			{% if object.membership_type == 'Landlord' %}
+				<h3 class="card-title pricing-card-title">$3.5% of rent <small class="text-muted">/ mo</small></h3>
 				<ul class="list-unstyled mt-3 mb-4">
-					<li>Full service without hiring anyone</li>
-					<li>24/7 Customer Support</li>
-					<li>Security Deposit Gurantee<small><sup>Coming Soon</sup></small></li>
-					<li>Messaging<small><sup>Coming Soon</sup></small></li>
+					<li>Everything in free plan</li><hr>
+					<li>Unlimited listing</li><hr>
+					<li>Grow your income while lowering workload</li><hr>
+					<li>We select the most qualified tenant</li><hr>
+					<li>We do the hardwork,applicant's and tenants will get service from us</li><hr>
+					<li>Property showing on autopilot by magic box</li>
+				</ul>
+			{% endif %}
+			{% if object.membership_type == 'Lease Holder' %}
+				<h3 class="card-title pricing-card-title">$15 <small class="text-muted">/ mo</small></h3>
+				<ul class="list-unstyled mt-3 mb-4">
+					<li>Everything in free plan</li><hr>
+					<li>Leave as soon as you are approved</li><hr>
+					<li>We will take care of the paperwork</li><hr>
+					<li>We will do the scheduling</li>
 				</ul>
 			{% endif %}
 			{% if object.membership_type == 'Free' %}
+				<h3 class="card-title pricing-card-title">$0 <small class="text-muted">/ mo</small></h3>
 				<ul class="list-unstyled mt-3 mb-4">
-					<li>Basic listings</li>
-					<li>Free Service</li>
-					<li>Tenant Verifications</li>
+					<li>Full service without hiring anyone</li><hr>
+					<li>24/7 Customer Support</li><hr>
+					<li>Security Deposit Gurantee</li><hr>
+					<li>Basic listings</li><hr>
+					<li>Tenant Verifications</li><hr>
 					<li>Email support</li>
-					<li>Security Deposit Gurantee<small><sup>Coming Soon</sup></small></li>
-					<li>Messaging<small><sup>Coming Soon</sup></small></li>
 				</ul>
-				{% if current_membership == 'Free' %}
-					<small>This is your current membership</small>
-				{% endif %}
 			{% endif %}
+
 			{% if object.membership_type != 'Free' %}
 				<form method="POST" action="{% url 'memberships:select' %}">
 					{% csrf_token %}

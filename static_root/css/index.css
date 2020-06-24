@@ -78,7 +78,9 @@ input[type="number"] {
     object-fit: cover;
 } 
 /* HOME SECTION */
-
+#cities-section{
+    margin-top: 50px;
+}
 
 /* CREATE LISTING SECTION  */
 

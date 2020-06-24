@@ -9,6 +9,7 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 
 MEMBERSHIP_CHOICES = (
     ('Landlord', 'landlord'),
+    ('Lease Holder', 'lease'),
     ('Free', 'free')
 )
 

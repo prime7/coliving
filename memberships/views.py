@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.views.generic import ListView
@@ -32,7 +32,7 @@ def get_selected_membership(request):
     return None
 
 
-class MembershipSelectView(LoginRequiredMixin, ListView):
+class MembershipSelectView(UserPassesTestMixin, ListView):
     model = Membership
     template_name = "memberships/list.html"
 
@@ -40,7 +40,7 @@ class MembershipSelectView(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         current_membership = get_user_membership(self.request)
         context['current_membership'] = str(current_membership.membership)
-        print(context)
+        print(context['current_membership'])
         return context
 
     def post(self, request, **kwargs):
@@ -57,10 +57,17 @@ class MembershipSelectView(LoginRequiredMixin, ListView):
                               next payment is due {}""".format('get this value from stripe'))
                 return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-        # assign to the session
         request.session['selected_membership_type'] = selected_membership.membership_type
 
         return HttpResponseRedirect(reverse('memberships:payment'))
+    
+    def test_func(self):
+        if self.request.user.is_authenticated:
+            return True
+        return False
+
+    def handle_no_permission(self):
+        return render(self.request,"memberships/list-unauthenticated.html")
 
 @login_required
 def PaymentView(request):

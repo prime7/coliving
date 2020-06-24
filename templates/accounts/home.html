@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 {% load crispy_forms_tags %}    
 
 {% block content %}
@@ -27,7 +28,7 @@
   <div class="container">
     <div class="row small-margin">
       <div class="col-xl-9 mx-auto">
-        <h2 class="mb-5">Move out of your lease for just $15 per month</h2>
+        <h2 class="mb-5">Move out of your lease for just $15</h2>
         <a href="{% url 'for-leaseholders' %}" class="btn btn-lg btn-warning">Click to start</a>
       </div>
     </div>
@@ -97,4 +98,52 @@
     </div>
   </div>
 </section>
+<section id="cities-section" class="text-center">
+  <div class="container">
+    <div class="row small-margin">
+      <div class="col-xl-9 mx-auto">
+        <h2 class="mb-5">Top cities we operate</h2>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row justify-content-center m-3">
+      <div class="col-md-4">
+        <div class="card card box-shadow">
+          <img class="card-img-top" src="{% static 'img/toronto.jpg' %}" style="min-height: 250px;" alt="Card image cap"/>
+          <div class="card-body">
+            <button class="btn btn-outline-warning btn-lg">Toronto</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card box-shadow">
+          <img class="card-img-top" src="{% static 'img/vancouver.jpg' %}" style="min-height: 250px;" alt="Card image cap"/>
+          <div class="card-body">
+            <button class="btn btn-outline-warning btn-lg">Vancouver</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center m-3">
+      <div class="col-md-4">
+        <div class="card box-shadow">
+          <img class="card-img-top" src="{% static 'img/seattle.jpg' %}" style="min-height: 250px;" alt="Card image cap"/>
+          <div class="card-body">
+            <button class="btn btn-outline-warning btn-lg">Seattle</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card box-shadow">
+          <img class="card-img-top" src="{% static 'img/newyork.jpg' %}" style="min-height: 250px;" alt="Card image cap"/>
+          <div class="card-body">
+            <button class="btn btn-outline-warning btn-lg">New York</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 {% endblock content %}

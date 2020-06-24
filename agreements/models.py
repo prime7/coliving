@@ -77,7 +77,6 @@ class AgreementManager(models.Manager):
 class Agreement(models.Model):
     landlord = models.ForeignKey(User,on_delete=models.CASCADE)
     property_type = models.IntegerField(choices=PROPERTY_TYPE)
-    province = models.CharField(choices=PROVINCE_TYPE,max_length=10)
     lease_type = models.IntegerField(choices=LEASE_TYPE,default=2)
     agreement_created = models.DateField(auto_now=True)
     lease_start_date = models.DateField(null=True)

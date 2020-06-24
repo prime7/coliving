@@ -12,10 +12,6 @@ from memberships.views import get_user_membership,get_user_subscription
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-def home(request):
-    return render(request,"accounts/home.html")
-
-
 def signup(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)

@@ -24,9 +24,8 @@ class AgreementCreateForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Row(
-                Column('property_type', css_class='form-group col-md-12 mb-0'),
-                Column('province', css_class='form-group col-md-12 mb-0'),
-                Column('lease_type', css_class='form-group col-md-12 mb-0'),
+                Column('property_type', css_class='form-group col-md-6 mb-0'),
+                Column('lease_type', css_class='form-group col-md-6 mb-0'),
                 css_class='form-row'
             ),
             Row(
@@ -85,7 +84,6 @@ class AgreementCreateForm(forms.ModelForm):
         model = Agreement
         fields = [
             'property_type',
-            'province',
             'lease_type',
             'lease_start_date',
             'lease_end_date',
@@ -119,7 +117,6 @@ class AgreementCreateForm(forms.ModelForm):
         }
         labels = {
             'property_type':"What type of property is being rented?",
-            'province':"Where it is located?",
             'lease_type':"What type of lease term do you want?",
             'lease_start_date':"When is the lease starting?",
             'lease_end_date':"When is the lease ending?",

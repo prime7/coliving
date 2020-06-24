@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Fontawesome -->
-    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css'%}?rand=23423423">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css'%}">
     <script src="https://kit.fontawesome.com/7521df1375.js" crossorigin="anonymous"></script> 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     {% if title %}
@@ -51,6 +51,7 @@
             </li>
           {% else %}
             <a class="nav-item nav-link m-2" href="{% url 'listing' %}">Listing</a>
+            <a class="nav-item nav-link m-2" href="{% url 'memberships:select' %}">Pricing</a>
             <a class="nav-item nav-link m-2" href="{% url 'login' %}">Login</a>
             <a class="nav-item nav-link m-2" href="{% url 'signup' %}">Register</a>
             <li class="nav-item"><a class="nav-item m-2 btn btn-outline-warning" href="{% url 'listing-create' %}">List Your Place</a></li>
