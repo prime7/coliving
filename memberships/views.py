@@ -40,7 +40,6 @@ class MembershipSelectView(UserPassesTestMixin, ListView):
         context = super().get_context_data(**kwargs)
         current_membership = get_user_membership(self.request)
         context['current_membership'] = str(current_membership.membership)
-        print(context['current_membership'])
         return context
 
     def post(self, request, **kwargs):
