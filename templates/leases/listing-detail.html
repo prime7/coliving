@@ -143,7 +143,7 @@
                                             </form> -->
                                             <form method="POST" class="p-3">
                                                 {% csrf_token %}
-                                                {% crispy form %}
+                                                {{ form|crispy }}
                                                 <div class="form-group text-center">
                                                     <button class="btn btn-outline-warning" type="submit">Connect</button>
                                                 </div>

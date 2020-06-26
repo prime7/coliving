@@ -53,11 +53,12 @@ class LeaseDetailView(FormView,DetailView):
 
     def post(self,request,*args,**kwargs):
         self.object = self.get_object()
+        self.object.applications.add(request.user)
         context = context = super(LeaseDetailView, self).get_context_data(**kwargs)
         messages.info(request, 'Please check your email inbox')
-        
-        email = request.POST['email']
-        phone_number = request.POST['phone']
+        email = request.user.email
+        form = ProfileConnectForm(request.POST)
+        phone_number = request.POST['mobile_number']
         from django.conf import settings
         link = ""
         if settings.DEBUG:
@@ -137,7 +138,6 @@ class UserLeaseListView(ListView):
         context = super().get_context_data(**kwargs)
         context['user'] = User.objects.get(email=self.request.user.email)
         return context
-
 
 @method_decorator(login_required(login_url='/login'), name='dispatch')
 class LeaseFavouriteListView(ListView):
