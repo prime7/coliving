@@ -50,7 +50,7 @@ class House(models.Model):
     earliest_move_in = models.DateField(default=datetime.now)
     latest_move_out = models.DateField(default=datetime.now)
     monthly_rent = models.DecimalField(max_digits=10, decimal_places=2, null=True,help_text="In Cad")
-    slug = models.SlugField(unique=True,blank=True)
+    slug = models.SlugField(max_length=255,unique=True,blank=True)
     uploaded_at = models.DateField(auto_now=True,auto_now_add=False)
     updated_at = models.DateField(auto_now=False,auto_now_add=True)
     rented = models.BooleanField(default=False)
