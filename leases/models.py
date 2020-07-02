@@ -159,7 +159,7 @@ pre_save.connect(pre_save_house_receiver,sender=House)
 class Lead(models.Model):
     email = models.EmailField()
     phone_number = models.CharField(max_length=13)
-    link = models.CharField(max_length=50)
+    link = models.CharField(max_length=350)
 
     def __str__(self):
         return self.email
