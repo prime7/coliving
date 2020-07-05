@@ -8,7 +8,7 @@
     <div class="container">
         <div class="row justify-content-center">
             {% for house in houses %}
-            <div class="card col-md-3 col-sm-12 m-4 p-0 box-shadow">
+            <div class="card col-md-3 col-sm-12 col-md-6 m-4 p-0 box-shadow">
               <a href="{% url 'listing-detail' house.slug %}">
                   <img class="card-img-top" src="{{ house.get_thumbnail }}" style="min-height: 250px;" alt="Card image cap">
                   <div class="card-body m-0 p-0 ">
@@ -20,9 +20,9 @@
                       <hr/>
                       <div class="card-text m-2">
                           {% if house.user.profile.name %} 
-                            <a href="{% url 'listing-user' house.user.username %}"><small>Uploaded by :{{ house.user.profile.name }}</small></a>
+                            <a href="{% url 'listing-user' house.user.username %}"><small>Uploaded by : {{ house.user.profile.name }}</small></a>
                           {% else %}
-                            <a href="{% url 'listing-user' house.user.username %}"><small>Uploaded by :{{ house.user.username }}</small></a>
+                            <a href="{% url 'listing-user' house.user.username %}"><small>Uploaded by : {{ house.user.username }}</small></a>
                           {% endif %}
                       </div>
                   </div>

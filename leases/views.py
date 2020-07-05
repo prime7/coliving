@@ -47,8 +47,9 @@ class LeaseDetailView(FormView,DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         house = self.get_object()
-        context['form'] = ProfileConnectForm(instance=self.request.user.profile)
-        context['is_favourite'] = house.favourites.filter(id=self.request.user.id).exists()
+        if self.request.user.is_authenticated:
+            context['form'] = ProfileConnectForm(instance=self.request.user.profile)
+            context['is_favourite'] = house.favourites.filter(id=self.request.user.id).exists()
         return context
 
     def post(self,request,*args,**kwargs):
@@ -57,7 +58,9 @@ class LeaseDetailView(FormView,DetailView):
         context = context = super(LeaseDetailView, self).get_context_data(**kwargs)
         messages.info(request, 'Please check your email inbox')
         email = request.user.email
-        form = ProfileConnectForm(request.POST)
+        form = ProfileConnectForm(request.POST,instance=self.request.user.profile)
+        if form.is_valid:
+            form.save()
         phone_number = request.POST['mobile_number']
         from django.conf import settings
         link = ""

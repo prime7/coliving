@@ -35,7 +35,7 @@
         <img class="card-img-top" src="{{house.get_thumbnail }}" style="min-height: 250px;" alt="Card image cap">
           <div class="card-body">
             <div class="card-text">
-            <small>{{ house.get_monthly_rent }} | {{ house.city }}</small>
+            <small>{{ house.get_monthly_rent }} | {{ house.get_city_display }}</small>
               <br>
               <small>
                 <a href="{% url 'listing-detail' house.slug %}">
