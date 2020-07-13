@@ -39,7 +39,8 @@
                         <p>{{ house.get_address }}</p>
                         <h2>Description</h2>
                         <small>{{ house.description }}</small>
-                        <div class="card mt-3 mb-3">
+                        {% if house.has_amenities %}
+                        <div class="card mt-3">
                             <div class="card-body">
                                 <h5>Amenities</h5>
                                 <ul>
@@ -63,7 +64,8 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="card mb-3">
+                        {% endif %}
+                        <div class="card mb-3 mt-3">
                             <div class="card-header">
                                 Lister
                             </div>
@@ -112,6 +114,11 @@
                             </div>
                             {% endif %}
                             <div class="row no-gutters p-2 mb-3">
+                                {% if house.external_source %}
+                                    <a href="{{ house.external_link }}" target="_blank" class="btn btn-warning btn-lg btn-block">
+                                        See details
+                                    </a>
+                                {% else %}
                                 <button class="btn btn-warning btn-lg btn-block" data-toggle="modal" data-target="#staticBackdrop">Connect</button>
                                 <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog">
@@ -122,25 +129,7 @@
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                             </div>
-                                            <!-- <form method="POST">
-                                                {% csrf_token %}
-                                                <div class="modal-body">
-                                                    <div class="form-group">
-                                                        <label for="inputEmail">Your Email</label>
-                                                        <input type="email" class="form-control" id="inputEmail" required name="email">
-                                                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="inputPhone">Your Phone Number</label>
-                                                        <input type="number" class="form-control" id="inputPhone" required name="phone">
-                                                        <small id="emailHelp" class="form-text text-muted">We'll never share your phone number with anyone else.</small>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Connect</button>
-                                                </div>
-                                            </form> -->
+
                                             <form method="POST" class="p-3">
                                                 {% csrf_token %}
                                                 {{ form|crispy }}
@@ -151,6 +140,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>

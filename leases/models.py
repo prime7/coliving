@@ -68,6 +68,9 @@ class House(models.Model):
     has_closet = models.BooleanField(default=False, null=True)
     is_furnished = models.BooleanField(default=False, null=True)
     is_partially_furnished = models.BooleanField(default=False, null=True)
+
+    external_source = models.BooleanField(default=False,null=True)
+    external_link = models.URLField(max_length=200,null=True,blank=True)
     
     favourites = models.ManyToManyField(User,related_name='favourites',blank=True)
     applications = models.ManyToManyField(User,related_name='applications',blank=True)
@@ -76,6 +79,10 @@ class House(models.Model):
 
     def __str__(self):
         return self.title
+
+    @property
+    def has_amenities(self):
+        return self.has_dishwasher or self.pets_allowed or self.heating or self.has_closet or self.is_furnished or self.is_partially_furnished 
 
     @property
     def get_monthly_rent(self):
