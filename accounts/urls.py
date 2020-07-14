@@ -21,4 +21,6 @@ urlpatterns = [
     path('password-reset-confirm/<uidb64>/<token>/',auth_views.PasswordResetConfirmView.as_view(template_name='accounts/password_reset_confirm.html'),name='password_reset_confirm'),
     path('password-reset-complete/',auth_views.PasswordResetCompleteView.as_view(template_name='accounts/password_reset_complete.html'),name='password_reset_complete'),
     path('for-leaseholders/', TemplateView.as_view(template_name="accounts/holders.html"),name='for-leaseholders'),
+    path('privacy-policy/', TemplateView.as_view(template_name="accounts/privacy.html"),name='privacy-policy'),
+    path('terms/', TemplateView.as_view(template_name="accounts/terms.html"),name='terms-and-condition'),
 ]
