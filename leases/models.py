@@ -29,10 +29,13 @@ def upload_image_path(instance, filename):
     return "listing/{}/{}".format(instance.house.pk, filename)
 
 class HouseManager(models.Manager):
+    def short_term_rentals(self):
+        return super(HouseManager,self).filter(rented=False,active=True,short_term=True).order_by('-earliest_move_in')
+
     def active(self):
-        return super(HouseManager,self).filter(rented=False,active=True).order_by('-earliest_move_in')
+        return super(HouseManager,self).filter(rented=False,active=True,short_term=False).order_by('-earliest_move_in')
     def inactive(self):
-        return super(HouseManager,self).filter(rented=True,active=True).order_by('-earliest_move_in')
+        return super(HouseManager,self).filter(rented=True,active=True,short_term=False).order_by('-earliest_move_in')
         
     def active_by_user(self,user):
         return super(HouseManager,self).filter(user=user,rented=False,active=True).order_by('-earliest_move_in')

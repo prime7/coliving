@@ -14,6 +14,30 @@ from django.http import HttpResponse
 from accounts.forms import ProfileConnectForm
 
 
+class ShortTermListingListview(ListView):
+    model = House
+    template_name = "leases/listing.html"
+    paginate_by = 6
+    context_object_name = 'houses'
+    queryset = House.objects.short_term_rentals()
+    
+    def get(self, request, *args, **kwargs):
+        if request.GET:
+            houses = House.objects.short_term_rentals()
+            query = request.GET["q"]
+            if query=='vancouver':
+                query = 1
+            elif query == 'toronto':
+                query = 2
+            elif query == 'seattle':
+                query = 3
+            elif query == 'newyork':
+                query = 4
+
+            if query:
+                houses = houses.filter(Q(title__icontains=query)|Q(city__icontains=query)|Q(description__icontains=query)).distinct().order_by('-earliest_move_in')
+                return render(request, self.template_name, {'houses': houses})
+        return super().get(request, *args, **kwargs)
 class LeaseListView(ListView):
     model = House
     template_name = "leases/listing.html"
