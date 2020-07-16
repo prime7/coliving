@@ -71,6 +71,7 @@ class House(models.Model):
 
     external_source = models.BooleanField(default=False,null=True)
     external_link = models.URLField(max_length=200,null=True,blank=True)
+    short_term = models.BooleanField(default=False)
     
     favourites = models.ManyToManyField(User,related_name='favourites',blank=True)
     applications = models.ManyToManyField(User,related_name='applications',blank=True)
@@ -94,6 +95,10 @@ class House(models.Model):
     @property
     def get_gallery(self):
         return Image.objects.filter(house=self.pk)
+
+    @property
+    def get_bookings(self):
+        return Booking.objects.filter(house=self.pk,accepted=True)
     
     @property
     def get_thumbnail(self):
@@ -170,3 +175,14 @@ class Lead(models.Model):
 
     def __str__(self):
         return self.email
+
+
+class Booking(models.Model):
+    start = models.DateField()
+    end = models.DateField()
+    user = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+    house = models.ForeignKey(House, on_delete=models.CASCADE, related_name='bookings')
+    accepted = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.house.title

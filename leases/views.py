@@ -5,7 +5,7 @@ from .models import House,User,Image,Lead
 from django.db.models import Q,F
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from .forms import HouseCreateForm
+from .forms import HouseCreateForm,BookingForm
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
@@ -49,6 +49,7 @@ class LeaseDetailView(FormView,DetailView):
         house = self.get_object()
         if self.request.user.is_authenticated:
             context['form'] = ProfileConnectForm(instance=self.request.user.profile)
+            context['booking_form'] = BookingForm()
             context['is_favourite'] = house.favourites.filter(id=self.request.user.id).exists()
         return context
 
@@ -56,32 +57,42 @@ class LeaseDetailView(FormView,DetailView):
         self.object = self.get_object()
         self.object.applications.add(request.user)
         context = context = super(LeaseDetailView, self).get_context_data(**kwargs)
-        messages.info(request, 'Please check your email inbox')
+
         email = request.user.email
+        booking_form = BookingForm(request.POST)
+        if booking_form.is_valid():
+            booking_form = booking_form.save(commit=False)
+            booking_form.house = self.get_object()
+            booking_form.user = request.user
+            booking_form.save()
+            
         form = ProfileConnectForm(request.POST,instance=self.request.user.profile)
-        if form.is_valid:
+        if form.is_valid():
             form.save()
-        phone_number = request.POST['mobile_number']
-        from django.conf import settings
-        link = ""
-        if settings.DEBUG:
-            link = "http://127.0.0.1:8000"
-        else:    
-            link = "https://www.meetquoteshack.ca"
-        link += request.get_full_path()
+            messages.info(request, 'Please check your email inbox')
+            phone_number = request.POST['mobile_number']
+            from django.conf import settings
+            link = ""
+            
+            if settings.DEBUG:
+                link = "http://127.0.0.1:8000"
+            else:    
+                link = "https://www.meetquoteshack.ca"
+            
+            link += request.get_full_path()
 
-        if not Lead.objects.filter(email=email,phone_number=phone_number,link=link).exists():
-            Lead.objects.create(email=email,phone_number=phone_number,link=link)
-        lister_name = context['object'].user.email
-        lister_phone = context['object'].user.profile.mobile_number
+            if not Lead.objects.filter(email=email,phone_number=phone_number,link=link).exists():
+                Lead.objects.create(email=email,phone_number=phone_number,link=link)
+            lister_name = context['object'].user.email
+            lister_phone = context['object'].user.profile.mobile_number
 
-        message = render_to_string('emails/connect_lister.html', {
-            'email': email,
-            'lister_phone': lister_phone,
-            'lister_name': lister_name,
-            'link': link
-        })
-        send_mail('Lister information for leasing',message,settings.EMAIL_HOST_USER, [email],  fail_silently=False,)
+            message = render_to_string('emails/connect_lister.html', {
+                'email': email,
+                'lister_phone': lister_phone,
+                'lister_name': lister_name,
+                'link': link
+            })
+            send_mail('Lister information for leasing',message,settings.EMAIL_HOST_USER, [email],  fail_silently=False,)
 
         return self.render_to_response(context=context)
 
