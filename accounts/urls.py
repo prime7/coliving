@@ -23,4 +23,5 @@ urlpatterns = [
     path('for-leaseholders/', TemplateView.as_view(template_name="accounts/holders.html"),name='for-leaseholders'),
     path('privacy-policy/', TemplateView.as_view(template_name="accounts/privacy.html"),name='privacy-policy'),
     path('terms/', TemplateView.as_view(template_name="accounts/terms.html"),name='terms-and-condition'),
+    path('partners/', TemplateView.as_view(template_name="accounts/partners.html"),name='partners'),
 ]
