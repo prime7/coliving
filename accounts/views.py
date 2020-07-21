@@ -65,4 +65,6 @@ class UserLease(LoginRequiredMixin,ListView):
         context = super().get_context_data(**kwargs)
         context['active_houses'] = House.objects.active_by_user(self.request.user)
         context['inactive_houses'] = House.objects.inactive_by_user(self.request.user)
+        context['short_houses'] = House.objects.filter(user=self.request.user,short_term=True)
+        print(context['short_houses'])
         return context
