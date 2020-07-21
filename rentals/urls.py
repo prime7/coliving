@@ -9,7 +9,8 @@ from .views import (
     LeaseFavouriteView,
     UserLeaseApplicationView,
     ShortTermListingListview,
-    ShortLeaseCreateView
+    ShortLeaseCreateView,
+    ShortLeaseUpdateView,
 )
 from django.views.generic import TemplateView
 
@@ -22,6 +23,7 @@ urlpatterns = [
     path('u/<str:username>/', UserLeaseListView.as_view(), name='listing-user'),
     path('<slug>/', LeaseDetailView.as_view(), name='listing-detail'),
     path('<slug>/update/', LeaseUpdateView.as_view(), name='listing-update'),
+    path('<slug>/short/update/', ShortLeaseUpdateView.as_view(), name='listing-update-short'),
     path('<slug>/deactivate/', LeaseDeactivateView.as_view(), name='listing-deactivate'),
     path('<slug>/application/', UserLeaseApplicationView.as_view(), name='listing-application'),
     path('<int:id>/favourite/', LeaseFavouriteView.as_view(), name='listing-favourite'),

@@ -239,3 +239,19 @@ class LeaseUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
         if self.request.user == house.user:
             return True
         return False
+
+
+class ShortLeaseUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
+    model = House
+    form_class = ShortHouseCreateForm
+    template_name = "rentals/short-update.html"
+    
+    def form_valid(self,form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        house = self.get_object()
+        if self.request.user == house.user:
+            return True
+        return False

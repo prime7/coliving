@@ -46,20 +46,32 @@
                 </div>
             </div>
             {% endfor %}
-            {% if applications %}
+            {% if membership != 'Free' and applications %}
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row no-gutters card">
                     <div class="col-md-12">
                         <div class="card-header">
                             If you have found your suitable tenant create agreement with the user. Provide the correct email of the tenant so that they will be notified.
                             <br>
-                            <a class="btn btn-outline-warning" href="{% url 'agreement-create' %}">Create Agreement</a>   
+                            <a class="btn btn-lg btn-outline-secondary" href="{% url 'agreement-create' %}">Create Agreement</a>   
                         </div>
                     </div>
                 </div>
             </div>
             {% endif %}
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row no-gutters card">
+                    <div class="col-md-12">
+                        <div class="card-header">
+                            We have partnered with <a href="https://www.lawdepot.ca/">Lawdepot</a> to make your legal work easy
+                            <br>
+                            <a href="https://www.lawdepot.com/?pid=pg-BSHO4CDVKR-generaltextlink"><button type="button" class="btn btn-md btn-outline-secondary">Click here to start</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
 </div>
 {% endblock content %}
