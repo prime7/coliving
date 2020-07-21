@@ -2,7 +2,7 @@ from django.urls import path
 from accounts import views
 from django.contrib.auth import views as auth_views
 from agreements.views import AgreementListView
-from leases.views import LeaseFavouriteListView
+from rentals.views import LeaseFavouriteListView
 from django.views.generic import TemplateView
 
 

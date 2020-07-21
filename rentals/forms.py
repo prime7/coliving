@@ -23,12 +23,41 @@ class HouseCreateForm(forms.ModelForm):
             'has_closet',
             'is_furnished',
             'is_partially_furnished',
-            'short_term',
         ]
         widgets = {
             'earliest_move_in': DateInput(attrs={'type': 'date'}),
             'latest_move_out': DateInput(attrs={'type': 'date'}),
             'title': forms.TextInput(attrs={'placeholder':"Small"}),
+            'description': forms.Textarea(attrs={'rows': 5, 'cols': 100})  
+        }
+        labels = {
+            'is_partially_furnished':"Partially furnished",
+        }
+
+class ShortHouseCreateForm(forms.ModelForm):
+    class Meta:
+        model = House
+        fields = [
+            'title',
+            'description',
+            'address', 
+            'zip_code',
+            'city',
+            'monthly_rent',
+            'has_dishwasher',
+            'pets_allowed',
+            'heating',
+            'has_closet',
+            'is_furnished',
+            'is_partially_furnished',
+        ]
+        widgets = {
+            'title': forms.TextInput(attrs={'placeholder':"Small"}),
+            'description': forms.Textarea(attrs={'rows': 5, 'cols': 100})   
+        }
+        labels = {
+            'monthly_rent': 'Rent per day',
+            'is_partially_furnished':"Partially furnished",
         }
 
 class BookingForm(forms.ModelForm):

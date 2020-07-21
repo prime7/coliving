@@ -5,7 +5,7 @@ from .models import House,User,Image,Lead
 from django.db.models import Q,F
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from .forms import HouseCreateForm,BookingForm
+from .forms import HouseCreateForm,BookingForm,ShortHouseCreateForm
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
@@ -16,7 +16,7 @@ from accounts.forms import ProfileConnectForm
 
 class ShortTermListingListview(ListView):
     model = House
-    template_name = "leases/listing.html"
+    template_name = "rentals/listing.html"
     paginate_by = 6
     context_object_name = 'houses'
     queryset = House.objects.short_term_rentals()
@@ -40,7 +40,7 @@ class ShortTermListingListview(ListView):
         return super().get(request, *args, **kwargs)
 class LeaseListView(ListView):
     model = House
-    template_name = "leases/listing.html"
+    template_name = "rentals/listing.html"
     paginate_by = 6
     context_object_name = 'houses'
     queryset = House.objects.active()
@@ -65,7 +65,7 @@ class LeaseListView(ListView):
 
 class LeaseDetailView(FormView,DetailView):
     model = House
-    template_name = "leases/listing-detail.html"
+    template_name = "rentals/listing-detail.html"
     form_class = ProfileConnectForm
 
     def get_context_data(self, **kwargs):
@@ -123,7 +123,7 @@ class LeaseDetailView(FormView,DetailView):
 @method_decorator(login_required(login_url='/login'), name='dispatch')
 class LeaseDeactivateView(DetailView):
     model = House
-    template_name = "leases/listing-deactivate.html"
+    template_name = "rentals/listing-deactivate.html"
 
     def post(self,request,*args,**kwargs):
         self.object = self.get_object()
@@ -165,7 +165,7 @@ class UserLeaseApplicationView(DetailView):
 
 class UserLeaseListView(ListView):
     model = House
-    template_name = 'leases/listing-user.html'
+    template_name = 'rentals/listing-user.html'
     context_object_name = 'houses'
 
     def get_queryset(self):
@@ -174,7 +174,8 @@ class UserLeaseListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['user'] = User.objects.get(email=self.request.user.email)
+        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        context['user'] = User.objects.get(email=user)
         return context
 
 @method_decorator(login_required(login_url='/login'), name='dispatch')
@@ -188,39 +189,46 @@ class LeaseFavouriteListView(ListView):
         return user.favourites.all()
 
 @method_decorator(login_required(login_url='/login'), name='dispatch')
-class LeaseCreateView(LoginRequiredMixin,UserPassesTestMixin, CreateView):
+class LeaseCreateView(LoginRequiredMixin, CreateView):
     model = House
     form_class = HouseCreateForm
-    template_name = "leases/listing-create.html"
+    template_name = "rentals/listing-create-long.html"
     context_object_name = "form"
 
     def form_valid(self, form):
         form.instance.user = self.request.user
         obj = form.save()
-        
-        from memberships.context_processors import get_user_membership,is_landlord
-        if not is_landlord(self.request):
-            obj.rented = True
-            obj.save()
+        obj.short_term = False
+        obj.save()
 
         files = self.request.FILES.getlist('images')
         for f in files:
             Image.objects.create(house=obj,src=f)
         return super().form_valid(form)
 
-    def test_func(self):
-        from memberships.views import get_user_membership
-        if get_user_membership(self.request).membership.membership_type == 'Free':
-            return True
-        return True
+@method_decorator(login_required(login_url='/login'), name='dispatch')
+class ShortLeaseCreateView(LoginRequiredMixin, CreateView):
+    model = House
+    form_class = ShortHouseCreateForm
+    template_name = "rentals/listing-create-short.html"
+    context_object_name = "form"
 
-    def handle_no_permission(self):
-        return render(self.request,"memberships/upgrade-membership.html")
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        obj = form.save()
+        obj.short_term = True
+        obj.save()
+        
+        files = self.request.FILES.getlist('images')
+        for f in files:
+            Image.objects.create(house=obj,src=f)
+        return super().form_valid(form)
+
     
 class LeaseUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
     model = House
     form_class = HouseCreateForm
-    template_name = "leases/update.html"
+    template_name = "rentals/update.html"
     
     def form_valid(self,form):
         form.instance.user = self.request.user

@@ -41,8 +41,6 @@ class HouseManager(models.Manager):
         return super(HouseManager,self).filter(user=user,rented=False,active=True).order_by('-earliest_move_in')
     def inactive_by_user(self,user):
         return super(HouseManager,self).filter(user=user,rented=True,active=True).order_by('-earliest_move_in')
-    # def applicants(self,slug):
-    #     return super(HouseManager,self).filter(slug=slug).applications.all()
     
 
 class House(models.Model):
