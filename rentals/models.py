@@ -30,7 +30,7 @@ def upload_image_path(instance, filename):
 
 class HouseManager(models.Manager):
     def short_term_rentals(self):
-        return super(HouseManager,self).filter(rented=False,active=True,short_term=True).order_by('-earliest_move_in')
+        return super(HouseManager,self).filter(active=True,short_term=True).order_by('-earliest_move_in')
 
     def active(self):
         return super(HouseManager,self).filter(rented=False,active=True,short_term=False).order_by('-earliest_move_in')
@@ -38,16 +38,16 @@ class HouseManager(models.Manager):
         return super(HouseManager,self).filter(rented=True,active=True,short_term=False).order_by('-earliest_move_in')
         
     def active_by_user(self,user):
-        return super(HouseManager,self).filter(user=user,rented=False,active=True).order_by('-earliest_move_in')
+        return super(HouseManager,self).filter(user=user,rented=False,active=True,short_term=False).order_by('-earliest_move_in')
     def inactive_by_user(self,user):
-        return super(HouseManager,self).filter(user=user,rented=True,active=True).order_by('-earliest_move_in')
+        return super(HouseManager,self).filter(user=user,rented=True,active=True,short_term=False).order_by('-earliest_move_in')
     
 
 class House(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     title = models.CharField(max_length=150)
     description = models.CharField(max_length=1000)
-    duration = models.IntegerField(validators=[MinValueValidator(0),MaxValueValidator(30)], help_text="Duration for new lease in months",null=True)
+    duration = models.IntegerField(validators=[MinValueValidator(0),MaxValueValidator(30)], help_text="Duration for new lease in months",null=True,blank=True)
     earliest_move_in = models.DateField(default=datetime.now)
     latest_move_out = models.DateField(default=datetime.now)
     monthly_rent = models.DecimalField(max_digits=10, decimal_places=2, null=True,help_text="In Cad")
