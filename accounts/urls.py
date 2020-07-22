@@ -24,4 +24,8 @@ urlpatterns = [
     path('privacy-policy/', TemplateView.as_view(template_name="accounts/privacy.html"),name='privacy-policy'),
     path('terms/', TemplateView.as_view(template_name="accounts/terms.html"),name='terms-and-condition'),
     path('partners/', TemplateView.as_view(template_name="accounts/partners.html"),name='partners'),
+
+    path('account_activation_sent/', views.account_activation_sent, name='account_activation_sent'),
+    path('activation/<str:uidb64>/<str:token>/',views.activate, name='activate'),
+
 ]

@@ -4,21 +4,16 @@ from .models import Profile
 from django.contrib.auth.password_validation import validate_password
 from django.utils.safestring import mark_safe
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from .models import User
 
 
+class UserRegisterForm(UserCreationForm):
+    email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
 
-class UserRegisterForm(forms.Form):
-    email = forms.EmailField(validators=[validateEmail],label='Email')
-    password1 = forms.CharField(validators=[validate_password],widget=forms.PasswordInput(),label='Password')
-    password2 = forms.CharField(validators=[validate_password],widget=forms.PasswordInput(),label='Confirm Password')
-
-    def clean(self):
-        cleaned_data = super(UserRegisterForm, self).clean()
-        password = cleaned_data.get("password1")
-        confirm_password = cleaned_data.get("password2")
-
-        if password != confirm_password:
-            raise forms.ValidationError("passwords does not match")
+    class Meta:
+        model = User
+        fields = ('email', 'password1', 'password2', )
 
 
 class ImagePreviewWidget(forms.widgets.FileInput):

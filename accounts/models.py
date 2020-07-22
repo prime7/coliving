@@ -14,13 +14,16 @@ from resizeimage.imageexceptions import ImageSizeError
 from django.core.files.base import ContentFile
 from django.core.validators import RegexValidator
 from django_resized import ResizedImageField
+from django.core.mail import send_mail
+from django.conf import settings
+
 
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True)
     username = models.SlugField(unique=True,blank=True)
     email_varified = models.BooleanField(default=False)
     date_joined = models.DateTimeField(auto_now_add=True)
-    is_active = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     is_approved = models.BooleanField(default=False)
 
@@ -31,6 +34,9 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
+
+    def email_user(self, subject, message, from_email=None, **kwargs):
+        send_mail(subject, message, settings.EMAIL_HOST_USER, [self.email], **kwargs)
 
     def save(self, *args, **kwargs):
         strtime = "".join(str(time()).split(".")[1])
