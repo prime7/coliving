@@ -56,7 +56,9 @@
 						<small class="text-dark">This is your current membership</small>
 					{% endif %}
 					<input type="hidden" name="membership_type" value="{{ object.membership_type }}">
-				</form>			
+				</form>	
+			{% elif object.membership_type == 'Free' %}		
+				<small class="text-dark">This is your current membership</small>
 			{% endif %}	
 			</div>
 		</div>
