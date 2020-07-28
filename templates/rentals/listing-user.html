@@ -12,21 +12,19 @@
       </div>
       <div class="card m-4 p-4 shadow">
         <div class="container">
+        {% if user.profile.is_profile_ready %}
+          <i class="fas fa-check text-center text-success mb-2"></i> Varified by meetquoteshack
+        {% else %}
+          <i class="far fa-times-circle text-danger mb-2"></i> Not Varified by meetquoteshack
+        {% endif %}
+        </div>
+        <div class="container">
         {% if user.email_varified %}
           <i class="fas fa-check text-center text-success mb-2"></i> Email Varified
         {% else %}
           <i class="far fa-times-circle text-danger mb-2"></i> Email Not Varified 
         {% endif %}
         </div>
-
-        <div class="container">
-        {% if user.profile.mobile_number_varified %}
-          <i class="fas fa-check text-center text-success mb-2"></i> Mobile Varified
-        {% else %}
-          <i class="far fa-times-circle text-danger mb-2"></i> Mobile Not Varified 
-        {% endif %}
-        </div>
-        
       </div>
     </div>
     <div class="col-md-8">

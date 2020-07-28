@@ -39,10 +39,13 @@ class User(AbstractBaseUser, PermissionsMixin):
         send_mail(subject, message, settings.EMAIL_HOST_USER, [self.email], **kwargs)
 
     def save(self, *args, **kwargs):
-        strtime = "".join(str(time()).split(".")[1])
-        string = "%s%s" % (self.email.split("@")[0],strtime[:3])
-        self.username = slugify(string)
-        super(User, self).save()
+        if self.pk is None:
+            strtime = "".join(str(time()).split(".")[1])
+            string = "%s%s" % (self.email.split("@")[0],strtime[:3])
+            self.username = slugify(string)
+            super(User, self).save()
+        else:
+            super(User,self).save()
 
 PHONE_REGEX = RegexValidator(regex='\d{9,13}$',message="Phone Number must be without +")
 VERIFICATION_STATUS = (
