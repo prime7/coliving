@@ -125,7 +125,11 @@
                             </div>
                             {% endif %}
                             <div class="row no-gutters p-2 mb-3">
-                                {% if house.external_source %}
+                                {% if user.profile.is_notverified %}
+                                    <a href="{% url 'user-verification' %}"><button class="btn btn-outline-warning">Verify Profile</button></a>
+                                {% elif user.profile.is_verification_processing %}
+                                    <h5>Verification Status  <span class="badge badge-secondary">Processing</span></h5>
+                                {% elif house.external_source %}
                                     <a href="{{ house.external_link }}" target="_blank" class="btn btn-warning btn-lg btn-block">
                                         See details
                                     </a>

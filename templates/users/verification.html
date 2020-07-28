@@ -15,6 +15,13 @@
         {% csrf_token %}
         <fieldset class="form-group">
           <legend class="border-bottom mb-4">Profile Verification</legend>
+          <small>
+          We accept
+          <ul>
+            <li>Passport</li>
+            <li>Government issued ID</li>
+          </ul>
+          </small>
           {{ p_form|crispy }}
         </fieldset>
         <div class="form-group">
