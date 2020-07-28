@@ -45,7 +45,11 @@ class User(AbstractBaseUser, PermissionsMixin):
         super(User, self).save()
 
 PHONE_REGEX = RegexValidator(regex='\d{9,13}$',message="Phone Number must be without +")
-
+VERIFICATION_STATUS = (
+    (1,'Not Verified'),
+    (2,'Processing'),
+    (3,'Verified'),
+)
 class Profile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE, related_name='profile')
     name = models.CharField(max_length=50)
@@ -55,11 +59,17 @@ class Profile(models.Model):
     bio = models.CharField(max_length = 400,blank=True,help_text="Describe about yourself in short")
     registered_at = models.DateField(auto_now=True)
     verification_doc = ResizedImageField(size=[1200, 1200], upload_to='verifications',force_format='PNG',null=True,blank=True)
-    verified = models.BooleanField(default=False)
+    verified = models.IntegerField(choices=VERIFICATION_STATUS,default=1)
 
     @property
     def is_profile_ready(self):
-        return self.verified
+        return self.verified == 3
+    @property
+    def is_verification_processing(self):
+        return self.verified == 2
+    @property
+    def is_notverified(self):
+        return self.verified == 1
     @property
     def get_name(self):
         if self.name:

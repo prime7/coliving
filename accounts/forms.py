@@ -22,7 +22,10 @@ class ImagePreviewWidget(forms.widgets.FileInput):
         img_html = mark_safe(f'<br><img src="{value.url}" class="img-fluid" width="120" height="120"/>')
         return f'{input_html}{img_html}'
 
-
+class ProfileVerificationForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['verification_doc']
 
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:

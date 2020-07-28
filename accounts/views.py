@@ -2,7 +2,7 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect,reverse
-from .forms import UserRegisterForm,ProfileUpdateForm
+from .forms import UserRegisterForm,ProfileUpdateForm,ProfileVerificationForm
 from .models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -57,8 +57,24 @@ def userDetail(request):
     context = {
         'p_form': p_form
     }
-
     return render(request, 'users/detail.html', context)
+
+@login_required
+def userVerification(request):
+    if request.method == 'POST':
+        p_form = ProfileVerificationForm(request.POST,request.FILES,instance=request.user.profile)
+        if p_form.is_valid():
+            p_form = p_form.save(commit=False)
+            p_form.verified = 2
+            p_form.save()
+            messages.success(request, 'Your verification document is been succesfully updated')
+        return redirect('user-verification')
+    else:
+        p_form = ProfileVerificationForm()
+    context = {
+        'p_form': p_form
+    }
+    return render(request, 'users/verification.html',context)
 
 @login_required
 def userMembership(request):

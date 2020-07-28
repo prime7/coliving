@@ -2,9 +2,22 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="container">
-  <div class="row">
-    <div class="col-md-6 offset-3">
-      <div class="card p-3 m-3 box-shadow">
+  {% if user.profile.is_notverified %}
+  <div class="alert alert-danger mt-2 text-center" role="alert">
+    Please update your verification document. <a href="{% url 'user-verification' %}"><button class="btn btn-primary">Click Here</button></a>
+  </div>
+  {% else %}
+  <div class="mt-5"></div>
+  {% endif %}
+  <div class="row mb-5">
+    <div class="col-md-3">
+      <div class="list-group">
+        <a href="{% url 'user-detail'%}"><button type="button" class="list-group-item list-group-item-action {% if request.resolver_match.view_name == 'user-detail' %}active{% endif %}">Profile</button></a>
+        <a href="{% url 'user-verification'%}"><button type="button" class="list-group-item list-group-item-action {% if request.resolver_match.view_name == 'user-verification' %}active{% endif %}">Verify</button></a>
+      </div>
+    </div>
+    <div class="col-md-7 offset-1">
+      <div class="card p-3 box-shadow">
         <div class="media">
           <div class="media-body">
             <small class="text-secondary">Username : {{ user.username }}</small><br>
