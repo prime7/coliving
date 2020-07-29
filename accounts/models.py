@@ -91,3 +91,25 @@ def create_profile(sender, instance, created, *args, **kwargs):
 @receiver(post_save, sender=User)
 def save_profile(sender, instance, created, *args, **kwargs):
     instance.profile.save()
+
+
+Contact_Reason = (
+    (1,'Finding a rental'),
+    (2,'Listing a rental'),
+    (3,'Screening application'),
+    (4,'Applying for rentals'),
+    (5,'Rent collection and payments'),
+    (6,'Account details'),
+    (7,'General information'),
+    (8,'Account activation'),
+    (9,'Other'),
+)
+class Contact(models.Model):
+    email = models.EmailField(max_length=255)
+    reason = models.IntegerField(choices=Contact_Reason)
+    subject = models.CharField(max_length=100)
+    description = models.CharField(max_length=500)
+    checked = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.email + " - "+ self.subject

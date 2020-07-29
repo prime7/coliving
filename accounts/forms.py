@@ -1,6 +1,6 @@
 from django import forms
 from .validators import validateEmail
-from .models import Profile
+from .models import Profile,Contact
 from django.contrib.auth.password_validation import validate_password
 from django.utils.safestring import mark_safe
 from django import forms
@@ -39,3 +39,16 @@ class ProfileConnectForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['name','mobile_number','bio']
+
+
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Contact
+        fields = ['email','reason','subject','description',]
+        labels = {
+            'email':'Your email address',
+            'reason':'What can we help you with today?',
+        }
+        widgets = {
+            'description': forms.Textarea
+        }

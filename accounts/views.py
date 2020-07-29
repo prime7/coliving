@@ -2,7 +2,7 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect,reverse
-from .forms import UserRegisterForm,ProfileUpdateForm,ProfileVerificationForm
+from .forms import UserRegisterForm,ProfileUpdateForm,ProfileVerificationForm,ContactForm
 from .models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -75,6 +75,20 @@ def userVerification(request):
         'p_form': p_form
     }
     return render(request, 'users/verification.html',context)
+
+def contact(request):
+    if request.method == 'POST':
+        c_form = ContactForm(request.POST)
+        if c_form.is_valid():
+            c_form.save()
+            messages.success(request, 'We have received your request')
+        return redirect('home')
+    else:
+        c_form = ContactForm()
+    context = {
+        'c_form': c_form
+    }
+    return render(request, 'accounts/contact.html',context)
 
 @login_required
 def userMembership(request):
