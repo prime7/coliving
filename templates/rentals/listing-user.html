@@ -30,18 +30,22 @@
     <div class="col-md-8">
       {% for house in houses %}
       <div class="card m-4 box-shadow">
-        <img class="card-img-top" src="{{house.get_thumbnail }}" style="min-height: 250px;" alt="Card image cap">
-          <div class="card-body">
-            <div class="card-text">
-            <small>{{ house.get_monthly_rent }} | {{ house.get_city_display }}</small>
-              <br>
-              <small>
-                <a href="{% url 'listing-detail' house.slug %}">
-                  {{ house.title }}
-                </a>
-              </small>
-              <br>
-            </div>
+        {% if house.external_source %}
+          <img class="card-img-top" src="{{house.get_external_thumbnail }}" style="min-height: 250px;" alt="Card image cap">
+        {% else %}
+          <img class="card-img-top" src="{{house.get_thumbnail }}" style="min-height: 250px;" alt="Card image cap">
+        {% endif %}
+        <div class="card-body">
+          <div class="card-text">
+          <small>{{ house.get_monthly_rent }} | {{ house.get_city_display }}</small>
+            <br>
+            <small>
+              <a href="{% url 'listing-detail' house.slug %}">
+                {{ house.title }}
+              </a>
+            </small>
+            <br>
+          </div>
         </div>
       </div>
       {% endfor %}

@@ -98,6 +98,10 @@ class House(models.Model):
         return Image.objects.filter(house=self.pk)
 
     @property
+    def get_external_gallery(self):
+        return ImageLinks.objects.filter(house=self.pk)
+
+    @property
     def get_bookings(self):
         return Booking.objects.filter(house=self.pk,accepted=True)
     
@@ -108,8 +112,24 @@ class House(models.Model):
             return cover.src.url
         except AttributeError:
             return None
+
+    @property
+    def get_external_thumbnail(self):
+        cover = self.get_external_gallery.first()
+        try:
+            return cover.url
+        except AttributeError:
+            return None
+
     def get_absolute_url(self):
         return reverse('listing-detail', kwargs={'slug': self.slug})
+
+class ImageLinks(models.Model):
+    house = models.ForeignKey(House,on_delete=models.CASCADE)
+    url = models.CharField(max_length=100, null=True,blank=True)
+
+    def __str__(self):
+        return self.house.title
 
 
 class Image(models.Model):

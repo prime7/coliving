@@ -7,11 +7,19 @@
             <div class="card col-md-12">
                 <div id="carouselExampleInterval" class="carousel slide mb-5" data-ride="carousel">
                     <div class="carousel-inner">
-                        {% for image in house.get_gallery %}
-                        <div class="carousel-item {% if forloop.first %} active {% endif %}" data-interval="10000">
-                            <img src="{{ image.src.url }}" class="listing-header-image" alt="...">
-                        </div>
-                        {% endfor %}
+                        {% if house.external_source %}
+                            {% for image in house.get_external_gallery %}
+                            <div class="carousel-item {% if forloop.first %} active {% endif %}" data-interval="10000">
+                                <img src="{{ image.url }}" class="listing-header-image" alt="...">
+                            </div>
+                            {% endfor %}
+                        {% else %}
+                            {% for image in house.get_gallery %}
+                            <div class="carousel-item {% if forloop.first %} active {% endif %}" data-interval="10000">
+                                <img src="{{ image.src.url }}" class="listing-header-image" alt="...">
+                            </div>
+                            {% endfor %}
+                        {% endif %}
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
                       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -131,7 +139,7 @@
                                     <h5>Verification Status  <span class="badge badge-secondary">Processing</span></h5>
                                 {% elif house.external_source %}
                                     <a href="{{ house.external_link }}" target="_blank" class="btn btn-warning btn-lg btn-block">
-                                        See details
+                                        See more details
                                     </a>
                                 {% elif house.short_term %}
                                 <button class="btn btn-warning btn-lg btn-block" data-toggle="modal" data-target="#staticBackdrop">Request Booking</button>
