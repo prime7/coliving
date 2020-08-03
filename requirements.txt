@@ -1,6 +1,6 @@
-beautifulsoup4=4.9.1
+beautifulsoup4==4.9.1
 boto3==1.13.19
-datetime=4.3
+datetime==4.3
 Django==2.1.1
 django-crispy-forms==1.9.1
 django-resized==0.3.11
