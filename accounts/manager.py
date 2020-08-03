@@ -12,10 +12,15 @@ class UserManager(BaseUserManager):
         is_staff = extra_fields.pop('is_staff', False)
         is_superuser = extra_fields.pop('is_superuser', False)
 
+        is_active = False
+        if is_superuser:
+            is_active = True
+
         user = self.model(
             email=email, 
             is_staff=is_staff,
             is_superuser=is_superuser,
+            is_active=is_active,
             **extra_fields
         )
         user.set_password(password)
