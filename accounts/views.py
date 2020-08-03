@@ -35,7 +35,7 @@ def signup(request):
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)).decode(),
                 'token': account_activation_token.make_token(user),
             })
-            user.email_user(subject, message)
+            user.email_user(subject, message,fail_silently=False)
             return redirect('account_activation_sent')
     else:
         form = UserRegisterForm()
