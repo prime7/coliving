@@ -1,10 +1,10 @@
 from decouple import config
 
 
-if config('DEBUG'): 
-    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-else:
-    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+# if config('DEBUG'): 
+#     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+# else:
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
     
 EMAIL_HOST = config('EMAIL_HOST')
 EMAIL_USE_TLS = True
