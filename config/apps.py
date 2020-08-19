@@ -10,6 +10,7 @@ INSTALLED_APPS = [
     'rentals',
     'memberships',
     'agreements',
+    'services',
 
     'crispy_forms',
     'storages',

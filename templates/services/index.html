@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="jumbotron text-center m-0">
+  <div class="container">
+      <h1>All our Services</h1>
+      <p class="lead text-muted">We are constantly adding services to easy your rental work.</p>
+      <p class="lead text-muted">Email us at admin@meetquoteshack.com for any kind of help.</p>
+  </div>
+</section> 
+<div class="album py-5 bg-light">
+  <div class="container">
+    <div class="row">
+      {% for service in services %}
+      <div class="col-md-4 col-sm-12">
+        <div class="card mb-4 shadow-sm">
+          <img src="{{ service.banner.url }}" height="200" alt="Service">
+          <div class="card-body">
+            <h5 class="title">{{ service.name }}</h5>
+            <p class="card-text">{{ service.description|truncatewords:12 }}</p>
+            <p class="card-text">Average project budget <b>{{ service.average_project_budget }}</b></p>
+            <a href="{% url 'service-detail' service.slug %}" class="btn btn-lg btn-warning btn-icon mt-3 mb-sm-0">
+              <span class="btn-inner--icon"><i class="ni ni-button-play"></i></span>
+              <span class="btn-inner--text">See Details</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}
