@@ -17,6 +17,8 @@ from django.utils.http import urlsafe_base64_encode
 from django.template.loader import render_to_string
 from django.utils.encoding import force_text
 from django.utils.http import urlsafe_base64_decode
+from django.shortcuts import render_to_response
+from django.template import RequestContext
 
 
 def signup(request):
@@ -130,3 +132,8 @@ def activate(request, uidb64, token):
         return redirect('home')
     else:
         return render(request, 'accounts/account_activation_invalid.html')
+
+def page_not_found_view(request):
+    response = render_to_response('404.html', {},context_instance=RequestContext(request))
+    response.status_code = 404
+    return response

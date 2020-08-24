@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+#parent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 65vh;
+  width: 100%;
+}
+</style>
+<div id="parent">
+    <div class="container">
+        <div class="text-center">
+            <h3>Unfortunately the page you requested is not found.</h1>
+            <h4>You will be redirected to the home page in 3 seconds</h2>
+        </div>
+    </div>
+</div>
+
+<script>
+    function redirect(){
+       window.location.href = "/";
+    }
+    setTimeout(redirect, 3000);
+</script>
+{% endblock content %}
