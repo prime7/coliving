@@ -1,5 +1,7 @@
 from django.db import models
 from django_resized import ResizedImageField
+from django.urls import reverse
+
 
 class Service(models.Model):
     name = models.CharField(max_length=100)
@@ -12,6 +14,9 @@ class Service(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('service-detail', kwargs={'slug': self.slug})
 
 
 class Task(models.Model):

@@ -5,6 +5,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
 
     'accounts',
     'rentals',
@@ -15,3 +17,5 @@ INSTALLED_APPS = [
     'crispy_forms',
     'storages',
 ]
+
+SITE_ID = 1

@@ -17,7 +17,14 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.sitemaps.views import sitemap
+from rentals.sitemaps import HouseSitemap
+from services.sitemaps import ServiceSitemap
 
+sitemaps = {
+    'houses': HouseSitemap,
+    'services': ServiceSitemap,
+}
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,6 +33,7 @@ urlpatterns = [
     path('services/',include('services.urls')),
     path('',include('agreements.urls')),
     path('membership/',include('memberships.urls')),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps},name='django.contrib.sitemaps.views.sitemap')
 ]
 
 
