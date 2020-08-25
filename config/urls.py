@@ -20,6 +20,8 @@ from django.conf.urls.static import static
 from django.contrib.sitemaps.views import sitemap
 from rentals.sitemaps import HouseSitemap
 from services.sitemaps import ServiceSitemap
+from django.views.generic import TemplateView
+
 
 sitemaps = {
     'houses': HouseSitemap,
@@ -33,6 +35,7 @@ urlpatterns = [
     path('services/',include('services.urls')),
     path('',include('agreements.urls')),
     path('membership/',include('memberships.urls')),
+    path('robots.txt', TemplateView.as_view(template_name="robots.txt", content_type='text/plain')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},name='django.contrib.sitemaps.views.sitemap')
 ]
 

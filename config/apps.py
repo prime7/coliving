@@ -17,6 +17,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'storages',
     'meta',
+    'robots',
 ]
 
 SITE_ID = 1
