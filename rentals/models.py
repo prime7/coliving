@@ -46,7 +46,7 @@ class HouseManager(models.Manager):
 class House(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     title = models.CharField(max_length=150)
-    description = models.CharField(max_length=1000)
+    description = models.CharField(max_length=5000)
     duration = models.IntegerField(validators=[MinValueValidator(0),MaxValueValidator(30)], help_text="Duration for new lease in months",null=True,blank=True)
     earliest_move_in = models.DateField(default=datetime.now)
     latest_move_out = models.DateField(default=datetime.now)
