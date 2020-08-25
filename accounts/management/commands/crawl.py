@@ -25,7 +25,7 @@ class Command(BaseCommand):
         earliest_move_in = str(current.year)+'-'+str(current.month+1)+'-'+str(1)
         latest_move_out = str(current.year+1)+'-'+str(current.month)+'-'+str(1)
         
-        price = float(html_soup.find('span',class_='price').text.split('$')[1])
+        price = float(html_soup.find('span',class_='price').text.split('$')[1].replace(',',''))
         external_source = True
         external_link = url
         
