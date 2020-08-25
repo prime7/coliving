@@ -9,11 +9,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/index.css'%}">
     <script src="https://kit.fontawesome.com/7521df1375.js" crossorigin="anonymous"></script> 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    {% if title %}
-        <title>QuoteShack - {{ title }}</title>
-    {% else %}
-        <title>QuoteShack | The easiest way to sublet your lease</title>
-    {% endif %}
+    <title>{% block title %}{% endblock %}</title>
   </head>
   <body>
 

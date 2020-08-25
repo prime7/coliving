@@ -1,6 +1,10 @@
 {% extends "base.html" %}
-{% load crispy_forms_tags %}
 
+{% block title %}
+    {{house.get_city}} | {{ house.title }}
+{% endblock %}
+
+{% load crispy_forms_tags %}
 {% block content %}
     <div class="container mt-3 mb-5 box-shadow">
         <div class="row">

@@ -2,6 +2,10 @@
 {% load static %}
 {% load crispy_forms_tags %} 
 
+{% block title %}
+  Services we offer | {{service.name}}
+{% endblock %}
+
 {% block content %}
 <div class="wrapper my-5">
     <div class="section section-hero section-shaped">

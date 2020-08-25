@@ -92,6 +92,10 @@ class House(models.Model):
     @property
     def get_address(self):
         return self.address+" "+ dict(CITY_TYPE)[self.city] +" "
+
+    @property
+    def get_city(self):
+        return dict(CITY_TYPE)[self.city] +" "
     
     @property
     def get_gallery(self):
