@@ -16,9 +16,9 @@
             <div class="card col-md-5 col-sm-12 m-4 p-0 box-shadow">
               <a href="{% url 'listing-detail' house.slug %}">
                   {% if house.external_source %}
-                    <img class="card-img-top" src="{{house.get_external_thumbnail }}" style="min-height: 250px;" alt="Card image cap">
+                    <img class="card-img-top" src="{{house.get_external_thumbnail }}" style="min-height: 250px;" alt="Image thumbnail">
                   {% else %}
-                    <img class="card-img-top" src="{{house.get_thumbnail }}" style="min-height: 250px;" alt="Card image cap">
+                    <img class="card-img-top" src="{{house.get_thumbnail }}" style="min-height: 250px;" alt="Image thumbnail">
                   {% endif %}
                   <div class="card-body m-0 p-0 ">
                       <div class="card-text m-2 text-dark">

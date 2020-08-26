@@ -14,13 +14,13 @@
                         {% if house.external_source %}
                             {% for image in house.get_external_gallery %}
                             <div class="carousel-item {% if forloop.first %} active {% endif %}" data-interval="10000">
-                                <img src="{{ image.url }}" class="listing-header-image" alt="...">
+                                <img src="{{ image.url }}" class="listing-header-image" alt="{{ house.title }}">
                             </div>
                             {% endfor %}
                         {% else %}
                             {% for image in house.get_gallery %}
                             <div class="carousel-item {% if forloop.first %} active {% endif %}" data-interval="10000">
-                                <img src="{{ image.src.url }}" class="listing-header-image" alt="...">
+                                <img src="{{ image.src.url }}" class="listing-header-image" alt="{{ house.title }}">
                             </div>
                             {% endfor %}
                         {% endif %}
@@ -84,7 +84,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-2">
-                                        <img src="{{ house.user.profile.profile_pic.url }}" width="50" height="50" class="rounded-circle" href="#"/>
+                                        <img src="{{ house.user.profile.profile_pic.url }}" width="50" height="50" class="rounded-circle" href="#" alt="Profile picture"/>
                                     </div>
                                     <div class="col-6">
                                         {% if house.user.profile.name %}

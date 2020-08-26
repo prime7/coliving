@@ -10,7 +10,7 @@
         <div class="col-md-8 offset-2">
             {% for house in houses %}
             <div class="card m-4 box-shadow">
-                <img class="card-img-top" src="{{house.get_thumbnail }}" style="min-height: 250px;" alt="Card image cap">
+                <img class="card-img-top" src="{{house.get_thumbnail }}" style="min-height: 250px;" alt="Rentals">
                     <div class="card-body">
                     <div class="card-text">
                         <small>{{ house.get_monthly_rent }} | {{ house.get_city_display }}</small>
