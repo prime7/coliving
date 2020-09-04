@@ -1,0 +1,24 @@
+{% load urlify %}
+<h4 class="title text-lg-center">Sharing is caring</h4>
+<div class="text-lg-center btn-wrapper">
+    <a 
+        class="m-2"
+        href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" 
+        data-original-title="Like us"
+        target="_blank">
+        <span class="btn-inner--icon"><i class="fab fa-facebook" style="font-size: 30px;"></i></span>
+    </a>
+    <a 
+        class="m-2"
+        href="https://twitter.com/intent/tweet?text={{ house.title|urlify }}%20{{ request.build_absolute_uri }}" 
+        target="_blank">
+        <span class="btn-inner--icon"><i class="fa fa-twitter" style="font-size: 30px;"></i></span>
+    </a>
+    <a
+        class="m-2"
+        data-original-title="Follow us"
+        href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ house.title|urlify }}&source=https://toptechschool.com"
+        target="_blank">
+        <span class="btn-inner--icon"><i class="fa fa-linkedin" style="font-size: 30px;"></i></span>
+    </a>
+</div>
