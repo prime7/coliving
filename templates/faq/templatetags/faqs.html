@@ -1,0 +1,15 @@
+{% load faq_tags %}
+<ul class="list-group list-group-flush">
+    {% for faq in faqs %}
+      <li class="list-group-item">
+        <a data-toggle="collapse" href="#row{{ faq.pk }}" role="button" aria-expanded="false" aria-controls="row{{ faq.pk }}">
+          {{ faq.question }}
+        </a>
+      </li>
+      <div class="collapse" id="row{{ faq.pk }}">
+        <div class="card card-body">
+          {{ faq.answer }}
+        </div>
+      </div>
+    {% endfor %}
+</ul>
