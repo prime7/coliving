@@ -33,6 +33,7 @@ urlpatterns = [
     path('',include('accounts.urls')),
     path('rentals/',include('rentals.urls')),
     path('services/',include('services.urls')),
+    path('faq/',include('faq.urls')),
     path('',include('agreements.urls')),
     path('membership/',include('memberships.urls')),
     path('robots.txt', include('robots.urls')),

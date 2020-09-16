@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+  Coliving | Frequently asked questions
+{% endblock %}
+
+{% block content %}
+<section class="jumbotron text-center m-0">
+  <div class="container">
+      <h1>Frquently Asked Questions</h1>
+  </div>
+</section> 
+<div class="album py-5 bg-light">
+  <div class="container">
+    <div class="accordion" id="accordionExample">
+      <ul class="list-group list-group-flush">
+        {% for faq in faqs %}
+          <li class="list-group-item">
+            <a data-toggle="collapse" href="#colID{{ faq.pk }}" role="button" aria-expanded="false" aria-controls="colID{{ faq.pk }}">
+              {{ faq.question }}
+            </a>
+          </li>
+          <div class="collapse" id="colID{{ faq.pk }}">
+            <div class="card card-body">
+              {{ faq.answer }}
+            </div>
+          </div>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
