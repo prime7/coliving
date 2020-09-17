@@ -8,7 +8,7 @@
       </li>
       <div class="collapse" id="row{{ faq.pk }}">
         <div class="card card-body">
-          {{ faq.answer }}
+          {{ faq.answer|safe }}
         </div>
       </div>
     {% endfor %}
