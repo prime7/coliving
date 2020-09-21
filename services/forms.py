@@ -1,5 +1,5 @@
 from django import forms
-from .models import Task
+from .models import Task,Tasker
 
 
 class DateInput(forms.DateInput):
@@ -28,3 +28,8 @@ class TaskCreationForm(forms.ModelForm):
             'notes': forms.Textarea,
             'date': DateInput(attrs={'type': 'date'}),
         }
+
+class TaskerCreationForm(forms.ModelForm):
+    class Meta:
+        model = Tasker
+        fields = ('verification_doc' ,'services', )

@@ -1,6 +1,8 @@
 from django.db import models
 from django_resized import ResizedImageField
 from django.urls import reverse
+from services.choices import VERIFICATION_STATUS,SERVICES
+from accounts.models import User
 
 
 class Service(models.Model):
@@ -18,6 +20,14 @@ class Service(models.Model):
     def get_absolute_url(self):
         return reverse('service-detail', kwargs={'slug': self.slug})
 
+class Tasker(models.Model):
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    verification_doc = ResizedImageField(size=[1200, 1200], upload_to='verifications',force_format='PNG')
+    verified = models.IntegerField(choices=VERIFICATION_STATUS,default=1)
+    services = models.IntegerField(choices=SERVICES)
+
+    def __str__(self):
+        return f'Taskers email {self.user.email}'
 
 class Task(models.Model):
     location = models.CharField(max_length=50)
