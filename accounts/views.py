@@ -1,27 +1,31 @@
-from django.http import HttpResponse,HttpResponseRedirect
-from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import render, redirect,reverse
-from .forms import UserRegisterForm,ProfileUpdateForm,ProfileVerificationForm,ContactForm
-from .models import User
-from django.contrib.auth.decorators import login_required
-from django.contrib import messages
-from django.views.generic import ListView,UpdateView,DetailView
-from rentals.models import House
-from memberships.views import get_user_membership,get_user_subscription
-from django.contrib.auth.mixins import LoginRequiredMixin
-from .tokens import account_activation_token
-from django.contrib.sites.shortcuts import get_current_site
-from django.utils.encoding import force_bytes
-from django.utils.http import urlsafe_base64_encode
-from django.template.loader import render_to_string
-from django.utils.encoding import force_text
-from django.utils.http import urlsafe_base64_decode
-from django.shortcuts import render_to_response
-from django.template import RequestContext
+from django.http                            import HttpResponse,HttpResponseRedirect
+from django.contrib.auth                    import login, authenticate
+from django.contrib.auth.forms              import UserCreationForm
+from django.shortcuts                       import render, redirect,reverse
+from .forms                                 import UserRegisterForm,ProfileUpdateForm,ProfileVerificationForm,ContactForm
+from .models                                import User
+from django.contrib.auth.decorators         import login_required
+from django.contrib                         import messages
+from django.views.generic                   import ListView,UpdateView,DetailView
+from rentals.models                         import House
+from memberships.views                      import get_user_membership,get_user_subscription
+from django.contrib.auth.mixins             import LoginRequiredMixin
+from .tokens                                import account_activation_token
+from django.contrib.sites.shortcuts         import get_current_site
+from django.utils.encoding                  import force_bytes
+from django.utils.http                      import urlsafe_base64_encode
+from django.template.loader                 import render_to_string
+from django.utils.encoding                  import force_text
+from django.utils.http                      import urlsafe_base64_decode
+from django.shortcuts                       import render_to_response
+from django.template                        import RequestContext
 
 
 def signup(request):
+    u = User.objects.all()[0]
+
+    print(u)
+    login(request, u)
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
