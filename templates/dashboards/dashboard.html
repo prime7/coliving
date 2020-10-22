@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+  Coliving | Dashboard
+{% endblock %}
+
+{% block content %}
+<div class='dashboard-container'>
+
+  <!-- First Column it has ads -->
+   <div class='dc-c1'>
+        <div> Blazingly Fast. </div>
+        <div> Zoom in and out. </div>
+        <div> Be iterative </div>
+        <div> Enjoy Working Together </div>
+   </div>
+
+
+
+<!-- Mobile Navbar  -->
+   <div class="mob-dash-nav1 dash-mob1">
+
+       <nav class="navbar navbar-dark bg-dark">
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+           <span class="navbar-toggler-icon"></span>
+         </button>
+
+         <div>
+                <input type="text" style="width:50px">
+          </div>
+         <div>
+            <div> Profile </div>
+         </div>
+       </nav>
+
+       <div class="collapse" id="navbarToggleExternalContent">
+             <div class="bg-dark p-4">
+               <h5 class="text-white h4">Collapsed content</h5>
+               <span class="text-muted">Toggleable via the navbar brand.</span>
+               <div>
+                 <div> <div> Pic </div> <div> Dashboard </div> </div>
+                 <div> <div> Pic </div> <div> Status </div> </div>
+                 <div> <div> Pic </div> <div> Something </div> </div>
+                 <div> <div> Pic </div> <div> Name </div> </div>
+               </div>
+             </div>
+       </div>
+ </div>
+ <!-- Mobile Navbar ends -->
+
+
+
+   <div class='dc-c2'>
+
+       <!-- Desk -->
+        <div class='dc-c2-r1 dashnavbar1 dash-mob2'>
+           <div>
+                <div style="font-weight:bold">  DashNav2 </div>
+                <div> Flag </div>
+                <div> Button </div>
+                <div> Search Bar <input type="text"> </div>
+           </div>
+           <div>
+                <div> Icon1 </div>
+                <div> Icon2 </div>
+                <div> Collapse </div>
+            </div>
+        </div>
+
+
+        <div class='dc-c2-r2'>
+
+              <!-- Desk -->
+              <div class='dashnavbar2 dash-mob2'>
+                      <div> <div> Pic </div> <div> Dashboard </div> </div>
+                      <div> <div> Pic </div> <div> Status </div> </div>
+                      <div> <div> Pic </div> <div> Something </div> </div>
+                      <div> <div> Pic </div> <div> Name </div> </div>
+              </div>
+
+              <!-- Common -->
+              <div class='dash-main'>
+
+                      <div class='dashnavbar3'>
+                              <div>
+                                    <div> <div id="dashnavbar3_click"> > </div> <div> Workflow </div> </div>
+                                    <div>
+                                        <div> Stuff </div>
+                                        <div> Stuff </div>
+                                    </div>
+                              </div>
+
+                              <div>
+                                    <div>  <div id="dashnavbar3_click">  ></div> <div> Filter </div> </div>
+                                    <div>
+                                        <div> Stuff </div>
+                                        <div> Stuff </div>
+                                    </div>
+                              </div>
+
+                              <div>
+                                    <div> <div id="dashnavbar3_click"> >  </div> <div> Projects </div>  </div>
+                                    <div>
+                                       <div> Stuff </div>
+                                       <div> Stuff </div>
+                                    </div>
+                              </div>
+                        </div>
+
+                        <div class='dash-main-c2'>
+                              <div class="dashnavbar4">
+                                    <div> Button 1 </div>
+                                    <div> Button 2 </div>
+                                    <div> Button 3 </div>
+                              </div>
+                              <div class="dash-content">
+                                      <div> C1 </div>
+                                      <div> C2 </div>
+                              </div>
+                         </div>
+
+              </div>
+        </div>
+   </div>
+
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+{% endblock %}

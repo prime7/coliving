@@ -1,0 +1,150 @@
+
+@media screen and (min-width:1000px){
+
+  .dashboard-container{
+    border:1px solid red;
+    display: flex;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .dc-c1{
+    border:1px solid black;
+    flex:1 0 0;
+  }
+
+/* Dashcontainer column2 */
+  .dc-c2{
+    border:1px solid brown;
+    display: flex;
+    flex-direction: column;
+    flex: 2 0 0;
+  }
+
+/* Row 1 */
+     .dc-c2-r1{
+       display: flex;
+     }
+
+     .dc-c2-r1 > div{
+       flex:1 0 0;
+     }
+
+     .dashnavbar1{
+       border:1px solid blue;
+     }
+
+     .dashnavbar1 > div:nth-child(1){
+       display: flex;
+     }
+
+     .dashnavbar1 > div:nth-child(2){
+       display: flex;
+       justify-content: flex-end;
+     }
+
+
+/* Row2 */
+     .dc-c2-r2{
+       display: flex;
+     }
+
+        .dashnavbar2{
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            background-color: orange;
+          }
+             .dashnavbar2 > div {
+               display: flex;
+               flex-direction: column;
+             }
+
+         .dash-main{
+            display: flex;
+            width: 100%;
+          }
+
+         .dashnavbar3{
+           flex: 1 0 100px;
+           background-color: red;
+         }
+
+         .dash-main-c2{
+           flex: 6 0 0;
+           display: flex;
+           flex-direction: column;
+           background-color: grey;
+         }
+            .dashnavbar4{
+
+            }
+
+            .dash-content{
+
+            }
+
+/* Hidden Show....................*/
+            .dash-mob1{
+              display: none;
+            }
+
+            .dash-mob2{
+              display: flex;
+            }
+
+
+}
+
+@media screen and (max-width: 999px) {
+
+  .dashboard-container{
+    border:1px solid red;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .dc-c1{
+    display: flex;
+    flex-direction: column;
+  }
+
+   .dc-c2-r2{
+      display: flex;
+      flex-direction: column;
+   }
+
+   .dash-main{
+     display: flex;
+     flex-direction: column;
+   }
+      .dashnavbar3{
+        display: flex;
+        flex-direction: column;
+       }
+
+      .dash-main-c2{
+        display: flex;
+        flex-direction: column;
+        }
+         .dashnavbar4{
+           display: flex;
+           border:1px solid red;
+         }
+
+/* Hidden Show */
+  .dash-mob1{
+    display: block;
+   }
+
+   .dash-mob2{
+     display: none !important;
+   }
+
+}
+
+
+/* Common .............................*/
+.dashnavbar3 > div > div:nth-child(2){
+  display: none;
+}
