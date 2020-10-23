@@ -1,150 +1,202 @@
 
 @media screen and (min-width:1000px){
+ .dashboard-container{
+   display: flex;
+   border:1px solid red;
 
-  .dashboard-container{
-    border:1px solid red;
-    display: flex;
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-
+ }
   .dc-c1{
-    border:1px solid black;
     flex:1 0 0;
+    border: 1px solid green;
   }
 
-/* Dashcontainer column2 */
   .dc-c2{
-    border:1px solid brown;
-    display: flex;
-    flex-direction: column;
-    flex: 2 0 0;
+    flex:3 0 0;
+    border: 1px solid black;
   }
 
-/* Row 1 */
-     .dc-c2-r1{
+/* R1 of Column2 */
+   .dcc2-r1{
+     display: flex;
+     background-color: #200e5c;
+     height: 50px;
+     border-top-left-radius: 5px;
+     align-items: center;
+   }
+   .dashnav1 > div:nth-child(1){
+     flex:1 0 0;
+     display: flex;
+   }
+/* Flag */
+     .dashnav1 > div:nth-child(1) > div:nth-child(1){
+       width: 70px;
        display: flex;
+       justify-content: center;
+       align-items: center;
      }
+/*Search Bar */
+      .dash-sbar{
+        height: 20px;
+      }
+      .dash-sbar > button{
+        margin-right: -5px;
+        border: none;
+        background-color: #45357a;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+      }
+      .dash-sbar > input{
+        margin-left: 0px;
+        background-color: #45357a;
+        border: none;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+      }
+/* Dash Profile */
+      .dash-profile{
+        display: flex;
+      }
+      .dash-profile > img{
+        width: 20px;
+        height: 20px;
+      }
 
-     .dc-c2-r1 > div{
-       flex:1 0 0;
-     }
+   .dashnav1 > div:nth-child(2){
+     flex: 2 0 0;
+     display: flex;
+     justify-content: flex-end;
+   }
 
-     .dashnavbar1{
-       border:1px solid blue;
-     }
-
-     .dashnavbar1 > div:nth-child(1){
-       display: flex;
-     }
-
-     .dashnavbar1 > div:nth-child(2){
-       display: flex;
-       justify-content: flex-end;
-     }
-
-
-/* Row2 */
-     .dc-c2-r2{
-       display: flex;
-     }
-
-        .dashnavbar2{
-            height: 500px;
-            display: flex;
-            flex-direction: column;
-            background-color: orange;
-          }
-             .dashnavbar2 > div {
-               display: flex;
-               flex-direction: column;
-             }
-
-         .dash-main{
-            display: flex;
-            width: 100%;
-          }
-
-         .dashnavbar3{
-           flex: 1 0 100px;
-           background-color: red;
-         }
-
-         .dash-main-c2{
-           flex: 6 0 0;
-           display: flex;
-           flex-direction: column;
-           background-color: grey;
-         }
-            .dashnavbar4{
-
-            }
-
-            .dash-content{
-
-            }
-
-/* Hidden Show....................*/
-            .dash-mob1{
-              display: none;
-            }
-
-            .dash-mob2{
-              display: flex;
-            }
-
-
-}
-
-@media screen and (max-width: 999px) {
-
-  .dashboard-container{
-    border:1px solid red;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .dc-c1{
-    display: flex;
-    flex-direction: column;
-  }
-
-   .dc-c2-r2{
+/*R2 of Column2 */
+    .dcc2-r2{
+      display: flex;
+    }
+/*Dash Navbar2 */
+     .dashnav2{
+      width: 60px;
       display: flex;
       flex-direction: column;
-   }
+      background-color: #45357a;
+     }
+     .dash-main{
+       flex:1 0 0;
+       display: flex;
+     }
+/*Dash Navbar3*/
+      .dashnav3{
+        display: flex;
+        flex-direction: column;
+        background-color: #f0f0f0;
+        width: 250px;
+        padding-left: 20px;
+        padding-top: 20px;
+      }
 
-   .dash-main{
-     display: flex;
-     flex-direction: column;
-   }
-      .dashnavbar3{
+      .dashnav3 > div {
+        margin-bottom: 20px;
+      }
+      #id_dashboard_types{
+        width: 150px;
+        height: 40px;
+        font-size: 12px;
+        border: none;
+        background-color: #d4d2d2;
+        color: black;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        padding-left: 10px;
+        padding-right: 20px;
+        border-radius: 5px;
+        box-shadow: 0px 0px 5px 1px #e3e3e3;
+      }
+
+/*Nav3 updown */
+      .dashnav3-updown{
+        display: flex;
+        flex-direction: column;
+      }
+       .dashnav3-updown > div:nth-child(1){
+         display: flex;
+         border:1px solid red;
+         display: flex;
+         align-items: center;
+       }
+         .dashnav3-updown > div:nth-child(1)>img{
+           height: 10px;
+           width: 10px;
+         }
+         .dashnav3-updown > div:nth-child(1) > div:nth-child(2){
+           display: flex;
+         }
+
+         
+/* Second Div of updown */
+      .dashnav3-updown > div:nth-child(2){
+        display: flex;
+        flex-direction: column;
+      }
+       .dn3-ud-r2{
         display: flex;
         flex-direction: column;
        }
-
-      .dash-main-c2{
-        display: flex;
-        flex-direction: column;
-        }
-         .dashnavbar4{
+        .dn3-ud-r2 > div {
            display: flex;
-           border:1px solid red;
-         }
+           margin-left: 15px;
+        }
+        .dn3-ud-r2 > div > svg{
+            margin-top: 0px;
+            width: 10px;
+            font-weight: bold;
+            color: #bababa;
+        }
+        .dn3-ud-r2 > div > div{
+          color:#8f8f8f;
+          margin-left: 8px;
+          font-size: 11px;
+          word-spacing: -2px;
+          font-weight: bold;
+        }
 
-/* Hidden Show */
-  .dash-mob1{
-    display: block;
-   }
 
-   .dash-mob2{
-     display: none !important;
-   }
+      .dm-content{
+        display: flex;
+        background-color: blue;
+      }
+      .dm-content > div{
+        flex:1 0 0;
+      }
 
+
+
+
+.dash-desk1{
+    display: none;
+  }
+}
+
+@media screen and (max-width:999px){
+
+
+.dash-mob1{
+  display: none;
+}
 }
 
 
-/* Common .............................*/
-.dashnavbar3 > div > div:nth-child(2){
-  display: none;
+
+
+.dash-font1{
+  font-size: 11px;
+  text-transform:uppercase;
+  color:#999999;
+  word-spacing: -2px;
+  font-weight: bold;
+}
+
+.dash-font2{
+  color: #200e5c;
+  font-weight: bold;
+  font-size: 14px;
+  text-transform: uppercase;
 }

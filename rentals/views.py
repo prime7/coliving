@@ -20,7 +20,7 @@ class ShortTermListingListview(ListView):
     paginate_by = 6
     context_object_name = 'houses'
     queryset = House.objects.short_term_rentals()
-    
+
     def get(self, request, *args, **kwargs):
         if request.GET:
             houses = House.objects.short_term_rentals()
@@ -38,13 +38,15 @@ class ShortTermListingListview(ListView):
                 houses = houses.filter(Q(title__icontains=query)|Q(city__icontains=query)|Q(description__icontains=query)).distinct().order_by('-earliest_move_in')
                 return render(request, self.template_name, {'houses': houses})
         return super().get(request, *args, **kwargs)
+
+
 class LeaseListView(ListView):
     model = House
     template_name = "rentals/listing.html"
     paginate_by = 6
     context_object_name = 'houses'
     queryset = House.objects.active()
-    
+
     def get(self, request, *args, **kwargs):
         if request.GET:
             houses = House.objects.active()
@@ -89,7 +91,7 @@ class LeaseDetailView(FormView,DetailView):
             booking_form.house = self.get_object()
             booking_form.user = request.user
             booking_form.save()
-            
+
         form = ProfileConnectForm(request.POST,instance=self.request.user.profile)
         if form.is_valid():
             form.save()
@@ -97,12 +99,12 @@ class LeaseDetailView(FormView,DetailView):
             phone_number = request.POST['mobile_number']
             from django.conf import settings
             link = ""
-            
+
             if settings.DEBUG:
                 link = "http://127.0.0.1:8000"
-            else:    
+            else:
                 link = "https://www.meetquoteshack.ca"
-            
+
             link += request.get_full_path()
 
             if not Lead.objects.filter(email=email,phone_number=phone_number,link=link).exists():
@@ -128,7 +130,7 @@ class LeaseDeactivateView(DetailView):
     def post(self,request,*args,**kwargs):
         self.object = self.get_object()
         context = context = super(LeaseDeactivateView, self).get_context_data(**kwargs)
-        
+
         status = request.POST['status']
         if status == "1":
             self.object.rental_status = 1
@@ -148,7 +150,7 @@ class LeaseFavouriteView(View):
             house.favourites.remove(request.user)
         else:
             house.favourites.add(request.user)
-        
+
         return redirect('listing-detail', slug=house.slug)
 
 @method_decorator(login_required(login_url='/login'), name='dispatch')
@@ -185,7 +187,7 @@ class LeaseFavouriteListView(ListView):
     context_object_name = 'houses'
 
     def get_queryset(self):
-        user = self.request.user 
+        user = self.request.user
         return user.favourites.all()
 
 @method_decorator(login_required(login_url='/login'), name='dispatch')
@@ -201,10 +203,12 @@ class LeaseCreateView(LoginRequiredMixin, CreateView):
         obj.short_term = False
         obj.save()
 
-        files = self.request.FILES.getlist('images')
-        for f in files:
-            Image.objects.create(house=obj,src=f)
+        #files = self.request.FILES.getlist('images')
+        #for f in files:
+        #    Image.objects.create(house=obj,src=f)
         return super().form_valid(form)
+
+
 
 @method_decorator(login_required(login_url='/login'), name='dispatch')
 class ShortLeaseCreateView(LoginRequiredMixin, CreateView):
@@ -218,18 +222,18 @@ class ShortLeaseCreateView(LoginRequiredMixin, CreateView):
         obj = form.save()
         obj.short_term = True
         obj.save()
-        
+
         files = self.request.FILES.getlist('images')
         for f in files:
             Image.objects.create(house=obj,src=f)
         return super().form_valid(form)
 
-    
+
 class LeaseUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
     model = House
     form_class = HouseCreateForm
     template_name = "rentals/update.html"
-    
+
     def form_valid(self,form):
         form.instance.user = self.request.user
         return super().form_valid(form)
@@ -245,7 +249,7 @@ class ShortLeaseUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
     model = House
     form_class = ShortHouseCreateForm
     template_name = "rentals/short-update.html"
-    
+
     def form_valid(self,form):
         form.instance.user = self.request.user
         return super().form_valid(form)

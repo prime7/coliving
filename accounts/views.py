@@ -19,13 +19,15 @@ from django.utils.encoding                  import force_text
 from django.utils.http                      import urlsafe_base64_decode
 from django.shortcuts                       import render_to_response
 from django.template                        import RequestContext
+from django.contrib.auth import logout
 
 
 def signup(request):
-    u = User.objects.all()[0]
+    #logout(request)
+    #u = User.objects.all()[0]
 
-    print(u)
-    login(request, u)
+    #print(u)
+    #login(request, u)
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():

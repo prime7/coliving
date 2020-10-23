@@ -1,131 +1,146 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
+{% load static %}
 
 {% block title %}
   Coliving | Dashboard
 {% endblock %}
 
 {% block content %}
-<div class='dashboard-container'>
 
-  <!-- First Column it has ads -->
-   <div class='dc-c1'>
-        <div> Blazingly Fast. </div>
-        <div> Zoom in and out. </div>
-        <div> Be iterative </div>
-        <div> Enjoy Working Together </div>
-   </div>
-
-
-
-<!-- Mobile Navbar  -->
-   <div class="mob-dash-nav1 dash-mob1">
-
-       <nav class="navbar navbar-dark bg-dark">
-         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-           <span class="navbar-toggler-icon"></span>
-         </button>
-
-         <div>
-                <input type="text" style="width:50px">
+    <div class='dashboard-container'>
+          <div class='dc-c1'>
+               <div> Line 1 </div>
+               <div> Line 2 </div>
+               <div> Line 3 </div>
           </div>
-         <div>
-            <div> Profile </div>
-         </div>
-       </nav>
+          <div class='dc-c2'>
 
-       <div class="collapse" id="navbarToggleExternalContent">
-             <div class="bg-dark p-4">
-               <h5 class="text-white h4">Collapsed content</h5>
-               <span class="text-muted">Toggleable via the navbar brand.</span>
-               <div>
-                 <div> <div> Pic </div> <div> Dashboard </div> </div>
-                 <div> <div> Pic </div> <div> Status </div> </div>
-                 <div> <div> Pic </div> <div> Something </div> </div>
-                 <div> <div> Pic </div> <div> Name </div> </div>
-               </div>
-             </div>
-       </div>
- </div>
- <!-- Mobile Navbar ends -->
-
-
-
-   <div class='dc-c2'>
-
-       <!-- Desk -->
-        <div class='dc-c2-r1 dashnavbar1 dash-mob2'>
-           <div>
-                <div style="font-weight:bold">  DashNav2 </div>
-                <div> Flag </div>
-                <div> Button </div>
-                <div> Search Bar <input type="text"> </div>
-           </div>
-           <div>
-                <div> Icon1 </div>
-                <div> Icon2 </div>
-                <div> Collapse </div>
-            </div>
-        </div>
-
-
-        <div class='dc-c2-r2'>
-
-              <!-- Desk -->
-              <div class='dashnavbar2 dash-mob2'>
-                      <div> <div> Pic </div> <div> Dashboard </div> </div>
-                      <div> <div> Pic </div> <div> Status </div> </div>
-                      <div> <div> Pic </div> <div> Something </div> </div>
-                      <div> <div> Pic </div> <div> Name </div> </div>
-              </div>
-
-              <!-- Common -->
-              <div class='dash-main'>
-
-                      <div class='dashnavbar3'>
-                              <div>
-                                    <div> <div id="dashnavbar3_click"> > </div> <div> Workflow </div> </div>
-                                    <div>
-                                        <div> Stuff </div>
-                                        <div> Stuff </div>
-                                    </div>
+                  <!-- Nav1 Desktop -->
+                  <div class='dcc2-r1 dashnav1 dash-mob1'>
+                        <div>
+                              <div> <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-flag-fill" fill="white" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M14.778.085A.5.5 0 0 1 15 .5V8a.5.5 0 0 1-.314.464L14.5 8l.186.464-.003.001-.006.003-.023.009a12.435 12.435 0 0 1-.397.15c-.264.095-.631.223-1.047.35-.816.252-1.879.523-2.71.523-.847 0-1.548-.28-2.158-.525l-.028-.01C7.68 8.71 7.14 8.5 6.5 8.5c-.7 0-1.638.23-2.437.477A19.626 19.626 0 0 0 3 9.342V15.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 1 0v.282c.226-.079.496-.17.79-.26C4.606.272 5.67 0 6.5 0c.84 0 1.524.277 2.121.519l.043.018C9.286.788 9.828 1 10.5 1c.7 0 1.638-.23 2.437-.477a19.587 19.587 0 0 0 1.349-.476l.019-.007.004-.002h.001"/>
+                                  </svg>
                               </div>
-
-                              <div>
-                                    <div>  <div id="dashnavbar3_click">  ></div> <div> Filter </div> </div>
-                                    <div>
-                                        <div> Stuff </div>
-                                        <div> Stuff </div>
-                                    </div>
-                              </div>
-
-                              <div>
-                                    <div> <div id="dashnavbar3_click"> >  </div> <div> Projects </div>  </div>
-                                    <div>
-                                       <div> Stuff </div>
-                                       <div> Stuff </div>
-                                    </div>
-                              </div>
+                              <form class="dash-sbar" action="#">
+                                    <button type="submit"><i style="color:white" class="fa fa-search"></i></button>
+                                    <input type="text" placeholder="Search.." name="search">
+                              </form>
                         </div>
 
-                        <div class='dash-main-c2'>
-                              <div class="dashnavbar4">
-                                    <div> Button 1 </div>
-                                    <div> Button 2 </div>
-                                    <div> Button 3 </div>
-                              </div>
-                              <div class="dash-content">
-                                      <div> C1 </div>
-                                      <div> C2 </div>
-                              </div>
-                         </div>
 
-              </div>
-        </div>
-   </div>
+                        <div class='dashnav1-right'>
+                            <div>
+                              <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-archive-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15h9.286zM5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8H.8z"/>
+                              </svg>
+                            </div>
+
+                            <div>
+                              <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar-range-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM16 7V5H0v5h5a1 1 0 1 1 0 2H0v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9h-6a1 1 0 1 1 0-2h6z"/>
+                              </svg>
+                             </div>
+
+                            <div class='dash-profile'>
+                              <img src="{% static 'img/download.png' %}">
+                              <div>
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M3.204 5L8 10.481 12.796 5H3.204zm-.753.659l4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z"/>
+                                  </svg>
+                               </div>
+                             </div>
+                        </div>
+                  </div>
+
+                  <!-- Nav1 Mobile -->
+                  <div class='dashnav1-mob dash-desk1'>
+
+                  </div>
 
 
-</div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                  <div class='dcc2-r2'>
+                         <!-- Navbar 2 Desktop -->
+                         <div class="dashnav2 dash-mob1">
+                                  <div>
+                                     <div> Icon </div>
+                                     <div> Dashboard </div>
+                                   </div>
+
+                                   <div>
+                                      <div> Icon </div>
+                                      <div> Chats </div>
+                                    </div>
+
+                                    <div>
+                                       <div> Icon </div>
+                                       <div> Email </div>
+                                    </div>
+
+                                    <div>
+                                       <div> Icon </div>
+                                       <div> Social Media </div>
+                                     </div>
+                          </div>
+
+                          <div class="dash-main">
+                                <div class="dashnav3">
+
+                                      <!-- Common in Landlord , Tasker and Tenant -->
+                                      <div>
+                                            <div class='dash-font1'> Dashboard Type </div>
+                                            <form method="post" id="dash_type_form">
+                                                {% csrf_token %}
+                                                {{ form.dashboard_types }}
+                                            </form>
+                                      </div>
+
+                                      <div>
+                                            <div>
+                                                <div class='dash-font1'> Current Subscription </div>
+                                                <div class='dash-font2'>
+                                                  {{ membership_type }}
+                                                  <button type="button" class="btn btn-warning  btn-sm">Upgrade Subscription</button>
+
+                                                </div>
+                                             </div>
+                                      </div>
+
+                                    {{ dashboard_type }}
+                                      <!--Varies -->
+                                     {% if dashboard_type == 'landlord' %}
+                                          {% include "dashboards/dashnav3-landlord1.html" %}
+                                     {% elif dashboard_type == 'tenant' %}
+                                          {% include "dashboards/dashnav3-tenant1.html" %}
+                                     {% elif dashboard_type == 'tasker' %}
+                                          {% include "dashboards/dashnav3-tasker1.html" %}
+                                     {% endif %}
+
+
+
+                                </div>
+
+                                <div class="dm-content">
+                                          <div>
+                                                <div> Heading 1 </div>
+                                                <div>
+                                                      Content
+                                                </div>
+                                          </div>
+                                          <div>
+                                                <div> Heading 2 </div>
+                                                <div>
+                                                      Content
+                                                </div>
+                                          </div>
+                                </div>
+                          </div>
+                  </div>
+          </div>
+     </div>
+
+
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 {% endblock %}
