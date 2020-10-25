@@ -1,0 +1,69 @@
+{% load static %}
+
+
+<div class='dashnav3-updown'>
+       <div>
+          <img id="dashnavbar3_click" style="display:none" src="{% static 'img/cright.svg' %}">
+          <img id="dashnavbar3_click" src="{% static 'img/cdown.svg' %}">
+         <div class="dash-font1"> Tenant On </div>
+       </div>
+
+      <div class='dn3-ud-r2'>
+              {% include "dashboards/dashnav3_updown_element.html" with list_element='All' %}
+              {% include "dashboards/dashnav3_updown_element.html" with list_element='Current' %}
+              {% include "dashboards/dashnav3_updown_element.html" with list_element='Move out of lease' %}
+              {% include "dashboards/dashnav3_updown_element.html" with list_element='Photos / 3D Photos ' %}
+              {% include "dashboards/dashnav3_updown_element.html" with list_element='Videos' %}
+      </div>
+</div>
+
+<div class='dashnav3-updown'>
+      <div>
+          <img id="dashnavbar3_click" style="display:none" src="{% static 'img/cright.svg' %}">
+          <img id="dashnavbar3_click" src="{% static 'img/cdown.svg' %}">
+         <div class="dash-font1"> Applications </div>
+       </div>
+       <div class='dn3-ud-r2'>
+               {% include "dashboards/dashnav3_updown_element.html" with list_element='All' %}
+               {% include "dashboards/dashnav3_updown_element.html" with list_element='Verified' %}
+               {% include "dashboards/dashnav3_updown_element.html" with list_element='Scheduled for viewing' %}
+       </div>
+</div>
+
+<div class='dashnav3-updown'>
+      <div>
+          <img id="dashnavbar3_click" style="display:none" src="{% static 'img/cright.svg' %}">
+          <img id="dashnavbar3_click" src="{% static 'img/cdown.svg' %}">
+         <div class="dash-font1"> Rental Insurance </div>
+       </div>
+
+      <div class='dn3-ud-r2'>
+              {% include "dashboards/dashnav3_updown_element.html" with list_element='All' %}
+      </div>
+</div>
+
+<div class='dashnav3-updown'>
+      <div>
+          <img id="dashnavbar3_click" style="display:none" src="{% static 'img/cright.svg' %}">
+          <img id="dashnavbar3_click" src="{% static 'img/cdown.svg' %}">
+         <div class="dash-font1"> Rental Insurance </div>
+       </div>
+
+       <div class='dn3-ud-r2'>
+               {% include "dashboards/dashnav3_updown_element.html" with list_element='All' %}
+       </div>
+</div>
+
+<div class='dashnav3-updown'>
+      <div>
+          <img id="dashnavbar3_click" style="display:none" src="{% static 'img/cright.svg' %}">
+          <img id="dashnavbar3_click" src="{% static 'img/cdown.svg' %}">
+         <div class="dash-font1"> Services </div>
+       </div>
+
+      <div class='dn3-ud-r2'>
+              {% include "dashboards/dashnav3_updown_element.html" with list_element='All' %}
+              {% include "dashboards/dashnav3_updown_element.html" with list_element='Ongoing' %}
+              {% include "dashboards/dashnav3_updown_element.html" with list_element='Maintenance' %}
+      </div>
+</div>

@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from .forms import CurrentDashForm
+
+
 # Create your views here.
 def dashboard(request):
     user            = request.user
@@ -31,4 +33,4 @@ def dashboard(request):
         "membership_type"     : membership_type,
         'form'                : form
     }
-    return render(request, 'dashboards/dashboard.html', context)
+    return render(request, 'dashboards/dashboard-content-main.html', context)
