@@ -5,6 +5,59 @@
        flex:1 0 0;
        display: flex;
      }
+
+
+
+/* Navbar 1 and 2 .........................*/
+
+/*Search Bar */
+      .dash-sbar{
+        height: 25px;
+        display: flex;
+        flex-wrap: nowrap;
+      }
+      .dash-sbar > button{
+        margin-right: -5px;
+        border: none;
+        background-color: #4a1e5c;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+      }
+      .dash-sbar > input{
+        margin-left: 0px;
+        background-color: #4a1e5c;
+        border: none;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+      }
+
+
+/* Dash Profile */
+      .dash-profile{
+        display: flex;
+        margin-right: 5px;
+      }
+
+      .dash-profile > div:nth-child(1) > img{
+        width: 25px;
+        height:25px;
+        border-radius: 20px;
+        margin-right: 5px;
+      }
+
+      .caret {
+        display: inline-block;
+        width: 0;
+        height: 0;
+        margin-left: 2px;
+        vertical-align: middle;
+        border-top: 4px solid #b8b8b8;
+        border-right: 4px solid transparent;
+        border-bottom: 0 dotted;
+        border-left: 4px solid transparent;
+        content: "";
+      }
+
 /*Dash Navbar3*/
       .dashnav3{
         display: flex;
@@ -41,9 +94,12 @@
   margin-top: 10px;
 }
 
-.dashnav3 > div {
+.dashnav3 > div:nth-child(1) {
 }
 
+.dashnav3_currentsub > div:nth-child(1){
+  margin-right: 10px;
+}
 .dashnav3_currentsub > div:nth-child(2){
   display: flex;
 }
@@ -185,7 +241,7 @@
     }
 
 
-/* Media Queryies ....................................................*/
+/*  Media Queryies ....................................................*/
 @media screen and (min-width:1000px){
  .dashboard-container{
    display: flex;
@@ -259,49 +315,8 @@
        justify-content: center;
        align-items: center;
      }
-/*Search Bar */
-      .dash-sbar{
-        height: 25px;
-      }
-      .dash-sbar > button{
-        margin-right: -5px;
-        border: none;
-        background-color: #4a1e5c;
-        border-top-left-radius: 10px;
-        border-bottom-left-radius: 10px;
-      }
-      .dash-sbar > input{
-        margin-left: 0px;
-        background-color: #4a1e5c;
-        border: none;
-        border-top-right-radius: 10px;
-        border-bottom-right-radius: 10px;
-      }
-/* Dash Profile */
-      .dash-profile{
-        display: flex;
-        margin-right: 5px;
-      }
 
-      .dash-profile > div:nth-child(1) > img{
-        width: 25px;
-        height:25px;
-        border-radius: 20px;
-        margin-right: 5px;
-      }
 
-      .caret {
-        display: inline-block;
-        width: 0;
-        height: 0;
-        margin-left: 2px;
-        vertical-align: middle;
-        border-top: 4px solid #b8b8b8;
-        border-right: 4px solid transparent;
-        border-bottom: 0 dotted;
-        border-left: 4px solid transparent;
-        content: "";
-      }
 
    .dashnav1 > div:nth-child(2){
      flex: 2 0 0;
@@ -399,6 +414,8 @@
   flex-direction: column;
  }
 
+
+/* Dashmob Nav1 */
  .dashmobnav1{
    display: flex;
    flex-direction: column;
@@ -407,27 +424,56 @@
   .dashmobnav1  > nav {
     display: flex;
     width: 100%;
-    background-color: black;
+    background-color: #1f0729;
   }
-  .dashmobnav1 > nav > div:nth-child(1){
-    flex:1 0 0;
-    border:1px solid yellow;
-  }
+    .dashmobnav1 > nav > div:nth-child(1){
+      flex:1 0 0;
+    }
 
-  .dashmobnav1 > nav > div:nth-child(2){
-    flex:1 0 0;
-    border: 1px solid red;
-  }
+    .dashmobnav1 > nav > div:nth-child(2){
+      flex:1 0 0;
+    }
 
-  .dashmobnav1 > nav > div:nth-child(3){
-    flex: 1 0 0;
-    display: flex;
-    justify-content: flex-end;
-  }
+    .dashmobnav1 > nav > div:nth-child(3){
+      flex: 1 0 0;
+      display: flex;
+      justify-content: flex-end;
+    }
 
   .dashmobnav1 > div:nth-child(1){
-    background-color: red;
+    height: 3333px !important;
   }
+
+  .dashmobnav1-content{
+    background-color: #4a1e5c;
+    margin: 2px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 3px 1px #f5f5f5;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+    .dashmobnav1-content > div{
+      display: flex;padding: 10px;
+      border-bottom: 1px solid white;
+      align-items: center;
+    }
+
+    .dashmobnav1-content > div > div:nth-child(1) {
+
+    }
+
+      .dashmobnav1-content > div > div:nth-child(1) > img {
+        width: 40px;
+        height: 40px;
+      }
+
+    .dashmobnav1-content > div > div:nth-child(2){
+      margin-left: 10px;
+      color:white;
+      font-size: 15px;
+
+    }
 
 /*R2 of Column2 */
   .dcc2-r2{
@@ -463,9 +509,9 @@
   display: none;
 }
 }
-/* Queries End */
+/* Queries End ---------------------------------------------------------------- */
 
-/* Designing */
+/* Designing -------------------------------------------------------------------*/
 
 .dash-listing-pane > div{
   margin-bottom: 5px;

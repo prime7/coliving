@@ -43,51 +43,68 @@
 
           <div style="width:50px" class='dash-mob1'> </div>
           <div class='dc-c2'>
-                  <!-- Nav1 Mobile -->
-                <div class=" dashmobnav1 dash-desk1">
+
+
+
+                  <!-- Nav1 and Nav2 Mobile ------------------------------------------------------------------------------------------------------------------------>
+                <div class="dashmobnav1 dash-desk1">
 
                     <nav class="navbar">
                         <div>
                           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                          </button>
+                            <img style="width:20px; height:20px"   src="{% static 'img/menu.svg' %}">
+                            </button>
                         </div>
                         <div>
-                          <input type="text">
+                          <form class="dash-sbar" action="#">
+                                <button type="submit"><i style="color:white" class="fa fa-search"></i></button>
+                                <input type="text" placeholder="Search.." name="search">
+                          </form>
                         </div>
 
                         <div>
-                            <img style="width:10px; height:10px" src="{% static 'img/download.png' %}">
+                          <div class="dash-profile">
+                              <div type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="{% static 'img/profile.png' %}"><span class="caret"></span>
+                              </div>
+
+                              <div style="margin-left:75%; margin-top: -5px" class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                              </div>
+                          </div>
                          </div>
                       </nav>
 
-                      <div class="collapse" id="navbarToggleExternalContent">
-                          <div class="">
-                             <div>
-                               <div> <img style="width:20px; height:20px"  src="{% static 'img/dashboard.svg' %}"> </div>
+                      <!-- Dashnav Content ------------------------------------------------>
+                      <div class="collapse"  id="navbarToggleExternalContent" style="background-color:#e3e3e3;">
+                          <div class="dashmobnav1-content">
+                            <div>
+                               <div> <img  src="{% static 'img/dashboard.svg' %}"> </div>
                                <div> Dashboard </div>
-                             </div>
+                            </div>
+
                              <div>
-                                <div> <img  style="width:20px; height:20px"  src="{% static 'img/dashboard.svg' %}"> </div>
-                                <div> Dashboard </div>
+                                <div>  <img  src="{% static 'img/chat.svg' %}">  </div>
+                                <div> Chats </div>
                               </div>
+
                               <div>
-                                 <div> <img style="width:20px; height:20px"   src="{% static 'img/dashboard.svg' %}"> </div>
-                                 <div> Dashboard </div>
+                                 <div>  <img  src="{% static 'img/email.svg' %}">  </div>
+                                 <div> Email </div>
+                              </div>
+
+                              <div>
+                                 <div>  <img  src="{% static 'img/instagram.svg' %}">  </div>
+                                 <div> Social Media </div>
                                </div>
-                               <div>
-                                  <div> <img  style="width:20px; height:20px"  src="{% static 'img/dashboard.svg' %}"> </div>
-                                  <div> Dashboard </div>
-                                </div>
-                          </div>
-                          <div>
-                                <div> Something Else </div>
                           </div>
                       </div>
                 </div>
 
 
-                  <!-- Nav1 Desktop -->
+                  <!-- Nav1 Desktop ---------------------------------------------------------------------------------------------------------------------------------------->
                   <div class='dcc2-r1 dashnav1 dash-mob1'>
                         <div>
                               <div> <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-flag-fill" fill="white" xmlns="http://www.w3.org/2000/svg">
@@ -116,10 +133,7 @@
                         </div>
                   </div>
 
-                  <!-- Nav1 Mobile -->
-                  <div class='dashnav1-mob dash-desk1'>
 
-                  </div>
 
 
                   <div class='dcc2-r2'>
