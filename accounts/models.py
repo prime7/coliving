@@ -81,7 +81,7 @@ class Profile(models.Model):
 
     def __str__(self):
         return f'{self.user.email}s Profile'
-    
+
 
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, *args, **kwargs):
@@ -104,6 +104,9 @@ Contact_Reason = (
     (8,'Account activation'),
     (9,'Other'),
 )
+
+
+
 class Contact(models.Model):
     email = models.EmailField(max_length=255)
     reason = models.IntegerField(choices=Contact_Reason)

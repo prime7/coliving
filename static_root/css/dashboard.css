@@ -1,0 +1,574 @@
+
+/* Common */
+
+     .dash-main{
+       flex:1 0 0;
+       display: flex;
+     }
+
+
+
+/* Navbar 1 and 2 .........................*/
+
+/*Search Bar */
+      .dash-sbar{
+        height: 25px;
+        display: flex;
+        flex-wrap: nowrap;
+      }
+      .dash-sbar > button{
+        margin-right: -5px;
+        border: none;
+        background-color: #4a1e5c;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+      }
+      .dash-sbar > input{
+        margin-left: 0px;
+        background-color: #4a1e5c;
+        border: none;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+      }
+
+
+/* Dash Profile */
+      .dash-profile{
+        display: flex;
+        margin-right: 5px;
+      }
+
+      .dash-profile > div:nth-child(1) > img{
+        width: 25px;
+        height:25px;
+        border-radius: 20px;
+        margin-right: 5px;
+      }
+
+      .caret {
+        display: inline-block;
+        width: 0;
+        height: 0;
+        margin-left: 2px;
+        vertical-align: middle;
+        border-top: 4px solid #b8b8b8;
+        border-right: 4px solid transparent;
+        border-bottom: 0 dotted;
+        border-left: 4px solid transparent;
+        content: "";
+      }
+
+/*Dash Navbar3*/
+      .dashnav3{
+        display: flex;
+        flex-direction: column;
+        background-color: #f0f0f0;
+        width: 250px;
+        padding-left: 20px;
+        padding-top: 20px;
+      }
+
+      .dashnav3 > div {
+        margin-bottom: 20px;
+      }
+
+      #id_dashboard_types{
+        width: 150px;
+        height: 40px;
+        font-size: 12px;
+        border: none;
+        background-color: #d4d2d2;
+        color: black;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        padding-left: 10px;
+        padding-right: 20px;
+        border-radius: 5px;
+        box-shadow: 0px 0px 5px 1px #e3e3e3;
+      }
+
+
+/* Dashnav3 Current Sub */
+.dashnav3_currentsub{
+  margin-top: 10px;
+}
+
+.dashnav3 > div:nth-child(1) {
+}
+
+.dashnav3_currentsub > div:nth-child(1){
+  margin-right: 10px;
+}
+.dashnav3_currentsub > div:nth-child(2){
+  display: flex;
+}
+.dashnav3_currentsub >  div:nth-child(2) > a{
+  font-size: 10px;
+  margin-left: 5px;
+}
+
+
+/*Nav3 updown */
+      .dashnav3-updown{
+        display: flex;
+        flex-direction: column;
+        margin-top: 5px;
+      }
+       .dashnav3-updown > div:nth-child(1){
+         display: flex;
+         align-items: center;
+       }
+         .dashnav3-updown > div:nth-child(1)>img{
+           height: 10px;
+           width: 10px;
+           margin-right: 5px;
+         }
+         .dashnav3-updown > div:nth-child(1) > div:nth-child(2){
+           display: flex;
+         }
+
+
+/* Second Div of updown */
+      .dashnav3-updown > div:nth-child(2){
+        display: flex;
+        flex-direction: column;
+      }
+       .dn3-ud-r2{
+        display: flex;
+        flex-direction: column;
+       }
+        .dn3-ud-r2 > div {
+           display: flex;
+           margin-left: 15px;
+        }
+
+        .dn3-ud-r2 > div > svg{
+            margin-top: 0px;
+            width: 10px;
+            font-weight: bold;
+            color: #bababa;
+        }
+        .dn3-ud-r2 > div > div{
+          color:#8f8f8f;
+          margin-left: 8px;
+          font-size: 11px;
+          word-spacing: -2px;
+          font-weight: bold;
+        }
+
+        .dn3-ud-r2 > div > div:hover{
+          color:#1f0729;
+          cursor:pointer;
+        }
+
+/* The Main Content */
+  .dm-content{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    background-color: #f5f5f5;
+    padding: 5px;
+   }
+
+  .dm-content > div{
+      flex: 1 0 280px;
+      max-width: 280px;
+   }
+
+   .dmcb-r1{
+     display: flex;
+     height: 40px;
+     align-items: center;
+   }
+     .dmcb-r1 > div:nth-child(1){
+       flex:2 0 0;
+       color:#757575;
+       font-weight: bold;
+       font-size: 12px;
+       white-space: -1px;
+     }
+
+     .dmcb-r1 > div:nth-child(2){
+       flex: 1 0 0;
+       display: flex;
+       justify-content: flex-end;
+     }
+
+     .dmcb-r1 > div:nth-child(2) > div:nth-child(1){
+       background-color: #f0f0f0;
+       font-size: 12px;
+       margin-right: 5px;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       height: 25px;
+       width: 20px;
+       color:#b0b0b0;
+       border-radius: 5px;
+       font-weight: bold;
+     }
+
+
+     #dmc_click1 > img{
+       width: 10px;
+       height: 10px;
+     }
+
+  .dmcb-r2{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .dmcb-r2 > div{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    padding: 10px;
+  }
+    .dmcb-r2 > div:nth-child(odd) {
+      border-left:5px solid #e35656;
+      border-radius: 4px;
+      background-color: #ecedd8;
+
+     }
+
+   .dmcb-r2 > div:nth-child(even) {
+     border-left:5px solid #4735cc;
+     border-radius: 4px;
+     background-color: #ffd3c7;
+     box-shadow: 0px 0px 5px 1px #e8e8e8;
+    }
+
+
+/*  Media Queryies ....................................................*/
+@media screen and (min-width:1000px){
+ .dashboard-container{
+   display: flex;
+   margin-left: 10px;
+ }
+  .dc-c1{
+    flex:1 0 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .dashc1-divs{
+    border-bottom:2px solid #e3e3e3;
+    display: flex;
+    height: 150px;
+  }
+       .dashc1-divs > div:nth-child(1){
+         flex:1 0 0;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+       }
+       .dashc1-divs > div:nth-child(1) >img{
+         width: 50px;
+         height: 50px;
+       }
+
+   .dashc1-divs> div:nth-child(2){
+     flex:3 0 0;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+   }
+        .dashc1-divs > div:nth-child(2) > div:nth-child(1){
+         font-size:22px;
+         font-weight: bold;
+        }
+
+        .dashc1-divs > div:nth-child(2) > div:nth-child(2){
+          font-size: 14px;
+          color:#c2c2c2;
+          font-weight: bold;
+        }
+
+/* Dash column 2 */
+  .dc-c2{
+    flex:3 0 0;
+    margin-right: 10px;
+    margin-top: 10px;
+    border-bottom-right-radius: 10px;
+    box-shadow: 5px 5px 5px 1px #dbdbdb;
+  }
+
+/* Desk Navbar1 R1 of Column2 */
+   .dcc2-r1{
+     display: flex;
+     background-color: #1f0729;
+     height: 50px;
+     border-top-left-radius: 10px;
+     border-top-right-radius: 10px;
+     box-shadow: 0px 0px 5px 1px #dbdbdb;
+     align-items: center;
+   }
+   .dashnav1 > div:nth-child(1){
+     flex:1 0 0;
+     display: flex;
+   }
+/* Flag */
+     .dashnav1 > div:nth-child(1) > div:nth-child(1){
+       width: 70px;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+     }
+
+
+
+   .dashnav1 > div:nth-child(2){
+     flex: 2 0 0;
+     display: flex;
+     justify-content: flex-end;
+   }
+
+/*R2 of Column2 */
+  .dcc2-r2{
+         display: flex;
+
+       }
+
+/*Dash Navbar2 */
+     .dashnav2{
+      width: 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #4a1e5c;
+      border-bottom-left-radius: 10px;
+      padding-top: 20px;
+     }
+
+     .dashnav2 > div {
+       display: flex;
+       flex-direction: column;
+       margin-bottom: 20px;
+       align-items: center;
+     }
+     .dashnav2 > div > div:nth-child(1) > img{
+       width: 20px;
+       height: 20px;
+     }
+     .dashnav2 > div > div:nth-child(2){
+       color:#d4d4d4;
+       font-size: 7px;
+       word-spacing: 0px;
+       font-weight: bold;
+       text-transform: uppercase;
+     }
+
+     .dm-content{
+       height: 600px;
+     }
+
+.dash-desk1{
+    display: none;
+  }
+}
+
+
+
+/*Mobile Query................*/
+@media screen and (max-width:999px){
+.dashboard-container{
+  display: flex;
+  flex-direction: column;
+}
+
+ .dc-c1 > div{
+ }
+
+ .dashc1-divs{
+   display: flex;
+   padding: 20px;
+   margin: 20px;
+   width: 100%;
+ }
+ .dashc1-divs > div:nth-child(1){
+   flex:1 0 0;
+ }
+
+ .dashc1-divs > div:nth-child(1) >img{
+   width: 50px;
+   height: 50px;
+ }
+
+.dashc1-divs> div:nth-child(2){
+  flex:3 0 0;
+}
+  .dashc1-divs > div:nth-child(2) > div:nth-child(1){
+   font-size:22px;
+   font-weight: bold;
+  }
+
+  .dashc1-divs > div:nth-child(2) > div:nth-child(2){
+    font-size: 14px;
+    color:#c2c2c2;
+    font-weight: bold;
+  }
+
+ .dc-c2{
+  display: flex;
+  flex-direction: column;
+ }
+
+
+/* Dashmob Nav1 */
+ .dashmobnav1{
+   display: flex;
+   flex-direction: column;
+   width: 100%;
+ }
+  .dashmobnav1  > nav {
+    display: flex;
+    width: 100%;
+    background-color: #1f0729;
+  }
+    .dashmobnav1 > nav > div:nth-child(1){
+      flex:1 0 0;
+    }
+
+    .dashmobnav1 > nav > div:nth-child(2){
+      flex:1 0 0;
+    }
+
+    .dashmobnav1 > nav > div:nth-child(3){
+      flex: 1 0 0;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+  .dashmobnav1 > div:nth-child(1){
+    height: 3333px !important;
+  }
+
+  .dashmobnav1-content{
+    background-color: #4a1e5c;
+    margin: 2px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 3px 1px #f5f5f5;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+    .dashmobnav1-content > div{
+      display: flex;padding: 10px;
+      border-bottom: 1px solid white;
+      align-items: center;
+    }
+
+    .dashmobnav1-content > div > div:nth-child(1) {
+
+    }
+
+      .dashmobnav1-content > div > div:nth-child(1) > img {
+        width: 40px;
+        height: 40px;
+      }
+
+    .dashmobnav1-content > div > div:nth-child(2){
+      margin-left: 10px;
+      color:white;
+      font-size: 15px;
+
+    }
+
+/*R2 of Column2 */
+  .dcc2-r2{
+    display: flex;
+    flex-direction: column;
+  }
+
+.dash-main{
+  display: flex;
+  flex-direction: column;
+}
+ .dashnav3{
+   display: flex;
+   width: 100%;
+ }
+ .dashnav3 > div:nth-child(1){
+   display: flex;
+ }
+ .dashnav3 > div:nth-child(1) > div:nth-child(1){
+   flex:1 0 0;
+ }
+ .dashnav3 > div:nth-child(1) > div:nth-child(2){
+   flex:1 0 0;
+   display: flex;
+   justify-content: flex-end;
+ }
+
+
+
+
+
+.dash-mob1{
+  display: none;
+}
+}
+/* Queries End ---------------------------------------------------------------- */
+
+/* Designing -------------------------------------------------------------------*/
+
+.dash-listing-pane > div{
+  margin-bottom: 5px;
+}
+.dash-listing-pane > div:nth-child(1){
+  font-size: 12px;
+  font-weight: bold;
+  color: #919191;
+}
+
+.dash-listing-pane > div:nth-child(2), .dash-listing-pane > div:nth-child(3){
+  font-size: 10px;
+  padding: 4px;
+  font-weight: bold;
+  color: #919191;
+  background-color: #f0f0f0;
+  display: flex;
+  width: 30%;
+  box-shadow: 0px 0px 5px 1px #ebebeb;
+}
+
+
+
+
+/* Fonts */
+.dash-font1{
+  font-size: 11px;
+  text-transform:uppercase;
+  color:#999999;
+  word-spacing: -2px;
+  font-weight: bold;
+}
+
+.dash-font2{
+  color: #200e5c;
+  font-weight: bold;
+  font-size: 10px;
+  text-transform: uppercase;
+}
+
+
+/* Buttons */
+.dash-button1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 40px;
+    font-size: 12px;
+    border: none;
+    background-color: #d4d2d2;
+    color: black;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    padding-left: 10px;
+    padding-right: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px 1px #e3e3e3;
+}

@@ -1,0 +1,39 @@
+{% extends './dashboardbase.html' %}
+{% load static %}
+
+{% block dashboardbase_content %}
+    <div class="dashnav3">
+
+      <div>
+          <!-- Common in Landlord , Tasker and Tenant -->
+          <div>
+                <div class='dash-font1'> Dashboard Type </div>
+                <form method="post" id="dash_type_form">
+                    {% csrf_token %}
+                    {{ form.dashboard_types }}
+                </form>
+          </div>
+
+          <div class="dashnav3_currentsub">
+                <div class='dash-font1'> Current Subscription </div>
+                <div>
+                          <div class='dash-font2'> {{ membership_type }} </div>
+                          <a href="{% url 'user-membership' %}"  btn-sm">Upgrade Subscription</a>
+                </div>
+          </div>
+      </div>
+
+      <div>
+          <!--Varies -->
+         {% if dashboard_type == 'landlord' %}
+              {% include "dashboards/dashnav3-landlord1.html" %}
+         {% elif dashboard_type == 'tenant' %}
+              {% include "dashboards/dashnav3-tenant1.html" %}
+         {% elif dashboard_type == 'tasker' %}
+              {% include "dashboards/dashnav3-tasker1.html" %}
+         {% endif %}
+      </div>
+    </div>
+
+        {% block dashboard_content %} {% endblock %}
+{% endblock %}
