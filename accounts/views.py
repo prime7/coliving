@@ -36,7 +36,7 @@ def signup(request):
             user.save()
 
             current_site = get_current_site(request)
-            subject = 'Activate Your MySite Account'
+            subject = 'Welcome to Meetquoteshack <3 Activate your account'
             message = render_to_string('accounts/account_activation_email.html', {
                 'user': user,
                 'domain': current_site.domain,
