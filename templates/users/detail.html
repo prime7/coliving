@@ -9,7 +9,7 @@
 <div class="container">
   {% if user.profile.is_notverified %}
   <div class="alert alert-danger mt-2 text-center" role="alert">
-    Please update your verification document. <a href="{% url 'user-verification' %}"><button class="btn btn-primary">Click Here</button></a>
+    Please update your verification document. <a href="{% url 'user-verification' %}"><button class="btn btn-success">Click Here</button></a>
   </div>
   {% else %}
   <div class="mt-5"></div>
