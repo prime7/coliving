@@ -27,6 +27,7 @@ urlpatterns = [
     path('privacy-policy/', TemplateView.as_view(template_name="accounts/privacy.html"),name='privacy-policy'),
     path('terms/', TemplateView.as_view(template_name="accounts/terms.html"),name='terms-and-condition'),
     path('partners/', TemplateView.as_view(template_name="accounts/partners.html"),name='partners'),
+    path('newsletter/', views.newsletter_signup, name='newsletter-signup'),
     path('contact-us/', views.contact,name='contact-us'),
 
     path('account_activation_sent/', views.account_activation_sent, name='account_activation_sent'),

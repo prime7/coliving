@@ -116,3 +116,15 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.email + " - "+ self.subject
+
+
+class NewsLetter(models.Model):
+    email = models.EmailField(max_length=225)
+
+    def __str__(self):
+        return self.email
+
+    @classmethod
+    def create(cls, email):
+        registration = cls(email=email)
+        return registration
