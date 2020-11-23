@@ -12,7 +12,7 @@
       <p class="lead text-muted">We offer services that will help you ease the work.</p>
       <p class="lead text-muted">Email us at admin@meetquoteshack.com for any kind of help.</p>
       <p class="lead">            
-        <a href="{% url 'tasker-signup' %}" class="btn btn-lg btn-warning btn-icon mt-3 mb-sm-0">
+        <a href="{% url 'tasker-signup' %}" class="btn btn-lg btn-success btn-icon mt-3 mb-sm-0">
           Taskers Signup here
         </a>
       </p>
@@ -23,18 +23,17 @@
     <div class="row">
       {% for service in services %}
       <div class="col-md-4 col-sm-12">
-        <div class="card mb-4 shadow-sm">
-          <img src="{{ service.banner.url }}" height="200" alt="Service we offer">
-          <div class="card-body">
-            <h5 class="title">{{ service.name }}</h5>
-            <p class="card-text">{{ service.description|truncatewords:12 }}</p>
-            <p class="card-text">Average project budget <b>{{ service.average_project_budget }}</b></p>
-            <a href="{% url 'service-detail' service.slug %}" class="btn btn-lg btn-warning btn-icon mt-3 mb-sm-0">
-              <span class="btn-inner--icon"><i class="ni ni-button-play"></i></span>
-              <span class="btn-inner--text">See Details</span>
-            </a>
+          <div class="card mb-4 shadow-sm topborder">
+              <img src="{{ service.banner.url }}" height="200" alt="Service we offer">
+              <div class="card-body">
+                  <h5 class="title">{{ service.name }}</h5>
+                  <p class="card-text">{{ service.description|truncatewords:12 }}</p>
+                  <p class="card-text">Average project budget <b>{{ service.average_project_budget }}</b></p>
+                  <a href="{% url 'service-detail' service.slug %}" class="btn btn-lg btn-success btn-icon mt-3 mb-sm-0">
+                      See Details
+                  </a>
+              </div>
           </div>
-        </div>
       </div>
       {% endfor %}
     </div>

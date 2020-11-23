@@ -20,6 +20,11 @@ from django.utils.http                      import urlsafe_base64_decode
 from django.shortcuts                       import render_to_response
 from django.template                        import RequestContext
 from django.contrib.auth import logout
+from services.models import Service
+
+def home(request):
+    services = Service.objects.all()
+    return render(request,'accounts/home.html',{'services':services})
 
 
 def signup(request):
