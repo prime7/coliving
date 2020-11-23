@@ -342,7 +342,8 @@
             <h3 class="text-success">Newsletter</h3>
             <h5 class="mt3">Subscribe to our Newsletter to stay up to date.</h5>
             <div class="col-md-10 col-lg-8 col-xl-7 mx-auto mt3">
-              <form method='GET' action="{% url 'listing' %}"> <!-- Connect to newsletter backend -->
+              <form method='POST' action="{% url 'newsletter-signup' %}">
+                {% csrf_token %}
                 <div class="form-row">
                   <div class="col-12 col-md-9 mb-2 mb-md-0">
                     <input type='email' class="form-control form-control-lg" name='newsletter' placeholder='your@email.com'>
