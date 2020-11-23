@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+  Coliving | {{ category.title }}
+{% endblock %}
+
+{% block content %}
+<section class="jumbotron text-center m-0">
+  <div class="container">
+      <h1>{{ category.title }}</h1>
+      {{ category.description }}
+  </div>
+</section>
+<div class="album py-5 bg-light">
+  <div class="container">
+    <div class="mx-auto mb4">
+        <h1 class="text-center">Listings</h1>
+    </div>
+    <div class="row">
+        <div class="card" style="width: 100%;">
+            <div class="card-body topborder">
+                <ul class="list-group list-group-flush">
+                    {% for listing in listings %}
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-6 col-md-4">
+                                    <div class="ma4"><h3>{{ listing.title }}</h3><small class="text-success">({{ listing.city }}, {{ listing.country }})</small></div>
+                                    <h6 class="ma4 text-muted">{{ listing.description|truncatewords:15 }}</h6>
+                                </div>
+                                <div class="col-12 col-md-8">
+                                    <div class="col" style="margin-left: 80%;">
+                                        <div class="row ma4">
+                                            <span class="badge badge-pill badge-success" style="width: 100px;"><b>${{ listing.price }}</b> {{ listing.get_payment_interval }}</span>
+                                        </div>
+                                        <div class="row ma4 text-success">
+                                            <b>{{ listing.get_listing_rating.rating }}<i class="fas fa-star"></i></b> ({{ listing.get_listing_rating.amount }})
+                                        </div>
+                                        <div class="row ma4">
+                                            <a class="btn btn-success" style="color: white;" href="{% url 'rentanything-listing' pk=listing.pk %}">
+                                                <b>See Listing</b>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

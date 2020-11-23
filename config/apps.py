@@ -15,6 +15,7 @@ INSTALLED_APPS = [
     'services',
     'faq',
     'dashboards',
+    'rentanything',
 
     'crispy_forms',
     'storages',

@@ -39,7 +39,8 @@
                         </div>
                         <div class="card-body">
                             <p class="card-text"><small>Email: {{ application.email }}</small></p>
-                            <p class="card-text"><small>Phone: {{ application.profile.mobile_number }}</small></p>
+                            <p class="card-text"><small>Phone: {{ application.mobile_number }}</small></p>
+                            <p class="card-text"><small>Rating: {{ application.profile.get_rentee_rating.rating }}<i class="fas fa-star"></i> ({{ application.profile.get_rentee_rating.amount }})</small></p>
                         </div>
                     </div>
                 </div>

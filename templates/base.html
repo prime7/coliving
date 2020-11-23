@@ -35,7 +35,7 @@
         <ul class="navbar-nav ml-auto">
           {% if user.is_authenticated %}
             <a class="nav-item nav-link m-2" href="{% url 'services' %}">Services</a>
-              <a class="nav-item nav-link m-2" href="">Rent Anything</a>
+            <a class="nav-item nav-link m-2" href="{% url 'category-list' %}">Rent Anything</a>
             <li class="nav-item"><a class="nav-item nav-link m-2" href="{% url 'listing' %}">Listings</a></li>
             <li class="nav-item dropdown">
               <img src="{{ user.profile.profile_pic.url }}" alt="Profile Picture" width="60" height="60" class="rounded-circle nav-item nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="false" aria-expanded="true"/>
@@ -59,7 +59,7 @@
             </li>
           {% else %}
             <a class="nav-item nav-link m-2" href="{% url 'services' %}">Services</a>
-              <a class="nav-item nav-link m-2" href="">Rent Anything</a>
+            <a class="nav-item nav-link m-2" href="{% url 'category-list' %}">Rent Anything</a>
             <a class="nav-item nav-link m-2" href="{% url 'listing' %}">Listing</a>
             <a class="nav-item nav-link m-2" href="{% url 'memberships:select' %}">Pricing</a>
             <a class="nav-item nav-link m-2" href="{% url 'login' %}">Login</a>

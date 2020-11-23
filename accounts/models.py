@@ -1,51 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser,PermissionsMixin
-from accounts.manager import UserManager
+from accounts.manager import CustomUserManager
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from time import time
-from django.utils.text import slugify
-from PIL import Image as PILImage
-import uuid
-from os.path import splitext
-from io import BytesIO
-from resizeimage import resizeimage
-from resizeimage.imageexceptions import ImageSizeError
-from django.core.files.base import ContentFile
-from django.core.validators import RegexValidator
+import secrets
+from django.core.validators import RegexValidator, MinValueValidator, MaxValueValidator
 from django_resized import ResizedImageField
 from django.core.mail import send_mail
 from django.conf import settings
-
-
-class User(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField(max_length=255, unique=True)
-    username = models.SlugField(unique=True,blank=True)
-    email_varified = models.BooleanField(default=False)
-    date_joined = models.DateTimeField(auto_now_add=True)
-    is_active = models.BooleanField(default=False)
-    is_staff = models.BooleanField(default=False)
-    is_approved = models.BooleanField(default=False)
-
-    objects = UserManager()
-
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['password']
-
-    def __str__(self):
-        return self.email
-
-    def email_user(self, subject, message, from_email=None, **kwargs):
-        send_mail(subject, message, settings.EMAIL_HOST_USER, [self.email], **kwargs)
-
-    def save(self, *args, **kwargs):
-        if self.pk is None:
-            strtime = "".join(str(time()).split(".")[1])
-            string = "%s%s" % (self.email.split("@")[0],strtime[:3])
-            self.username = slugify(string)
-            super(User, self).save()
-        else:
-            super(User,self).save()
 
 PHONE_REGEX = RegexValidator(regex='\d{9,13}$',message="Phone Number must be without +")
 VERIFICATION_STATUS = (
@@ -53,15 +15,71 @@ VERIFICATION_STATUS = (
     (2,'Processing'),
     (3,'Verified'),
 )
-class Profile(models.Model):
-    user = models.OneToOneField(User,on_delete=models.CASCADE, related_name='profile')
-    name = models.CharField(max_length=50)
-    profile_pic = ResizedImageField(size=[640, 480], upload_to='profile_pics',force_format='PNG',default='default-profile.jpg')
+
+class User(AbstractBaseUser, PermissionsMixin):
+    """
+    User Model For Account Creation.
+    """
+    # User Information
+    username = models.CharField(unique=True, max_length=20)
+    email = models.EmailField(unique=True, max_length=255)
     mobile_number = models.CharField(validators=[PHONE_REGEX], max_length=13, blank=True)
-    mobile_number_varified = models.BooleanField(default=False)
+
+    date_joined = models.DateTimeField(auto_now_add=True)
+
+    # User Verification
+    mobile_number_verified = models.BooleanField(default=False)
+    email_verified = models.BooleanField(default=False)
+
+    # User Type/Permissions
+    is_active = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
+    is_approved = models.BooleanField(default=False)
+
+    # Login/Creation
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username']
+
+    objects = CustomUserManager()
+
+
+    def __str__(self):
+        return self.email
+
+    def email_user(self, subject, message, from_email=None, **kwargs):
+        send_mail(subject, message, settings.EMAIL_HOST_USER, [self.email], **kwargs)
+
+
+class RenterRating(models.Model):
+    renter = models.ForeignKey('accounts.User', on_delete=models.CASCADE, related_name='renter_getting_rated')
+    rentee = models.ForeignKey('accounts.User', on_delete=models.CASCADE, related_name='rentee_giving_rating')
+    rating = models.PositiveIntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(5)])
+
+    def __str__(self):
+        return f"{self.rentee.username}'s rating of {self.renter.username} ({self.rating}/5)"
+
+class RenteeRating(models.Model):
+    renter = models.ForeignKey('accounts.User', on_delete=models.CASCADE, related_name='renter_giving_rating')
+    rentee = models.ForeignKey('accounts.User', on_delete=models.CASCADE, related_name='rentee_getting_rated')
+    rating = models.PositiveIntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(5)])
+
+    def __str__(self):
+        return f"{self.renter.username}'s rating of {self.rentee.username} ({self.rating}/5)"
+
+class Profile(models.Model):
+    """
+    Profile Model, Connected To User Model. Used For Extra Account Details.
+    """
+
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
+
+    # Profile Information
+    profile_pic = ResizedImageField(size=[640, 480], upload_to='profile_pics', default='default-profile.jpg')
     bio = models.CharField(max_length = 400,blank=True,help_text="Describe about yourself in short")
-    registered_at = models.DateField(auto_now=True)
-    verification_doc = ResizedImageField(size=[1200, 1200], upload_to='verifications',force_format='PNG',null=True,blank=True)
+    referral_code = models.CharField(unique=True, max_length=20, null=True)
+
+    # Verification
+    verification_doc = ResizedImageField(size=[1200, 1200], upload_to='verifications', null=True,blank=True)
     verified = models.IntegerField(choices=VERIFICATION_STATUS,default=1)
 
     @property
@@ -74,23 +92,58 @@ class Profile(models.Model):
     def is_notverified(self):
         return self.verified == 1
     @property
-    def get_name(self):
-        if self.name:
-            return self.name
-        return self.user.email.split('@')[0]
+    def name(self):
+        return self.user.username
+
+    @property
+    def mobile_number(self):
+        return self.user.mobile_number
+
+    @property
+    def get_renter_rating(self):
+        total = 0
+        amount = 0
+        for rating in RenterRating.objects.filter(renter=self.user):
+            total += rating.rating
+            amount += 1
+
+        if amount == 0:
+            return {'amount': amount, 'rating': amount}
+        else:
+            return {'amount': amount, 'rating': round(total / amount, 2)}
+
+    @property
+    def get_rentee_rating(self):
+        total = 0
+        amount = 0
+        for rating in RenteeRating.objects.filter(rentee=self.user):
+            total += rating.rating
+            amount += 1
+
+        if amount == 0:
+            return {'amount': amount, 'rating': amount}
+        else:
+            return {'amount': amount, 'rating': round(total / amount, 2)}
+
+    @receiver(post_save, sender=User)
+    def create_profile(sender, instance, created, *args, **kwargs):
+        if created:
+            profile = Profile(user=instance)
+        instance.profile.save()
+
+    @receiver(post_save, sender=User)
+    def save_profile(sender, instance, created, *args, **kwargs):
+        instance.profile.save()
+
+    @receiver(post_save, sender=User)
+    def create_referral_code(sender, instance, *args, **kwargs):
+        upper_alpha = "ABCDEFGHJKLMNPQRSTVWXYZ"
+        random_str = "".join(secrets.choice(upper_alpha) for i in range(12))
+        instance.profile.referral_code = (random_str + (str(instance.id)))[-12:]
+        instance.profile.save()
 
     def __str__(self):
-        return f'{self.user.email}s Profile'
-
-
-@receiver(post_save, sender=User)
-def create_profile(sender, instance, created, *args, **kwargs):
-    if created:
-        profile = Profile(user=instance)
-
-@receiver(post_save, sender=User)
-def save_profile(sender, instance, created, *args, **kwargs):
-    instance.profile.save()
+        return f"{self.user.email}'s Profile"
 
 
 Contact_Reason = (
@@ -116,7 +169,6 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.email + " - "+ self.subject
-
 
 class NewsLetter(models.Model):
     email = models.EmailField(max_length=225)
