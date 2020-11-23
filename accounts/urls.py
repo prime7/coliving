@@ -8,7 +8,7 @@ from services.views import signupTasker
 
 
 urlpatterns = [
-    path('',TemplateView.as_view(template_name="accounts/home.html"), name="home"),
+    path('',views.home, name="home"),
     path('signup/',views.signup,name="signup"),
     path('signup/tasker/',signupTasker,name="tasker-signup"),
     path('login/', auth_views.LoginView.as_view(template_name='accounts/login.html' ),  name='login'),
@@ -27,6 +27,7 @@ urlpatterns = [
     path('privacy-policy/', TemplateView.as_view(template_name="accounts/privacy.html"),name='privacy-policy'),
     path('terms/', TemplateView.as_view(template_name="accounts/terms.html"),name='terms-and-condition'),
     path('partners/', TemplateView.as_view(template_name="accounts/partners.html"),name='partners'),
+    path('newsletter/', views.newsletter_signup, name='newsletter-signup'),
     path('contact-us/', views.contact,name='contact-us'),
 
     path('account_activation_sent/', views.account_activation_sent, name='account_activation_sent'),

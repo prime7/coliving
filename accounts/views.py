@@ -3,7 +3,7 @@ from django.contrib.auth                    import login, authenticate
 from django.contrib.auth.forms              import UserCreationForm
 from django.shortcuts                       import render, redirect,reverse
 from .forms                                 import UserRegisterForm,ProfileUpdateForm,ProfileVerificationForm,ContactForm
-from .models                                import User
+from .models                                import User, NewsLetter
 from django.contrib.auth.decorators         import login_required
 from django.contrib                         import messages
 from django.views.generic                   import ListView,UpdateView,DetailView
@@ -20,6 +20,11 @@ from django.utils.http                      import urlsafe_base64_decode
 from django.shortcuts                       import render_to_response
 from django.template                        import RequestContext
 from django.contrib.auth import logout
+from services.models import Service
+
+def home(request):
+    services = Service.objects.all()
+    return render(request,'accounts/home.html',{'services':services})
 
 
 def signup(request):
@@ -143,3 +148,18 @@ def page_not_found_view(request):
     response = render_to_response('404.html', {},context_instance=RequestContext(request))
     response.status_code = 404
     return response
+
+def newsletter_signup(request):
+    if request.method == 'POST':
+        letters = NewsLetter.objects.filter(email=request.POST.get('newsletter'))
+        if letters.count() >= 1:
+            messages.error(request, 'Your email has already been registered to our News Letter.')
+        else:
+            newsletter = NewsLetter.create(request.POST.get('newsletter'))
+            newsletter.save()
+            if newsletter.id:
+                messages.success(request, 'Your email has been registered for our News Letter!')
+            else:
+                messages.warning(request, 'Email could not be entered into News Letter at this time. Please try again.')
+
+    return render(request, 'accounts/home.html', )

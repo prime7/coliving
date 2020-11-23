@@ -88,7 +88,11 @@ class House(models.Model):
 
     @property
     def get_monthly_rent(self):
-        return "$"+str(self.monthly_rent)+"/mo"
+        if self.short_term:
+            ending = "/day"
+        else:
+            ending = "/mo"
+        return "$"+str(self.monthly_rent)+ending
     @property
     def get_address(self):
         return self.address+" "+ dict(CITY_TYPE)[self.city] +" "
