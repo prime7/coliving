@@ -1,12 +1,17 @@
 from django.shortcuts import render
 from .forms import CurrentDashForm
-
+from django.urls import resolve
 
 # Create your views here.
 def dashboard(request):
     user            = request.user
     is_tasker       = False
     membership_type = user.usermembership.membership.membership_type
+    current_url     = resolve(request.path_info).url_name
+    template        = None
+    context         = None
+    dash_active1    = None
+    dash_active2    = None
 
     try:
         user.tasker
@@ -27,10 +32,16 @@ def dashboard(request):
                 dashboard_type = form.cleaned_data.get("dashboard_types")
 
 
-
+    if current_url == 'sharing':
+           template = 'dashboards/dashboard_main_content/dmc/sharing.html'
+           dash_active2 = 'sharing'
+    else:
+        template = 'dashboards/dashboard_main_content/dashboard-content-main.html'
     context = {
         "dashboard_type"      : dashboard_type,
         "membership_type"     : membership_type,
-        'form'                : form
+        'form'                : form,
+        "dash_active1"        : dash_active1,
+        "dash_active2"        : dash_active2,
     }
-    return render(request, 'dashboards/dashboard-content-main.html', context)
+    return render(request, template, context)

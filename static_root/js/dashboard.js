@@ -45,27 +45,10 @@ function dmc_click1(){
 }
 
 
-
 $(document).on('click' , '#dnav3_updown' , dmc_click1);
 function dmc_click1(){
-
-   var target_el      = $(this).parent().parent().parent().children().eq(1)
-   var current_state  = target_el.css('display').trim();
-
-
-   if(current_state == 'none')
-   {
-       target_el.css('display' , 'flex');
-       $(this).children().eq(1).css('display' , 'flex');
-       $(this).children().eq(0).css('display' , 'none');
-   }
-
-   else if(current_state == 'flex')
-   {
-       target_el.css('display' , 'none');
-       $(this).children().eq(1).css('display' , 'none');
-       $(this).children().eq(0).css('display' , 'flex');
-   }
+  
+   $(this).css('display' , 'none');
 }
 
 

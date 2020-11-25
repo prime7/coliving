@@ -1,0 +1,125 @@
+{% extends '../dashboard.html' %}
+{% load static %}
+
+{% block dashboard_content %}
+
+
+    <div class="dm-content">
+
+      {% if dashboard_type == 'landlord' %}
+          <div style="margin-right:20px;" class='dmc-box'>
+              <div class='dmcb-r1'>
+                  <div> Long Term Rentals </div>
+                  <div>
+                      <div>  </div>
+                      <div id='dmc_click1'>
+                        <img id="dashnavbar3_click" style="display:none" src="{% static 'img/cright.svg' %}">
+                        <img id="dashnavbar3_click" src="{% static 'img/cdown.svg' %}">
+                      </div>
+                  </div>
+              </div>
+
+              {% for x in request.user.house_set.all %}
+                {% if not x.short_term %}  {% include "dashboards/dashboard_main_content/dmc/landlord_box.html" %}  {% endif %}
+              {% endfor %}
+          </div>
+
+
+          <div style="margin-right:20px;" class='dmc-box'>
+              <div class='dmcb-r1'>
+                  <div> Short Term Rentals </div>
+                  <div>
+                      <div>  </div>
+                      <div id='dmc_click1'>
+                        <img id="dashnavbar3_click" style="display:none" src="{% static 'img/cright.svg' %}">
+                        <img id="dashnavbar3_click" src="{% static 'img/cdown.svg' %}">
+                      </div>
+                  </div>
+              </div>
+              {% for x in request.user.house_set.all %}
+                    {% if  x.short_term %}  {% include "dashboards/dashboard_main_content/dmc/landlord_box.html" %}  {% endif %}
+              {% endfor %}
+          </div>
+
+          <div style="margin-right:20px;" class='dmc-box'>
+              <div class='dmcb-r1'>
+                  <div> Past Rentals </div>
+                  <div>
+                      <div>  </div>
+                      <div id='dmc_click1'>
+                        <img id="dashnavbar3_click" style="display:none" src="{% static 'img/cright.svg' %}">
+                        <img id="dashnavbar3_click" src="{% static 'img/cdown.svg' %}">
+                      </div>
+                  </div>
+              </div>
+
+              {% for x in request.user.house_set.all %}
+                {% if not x.active %}
+                    <div class='dmcb-r2'>
+                          <div class='dash-listing-pane'>
+                              <div> {{ x.title}} </div>
+                              <div> <div> Uploaded at  {{ x.uploaded_at }} </div> </div>
+                              <div> {% if x.applications_set.count > 0 %} <div> Applicants  {{ x.applications_set.count  }} </div> {% else %} No Applications {% endif %} </div>
+                          </div>
+                    </div>
+                {% endif %}
+              {% endfor %}
+          </div>
+
+
+
+      {% elif dashboard_type == 'tenant' %}
+            <div class='dmc-box'>
+              <div class='dmcb-r1'>
+                  <div> Applied At </div>
+                  <div>
+                      <div>  </div>
+                      <div id='dmc_click1'>
+                        <img id="dashnavbar3_click" style="display:none" src="{% static 'img/cright.svg' %}">
+                        <img id="dashnavbar3_click" src="{% static 'img/cdown.svg' %}">
+                      </div>
+                  </div>
+              </div>
+            </div>
+
+            <div class='dmc-box'>
+              <div class='dmcb-r1'>
+                  <div> Tenant On </div>
+                  <div>
+                      <div>  </div>
+                      <div id='dmc_click1'>
+                        <img id="dashnavbar3_click" style="display:none" src="{% static 'img/cright.svg' %}">
+                        <img id="dashnavbar3_click" src="{% static 'img/cdown.svg' %}">
+                      </div>
+                  </div>
+              </div>
+            </div>
+      {% elif dashboard_type == 'tasker' %}
+        <div class='dmc-box'>
+          <div class='dmcb-r1'>
+              <div> Tasks </div>
+              <div>
+                  <div>  </div>
+                  <div id='dmc_click1'>
+                    <img id="dashnavbar3_click" style="display:none" src="{% static 'img/cright.svg' %}">
+                    <img id="dashnavbar3_click" src="{% static 'img/cdown.svg' %}">
+                  </div>
+              </div>
+          </div>
+
+
+            {% for x in request.user.tasker.task_set.all %}
+            <div class='dmcb-r2'>
+                  <div class='dash-listing-pane'>
+                      <div> {{ x.name }} </div>
+                      <div> <div> Due  {{ x.date }} </div> </div>
+                      <div> <div> Price {{ x.budget }}   </div> </div>
+                  </div>
+            </div>
+            {% endfor %}
+        </div>
+      {% endif %}
+
+
+    </div>
+{% endblock %}

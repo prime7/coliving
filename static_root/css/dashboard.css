@@ -149,15 +149,15 @@
             font-weight: bold;
             color: #bababa;
         }
-        .dn3-ud-r2 > div > div{
-          color:#8f8f8f;
+        .dn3-ud-r2 > div > a{
+          color:#8f8f8f !important;
           margin-left: 8px;
           font-size: 11px;
           word-spacing: -2px;
           font-weight: bold;
         }
 
-        .dn3-ud-r2 > div > div:hover{
+        .dn3-ud-r2 > div > a:hover{
           color:#1f0729;
           cursor:pointer;
         }
@@ -533,6 +533,15 @@
   box-shadow: 0px 0px 5px 1px #ebebeb;
 }
 
+.dlp-ud{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.dlp-ud > div{
+  font-size:10px;
+  margin-right: 10px;
+}
 
 
 

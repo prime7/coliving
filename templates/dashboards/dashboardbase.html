@@ -9,6 +9,8 @@
 {% block content %}
 
     <div class='dashboard-container'>
+
+         <!-- C1 with four things -->
           <div class='dc-c1 dash-mob1'>
             {% include "dashboards/dashc1.html" with img_name='fire' dashc1_name1='Blazingly Fast' dashc1_name2="See what you can get done when every page load and interaction feels instant." %}
             {% include "dashboards/dashc1.html" with img_name='binoculars' dashc1_name1='Zoom In and zoom out' dashc1_name2="Quickly filter by project or team to see how everything is progressing." %}
@@ -16,6 +18,7 @@
             {% include "dashboards/dashc1.html" with img_name='chat' dashc1_name1='Enjoy Working Together ' dashc1_name2="Easy Drag and drop UI, dark mode, emoji, reactions and more." %}
           </div>
 
+          <!-- C1 for mobile -->
           <div id="carouselExampleControls" class="carousel slide dash-desk1" data-ride="carousel">
               <div class="dc-c1 carousel-inner">
                   <div class="carousel-item active">
@@ -43,8 +46,6 @@
 
           <div style="width:50px" class='dash-mob1'> </div>
           <div class='dc-c2'>
-
-
 
                   <!-- Nav1 and Nav2 Mobile ------------------------------------------------------------------------------------------------------------------------>
                 <div class="dashmobnav1 dash-desk1">

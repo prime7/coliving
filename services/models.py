@@ -31,6 +31,7 @@ class Tasker(models.Model):
 
 #It should have foreign key to Tasker ?
 class Task(models.Model):
+    tasker = models.ForeignKey(Tasker,on_delete=models.CASCADE, null=True)
     location = models.CharField(max_length=50)
     budget = models.IntegerField()
     date = models.DateTimeField(null=True)
