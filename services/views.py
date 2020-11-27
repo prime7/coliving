@@ -17,7 +17,7 @@ def services(request):
 
 
 class ServiceDetail(FormView,DetailView):
-    model = Service 
+    model = Service
     template_name = 'services/detail.html'
     form_class = TaskCreationForm
 
@@ -66,12 +66,17 @@ def signupTasker(request):
             user.email_user(subject, message,fail_silently=False)
             messages.success(request, f'Your account has been updated!')
             return redirect('account_activation_sent')
-    
+
     u_form = UserRegisterForm()
     t_form = TaskerCreationForm()
-    
+
     context = {
         'u_form': u_form,
         't_form': t_form
     }
     return render(request, 'users/tasker_signup.html', context)
+
+
+def create_task(request):
+    if request.method == 'GET':
+        return render(request, 'services/create_task.html')    

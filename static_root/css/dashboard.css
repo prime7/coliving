@@ -1,14 +1,5 @@
 
-/* Common */
-
-     .dash-main{
-       flex:1 0 0;
-       display: flex;
-     }
-
-
-
-/* Navbar 1 and 2 .........................*/
+/* Common Design.......................................... */
 
 /*Search Bar */
       .dash-sbar{
@@ -162,7 +153,7 @@
           cursor:pointer;
         }
 
-/* The Main Content */
+/* The Main Content Screen */
   .dm-content{
     display: flex;
     width: 100%;
@@ -241,61 +232,61 @@
     }
 
 
-/*  Media Queryies ....................................................*/
+/* Screen Content -----*/
+.dash-listing-pane > div{
+  margin-bottom: 5px;
+}
+
+.dash-listing-pane > div:nth-child(1){
+  font-size: 12px;
+  font-weight: bold;
+  color: #919191;
+}
+
+.dash-listing-pane > div:nth-child(2), .dash-listing-pane > div:nth-child(3){
+  font-size: 10px;
+  padding: 4px;
+  font-weight: bold;
+  color: #919191;
+  background-color: #f0f0f0;
+  display: flex;
+  width: 30%;
+  box-shadow: 0px 0px 5px 1px #ebebeb;
+}
+
+.dlp-ud{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.dlp-ud > div{
+  font-size:10px;
+  margin-right: 10px;
+}
+
+
+
+
+
+/*Desktop Media Query ...........................................................*/
 @media screen and (min-width:1000px){
  .dashboard-container{
    display: flex;
-   margin-left: 10px;
+   justify-content: center;
+   height: 90vh;
  }
-  .dc-c1{
-    flex:1 0 0;
+
+/* DC Box */
+  .dc-box{
+    margin-top: 10px;
+    width: 98%;
+    border-bottom-right-radius: 10px;
     display: flex;
     flex-direction: column;
   }
-  .dashc1-divs{
-    border-bottom:2px solid #e3e3e3;
-    display: flex;
-    height: 150px;
-  }
-       .dashc1-divs > div:nth-child(1){
-         flex:1 0 0;
-         display: flex;
-         justify-content: center;
-         align-items: center;
-       }
-       .dashc1-divs > div:nth-child(1) >img{
-         width: 50px;
-         height: 50px;
-       }
 
-   .dashc1-divs> div:nth-child(2){
-     flex:3 0 0;
-     display: flex;
-     flex-direction: column;
-     justify-content: center;
-   }
-        .dashc1-divs > div:nth-child(2) > div:nth-child(1){
-         font-size:22px;
-         font-weight: bold;
-        }
-
-        .dashc1-divs > div:nth-child(2) > div:nth-child(2){
-          font-size: 14px;
-          color:#c2c2c2;
-          font-weight: bold;
-        }
-
-/* Dash column 2 */
-  .dc-c2{
-    flex:3 0 0;
-    margin-right: 10px;
-    margin-top: 10px;
-    border-bottom-right-radius: 10px;
-    box-shadow: 5px 5px 5px 1px #dbdbdb;
-  }
-
-/* Desk Navbar1 R1 of Column2 */
-   .dcc2-r1{
+/*  Nav1 */
+   .dcb-r1{
      display: flex;
      background-color: #1f0729;
      height: 50px;
@@ -308,29 +299,28 @@
      flex:1 0 0;
      display: flex;
    }
+
 /* Flag */
      .dashnav1 > div:nth-child(1) > div:nth-child(1){
        width: 70px;
        display: flex;
        justify-content: center;
        align-items: center;
-     }
-
-
+       }
 
    .dashnav1 > div:nth-child(2){
      flex: 2 0 0;
      display: flex;
      justify-content: flex-end;
+     }
+
+/* R2 */
+  .dcb-r2{
+    display: flex;
+    height: 100%;
    }
 
-/*R2 of Column2 */
-  .dcc2-r2{
-         display: flex;
-
-       }
-
-/*Dash Navbar2 */
+/* Nav2 */
      .dashnav2{
       width: 60px;
       display: flex;
@@ -359,18 +349,30 @@
        text-transform: uppercase;
      }
 
-     .dm-content{
-       height: 600px;
+/* Nav3 and Screen */
+     .dash-main{
+       flex:1 0 0;
+       display: flex;
+       height: 100%;
      }
 
-.dash-desk1{
+/* Screen */
+     .dm-content{
+       height: 100%;
+     }
+
+/* Hiddens ..........*/
+  .dash-desk1{
+      display: flex;
+    }
+  .dash-mob1{
     display: none;
   }
 }
 
 
 
-/*Mobile Query................*/
+/*Mobile Query............................................................*/
 @media screen and (max-width:999px){
 .dashboard-container{
   display: flex;
@@ -409,7 +411,7 @@
     font-weight: bold;
   }
 
- .dc-c2{
+ .dc-box{
   display: flex;
   flex-direction: column;
  }
@@ -476,7 +478,7 @@
     }
 
 /*R2 of Column2 */
-  .dcc2-r2{
+  .dcb-r2{
     display: flex;
     flex-direction: column;
   }
@@ -502,50 +504,28 @@
  }
 
 
+ .dash-main{
+   display: flex;
+   height: 100%;
+ }
 
 
-
-.dash-mob1{
-  display: none;
-}
+/* Hiddens .............*/
+  .dash-desk1{
+    display: none;
+  }
+  .dash-mob1{
+    display: flex;
+  }
 }
 /* Queries End ---------------------------------------------------------------- */
 
-/* Designing -------------------------------------------------------------------*/
-
-.dash-listing-pane > div{
-  margin-bottom: 5px;
-}
-.dash-listing-pane > div:nth-child(1){
-  font-size: 12px;
-  font-weight: bold;
-  color: #919191;
-}
-
-.dash-listing-pane > div:nth-child(2), .dash-listing-pane > div:nth-child(3){
-  font-size: 10px;
-  padding: 4px;
-  font-weight: bold;
-  color: #919191;
-  background-color: #f0f0f0;
-  display: flex;
-  width: 30%;
-  box-shadow: 0px 0px 5px 1px #ebebeb;
-}
-
-.dlp-ud{
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-}
-.dlp-ud > div{
-  font-size:10px;
-  margin-right: 10px;
-}
 
 
 
-/* Fonts */
+
+
+/* Fonts......................................................... */
 .dash-font1{
   font-size: 11px;
   text-transform:uppercase;
@@ -562,7 +542,7 @@
 }
 
 
-/* Buttons */
+/* Buttons.............................................................. */
 .dash-button1{
     display: flex;
     justify-content: center;
@@ -581,3 +561,7 @@
     border-radius: 5px;
     box-shadow: 0px 0px 5px 1px #e3e3e3;
 }
+
+
+
+/*Inputs.................................................................*/

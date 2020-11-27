@@ -26,6 +26,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     is_approved = models.BooleanField(default=False)
+    #account_type = models.CharField()
 
     objects = UserManager()
 
@@ -53,6 +54,25 @@ VERIFICATION_STATUS = (
     (2,'Processing'),
     (3,'Verified'),
 )
+
+class Landlord(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='landlord')
+
+    @receiver(post_save, sender=User)
+    def create_landlord(sender, instance, created, *args, **kwargs):
+        if created:
+             landlord = Landlord(user=instance)
+
+
+class Tenant(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='tenant')
+
+    @receiver(post_save, sender=User)
+    def create_tenant(sender, instance, created, *args, **kwargs):
+        if created:
+             profile = Tenant(user=instance)
+
+
 class Profile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE, related_name='profile')
     name = models.CharField(max_length=50)

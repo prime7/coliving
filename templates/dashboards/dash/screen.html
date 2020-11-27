@@ -1,10 +1,7 @@
-{% extends '../dashboard.html' %}
+{% extends './dashboard.html' %}
 {% load static %}
 
-{% block dashboard_content %}
-
-
-    <div class="dm-content">
+{% block screen %}
 
       {% if dashboard_type == 'landlord' %}
           <div style="margin-right:20px;" class='dmc-box'>
@@ -20,7 +17,7 @@
               </div>
 
               {% for x in request.user.house_set.all %}
-                {% if not x.short_term %}  {% include "dashboards/dashboard_main_content/dmc/landlord_box.html" %}  {% endif %}
+                {% if not x.short_term %}  {% include "dashboards/dash/screen_content/landlord_box.html" %}  {% endif %}
               {% endfor %}
           </div>
 
@@ -37,7 +34,7 @@
                   </div>
               </div>
               {% for x in request.user.house_set.all %}
-                    {% if  x.short_term %}  {% include "dashboards/dashboard_main_content/dmc/landlord_box.html" %}  {% endif %}
+                    {% if  x.short_term %}  {% include "dashboards/dash/screen_content/landlord_box.html" %}  {% endif %}
               {% endfor %}
           </div>
 
@@ -121,5 +118,4 @@
       {% endif %}
 
 
-    </div>
 {% endblock %}
