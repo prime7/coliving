@@ -68,14 +68,14 @@
     {% if request.path == "/rentals/" %}
     <div class="container mt-4">
       <div class="row justify-content-center">
-        <a class="btn btn-outline-info mb-4" href="{% url 'listing-short' %}">Show short-term rentals</a>
+        <a class="btn btn-outline-success mb-4" href="{% url 'listing-short' %}">Show short-term rentals</a>
       </div>
     </div>
     {% endif %}
     {% if request.path == "/rentals/short/" %}
     <div class="container mt-4">
       <div class="row justify-content-center">
-        <a class="btn btn-outline-info mb-4" href="{% url 'listing' %}">Show long-term rentals</a>
+        <a class="btn btn-outline-success mb-4" href="{% url 'listing' %}">Show long-term rentals</a>
       </div>
     </div>
     {% endif %}

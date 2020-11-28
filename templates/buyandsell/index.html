@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+  Coliving | Buy & Sell
+{% endblock %}
+
+{% block content %}
+<section class="jumbotron text-center m-0">
+  <div class="container">
+      <h1>Buy & Sell</h1>
+      <p class="lead text-muted">Sell items on our online person-to-person system.</p>
+      <p class="lead text-muted">Email us at admin@meetquoteshack.com for any kind of help.</p>
+      <p class="lead">            
+        <a href="{% url 'buyandsell-create' %}" class="btn btn-lg btn-success btn-icon mt-3 mb-sm-0">
+          Start Listing Here
+        </a>
+      </p>
+  </div>
+</section> 
+<div class="album py-5 bg-light">
+  <div class="container">
+    <div class="mx-auto mb4">
+        <h1 class="text-center">Categories</h1>
+    </div>
+    <div class="row">
+        {% for category in categories %}
+          <div class="col-md-4 col-sm-12">
+              <div class="card mb-4 shadow-sm topborder">
+                  <img src="{{ category.image.url }}" height="200" alt="Service we offer">
+                  <div class="card-body">
+                      <h5 class="title">{{ category.title }}</h5>
+                      <p class="card-text">{{ category.description|truncatewords:12 }}</p>
+                      <a href="{% url 'buyandsell-category-detail' pk=category.id %}" class="btn btn-lg btn-success btn-icon mt-3 mb-sm-0">
+                          See Listings
+                      </a>
+                  </div>
+              </div>
+          </div>
+        {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+  Coliving | The easiest way to sublet your lease
+{% endblock %}
+
+{% block content %}
+<div class="col-md-6 offset-3">
+    <div class="container mt-3 mb-5 p-0 shadow">
+        <div class="row-fluid">
+            <form method="POST">
+                <div class="card-header">
+                    <p>Please confirm the deactivation.</p>
+                </div>
+                {% csrf_token %}
+                <fieldset class="form-group p-5">
+                    <h3 class="text-center mb4" >Are you sure?</h3>
+                    <div class="form-group text-center mt4">
+                        <button class="btn btn-outline-success" type="submit">Deactivate</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

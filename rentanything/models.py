@@ -10,43 +10,16 @@ from django.urls import reverse
 from resizeimage import resizeimage
 from resizeimage.imageexceptions import ImageSizeError
 
+from config.functions import IntegerRangeField
 
 def upload_image_path(instance, filename):
     return "rentanything/{}/{}".format(instance.listing.pk, filename)
 
-class IntegerRangeField(models.IntegerField):
-    def __init__(self, verbose_name=None, name=None, min_value=None, max_value=None, **kwargs):
-        self.min_value, self.max_value = min_value, max_value
-        models.IntegerField.__init__(self, verbose_name, name, **kwargs)
-    def formfield(self, **kwargs):
-        defaults = {'min_value': self.min_value, 'max_value':self.max_value}
-        defaults.update(kwargs)
-        return super(IntegerRangeField, self).formfield(**defaults)
-
-class Country(models.Model):
-    name = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.name
-
-class Area(models.Model):
-    country = models.ForeignKey('rentanything.Country', on_delete=models.CASCADE)
-    name = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.name
-
-class City(models.Model):
-    area = models.ForeignKey('rentanything.Area', on_delete=models.CASCADE)
-    name = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.name
 
 class Category(models.Model):
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=250)
-    image = models.ImageField(upload_to='profile_pics', default='default-profile.jpg')
+    image = models.ImageField(upload_to='category_pics/rentanything/', default='default-profile.jpg')
 
     def __str__(self):
         return f'{self.title}'
@@ -95,9 +68,9 @@ class Listing(models.Model):
 
     payment_interval = models.CharField(max_length=20, choices=INTERVAL_CHOICES, default="Daily")
 
-    country = models.ForeignKey('rentanything.Country', on_delete=models.CASCADE)
-    area = models.ForeignKey('rentanything.Area', on_delete=models.CASCADE)
-    city = models.ForeignKey('rentanything.City', on_delete=models.CASCADE)
+    country = models.ForeignKey('accounts.Country', on_delete=models.CASCADE)
+    area = models.ForeignKey('accounts.Area', on_delete=models.CASCADE)
+    city = models.ForeignKey('accounts.City', on_delete=models.CASCADE)
 
     applications = models.ManyToManyField('accounts.User', related_name='rentanything_applications', blank=True)
 
@@ -147,8 +120,8 @@ class ListingImage(models.Model):
 
     def save(self, **kwargs):
         name = uuid.uuid4()
-        _, extension = splitext(self.src.name)
-        pil_image = PILImage.open(self.src)
+        _, extension = splitext(self.image.name)
+        pil_image = PILImage.open(self.image)
         img_format = pil_image.format
         image_io = BytesIO()
         pil_image.save(
@@ -158,13 +131,13 @@ class ListingImage(models.Model):
             new_image = resizeimage.resize_cover(pil_image, [1000, 1000])
             new_image_io = BytesIO()
             new_image.save(new_image_io, format=img_format)
-            self.src.save(
+            self.image.save(
                 '%s%s' % (name, extension),
                 content=ContentFile(new_image_io.getvalue()),
                 save=False
             )
         except ImageSizeError:
-            self.src.save(
+            self.image.save(
                 '%s%s' % (name, extension),
                 content=ContentFile(image_io.getvalue()),
                 save=False
@@ -173,7 +146,7 @@ class ListingImage(models.Model):
         super(ListingImage, self).save(**kwargs)
 
     def __str__(self):
-        return self.listing.title + "'s image"
+        return self.image.url
 
     @property
     def get_picture(self):

@@ -180,3 +180,23 @@ class NewsLetter(models.Model):
     def create(cls, email):
         registration = cls(email=email)
         return registration
+
+class Country(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+class Area(models.Model):
+    country = models.ForeignKey('accounts.Country', on_delete=models.CASCADE)
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+class City(models.Model):
+    area = models.ForeignKey('accounts.Area', on_delete=models.CASCADE)
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name

@@ -5,6 +5,7 @@ from django.shortcuts                       import render, redirect,reverse
 from .forms                                 import UserRegisterForm,ProfileUpdateForm,ProfileVerificationForm,ContactForm
 from .models                                import User, NewsLetter
 from rentanything.models                    import Listing
+from buyandsell.models                      import Posting
 from django.contrib.auth.decorators         import login_required
 from django.contrib                         import messages
 from django.views.generic                   import ListView,UpdateView,DetailView
@@ -125,6 +126,7 @@ class UserLease(LoginRequiredMixin,ListView):
         context['inactive_houses'] = House.objects.filter(user=self.request.user,rented=True,active=True)
         context['short_houses'] = House.objects.filter(user=self.request.user,short_term=True,rented=False)
         context['rentanything'] = Listing.objects.filter(user=self.request.user)
+        context['buyandsell'] = Posting.objects.filter(user=self.request.user)
         return context
 
 def account_activation_sent(request):
