@@ -1,0 +1,19 @@
+{% load static %}
+
+
+<div class='dash-listing-ad'>
+    <div> {{ x.title }} </div>
+    <div> {{ x.landlord.user.email }} </div>
+    <div> {{ x.address }} </div>
+    <div>
+          <div> Update </div>
+          <div> Delete </div>
+          <div>
+              {% if x.sfvapplication_set.all.count == 0 %}
+                  <div> 0 Application </div>
+              {% else %}
+                  <a href="#"> {{ x.sfvapplication_set.all.count  }} Application </a>
+              {% endif %}
+          </div>
+    </div>
+</div>

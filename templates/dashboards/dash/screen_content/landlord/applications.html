@@ -1,0 +1,29 @@
+{% extends './base.html' %}
+
+
+{% block screen_content %}
+<div class='dash-applications-pane'>
+
+  {% for x in request.user.landlord.house_set.all %}
+      <div>
+            <div> {{ x.title}} </div>
+            <div> {{ x.address }} </div>
+            <div>
+                {% if x.sfvapplication_set.all %}
+                       {% for y in x.sfvapplication_set.all %}
+                            <a>
+                               <div> {{ y.tenant.user.email }} </div>
+                               <div> {{ y.tenant.name }} </div>
+                               <div> {{ y.phone_number }} </div>
+                            </a>
+                       {% endfor %}
+                {% else %}
+                      <div> No Applications Yet </div>
+                {% endif %}
+            </div>
+      </div>
+  {% endfor %}
+
+</div>
+
+{% endblock %}

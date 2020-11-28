@@ -204,7 +204,7 @@
         <div>
           <!-- Button trigger modal -->
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-            Launch demo modal
+            Schedule for viewing
           </button>
 
           <!-- Modal -->
@@ -241,66 +241,16 @@
                         </div>
 
                         <div id='sfv_avail'>
-                            <div>
-                                <div> Monday </div>
-                                <div>
-                                  <div> <div> Available </div> <input type="radio" name='sfv_mon' value='yes'> </div>
-                                  <div> <div> Not Available </div> <input type="radio" name="sfv_mon" value='no'> </div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div> Tuesday </div>
-                                <div>
-                                  <div> <div> Available </div> <input type="radio" name='sfv_tue' value='yes'> </div>
-                                  <div> <div> Not Available </div> <input type="radio" name="sfv_tue" value='no'> </div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div> Wednesday </div>
-                                <div>
-                                  <div> <div> Available </div> <input type="radio" name='sfv_wed' value='yes'> </div>
-                                  <div> <div> Not Available </div> <input type="radio" name="sfv_wed" value='no'> </div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div> Thursday </div>
-                                <div>
-                                  <div> <div> Available </div> <input type="radio" name='sfv_thr' value='yes'> </div>
-                                  <div> <div> Not Available </div> <input type="radio" name="sfv_thr" value='no'> </div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div> Friday </div>
-                                <div>
-                                  <div> <div> Available </div> <input type="radio" name='sfv_fri' value='yes'> </div>
-                                  <div> <div> Not Available </div> <input type="radio" name="sfv_fri" value='no'> </div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div> Saturday </div>
-                                <div>
-                                  <div> <div> Available </div> <input type="radio" name='sfv_sat' value='yes'> </div>
-                                  <div> <div> Not Available </div> <input type="radio" name="sfv_sat" value='no'> </div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div> Sunday </div>
-                                <div>
-                                  <div> <div> Available </div> <input type="radio" name='sfv_sun' value='yes'> </div>
-                                  <div> <div> Not Available </div> <input type="radio" name="sfv_sun" value='no'> </div>
-                                </div>
-                            </div>
+                              <div> Maximum 3 Availabilty Days allowed </div>
+                              <div id="ama_area">
+                                  <input type='date'>
+                              </div>
+                              <div id="add_more_avail"> Add more day </div>
                         </div>
                         <div id="sqv_hiddens">
                             <div id="ad_id" style='display:none'> {{ house.id}} </div>
                         </div>
-                          <input id='sfv_form_submit' class="btn btn-primary" value='submit'>
+                        <input id='sfv_form_submit' class="btn btn-primary" value='submit'>
                   </div>
                 </div>
 

@@ -37,8 +37,10 @@ def dashboard(request):
             if form.is_valid():
                 dashboard_type = form.cleaned_data.get("dashboard_types")
 
-
-    template = 'dashboards/dash/screen_content/landlord/listings.html'
+    if current_url == 'applications':
+        template = 'dashboards/dash/screen_content/landlord/applications.html'
+    else:
+        template = 'dashboards/dash/screen_content/landlord/listings.html'
 
     print('4')
     context = {

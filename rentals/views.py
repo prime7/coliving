@@ -12,6 +12,8 @@ from django.template.loader import render_to_string
 from django.core.mail import send_mail
 from django.http import HttpResponse
 from accounts.forms import ProfileConnectForm
+from datetime import datetime
+from datetime import date
 
 
 
@@ -273,52 +275,38 @@ def sfv_application(request):
     ad_id = request.GET.get('ad_id')
     sfv_name = request.GET.get("sfv_name")
     sfv_phone = request.GET.get("sfv_phone")
-    sfv_num = request.GET.get("sfv_num")
     sfv_notes = request.GET.get("sfv_notes")
-    sfv_mon = request.GET.get("sfv_mon")
-    sfv_tue = request.GET.get("sfv_tue")
-    sfv_wed = request.GET.get("sfv_wed")
-    sfv_thr = request.GET.get("sfv_thr")
-    sfv_fri = request.GET.get("sfv_fri")
-    sfv_sat = request.GET.get("sfv_sat")
-    sfv_sun = request.GET.get("sfv_sun")
+    sfv_avail = request.GET.get("sfv_avail")
 
-    sfv_day_array = [ {'mon' : sfv_mon } ,
-                      {'tue' : sfv_tue } ,
-                      {'wed' : sfv_wed } ,
-                      {'thr' : sfv_thr } ,
-                      {'fri' : sfv_fri } ,
-                      {'sat' : sfv_sat } ,
-                      {'sun' : sfv_sun }
-                    ]
-    for x in sfv_day_array:
-        for key , value in x.items():
-            if not value:
-                x[key] = False
-            else:
-                if value.strip() == 'yes':
-                    x[key] = True
-                elif value.strip() == 'no':
-                    x[key] = False
-                else:
-                    x[key] = False
+    if not (ad_id and sfv_name and sfv_phone and sfv_notes and sfv_avail):
+        return HttpResponse("error")
 
-
-    print(sfv_day_array)
-
-    house = House.objects.filter(id=ad_id)[0]
-    if not house:
+    listing = House.objects.filter(id=ad_id)
+    if listing:
+        listing = listing[0]
+    else:
         return HttpResponse('error')
-    sfv_application = SfvApplication.objects.filter(tenant=request.user.tenant, listing=house)
+
+    tenant = request.user.tenant
+    landlord = listing.landlord
+
+    sfv_application = SfvApplication.objects.filter(tenant=tenant, listing=listing)
     if sfv_application:
-        return HttpResponse("error1")
+           return HttpResponse('error')
+
+    sfv_avail_list = sfv_avail.split(',')
+    if len(sfv_avail_list) > 3:
+        return HttpResponse("error")
+
+    sfv_avail_date = []
+    for x in sfv_avail_list:
+        a = datetime.strptime(x, '%Y-%m-%d').date()
+        sfv_avail_date.append(a)
 
 
-    sfv_application = SfvApplication.objects.create(tenant=request.user.tenant, listing=house,
-    name=sfv_name, phone_number=7, notes=sfv_notes, num_people_coming=4)
+    sfv_application = SfvApplication.objects.create(tenant=tenant, listing=listing, name=sfv_name, phone_number=sfv_phone, notes=sfv_notes)
 
-    for x in sfv_day_array:
-        for key , value in x.items():
-            SfvAppAvail.objects.create(sfv_application=sfv_application, day=key, availalbe=value)
+    for y in sfv_avail_date:
+        SfvAppAvail.objects.create(sfv_application=sfv_application, date=y)
 
     return HttpResponse("hi")

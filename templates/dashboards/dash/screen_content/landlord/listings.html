@@ -3,22 +3,24 @@
 
 {% block screen_content %}
 <div class='dash-listing-pane'>
-  <div> Long Term Ads </div>
+  <div> <div id='listing_ads_oc'> closer </div> <div> Long Term Ads </div> </div>
   <div>
   {% for x in request.user.landlord.house_set.all %}
           {% if not x.short_term %}
-                <div> {{ x.title }} </div>
+            {% include "dashboards/dash/screen_content/includes/dash-listing-ad.html" with x=x %}
           {% endif %}
   {% endfor %}
   </div>
 </div>
 
 <div class='dash-listing-pane'>
-  <div> Short Term Ads </div>
+  <div> <div id="listing_ads_oc"> closer </div> <div> Short Term Ads </div> </div>
+  <div>
   {% for x in request.user.landlord.house_set.all %}
           {% if  x.short_term %}
-                <div> {{ x.title }} </div>
+                {% include "dashboards/dash/screen_content/includes/dash-listing-ad.html" with x=x %}
           {% endif %}
   {% endfor %}
+  </div>
 </div>
 {% endblock %}

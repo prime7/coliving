@@ -59,3 +59,16 @@ function dashtype_submit(){
   //alert(selected_value);
   $("#dash_type_form").submit();
 }
+
+$(document).on('click', "#listing_ads_oc" , listing_ads_oc);
+function listing_ads_oc(){
+  var el = $(this).parent().parent().children().eq(1);
+  var val = el.css('display');
+
+  if(val.trim() == 'flex'){
+      el.css('display' , 'none');
+  }
+  else if(val.trim() == 'none'){
+      el.css('display' , 'flex');
+  }
+}

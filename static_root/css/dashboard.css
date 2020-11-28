@@ -187,7 +187,8 @@
 }
 
 .dash-listing-pane > div:nth-child(1){
-  font-size: 20px;
+  width: 100%;
+  display: flex;
 }
 
 .dash-listing-pane > div:nth-child(2){

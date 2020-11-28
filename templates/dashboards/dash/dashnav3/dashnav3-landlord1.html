@@ -12,14 +12,12 @@
 
       <div class='dn3-ud-r2'>
             {% if dash_active2 == 'listings' %}
-                {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='Listings' lurl='dashboard' da2=False %}
+                {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All' lurl='dashboard' da2=False %}
             {% else %}
-                {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='Listings' lurl='dashboard' da2=True %}
+                {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All' lurl='dashboard' da2=True %}
             {% endif %}
 
             {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='Scheduled for viewing' lurl='schedule_for_viewing'%}
-            {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='Photos / 3D Photos ' lurl='photos' %}
-            {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='Videos' lurl='videos' %}
       </div>
 
 </div>
@@ -42,11 +40,11 @@
       <div>
           <img id="dashnavbar3_click" style="display:none" src="{% static 'img/cright.svg' %}">
           <img id="dashnavbar3_click" src="{% static 'img/cdown.svg' %}">
-         <div class="dash-font1"> Applicants </div>
+         <div class="dash-font1"> Applications </div>
       </div>
 
        <div class='dn3-ud-r2'>
-             {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All' lurl='applicants' %}
+             {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All' lurl='applications' %}
              {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='Comparision' lurl='comparison' %}
        </div>
 </div>

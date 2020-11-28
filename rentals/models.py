@@ -12,6 +12,8 @@ from django.core.files.base import ContentFile
 from PIL import Image as PILImage
 from resizeimage import resizeimage
 from resizeimage.imageexceptions import ImageSizeError
+from datetime import datetime
+from datetime import date
 
 RENTAL_TYPE = (
     (1,"Using Us"),
@@ -226,12 +228,17 @@ class SfvApplication(models.Model):
     sent_at = models.DateTimeField(auto_now_add = True)
     phone_number = models.IntegerField(default=0)
     notes = models.CharField(max_length=5000, default='')
-    num_people_coming = models.IntegerField(default=0)
+
 
 class SfvAppAvail(models.Model):
     sfv_application = models.ForeignKey(SfvApplication, on_delete=models.CASCADE)
-    day = models.CharField(max_length=55)
-    availalbe = models.BooleanField(default=False)
+    date = models.DateField( default=date.today)
 
-    def __str__(self):
-         return '{} by {}'.format(self.day, self.availalbe)
+
+
+class Sfv(models.Model):
+    application = models.OneToOneField( SfvApplication , on_delete=models.CASCADE, related_name='application')
+    notes = models.CharField(max_length=5000, default='')
+    date = models.DateField( default=date.today)
+    scheduled_at = models.DateTimeField(auto_now_add=True)
+    accepted = models.BooleanField(default=False)
