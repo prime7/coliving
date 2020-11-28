@@ -156,80 +156,29 @@
 /* The Main Content Screen */
   .dm-content{
     display: flex;
+    flex-direction: column;
     width: 100%;
     flex-wrap: wrap;
-    background-color: #f5f5f5;
+    background-color: #fafafa;
     padding: 5px;
    }
 
-  .dm-content > div{
-      flex: 1 0 280px;
-      max-width: 280px;
-   }
+/* Lnav */
+.lnav{
+  border:1px solid red;
+}
 
-   .dmcb-r1{
-     display: flex;
-     height: 40px;
-     align-items: center;
-   }
-     .dmcb-r1 > div:nth-child(1){
-       flex:2 0 0;
-       color:#757575;
-       font-weight: bold;
-       font-size: 12px;
-       white-space: -1px;
-     }
+/* Lscreen */
+.lscreen{
+  display: flex;
+  flex-direction: column;
+}
 
-     .dmcb-r1 > div:nth-child(2){
-       flex: 1 0 0;
-       display: flex;
-       justify-content: flex-end;
-     }
-
-     .dmcb-r1 > div:nth-child(2) > div:nth-child(1){
-       background-color: #f0f0f0;
-       font-size: 12px;
-       margin-right: 5px;
-       display: flex;
-       justify-content: center;
-       align-items: center;
-       height: 25px;
-       width: 20px;
-       color:#b0b0b0;
-       border-radius: 5px;
-       font-weight: bold;
-     }
-
-
-     #dmc_click1 > img{
-       width: 10px;
-       height: 10px;
-     }
-
-  .dmcb-r2{
-    display: flex;
-    flex-direction: column;
-  }
-
-  .dmcb-r2 > div{
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
-    padding: 10px;
-  }
-    .dmcb-r2 > div:nth-child(odd) {
-      border-left:5px solid #e35656;
-      border-radius: 4px;
-      background-color: #ecedd8;
-
-     }
-
-   .dmcb-r2 > div:nth-child(even) {
-     border-left:5px solid #4735cc;
-     border-radius: 4px;
-     background-color: #ffd3c7;
-     box-shadow: 0px 0px 5px 1px #e8e8e8;
-    }
+/* Dash Listing Pane */
+.dash-listing-pane{
+  display: flex;
+  flex-direction: column;
+}
 
 
 /* Screen Content -----*/
@@ -238,34 +187,21 @@
 }
 
 .dash-listing-pane > div:nth-child(1){
-  font-size: 12px;
-  font-weight: bold;
-  color: #919191;
+  font-size: 20px;
 }
 
-.dash-listing-pane > div:nth-child(2), .dash-listing-pane > div:nth-child(3){
-  font-size: 10px;
-  padding: 4px;
-  font-weight: bold;
-  color: #919191;
-  background-color: #f0f0f0;
-  display: flex;
-  width: 30%;
-  box-shadow: 0px 0px 5px 1px #ebebeb;
-}
-
-.dlp-ud{
-  width: 100%;
+.dash-listing-pane > div:nth-child(2){
   display: flex;
   flex-wrap: wrap;
 }
-.dlp-ud > div{
-  font-size:10px;
-  margin-right: 10px;
+
+.dash-listing-ad{
+  display: flex;
+  border:2px solid red;
+  display: flex;
+  flex-direction: column;
+
 }
-
-
-
 
 
 /*Desktop Media Query ...........................................................*/

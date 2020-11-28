@@ -29,9 +29,9 @@
                       <hr/>
                       <div class="card-text m-2">
                           {% if house.user.profile.name %}
-                            <a href="{% url 'listing-user' house.user.username %}"><small>Uploaded by : {{ house.user.profile.name }}</small></a>
+                            <a href="{% url 'listing-user' house.landlord.user.username %}"><small>Uploaded by : {{ house.user.profile.name }}</small></a>
                           {% else %}
-                            <a href="{% url 'listing-user' house.user.username %}"><small>Uploaded by : {{ house.user.username }}</small></a>
+                            <a href="{% url 'listing-user' house.landlord.user.username %}"><small>Uploaded by : {{ house.user.username }}</small></a>
                           {% endif %}
                       </div>
                   </div>

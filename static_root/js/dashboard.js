@@ -1,7 +1,7 @@
 
 $(document).on('click' , '#dashnavbar3_click' , dashnavbar3_click);
-function dashnavbar3_click(){
 
+function dashnavbar3_click(){
    var target_el      = $(this).parent().parent().children().eq(1)
    var current_state  = target_el.css('display').trim();
 
@@ -47,8 +47,7 @@ function dmc_click1(){
 
 $(document).on('click' , '#dnav3_updown' , dmc_click1);
 function dmc_click1(){
-  
-   $(this).css('display' , 'none');
+   //lesson.
 }
 
 

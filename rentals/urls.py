@@ -1,4 +1,5 @@
 from django.urls import path
+from . import views
 from .views import (
     LeaseListView,
     LeaseDetailView,
@@ -27,4 +28,7 @@ urlpatterns = [
     path('<slug>/deactivate/', LeaseDeactivateView.as_view(), name='listing-deactivate'),
     path('<slug>/application/', UserLeaseApplicationView.as_view(), name='listing-application'),
     path('<int:id>/favourite/', LeaseFavouriteView.as_view(), name='listing-favourite'),
+
+    #Ajax
+    path('ajax/sqv/application' , views.sfv_application)
 ]

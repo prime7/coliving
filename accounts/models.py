@@ -26,7 +26,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     is_approved = models.BooleanField(default=False)
-    #account_type = models.CharField()
 
     objects = UserManager()
 
@@ -41,11 +40,14 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def save(self, *args, **kwargs):
         if self.pk is None:
+            print('1')
             strtime = "".join(str(time()).split(".")[1])
             string = "%s%s" % (self.email.split("@")[0],strtime[:3])
             self.username = slugify(string)
+            print('2')
             super(User, self).save()
         else:
+            print('3')
             super(User,self).save()
 
 PHONE_REGEX = RegexValidator(regex='\d{9,13}$',message="Phone Number must be without +")
@@ -62,6 +64,7 @@ class Landlord(models.Model):
     def create_landlord(sender, instance, created, *args, **kwargs):
         if created:
              landlord = Landlord(user=instance)
+             instance.landlord.save()
 
 
 class Tenant(models.Model):
@@ -71,7 +74,7 @@ class Tenant(models.Model):
     def create_tenant(sender, instance, created, *args, **kwargs):
         if created:
              profile = Tenant(user=instance)
-
+             instance.tenant.save()
 
 class Profile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE, related_name='profile')

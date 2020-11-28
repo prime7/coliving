@@ -1,13 +1,17 @@
 from django.shortcuts import render
 from .forms import CurrentDashForm
 from django.urls import resolve
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
+@login_required
 def dashboard(request):
     print("1")
     user            = request.user
     is_tasker       = False
-    membership_type = user.usermembership.membership.membership_type
+    #membership_type = user.usermembership.membership.membership_type
+    membership_type = 'premium'
     current_url     = resolve(request.path_info).url_name
     template        = None
     context         = None
@@ -33,12 +37,8 @@ def dashboard(request):
             if form.is_valid():
                 dashboard_type = form.cleaned_data.get("dashboard_types")
 
-    print('3')
-    if current_url == 'sharing':
-           template = 'dashboards/dash/dmc/sharing.html'
-           dash_active2 = 'sharing'
-    else:
-        template = 'dashboards/dash/screen.html'
+
+    template = 'dashboards/dash/screen_content/landlord/listings.html'
 
     print('4')
     context = {

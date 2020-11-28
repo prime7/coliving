@@ -1,7 +1,7 @@
 from django.shortcuts import render,get_object_or_404
 from django.views.generic import ListView,DetailView,CreateView,UpdateView,View,FormView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .models import House,User,Image,Lead
+from .models import House,User,Image,Lead, Landlord, Tenant, SfvApplication, SfvAppAvail
 from django.db.models import Q,F
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -12,6 +12,7 @@ from django.template.loader import render_to_string
 from django.core.mail import send_mail
 from django.http import HttpResponse
 from accounts.forms import ProfileConnectForm
+
 
 
 class ShortTermListingListview(ListView):
@@ -63,8 +64,8 @@ class LeaseListView(ListView):
             if query:
                 houses = houses.filter(Q(title__icontains=query)|Q(city__icontains=query)|Q(description__icontains=query)).distinct().order_by('-earliest_move_in')
                 return render(request, self.template_name, {'houses': houses})
-        return super().get(request, *args, **kwargs)
 
+        return super().get(request, *args, **kwargs)
 class LeaseDetailView(FormView,DetailView):
     model = House
     template_name = "rentals/listing-detail.html"
@@ -172,12 +173,14 @@ class UserLeaseListView(ListView):
 
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
-        return House.objects.active_by_user(user)
+        landlord = user.landlord
+        return House.objects.active_by_user(landlord)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = get_object_or_404(User, username=self.kwargs.get('username'))
-        context['user'] = User.objects.get(email=user)
+        user = User.objects.get(email=user)
+        context['user'] = user.landlord
         return context
 
 @method_decorator(login_required(login_url='/login'), name='dispatch')
@@ -198,7 +201,8 @@ class LeaseCreateView(LoginRequiredMixin, CreateView):
     context_object_name = "form"
 
     def form_valid(self, form):
-        form.instance.user = self.request.user
+        user = User.objects.filter(id=self.request.user.id)[0]
+        form.instance.landlord = user.landlord
         obj = form.save()
         obj.short_term = False
         obj.save()
@@ -218,7 +222,8 @@ class ShortLeaseCreateView(LoginRequiredMixin, CreateView):
     context_object_name = "form"
 
     def form_valid(self, form):
-        form.instance.user = self.request.user
+        user = User.objects.get(id=self.request.user.id)
+        form.instance.landlord = user.landlord
         obj = form.save()
         obj.short_term = True
         obj.save()
@@ -259,3 +264,61 @@ class ShortLeaseUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
         if self.request.user == house.user:
             return True
         return False
+
+
+#Ajax
+@login_required
+def sfv_application(request):
+
+    ad_id = request.GET.get('ad_id')
+    sfv_name = request.GET.get("sfv_name")
+    sfv_phone = request.GET.get("sfv_phone")
+    sfv_num = request.GET.get("sfv_num")
+    sfv_notes = request.GET.get("sfv_notes")
+    sfv_mon = request.GET.get("sfv_mon")
+    sfv_tue = request.GET.get("sfv_tue")
+    sfv_wed = request.GET.get("sfv_wed")
+    sfv_thr = request.GET.get("sfv_thr")
+    sfv_fri = request.GET.get("sfv_fri")
+    sfv_sat = request.GET.get("sfv_sat")
+    sfv_sun = request.GET.get("sfv_sun")
+
+    sfv_day_array = [ {'mon' : sfv_mon } ,
+                      {'tue' : sfv_tue } ,
+                      {'wed' : sfv_wed } ,
+                      {'thr' : sfv_thr } ,
+                      {'fri' : sfv_fri } ,
+                      {'sat' : sfv_sat } ,
+                      {'sun' : sfv_sun }
+                    ]
+    for x in sfv_day_array:
+        for key , value in x.items():
+            if not value:
+                x[key] = False
+            else:
+                if value.strip() == 'yes':
+                    x[key] = True
+                elif value.strip() == 'no':
+                    x[key] = False
+                else:
+                    x[key] = False
+
+
+    print(sfv_day_array)
+
+    house = House.objects.filter(id=ad_id)[0]
+    if not house:
+        return HttpResponse('error')
+    sfv_application = SfvApplication.objects.filter(tenant=request.user.tenant, listing=house)
+    if sfv_application:
+        return HttpResponse("error1")
+
+
+    sfv_application = SfvApplication.objects.create(tenant=request.user.tenant, listing=house,
+    name=sfv_name, phone_number=7, notes=sfv_notes, num_people_coming=4)
+
+    for x in sfv_day_array:
+        for key , value in x.items():
+            SfvAppAvail.objects.create(sfv_application=sfv_application, day=key, availalbe=value)
+
+    return HttpResponse("hi")

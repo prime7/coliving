@@ -28,18 +28,14 @@ def home(request):
 
 
 def signup(request):
-    #logout(request)
-    #u = User.objects.all()[0]
 
-    #print(u)
-    #login(request, u)
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
             user.is_active = False
             user.save()
-
+            print("b")
             current_site = get_current_site(request)
             subject = 'Welcome to Meetquoteshack <3 Activate your account'
             message = render_to_string('accounts/account_activation_email.html', {
@@ -49,6 +45,7 @@ def signup(request):
                 'token': account_activation_token.make_token(user),
             })
             user.email_user(subject, message,fail_silently=False)
+            print("a")
             return redirect('account_activation_sent')
     else:
         form = UserRegisterForm()

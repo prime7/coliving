@@ -16,7 +16,7 @@ class BookingTimeInline(admin.TabularInline):
     model = Booking
 
 class HouseAdmin(admin.ModelAdmin):
-    readonly_fields = ('slug','user','uploaded_at','updated_at',)
+    readonly_fields = ('slug','landlord', 'tenant' , 'uploaded_at','updated_at',)
     inlines = [ImageInline,BookingTimeInline,ImageLinksInline ]
 
 class LeadAdmin(admin.ModelAdmin):

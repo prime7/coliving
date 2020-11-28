@@ -4,8 +4,7 @@ from . import views as dashboard_views
 
 
 urlpatterns = [
-    path('',  dashboard_views.dashboard, name='dashboard'),
-    path('landlord/sharing' , dashboard_views.dashboard, name='sharing'),
+    path('landlord/',  dashboard_views.dashboard, name='dashboard'),
     path('landlord/schedule_for_viewing' , dashboard_views.dashboard, name='schedule_for_viewing'),
     path('landlord/photos' , dashboard_views.dashboard, name='photos'),
     path('landlord/videos' , dashboard_views.dashboard, name='videos'),
@@ -22,5 +21,13 @@ urlpatterns = [
     path('landlord/services' , dashboard_views.dashboard, name='services'),
     path('landlord/ongoing' , dashboard_views.dashboard, name='services_ongoing'),
     path('landlord/maintenance' , dashboard_views.dashboard, name='maintenance'),
+
+    #Tenant
+    path('tenant/' , dashboard_views.dashboard, name='dashboard_tenant'),
+
+    #Tasker
+    path('tasker/' , dashboard_views.dashboard, name='dashboard_tasker'),
+
+
 
 ]

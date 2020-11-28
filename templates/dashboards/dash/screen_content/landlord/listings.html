@@ -1,0 +1,24 @@
+{% extends './base.html' %}
+
+
+{% block screen_content %}
+<div class='dash-listing-pane'>
+  <div> Long Term Ads </div>
+  <div>
+  {% for x in request.user.landlord.house_set.all %}
+          {% if not x.short_term %}
+                <div> {{ x.title }} </div>
+          {% endif %}
+  {% endfor %}
+  </div>
+</div>
+
+<div class='dash-listing-pane'>
+  <div> Short Term Ads </div>
+  {% for x in request.user.landlord.house_set.all %}
+          {% if  x.short_term %}
+                <div> {{ x.title }} </div>
+          {% endif %}
+  {% endfor %}
+</div>
+{% endblock %}

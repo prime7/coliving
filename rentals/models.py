@@ -1,5 +1,5 @@
 from django.db import models
-from accounts.models import User
+from accounts.models import User, Landlord, Tenant
 from django.core.validators import MinValueValidator,MaxValueValidator
 from datetime import datetime
 from django.utils.text import slugify
@@ -36,15 +36,18 @@ class HouseManager(models.Manager):
         return super(HouseManager,self).filter(rented=False,active=True,short_term=False).order_by('-earliest_move_in')
     def inactive(self):
         return super(HouseManager,self).filter(rented=True,active=True,short_term=False).order_by('-earliest_move_in')
-        
-    def active_by_user(self,user):
-        return super(HouseManager,self).filter(user=user,rented=False,active=True,short_term=False).order_by('-earliest_move_in')
-    def inactive_by_user(self,user):
-        return super(HouseManager,self).filter(user=user,rented=True,active=True,short_term=False).order_by('-earliest_move_in')
-    
+
+    def active_by_landlord(self,landlord):
+        return super(HouseManager,self).filter(landlord=landlord,rented=False,active=True,short_term=False).order_by('-earliest_move_in')
+    def inactive_by_landlord(self,landlord):
+        return super(HouseManager,self).filter(landlord=landlord,rented=True,active=True,short_term=False).order_by('-earliest_move_in')
+
 
 class House(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
+
+    landlord = models.ForeignKey(Landlord, on_delete=models.CASCADE, null=True)
+    tenant   = models.ForeignKey(Tenant, on_delete=models.CASCADE, null=True)
+
     title = models.CharField(max_length=150)
     description = models.CharField(max_length=5000)
     duration = models.IntegerField(validators=[MinValueValidator(0),MaxValueValidator(30)], help_text="Duration for new lease in months",null=True,blank=True)
@@ -73,7 +76,7 @@ class House(models.Model):
     external_source = models.BooleanField(default=False,null=True)
     external_link = models.URLField(max_length=200,null=True,blank=True)
     short_term = models.BooleanField(default=False)
-    
+
     favourites = models.ManyToManyField(User,related_name='favourites',blank=True)
     applications = models.ManyToManyField(User,related_name='applications',blank=True)
 
@@ -84,7 +87,7 @@ class House(models.Model):
 
     @property
     def has_amenities(self):
-        return self.has_dishwasher or self.pets_allowed or self.heating or self.has_closet or self.is_furnished or self.is_partially_furnished 
+        return self.has_dishwasher or self.pets_allowed or self.heating or self.has_closet or self.is_furnished or self.is_partially_furnished
 
     @property
     def get_monthly_rent(self):
@@ -100,7 +103,7 @@ class House(models.Model):
     @property
     def get_city(self):
         return dict(CITY_TYPE)[self.city] +" "
-    
+
     @property
     def get_gallery(self):
         return Image.objects.filter(house=self.pk)
@@ -112,7 +115,7 @@ class House(models.Model):
     @property
     def get_bookings(self):
         return Booking.objects.filter(house=self.pk,accepted=True)
-    
+
     @property
     def get_thumbnail(self):
         cover = self.get_gallery.first()
@@ -192,7 +195,7 @@ def pre_save_house_receiver(sender,instance,*args,**kwargs):
         # if get_user_membership(instance.user) != 'Landlord':
         #     instance.rented = False
         instance.slug = create_slug(instance)
-    
+
 
 pre_save.connect(pre_save_house_receiver,sender=House)
 
@@ -215,3 +218,20 @@ class Booking(models.Model):
 
     def __str__(self):
         return self.house.title
+
+class SfvApplication(models.Model):
+    tenant = models.ForeignKey(Tenant, on_delete=models.CASCADE)
+    listing = models.ForeignKey(House, on_delete=models.CASCADE)
+    name = models.CharField(max_length=200)
+    sent_at = models.DateTimeField(auto_now_add = True)
+    phone_number = models.IntegerField(default=0)
+    notes = models.CharField(max_length=5000, default='')
+    num_people_coming = models.IntegerField(default=0)
+
+class SfvAppAvail(models.Model):
+    sfv_application = models.ForeignKey(SfvApplication, on_delete=models.CASCADE)
+    day = models.CharField(max_length=55)
+    availalbe = models.BooleanField(default=False)
+
+    def __str__(self):
+         return '{} by {}'.format(self.day, self.availalbe)

@@ -10,7 +10,7 @@ class HouseCreateForm(forms.ModelForm):
         fields = [
             'title',
             'description',
-            'address', 
+            'address',
             'zip_code',
             'city',
             'earliest_move_in',
@@ -28,7 +28,7 @@ class HouseCreateForm(forms.ModelForm):
             'earliest_move_in': DateInput(attrs={'type': 'date'}),
             'latest_move_out': DateInput(attrs={'type': 'date'}),
             'title': forms.TextInput(attrs={'placeholder':"Small"}),
-            'description': forms.Textarea(attrs={'rows': 5, 'cols': 100})  
+            'description': forms.Textarea(attrs={'rows': 5, 'cols': 100})
         }
         labels = {
             'is_partially_furnished':"Partially furnished",
@@ -40,7 +40,7 @@ class ShortHouseCreateForm(forms.ModelForm):
         fields = [
             'title',
             'description',
-            'address', 
+            'address',
             'zip_code',
             'city',
             'monthly_rent',
@@ -53,7 +53,7 @@ class ShortHouseCreateForm(forms.ModelForm):
         ]
         widgets = {
             'title': forms.TextInput(attrs={'placeholder':"Small"}),
-            'description': forms.Textarea(attrs={'rows': 5, 'cols': 100})   
+            'description': forms.Textarea(attrs={'rows': 5, 'cols': 100})
         }
         labels = {
             'monthly_rent': 'Rent per day',
