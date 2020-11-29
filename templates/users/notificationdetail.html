@@ -1,0 +1,11 @@
+{% extends "users/users_base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content_block %}
+    <small class="text-secondary">Username : {{ user.username }}</small><br>
+    <small class="text-secondary">Email : {{ user.email }}</small><br><br>
+    {{ notification.title }}<br>
+    <small class="text-muted">{{ notification.date_created }} UTC</small>
+    <hr>
+    {{ notification.text }}
+{% endblock  %}

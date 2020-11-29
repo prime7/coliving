@@ -66,6 +66,42 @@ class RenteeRating(models.Model):
     def __str__(self):
         return f"{self.renter.username}'s rating of {self.rentee.username} ({self.rating}/5)"
 
+class Notification(models.Model):
+    user = models.ForeignKey('accounts.User', on_delete=models.CASCADE)
+    title = models.CharField(max_length=100)
+    text = models.CharField(max_length=250)
+    date_created = models.DateTimeField(auto_now_add=True)
+    read = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.title} ({self.user.username})"
+
+class ChatRoomMessage(models.Model):
+    chatroom = models.ForeignKey('accounts.ChatRoom', on_delete=models.CASCADE)
+    sender = models.ForeignKey('accounts.User', on_delete=models.CASCADE, related_name='chatroom_message_sender')
+    text = models.TextField(max_length=500, default="This message no longer exists.")
+    date_created = models.DateTimeField(auto_now_add=True)
+    read = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"Message by {self.sender} in {self.chatroom}"
+
+class ChatRoom(models.Model):
+    users = models.ManyToManyField('accounts.User', related_name='chatroom_users')
+
+    def __str__(self):
+        return f"Chatroom #{self.pk}"
+
+    def is_unread(self, user):
+        for message in ChatRoomMessage.objects.filter(chatroom_id=self.pk):
+            if not message.read:
+                if message.sender != user:
+                    return True
+                else:
+                    return False
+            else:
+                return False
+
 class Profile(models.Model):
     """
     Profile Model, Connected To User Model. Used For Extra Account Details.
@@ -124,6 +160,30 @@ class Profile(models.Model):
             return {'amount': amount, 'rating': amount}
         else:
             return {'amount': amount, 'rating': round(total / amount, 2)}
+
+    @property
+    def get_notifications(self):
+        notifications = []
+        for notification in Notification.objects.all().filter(user=self.user).order_by('read', '-date_created'):
+            notifications.append(notification)
+
+        return notifications
+
+    @property
+    def get_unread_notifications(self):
+        notifications= []
+        for notification in Notification.objects.all().filter(user=self.user, read=False).order_by('-date_created'):
+            notifications.append(notification)
+
+        return notifications
+
+    @property
+    def get_chatrooms(self):
+        chatrooms = []
+        for chatroom in ChatRoom.objects.all().filter(users=self.user).order_by():
+            chatrooms.append(chatroom)
+
+        return chatrooms
 
     @receiver(post_save, sender=User)
     def create_profile(sender, instance, created, *args, **kwargs):
@@ -200,3 +260,4 @@ class City(models.Model):
 
     def __str__(self):
         return self.name
+

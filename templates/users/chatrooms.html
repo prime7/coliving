@@ -1,0 +1,26 @@
+{% extends 'users/users_base.html' %}
+{% block content_block %}
+    <small class="text-secondary">Username : {{ user.username }}</small><br>
+    <small class="text-secondary">Email : {{ user.email }}</small><br><br>
+    Direct Messages
+    <hr>
+    <ul class="list-group">
+      {% for chatroom, unread in chatrooms.items %}
+            <li class="list-group-item {% if chatroom.read %}list-group-item-light{% endif %}">
+                <a class="text-{% if chatroom.read %}muted{% else %}success{% endif %}" href="{% url 'chatroom-detail' pk=chatroom.pk %}">
+                    {% for member in chatroom.users.all %}
+                        {% if member != user %}
+                            {{ member.username }}
+                        {% endif %}
+                    {% endfor %}
+                    {% if chatroom.users.all.count == 1 %}
+                        Solo Chatroom
+                    {% endif %}
+                </a>
+                <span class="float-right">
+                    {% if unread %}<span class="badge badge-pill badge-success">New</span>{% endif %}
+                </span>
+            </li>
+      {% endfor %}
+    </ul>
+{% endblock %}
