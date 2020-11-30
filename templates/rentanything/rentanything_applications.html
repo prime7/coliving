@@ -20,15 +20,13 @@
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row no-gutters">
                     <div class="col-md-4">
-                        <img src="{{ application.profile.profile_pic.url }}" class="card-img" style="max-height: 250px;" alt="Profile Picture">
+                        <img src="{{ application.rentee.profile.profile_pic.url }}" class="card-img" style="max-height: 250px;" alt="Profile Picture">
                     </div>
                     <div class="col-md-8">
                         <div class="card-header">
                             <div class="row no-gutters">
-                                <h5 class="card-title mr-auto">{{ application.username }}</h5>
-                                {% if booking %}
-                                <a href="{% url 'rentanything-accept' listingpk=listing.pk bookingpk=booking.pk %}" class="btn btn-outline-success" style="margin-right:5%;">Accept</a>
-                                {% endif %}
+                                <h5 class="card-title mr-auto">{{ application.rentee.username }}</h5>
+                                <a href="{% url 'rentanything-accept' listingpk=listing.pk bookingpk=application.pk %}" class="btn btn-outline-success" style="margin-right:5%;">Accept</a>
                                 {% if application.profile.verified %}
                                 <i class="fas fa-check text-center text-success mb-2"></i>
                                 {% else %}
@@ -37,10 +35,10 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <p class="card-text"><small>Email: {{ application.email }}</small></p>
-                            <p class="card-text"><small>Phone: {{ application.profile.mobile_number }}</small></p>
-                            <p class="card-text"><small>Rating: {{ application.profile.get_rentee_rating.rating }}<i class="fas fa-star"></i> ({{ application.profile.get_rentee_rating.amount }})</small></p>
-                            <p class="card-text"><small>Dates: {{ booking.start }} - {{ booking.end }}</small></p>
+                            <p class="card-text"><small>Email: {{ application.rentee.email }}</small></p>
+                            <p class="card-text"><small>Phone: {{ application.rentee.profile.mobile_number }}</small></p>
+                            <p class="card-text"><small>Rating: {{ application.rentee.profile.get_rentee_rating.rating }}<i class="fas fa-star"></i> ({{ application.profile.get_rentee_rating.amount }})</small></p>
+                            <p class="card-text"><small>Dates: {{ application.start }} - {{ application.end }}</small></p>
                         </div>
                     </div>
                 </div>

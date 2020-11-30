@@ -47,7 +47,7 @@
                     <hr />
                     <div class="mt-3 mb-4">
                         <h5 class="card-title pricing-card-title text-success">
-                            <a>Learn more about landlord services</a>
+                            <a href="{% url 'memberships:select' %}" class="text-success">Learn more about landlord services</a>
                         </h5>
                     </div>
                     <a href="{% url 'listing-create' %}" class="btn btn-lg btn-block btn-outline-success text-success mx-auto">Start Listing</a>
@@ -66,8 +66,8 @@
                     </h5>
                     <hr />
                     <div class="mt-3 mb-4">
-                        <h5 class="card-title pricing-card-title text-success">
-                            <a>Learn more about tenant services</a>
+                        <h5 class="card-title pricing-card-title">
+                            <a href="{% url 'memberships:select' %}" class="text-success">Learn more about tenant services</a>
                         </h5>
                     </div>
                     <a href="{% url 'listing' %}" class="btn btn-lg btn-block btn-outline-success text-success mx-auto">Find Listings</a>
@@ -88,7 +88,7 @@
                 <hr />
                 <div class="mt-3 mb-4">
                     <h5 class="card-title pricing-card-title text-success">
-                        <a>Learn more about tenant services</a>
+                        <a href="{% url 'memberships:select' %}" class="text-success">Learn more about tenant services</a>
                     </h5>
                 </div>
                 <a href="{% url 'listing-create' %}" class="btn btn-lg btn-block btn-outline-success text-success mx-auto">Start Listing</a>
@@ -110,7 +110,7 @@
                     </h3>
                     <span class="badge badge-pill badge-success">Cancel At Anytime</span>
                     <div style="margin-top: 15%;">
-                        <a href="{% url 'listing-create' %}" class="btn btn-lg btn-block btn-success">Move Out</a>
+                        <a href="{% url 'memberships:select' %}" class="btn btn-lg btn-block btn-success">Move Out</a>
                     </div>
                 </div>
             </div>
@@ -208,7 +208,8 @@
       </div>
       <div class="row mb4">
           <div class="mx-auto text-center" style="margin-top: 5%;">
-            <a href="{% url 'services' %}" class="btn btn-lg btn-success">See All Services</a>
+            <a href="{% url 'services' %}" class="btn btn-lg btn-success">See All Services</a><br><br>
+            <a href="{% url 'tasker-signup' %}" class="btn btn-lg btn-success">Join As A Tasker</a>
           </div>
       </div>
   </div>

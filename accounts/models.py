@@ -88,6 +88,7 @@ class ChatRoomMessage(models.Model):
 
 class ChatRoom(models.Model):
     users = models.ManyToManyField('accounts.User', related_name='chatroom_users')
+    topic = models.TextField(max_length=250, null=True, blank=True)
 
     def __str__(self):
         return f"Chatroom #{self.pk}"

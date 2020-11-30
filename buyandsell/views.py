@@ -9,6 +9,7 @@ from .models import *
 from django.shortcuts import render, redirect
 from django.views.generic import FormView, DetailView, CreateView, UpdateView, ListView
 from .forms import PostingCreateForm, OfferForm
+from accounts.models import Notification, ChatRoom
 
 def CategoryList(request):
     categories = Category.objects.all()
@@ -109,6 +110,22 @@ def ApplicationAcceptView(request, postingpk, offerpk):
         offer.save()
         posting.delete()
         messages.success(request, 'Application Accepted!')
+        chatroom = ChatRoom.objects.create(topic=f"{posting.title} (${offer.offering_price})")
+        chatroom.users.add(request.user, offer.applicant)
+        Notification.objects.create(
+            user=request.user,
+            title=f"You have been added to a chatroom with {offer.applicant.username}",
+            text=f"Since you have accepted {offer.applicant.username}'s offer on your posting of {posting.title}, you have been added to a chatroom with them to coordinate shipping, recieving, and/or pickup of the product."
+        )
+        Notification.objects.create(
+            user=offer.applicant,
+            title=f"Your offer for {posting.title} has been accepted!",
+            text=f"Since your offer has been accepted by {request.user}, you have been added to a chatroom with them to coordinate shipping, recieving, and/or pickup of the product."
+        )
+        offer.applicant.email_user(
+            subject=f"Your offer for {posting.title} has been accepted!",
+            message=f"{request.user} has accepted your offer of ${offer.offering_price} for their posting! Head to https://meetquoteshack.com/user/chatrooms to coordinate the rental process with them!",
+        )
 
     return redirect('user-lease')
 

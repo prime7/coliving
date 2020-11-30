@@ -38,7 +38,8 @@
         {% if member != user %}
             {{ member.username }}
         {% endif %}
-    {% endfor %}<br>
+    {% endfor %}<br><br>
+    Topic: {{ chatroom.topic }}
     <hr>
     <ul class="list-group chatgroup" style="list-style-type: none;">
     {% for message in chatroom_messages %}

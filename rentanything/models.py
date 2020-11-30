@@ -72,7 +72,7 @@ class Listing(models.Model):
     area = models.ForeignKey('accounts.Area', on_delete=models.CASCADE)
     city = models.ForeignKey('accounts.City', on_delete=models.CASCADE)
 
-    applications = models.ManyToManyField('accounts.User', related_name='rentanything_applications', blank=True)
+    applications = models.ManyToManyField('rentanything.Booking', related_name='rentanything_applications', blank=True)
 
     @property
     def get_payment_interval(self):

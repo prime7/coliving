@@ -5,6 +5,7 @@ from django.utils.decorators import method_decorator
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db.models import Q
 
+from accounts.models import ChatRoom, Notification
 from .models import *
 from django.shortcuts import render, redirect
 from django.views.generic import FormView, DetailView, CreateView, UpdateView, ListView
@@ -74,7 +75,6 @@ class ListingDetail(FormView, DetailView):
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
-        self.object.applications.add(request.user)
         context = self.get_context_data()
 
         booking_form = BookingForm(request.POST)
@@ -83,6 +83,7 @@ class ListingDetail(FormView, DetailView):
             booking_form.listing = self.get_object()
             booking_form.rentee = request.user
             booking_form.save()
+            self.object.applications.add(booking_form)
 
         messages.success(request, 'You have been entered as an applicant!')
         return self.render_to_response(context=context)
@@ -97,9 +98,6 @@ class ListingApplicationView(DetailView):
         listing = Listing.objects.get(pk=self.object.pk)
         context['applications'] = listing.applications.all()
         context['listing'] = self.object
-        booking = list(Booking.objects.filter(listing=self.object, rentee=self.request.user))
-        if len(booking) > 0:
-            context['booking'] = booking[-1]
         return context
 
 def ApplicationAcceptView(request, listingpk, bookingpk):
@@ -108,9 +106,25 @@ def ApplicationAcceptView(request, listingpk, bookingpk):
         listing = list(Listing.objects.filter(pk=listingpk))[0]
         booking = list(Booking.objects.filter(listing=listing, pk=bookingpk))[-1]
         booking.accepted = True
-        listing.applications.remove(booking.rentee)
+        listing.applications.remove(booking)
         booking.save()
         messages.success(request, 'Application Accepted!')
+        chatroom = ChatRoom.objects.create(topic=f"{listing.title} ({booking.start} - {booking.end})")
+        chatroom.users.add(request.user, booking.rentee)
+        Notification.objects.create(
+            user=request.user,
+            title=f"You have been added to a chatroom with {booking.rentee.username}",
+            text=f"Since you have accepted {booking.rentee.username}'s booking request on your posting of {listing.title}, you have been added to a chatroom with them to coordinate shipping, receiving, and/or pickup of the product."
+        )
+        Notification.objects.create(
+            user=booking.rentee,
+            title=f"Your offer for {listing.title} has been accepted!",
+            text=f"Since your booking request has been accepted by {request.user}, you have been added to a chatroom with them to coordinate shipping, receiving, and/or pickup of the product."
+        )
+        booking.rentee.email_user(
+            subject=f"Your booking request for {listing.title} has been accepted!",
+            message=f"{request.user} has accepted your booking request! Head to https://meetquoteshack.com/user/chatrooms to coordinate the rental process with them!",
+        )
 
     return redirect('rentanything-listing', pk=listingpk)
 

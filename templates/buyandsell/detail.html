@@ -33,7 +33,7 @@
                         <li class="list-group-item">
                             <div class="row">
                                 <div class="col-6 col-md-4">
-                                    <div class="ma4"><h3>{{ posting.title }}</h3><small class="text-success">({{ posting.city }}, {{ posting.country }})</small></div>
+                                    <div class="ma4"><h3><a href="{% url 'buyandsell-posting' pk=posting.pk %}" class="text-dark">{{ posting.title }}</a></h3><small class="text-success">({{ posting.city }}, {{ posting.country }})</small></div>
                                     <h6 class="ma4 text-muted">{{ posting.description|truncatewords:15 }}</h6>
                                 </div>
                                 <div class="col-12 col-md-8">
