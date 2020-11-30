@@ -23,12 +23,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     # User Information
     username = models.CharField(unique=True, max_length=20)
     email = models.EmailField(unique=True, max_length=255)
-    mobile_number = models.CharField(validators=[PHONE_REGEX], max_length=13, blank=True)
 
     date_joined = models.DateTimeField(auto_now_add=True)
 
     # User Verification
-    mobile_number_verified = models.BooleanField(default=False)
     email_verified = models.BooleanField(default=False)
 
     # User Type/Permissions
@@ -111,6 +109,8 @@ class Profile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
 
     # Profile Information
+    mobile_number = models.CharField(validators=[PHONE_REGEX], max_length=13, blank=True)
+    mobile_number_verified = models.BooleanField(default=False)
     profile_pic = ResizedImageField(size=[640, 480], upload_to='profile_pics', default='default-profile.png')
     bio = models.CharField(max_length = 400,blank=True,help_text="Describe about yourself in short")
     referral_code = models.CharField(unique=True, max_length=20, null=True)
@@ -134,7 +134,7 @@ class Profile(models.Model):
 
     @property
     def mobile_number(self):
-        return self.user.mobile_number
+        return self.mobile_number
 
     @property
     def get_renter_rating(self):
