@@ -60,17 +60,15 @@ class ListingDetail(FormView, DetailView):
     def get_context_data(self, **kwargs):
         context = {}
         listing = self.get_object()
-        if self.request.user.is_authenticated:
-            context['booking_form'] = BookingForm()
-            context['listing'] = list(Listing.objects.filter(pk=listing.pk))[0]
+        context['booking_form'] = BookingForm()
+        context['listing'] = list(Listing.objects.filter(pk=listing.pk))[0]
         return context
 
     def get(self, request, *args, **kwargs):
         context = self.get_context_data()
         listing = self.get_object()
-        if self.request.user.is_authenticated:
-            context['booking_form'] = BookingForm()
-            context['listing'] = list(Listing.objects.filter(pk=listing.pk))[0]
+        context['booking_form'] = BookingForm()
+        context['listing'] = list(Listing.objects.filter(pk=listing.pk))[0]
         return render(request, template_name=self.template_name, context=context)
 
     def post(self, request, *args, **kwargs):

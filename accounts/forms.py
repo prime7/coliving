@@ -10,7 +10,7 @@ class UserRegisterForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('email', 'password1', 'password2', )
+        fields = ('email', 'username','password1', 'password2', )
 
 
 class ImagePreviewWidget(forms.widgets.FileInput):

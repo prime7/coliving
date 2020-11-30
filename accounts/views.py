@@ -148,7 +148,6 @@ def chatroomsDetail(request, pk):
 
     if request.user in chatroom.users.all() or request.user.is_superuser:
         if request.method == "POST":
-            print(request.POST)
             if request.POST.get('message'):
                 ChatRoomMessage.objects.create(sender=request.user, text=request.POST.get('message'), chatroom_id=pk)
             elif request.POST.get('hidden'):

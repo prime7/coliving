@@ -61,17 +61,15 @@ class PostingDetail(FormView, DetailView):
     def get_context_data(self, **kwargs):
         context = {}
         posting = self.get_object()
-        if self.request.user.is_authenticated:
-            context['offer_form'] = OfferForm()
-            context['posting'] = list(Posting.objects.filter(pk=posting.pk))[0]
+        context['offer_form'] = OfferForm()
+        context['posting'] = list(Posting.objects.filter(pk=posting.pk))[0]
         return context
 
     def get(self, request, *args, **kwargs):
         context = self.get_context_data()
         posting = self.get_object()
-        if self.request.user.is_authenticated:
-            context['offer_form'] = OfferForm()
-            context['posting'] = list(Posting.objects.filter(pk=posting.pk))[0]
+        context['offer_form'] = OfferForm()
+        context['posting'] = list(Posting.objects.filter(pk=posting.pk))[0]
         return render(request, template_name=self.template_name, context=context)
 
     def post(self, request, *args, **kwargs):
