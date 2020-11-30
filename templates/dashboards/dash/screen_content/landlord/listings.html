@@ -2,8 +2,8 @@
 
 
 {% block screen_content %}
-<div class='dash-listing-pane'>
-  <div> <div id='listing_ads_oc'> closer </div> <div> Long Term Ads </div> </div>
+<div class='land-listing-pane'>
+  <div>  <div class='dash-font3'> Long Term Ads </div> </div>
   <div>
   {% for x in request.user.landlord.house_set.all %}
           {% if not x.short_term %}
@@ -13,8 +13,9 @@
   </div>
 </div>
 
-<div class='dash-listing-pane'>
-  <div> <div id="listing_ads_oc"> closer </div> <div> Short Term Ads </div> </div>
+<div style="border-top:1px solid #e8e8e8; margin-top:5px; margin-bottom:5px;"> </div>
+<div class='land-listing-pane'>
+  <div>  <div class='dash-font3'> Short Term Ads </div> </div>
   <div>
   {% for x in request.user.landlord.house_set.all %}
           {% if  x.short_term %}

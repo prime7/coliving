@@ -63,41 +63,13 @@
         margin-bottom: 20px;
       }
 
-      #id_dashboard_types{
-        width: 150px;
-        height: 40px;
-        font-size: 12px;
-        border: none;
-        background-color: #d4d2d2;
-        color: black;
-        font-weight: bold;
-        display: flex;
-        justify-content: center;
-        padding-left: 10px;
-        padding-right: 20px;
-        border-radius: 5px;
-        box-shadow: 0px 0px 5px 1px #e3e3e3;
-      }
+
+/* Nav3 dash type */
+     .dash-type > button{
+       width: 150px !important;
+     }
 
 
-/* Dashnav3 Current Sub */
-.dashnav3_currentsub{
-  margin-top: 10px;
-}
-
-.dashnav3 > div:nth-child(1) {
-}
-
-.dashnav3_currentsub > div:nth-child(1){
-  margin-right: 10px;
-}
-.dashnav3_currentsub > div:nth-child(2){
-  display: flex;
-}
-.dashnav3_currentsub >  div:nth-child(2) > a{
-  font-size: 10px;
-  margin-left: 5px;
-}
 
 
 /*Nav3 updown */
@@ -132,26 +104,31 @@
         .dn3-ud-r2 > div {
            display: flex;
            margin-left: 15px;
+           color:red;
         }
 
         .dn3-ud-r2 > div > svg{
             margin-top: 0px;
             width: 10px;
-            font-weight: bold;
             color: #bababa;
         }
+
         .dn3-ud-r2 > div > a{
-          color:#8f8f8f !important;
+          color:#8f8f8f;
           margin-left: 8px;
           font-size: 11px;
-          word-spacing: -2px;
           font-weight: bold;
+          word-spacing: -1px;
         }
 
         .dn3-ud-r2 > div > a:hover{
           color:#1f0729;
           cursor:pointer;
+          text-decoration: none;
         }
+
+
+
 
 /* The Main Content Screen */
   .dm-content{
@@ -160,49 +137,78 @@
     width: 100%;
     flex-wrap: wrap;
     background-color: #fafafa;
-    padding: 5px;
+    padding: 10px;
    }
 
-/* Lnav */
+/* nav */
 .lnav{
-  border:1px solid red;
+  display: flex;
+  margin-bottom: 20px;
 }
+ .lnav > div {
+   font-size: 25px;
+   font-weight:  bold;
+ }
 
-/* Lscreen */
+/*lscreen */
 .lscreen{
   display: flex;
   flex-direction: column;
-}
-
-/* Dash Listing Pane */
-.dash-listing-pane{
-  display: flex;
-  flex-direction: column;
-}
-
-
-/* Screen Content -----*/
-.dash-listing-pane > div{
-  margin-bottom: 5px;
-}
-
-.dash-listing-pane > div:nth-child(1){
   width: 100%;
-  display: flex;
 }
 
-.dash-listing-pane > div:nth-child(2){
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.dash-listing-ad{
-  display: flex;
-  border:2px solid red;
+/* Landlord Listing */
+.land-listing-pane{
   display: flex;
   flex-direction: column;
-
 }
+ .land-listing-pane > div:nth-child(1){
+   display: flex;
+   width: 100%;
+ }
+
+ .land-listing-pane > div:nth-child(2){
+   display: flex;
+   padding: 10px;
+   flex-wrap:wrap;
+ }
+
+ .dash-listing-ad{
+   box-shadow:0px 0px 5px 1px #e8e8e8;
+   border-radius: 5px;
+   padding: 10px;
+   background-color: #4a1e5c;
+   color:white;
+ }
+ .dash-listing-ad > div:nth-child(2){
+   display: flex;
+   flex-wrap: wrap;
+ }
+
+ .dash-listing-ad > div:nth-child(2) > button{
+   margin-right: 5px;
+   color:white !important;
+ }
+
+ .dash-listing-ad > div:nth-child(2) > button > a{
+   color:white !important;
+ }
+
+ .dash-listing-ad > div:nth-child(3){
+   margin-top: 10px;
+ }
+
+ .dash-listing-ad > div:nth-child(3) > div {
+   display: flex;
+   justify-content: center;
+   padding: 10px;
+   margin-bottom: 5px;
+ }
+
+ /*SFV Landlord */
+ .land-app-pane{
+   border:3px solid red;
+ }
 
 
 /*Desktop Media Query ...........................................................*/
@@ -259,7 +265,7 @@
 
 /* Nav2 */
      .dashnav2{
-      width: 60px;
+      width: 70px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -268,22 +274,48 @@
       padding-top: 20px;
      }
 
-     .dashnav2 > div {
+     .dashnav2 > a {
        display: flex;
        flex-direction: column;
        margin-bottom: 20px;
        align-items: center;
+       justify-content: center;
+       height: 50px;
      }
-     .dashnav2 > div > div:nth-child(1) > img{
+
+     .dashnav2 > a:hover{
+       border:1px dotted white;
+       background-color: #9100c2;
+       width: 100%;
+     }
+
+     .dashnav2 > a > div:nth-child(1) > img{
        width: 20px;
        height: 20px;
      }
-     .dashnav2 > div > div:nth-child(2){
+     .dashnav2 > a > div:nth-child(2){
        color:#d4d4d4;
        font-size: 7px;
        word-spacing: 0px;
        font-weight: bold;
        text-transform: uppercase;
+     }
+
+     .dashnav2_active{
+       background-color: #9100c2;
+       display: flex;
+       flex-direction: column;
+       margin-bottom: 20px;
+       align-items: center;
+       width: 100%;
+      justify-content: center;
+     }
+
+
+     .dashnav2_active > div:nth-child(2){
+       color:white !important;
+       font-size:8px !important;
+       font-weight: bold;
      }
 
 /* Nav3 and Screen */
@@ -306,6 +338,8 @@
     display: none;
   }
 }
+
+
 
 
 
@@ -371,6 +405,8 @@
 
     .dashmobnav1 > nav > div:nth-child(2){
       flex:1 0 0;
+      display: flex;
+      justify-content: flex-end;
     }
 
     .dashmobnav1 > nav > div:nth-child(3){
@@ -383,6 +419,7 @@
     height: 3333px !important;
   }
 
+  /*Mobile Nav1 Content */
   .dashmobnav1-content{
     background-color: #4a1e5c;
     margin: 2px;
@@ -392,22 +429,22 @@
     display: flex;
     flex-direction: column;
   }
-    .dashmobnav1-content > div{
+    .dashmobnav1-content > a{
       display: flex;padding: 10px;
       border-bottom: 1px solid white;
       align-items: center;
     }
 
-    .dashmobnav1-content > div > div:nth-child(1) {
+    .dashmobnav1-content > a > div:nth-child(1) {
 
     }
 
-      .dashmobnav1-content > div > div:nth-child(1) > img {
+      .dashmobnav1-content > a > div:nth-child(1) > img {
         width: 40px;
         height: 40px;
       }
 
-    .dashmobnav1-content > div > div:nth-child(2){
+    .dashmobnav1-content > a > div:nth-child(2){
       margin-left: 10px;
       color:white;
       font-size: 15px;
@@ -476,6 +513,11 @@
   font-weight: bold;
   font-size: 10px;
   text-transform: uppercase;
+}
+.dash-font3{
+  color:black;
+  font-weight: bold;
+  font-size:20px;
 }
 
 

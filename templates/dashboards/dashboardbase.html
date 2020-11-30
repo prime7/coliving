@@ -20,6 +20,7 @@
                             <img style="width:20px; height:20px"   src="{% static 'img/menu.svg' %}">
                             </button>
                         </div>
+
                         <div>
                           <form class="dash-sbar" action="#">
                                 <button type="submit"><i style="color:white" class="fa fa-search"></i></button>
@@ -27,6 +28,7 @@
                           </form>
                         </div>
 
+                        <!--
                         <div>
                           <div class="dash-profile">
                               <div type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -40,30 +42,64 @@
                               </div>
                           </div>
                          </div>
+                        -->
                       </nav>
+                      {{ dash_active1 }}
 
                       <!-- Mobile (Nav1 Nav2) Content ------------------------------------------------------------------------------------------------------------------------------------->
                       <div class="collapse"  id="navbarToggleExternalContent" style="background-color:#e3e3e3;">
                           <div class="dashmobnav1-content">
-                            <div>
-                               <div> <img  src="{% static 'img/dashboard.svg' %}"> </div>
-                               <div> Dashboard </div>
-                            </div>
 
-                             <div>
-                                <div>  <img  src="{% static 'img/chat.svg' %}">  </div>
-                                <div> Chats </div>
-                              </div>
+                              {% if dash_active1 == 'dash' %}
+                                  <a  style='background-color:#9100c2' href="{% url 'dashboard' %}">
+                                     <div> <img  src="{% static 'img/dashboard.svg' %}"> </div>
+                                     <div> Dashboard </div>
+                                  </a>
 
-                              <div>
-                                 <div>  <img  src="{% static 'img/email.svg' %}">  </div>
-                                 <div> Email </div>
-                              </div>
+                              {% else %}
+                                  <a  href="{% url 'dashboard' %}">
+                                     <div> <img  src="{% static 'img/dashboard.svg' %}"> </div>
+                                     <div> Dashboard </div>
+                                  </a>
+                              {% endif %}
 
-                              <div>
-                                 <div>  <img  src="{% static 'img/instagram.svg' %}">  </div>
-                                 <div> Social Media </div>
-                               </div>
+
+                              {% if dash_active1 == 'chats' %}
+                                  <a style='background-color:#9100c2' href="{% url 'chats' %}">
+                                     <div>  <img  src="{% static 'img/chat.svg' %}">  </div>
+                                     <div> Chats </div>
+                                   </a>
+                              {% else %}
+                                   <a href="{% url 'chats' %}">
+                                      <div>  <img  src="{% static 'img/chat.svg' %}">  </div>
+                                      <div> Chats </div>
+                                    </a>
+                              {% endif %}
+
+                              {% if dash_active1 == 'email' %}
+                                    <a style='background-color:#9100c2' href="{% url 'email' %}">
+                                       <div>  <img  src="{% static 'img/email.svg' %}">  </div>
+                                       <div> Email </div>
+                                    </a>
+                                {% else %}
+                                    <a href="{% url 'email' %}">
+                                       <div>  <img  src="{% static 'img/email.svg' %}">  </div>
+                                       <div> Email </div>
+                                    </a>
+                                {% endif %}
+
+
+                              {% if dash_active1 == 'social' %}
+                                    <a style='background-color:#9100c2' href="{% url 'social' %}">
+                                       <div>  <img  src="{% static 'img/instagram.svg' %}">  </div>
+                                       <div> Social Media </div>
+                                     </a>
+                              {% else %}
+                                    <a href="{% url 'social' %}">
+                                       <div>  <img  src="{% static 'img/instagram.svg' %}">  </div>
+                                       <div> Social Media </div>
+                                     </a>
+                              {% endif %}
                           </div>
                       </div>
           </div>
@@ -82,7 +118,7 @@
                               </form>
                         </div>
 
-
+                        <!--
                         <div class='dashnav1-right'>
                           <div class="dash-profile">
                               <div type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -96,30 +132,60 @@
                               </div>
                           </div>
                         </div>
+                        -->
           </div>
 
           <div class='dcb-r2'>
                          <!-- Nav2 Desktop -->
                          <div class="dashnav2 dash-desk1">
-                                  <div>
-                                     <div> <img  src="{% static 'img/dashboard.svg' %}"> </div>
-                                     <div> Dashboard </div>
-                                   </div>
 
-                                   <div>
-                                      <div>  <img  src="{% static 'img/chat.svg' %}">  </div>
-                                      <div> Chats </div>
-                                    </div>
+                                 {% if dash_active1 == 'dash' %}
+                                      <a class='dashnav2_active' href="{% url 'dashboard' %}">
+                                         <div> <img  src="{% static 'img/dashboard_active.svg' %}"> </div>
+                                         <div> Dashboard </div>
+                                       </a>
+                                  {% else %}
+                                      <a href="{% url 'dashboard' %}">
+                                         <div> <img  src="{% static 'img/dashboard.svg' %}"> </div>
+                                         <div> Dashboard </div>
+                                       </a>
+                                  {% endif %}
 
-                                    <div>
-                                       <div>  <img  src="{% static 'img/email.svg' %}">  </div>
-                                       <div> Email </div>
-                                    </div>
+                                  {% if dash_active1 == 'chats' %}
+                                       <a class='dashnav2_active'  href="{% url 'chats' %}">
+                                          <div>  <img  src="{% static 'img/chat.svg' %}">  </div>
+                                          <div> Chats </div>
+                                        </a>
+                                  {% else %}
+                                      <a href="{% url 'chats' %}">
+                                         <div>  <img  src="{% static 'img/chat.svg' %}">  </div>
+                                         <div> Chats </div>
+                                       </a>
+                                  {% endif %}
 
-                                    <div>
-                                       <div>  <img  src="{% static 'img/instagram.svg' %}">  </div>
-                                       <div> Social Media </div>
-                                     </div>
+                                  {% if dash_active1 == 'email' %}
+                                      <a class='dashnav2_active'  href="{% url 'email' %}">
+                                         <div>  <img  src="{% static 'img/email.svg' %}">  </div>
+                                         <div> Email </div>
+                                      </a>
+                                  {% else %}
+                                      <a href="{% url 'email' %}">
+                                         <div>  <img  src="{% static 'img/email.svg' %}">  </div>
+                                         <div> Email </div>
+                                      </a>
+                                  {% endif %}
+
+                                  {% if dash_active1 == 'social' %}
+                                      <a class='dashnav2_active'  href="{% url 'social' %}">
+                                           <div>  <img  src="{% static 'img/instagram.svg' %}">  </div>
+                                           <div> Social Media </div>
+                                       </a>
+                                  {% else %}
+                                      <a href="{% url 'social' %}">
+                                         <div>  <img  src="{% static 'img/instagram.svg' %}">  </div>
+                                         <div> Social Media </div>
+                                       </a>
+                                  {% endif %}
                           </div>
 
                           <div class="dash-main">

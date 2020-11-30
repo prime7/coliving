@@ -228,17 +228,20 @@ class SfvApplication(models.Model):
     sent_at = models.DateTimeField(auto_now_add = True)
     phone_number = models.IntegerField(default=0)
     notes = models.CharField(max_length=5000, default='')
+    scheduled = models.BooleanField(default=False)
 
-
-class SfvAppAvail(models.Model):
+class SfvDay(models.Model):
     sfv_application = models.ForeignKey(SfvApplication, on_delete=models.CASCADE)
     date = models.DateField( default=date.today)
-
-
-
-class Sfv(models.Model):
-    application = models.OneToOneField( SfvApplication , on_delete=models.CASCADE, related_name='application')
-    notes = models.CharField(max_length=5000, default='')
-    date = models.DateField( default=date.today)
-    scheduled_at = models.DateTimeField(auto_now_add=True)
+    selected = models.BooleanField(default=False)
     accepted = models.BooleanField(default=False)
+
+    def __str__(self):
+        return '%s, %s, %s' % ( self.id , self.selected, self.accepted)
+
+#class Sfv(models.Model):
+#    application = models.OneToOneField( SfvApplication , on_delete=models.CASCADE, related_name='application')
+#    notes = models.CharField(max_length=5000, default='')
+#    date = models.DateField( default=date.today)
+#    scheduled_at = models.DateTimeField(auto_now_add=True)
+#    accepted = models.BooleanField(default=False)

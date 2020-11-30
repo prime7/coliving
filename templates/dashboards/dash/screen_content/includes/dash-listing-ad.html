@@ -2,18 +2,22 @@
 
 
 <div class='dash-listing-ad'>
-    <div> {{ x.title }} </div>
-    <div> {{ x.landlord.user.email }} </div>
-    <div> {{ x.address }} </div>
     <div>
-          <div> Update </div>
-          <div> Delete </div>
-          <div>
-              {% if x.sfvapplication_set.all.count == 0 %}
-                  <div> 0 Application </div>
-              {% else %}
-                  <a href="#"> {{ x.sfvapplication_set.all.count  }} Application </a>
-              {% endif %}
-          </div>
+        <div style="display:none"> {{ x.id}} </div>
+        <div> {{ x.title }} </div>
+        <div> {{ x.landlord.user.email }} </div>
+        <div> {{ x.address }} </div>
+    </div>
+    <div>
+        <button type="button" class="btn btn-success">  Update </button>
+        <button type="button" class="btn btn-info"> <a href="/rentals/{{ x.slug }}/">View </a></button>
+        <button type="button" id="land_delete_listing" class="btn btn-danger">Delete</button>
+    </div>
+    <div>
+        {% if x.sfvapplication_set.all.count == 0 %}
+              <div> 0 Application </div>
+        {% else %}
+            <button type="button" class="btn btn-primary btn-lg btn-block"> {{ x.sfvapplication_set.all.count  }} Application </button>
+        {% endif %}
     </div>
 </div>

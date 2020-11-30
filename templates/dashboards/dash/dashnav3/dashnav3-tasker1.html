@@ -10,8 +10,20 @@
          <div class="dash-font1"> Tasks </div>
        </div>
       <div class='dn3-ud-r2' >
-          {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All' %}
-          {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='Manage Schedule' %}
+
+          {% if dash_active2 == 'tasker_tasks_all' %}
+               {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All' lurl='dashboard_tasker' da2=True %}
+          {% else %}
+               {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All' lurl='dashboard_tasker' da2=False %}
+          {% endif %}
+
+
+          {% if dash_active2 == 'tasker_tasks_ms' %}
+               {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='Manage Schedule' lurl='tasker_manage_schedule' da2=True %}
+          {% else %}
+               {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='Manage Schedule' lurl='tasker_manage_schedule' da2=False %}
+          {% endif %}
+
       </div>
 </div>
 
@@ -23,9 +35,12 @@
        </div>
       <div class='dn3-ud-r2' >
 
-          {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All' %}
-          {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='Comparision' %}
 
+          {% if dash_active2 == 'tasker_wd_all' %}
+               {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All' lurl='tasker_web_dev' da2=True %}
+          {% else %}
+               {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All' lurl='tasker_web_dev' da2=False%}
+          {% endif %}
 
       </div>
 </div>

@@ -1,7 +1,7 @@
 from django.shortcuts import render,get_object_or_404
 from django.views.generic import ListView,DetailView,CreateView,UpdateView,View,FormView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .models import House,User,Image,Lead, Landlord, Tenant, SfvApplication, SfvAppAvail
+from .models import House,User,Image,Lead, Landlord, Tenant, SfvApplication, SfvDay
 from django.db.models import Q,F
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -307,6 +307,6 @@ def sfv_application(request):
     sfv_application = SfvApplication.objects.create(tenant=tenant, listing=listing, name=sfv_name, phone_number=sfv_phone, notes=sfv_notes)
 
     for y in sfv_avail_date:
-        SfvAppAvail.objects.create(sfv_application=sfv_application, date=y)
+        SfvDay.objects.create(sfv_application=sfv_application, date=y)
 
     return HttpResponse("hi")

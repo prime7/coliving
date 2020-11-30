@@ -9,12 +9,13 @@
        </div>
 
       <div class='dn3-ud-r2'>
-              {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All' %}
 
-              {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='Current' %}
-              {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='Move out of lease' %}
-              {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='Photos / 3D Photos ' %}
-              {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='Videos' %}
+              {% if dash_active2 == 'tenant_on' %}
+                   {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All' lurl='dashboard_tenant' da2=True %}
+              {% else %}
+                   {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All' lurl='dashboard_tenant' da2=False %}
+              {% endif %}
+
       </div>
 </div>
 
@@ -25,9 +26,22 @@
          <div class="dash-font1"> Applications </div>
        </div>
        <div class='dn3-ud-r2'>
-               {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All' %}
-               {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='Verified' %}
-               {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='Scheduled for viewing' %}
+
+               {% if dash_active2 == 'tenant_applications_all' %}
+                    {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All'  lurl='tenant_applications' da2=True %}
+               {% else %}
+                  {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All'  lurl='tenant_applications' da2=False %}
+               {% endif %}
+
+
+
+               {% if dash_active2 == 'tenant_applications_sfv' %}
+                    {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='Scheduled for viewing'  lurl='tenant_schedule_for_viewing' da2=True %}
+               {% else %}
+                    {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='Scheduled for viewing'  lurl='tenant_schedule_for_viewing' da2=False%}
+               {% endif %}
+
+
        </div>
 </div>
 
@@ -39,21 +53,15 @@
        </div>
 
       <div class='dn3-ud-r2'>
-              {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All' %}
+              {% if dash_active2 == 'tenant_ri_all' %}
+                   {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All'  lurl='tenant_rental_insurance' da2=True%}
+              {% else %}
+                   {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All'  lurl='tenant_rental_insurance' da2=False%}
+              {% endif %}
       </div>
 </div>
 
-<div class='dashnav3-updown'>
-      <div>
-          <img id="dashnavbar3_click" style="display:none" src="{% static 'img/cright.svg' %}">
-          <img id="dashnavbar3_click" src="{% static 'img/cdown.svg' %}">
-         <div class="dash-font1"> Rental Insurance </div>
-       </div>
 
-       <div class='dn3-ud-r2'>
-               {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All' %}
-       </div>
-</div>
 
 <div class='dashnav3-updown'>
       <div>
@@ -63,8 +71,11 @@
        </div>
 
       <div class='dn3-ud-r2'>
-              {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All' %}
-              {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='Ongoing' %}
-              {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='Maintenance' %}
+
+              {% if dash_active2 == 'tenant_services_all' %}
+                   {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All'  lurl='tenant_services' da2=True%}
+              {% else %}
+                   {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All'  lurl='tenant_services' da2=False%}
+              {% endif %}
       </div>
 </div>

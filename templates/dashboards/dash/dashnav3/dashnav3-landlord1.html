@@ -11,13 +11,17 @@
        </div>
 
       <div class='dn3-ud-r2'>
-            {% if dash_active2 == 'listings' %}
-                {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All' lurl='dashboard' da2=False %}
-            {% else %}
+            {% if dash_active2 == 'landlord_listings' %}
                 {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All' lurl='dashboard' da2=True %}
+            {% else %}
+                {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All' lurl='dashboard' da2=False %}
             {% endif %}
 
-            {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='Scheduled for viewing' lurl='schedule_for_viewing'%}
+            {% if dash_active2 == 'landlord_listing_sfv' %}
+                {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='Scheduled For Viewing' lurl='landlord_schedule_for_viewing' da2=True %}
+            {% else %}
+                {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='Scheduled For Viewing' lurl='landlord_schedule_for_viewing' da2=False  %}
+            {% endif %}
       </div>
 
 </div>
@@ -30,8 +34,19 @@
       </div>
 
        <div class='dn3-ud-r2'>
-             {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All' lurl='tenants' %}
-             {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='Verification' lurl='verification' %}
+         {% if dash_active2 == 'landlord_tenants' %}
+              {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All' lurl='landlord_tenants'  da2=True %}
+         {% else %}
+              {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All' lurl='landlord_tenants' da2=False %}
+         {% endif %}
+
+
+        {% if dash_active2 == 'landlord_tenants_verification' %}
+             {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='Verification' lurl='landlord_tenants_verification' da2=True %}
+        {% else %}
+             {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='Verification' lurl='landlord_tenants_verification' da2=False %}
+        {% endif %}
+
        </div>
 </div>
 
@@ -44,8 +59,20 @@
       </div>
 
        <div class='dn3-ud-r2'>
-             {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All' lurl='applications' %}
-             {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='Comparision' lurl='comparison' %}
+
+             {% if dash_active2 == 'landlord_applications_all' %}
+                  {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All' lurl='landlord_applications' da2=True %}
+             {% else %}
+                  {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All' lurl='landlord_applications' da2=False %}
+             {% endif %}
+
+
+             {% if dash_active2 == 'landlord_applications_comparison' %}
+                  {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='Comparision' lurl='landlord_applications_comparison' da2=True %}
+             {% else %}
+                  {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='Comparision' lurl='landlord_applications_comparison' da2=False %}
+             {% endif %}
+
        </div>
 </div>
 
@@ -58,7 +85,12 @@
       </div>
 
        <div class='dn3-ud-r2'>
-             {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All' lurl='rental_insurance' %}
+
+             {% if dash_active2 == 'landlord_rental_insurance' %}
+                  {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All' lurl='landlord_rental_insurance' da2=True %}
+             {% else %}
+                  {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All' lurl='landlord_rental_insurance' da2=False %}
+             {% endif %}
        </div>
 </div>
 
@@ -71,8 +103,11 @@
       </div>
 
        <div class='dn3-ud-r2'>
-             {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All' lurl='services' %}
-             {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='Ongoing' lurl='services_ongoing' %}
-             {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='Maintenance' lurl='maintenance' %}
+             {% if dash_active2 == 'landlord_services' %}
+                    {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All' lurl='landlord_services' da2=True %}
+             {% else %}
+                    {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All' lurl='landlord_services' da2=False %}
+             {% endif %}
+
        </div>
 </div>

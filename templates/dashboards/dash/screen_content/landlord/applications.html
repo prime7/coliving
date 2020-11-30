@@ -11,11 +11,25 @@
             <div>
                 {% if x.sfvapplication_set.all %}
                        {% for y in x.sfvapplication_set.all %}
-                            <a>
                                <div> {{ y.tenant.user.email }} </div>
                                <div> {{ y.tenant.name }} </div>
                                <div> {{ y.phone_number }} </div>
-                            </a>
+                               <div>
+                                  {% for z in y.sfvday_set.all %}
+                                      <div>
+                                          <div> {{ z.id }} </div>
+                                          <div>  {{ z.date }} </div>
+                                          {% if z.selected %}
+                                             <div> Selected </div>
+                                          {% else %}
+                                              <div id="select_sfv_day"> Select </div>
+                                          {% endif %}
+                                      </div>
+                                      <div>
+                                            {% if z.accepted %} Accepted {% endif %}
+                                      </div>
+                                  {% endfor %}
+                                </div>
                        {% endfor %}
                 {% else %}
                       <div> No Applications Yet </div>
