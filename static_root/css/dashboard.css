@@ -205,11 +205,44 @@
    margin-bottom: 5px;
  }
 
- /*SFV Landlord */
+ /* Landlord Apps...................*/
  .land-app-pane{
    border:3px solid red;
  }
+  .land-app-pane > div:nth-child(1){
+    margin-bottom: 10px;
+  }
 
+  .land-app-pane > div:nth-child(2){
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .las{
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px 1px grey;
+    padding: 5px;
+    margin-right: 10px;
+    color:white;
+    min-width: 250px;
+  }
+  .las > div:nth-child(1){
+    padding: 12px;
+    font-weight: bold;
+    background-color: #ba7575;
+    color:white;
+    border-radius: 10px;
+  }
+
+  .las-apps{
+   margin-top: 5px;
+  }
+
+  .lasone{
+    background-color: #4a1e5c;
+  }
 
 /*Desktop Media Query ...........................................................*/
 @media screen and (min-width:1000px){

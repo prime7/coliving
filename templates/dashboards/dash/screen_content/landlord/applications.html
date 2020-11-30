@@ -2,15 +2,27 @@
 
 
 {% block screen_content %}
-<div class='dash-applications-pane'>
+<div class='land-app-pane'>
+  <div>
+        <div class='dash-font3'> Applications </div>
+  </div>
 
+  <div>
   {% for x in request.user.landlord.house_set.all %}
-      <div>
-            <div> {{ x.title}} </div>
-            <div> {{ x.address }} </div>
+      <div class='las'>
+
             <div>
+               <div style="color:black; font-size:18px;"> Listing </div>
+               <div> {{ x.title}} </div>
+               <div>  {{ x.address }} </div>
+               <button type="button" class="btn btn-info"> <a style="color:white" href="/rentals/{{ x.slug }}/">View </a></button>
+            </div>
+
+            <div class='las-apps'>
                 {% if x.sfvapplication_set.all %}
+                       <div class='dash-font2'> Applications </div>
                        {% for y in x.sfvapplication_set.all %}
+                         <div class='lasone'>
                                <div> {{ y.tenant.user.email }} </div>
                                <div> {{ y.tenant.name }} </div>
                                <div> {{ y.phone_number }} </div>
@@ -18,18 +30,21 @@
                                   {% for z in y.sfvday_set.all %}
                                       <div>
                                           <div> {{ z.id }} </div>
+
                                           <div>  {{ z.date }} </div>
                                           {% if z.selected %}
                                              <div> Selected </div>
                                           {% else %}
                                               <div id="select_sfv_day"> Select </div>
                                           {% endif %}
+                                          
                                       </div>
                                       <div>
                                             {% if z.accepted %} Accepted {% endif %}
                                       </div>
                                   {% endfor %}
                                 </div>
+                        </div>
                        {% endfor %}
                 {% else %}
                       <div> No Applications Yet </div>
@@ -37,6 +52,7 @@
             </div>
       </div>
   {% endfor %}
+  </div>
 
 </div>
 
