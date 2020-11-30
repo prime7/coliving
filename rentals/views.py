@@ -109,7 +109,7 @@ class LeaseDetailView(FormView,DetailView):
             if not Lead.objects.filter(email=email,link=link).exists():
                 Lead.objects.create(email=email,link=link)
             lister_name = context['object'].user.email
-            lister_phone = context['object'].user.mobile_number
+            lister_phone = context['object'].user.profile.mobile_number
 
             message = render_to_string('emails/connect_lister.html', {
                 'email': email,
