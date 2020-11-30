@@ -203,54 +203,55 @@
         </div>
         <div>
           <!-- Button trigger modal -->
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-            Schedule for viewing
-          </button>
+          {% if not has_applied %}
+            <button type="button" class="btn btn-primary " data-toggle="modal" style="margin-top:20px; margin-bottom:20px" data-target="#exampleModal">
+              Schedule for viewing
+            </button>
+          {% else %}
+             <div class="alert alert-secondary" role="alert" > You have already applied for this listing </div>
+          {% endif %}
 
           <!-- Modal -->
           <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
-                <div class="modal-header">
+
+
+                <div class="modal-header " >
                   <h5 class="modal-title" id="exampleModalLabel">Schedule for viewing</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <button  type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
 
                 <div class="modal-body">
-                  <div>
+                  <div class='lsfv'>
                         <div id="sfv_name">
-                           <div> Name </div>
-                           <input type="text" name='sfv_name'>
+                           <div class='h5'> Name </div>
+                           <input type="text" class="form-control form-control-lg" name='sfv_name'>
                         </div>
 
                         <div id='sfv_phone'>
-                           <div> Phone Number </div>
-                           <input type="text" name='sfv_phone'>
-                        </div>
-
-                        <div id='sfv_num'>
-                           <div> Number of people coming </div>
-                           <input type='number' name='sfv_num'>
+                           <div class='h5'> Phone Number </div>
+                           <input class="form-control form-control-lg" type="text" name='sfv_phone'>
                         </div>
 
                         <div>
-                           <div> Notes </div>
-                           <textarea type="text" name='sfv_notes' rows="4" cols="50"> </textarea>
+                           <div class='h5'> Notes </div>
+                           <textarea type="text" class="form-control"  name='sfv_notes' rows="4" cols="50"> </textarea>
                         </div>
 
                         <div id='sfv_avail'>
-                              <div> Maximum 3 Availabilty Days allowed </div>
+                              <div class='h6'> Maximum 3 Availabilty Days allowed </div>
                               <div id="ama_area">
                                   <input type='date'>
                               </div>
-                              <div id="add_more_avail"> Add more day </div>
+                              <div class="btn btn-warning" id="add_more_avail" style="margin-top:10px; margin-bottom:10px"> Add more day </div>
                         </div>
                         <div id="sqv_hiddens">
                             <div id="ad_id" style='display:none'> {{ house.id}} </div>
                         </div>
-                        <input id='sfv_form_submit' class="btn btn-primary" value='submit'>
+                        <input id='sfv_form_submit' class="btn btn-primary" value='Send Availabilty'>
                   </div>
                 </div>
 

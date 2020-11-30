@@ -76,10 +76,22 @@ class LeaseDetailView(FormView,DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         house = self.get_object()
+        print(house.id)
+        has_applied = False
+
+        sfvapplications = self.request.user.tenant.sfvapplication_set.all()
+
+        if sfvapplications:
+            for x in sfvapplications:
+                if x.listing.id == house.id:
+                    has_applied = True
+
+
         if self.request.user.is_authenticated:
             context['form'] = ProfileConnectForm(instance=self.request.user.profile)
             context['booking_form'] = BookingForm()
             context['is_favourite'] = house.favourites.filter(id=self.request.user.id).exists()
+            context['has_applied']  = has_applied
         return context
 
     def post(self,request,*args,**kwargs):
@@ -271,42 +283,50 @@ class ShortLeaseUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
 #Ajax
 @login_required
 def sfv_application(request):
+    try:
+            ad_id = request.GET.get('ad_id')
+            sfv_name = request.GET.get("sfv_name")
+            sfv_phone = request.GET.get("sfv_phone")
+            sfv_notes = request.GET.get("sfv_notes")
+            sfv_avail = request.GET.get("sfv_avail")
 
-    ad_id = request.GET.get('ad_id')
-    sfv_name = request.GET.get("sfv_name")
-    sfv_phone = request.GET.get("sfv_phone")
-    sfv_notes = request.GET.get("sfv_notes")
-    sfv_avail = request.GET.get("sfv_avail")
+            if not (ad_id and sfv_name and sfv_phone and sfv_notes and sfv_avail):
+                return HttpResponse("error")
 
-    if not (ad_id and sfv_name and sfv_phone and sfv_notes and sfv_avail):
+            listing = House.objects.filter(id=ad_id)
+            print(listing)
+            if listing:
+                listing = listing[0]
+            else:
+                return HttpResponse('error')
+
+            tenant = request.user.tenant
+            landlord = listing.landlord
+
+            sfv_application = SfvApplication.objects.filter(tenant=tenant, listing=listing)
+            print(sfv_application)
+            if sfv_application:
+                   return HttpResponse('error')
+
+            sfv_avail_list = sfv_avail.split(',')
+            if len(sfv_avail_list) > 3:
+                return HttpResponse("error")
+
+            sfv_avail_date = []
+            for x in sfv_avail_list:
+                a = datetime.strptime(x, '%Y-%m-%d').date()
+                sfv_avail_date.append(a)
+
+
+            sfv_application = SfvApplication.objects.create(tenant=tenant, listing=listing, name=sfv_name, phone_number=sfv_phone, notes=sfv_notes)
+
+            for y in sfv_avail_date:
+                SfvDay.objects.create(sfv_application=sfv_application, date=y)
+
+            return HttpResponse("done")
+    except Exception as e:
+        print(e)
         return HttpResponse("error")
 
-    listing = House.objects.filter(id=ad_id)
-    if listing:
-        listing = listing[0]
-    else:
-        return HttpResponse('error')
 
-    tenant = request.user.tenant
-    landlord = listing.landlord
-
-    sfv_application = SfvApplication.objects.filter(tenant=tenant, listing=listing)
-    if sfv_application:
-           return HttpResponse('error')
-
-    sfv_avail_list = sfv_avail.split(',')
-    if len(sfv_avail_list) > 3:
-        return HttpResponse("error")
-
-    sfv_avail_date = []
-    for x in sfv_avail_list:
-        a = datetime.strptime(x, '%Y-%m-%d').date()
-        sfv_avail_date.append(a)
-
-
-    sfv_application = SfvApplication.objects.create(tenant=tenant, listing=listing, name=sfv_name, phone_number=sfv_phone, notes=sfv_notes)
-
-    for y in sfv_avail_date:
-        SfvDay.objects.create(sfv_application=sfv_application, date=y)
-
-    return HttpResponse("hi")
+        

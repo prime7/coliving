@@ -23,27 +23,34 @@
                        <div class='dash-font2'> Applications </div>
                        {% for y in x.sfvapplication_set.all %}
                          <div class='lasone'>
-                               <div> {{ y.tenant.user.email }} </div>
-                               <div> {{ y.tenant.name }} </div>
+                               <div> Application {{ forloop.counter }} </div>
+                               <div> {{ y.name }} </div>
+                               <div> {{ y.notes }} </div>
                                <div> {{ y.phone_number }} </div>
-                               <div>
+                               <div class='lselectday' >
                                   {% for z in y.sfvday_set.all %}
-                                      <div>
-                                          <div> {{ z.id }} </div>
+                                  <div style='border: 1px dotted white; margin-bottom:10px;'>
+                                      <div style='display:flex; margin-bottom:10px;  padding:5px; border-radius:5px;'>
 
-                                          <div>  {{ z.date }} </div>
-                                          {% if z.selected %}
-                                             <div> Selected </div>
-                                          {% else %}
-                                              <div id="select_sfv_day"> Select </div>
+                                          <div style='display:none'> {{ z.id }} </div>
+                                          <div style='margin-right:10px;'>  {{ z.date }} </div>
+                                          {% if not y.scheduled %}
+                                              {% if z.selected %}
+                                                 <div style="font-size:15px"> Selected </div>
+                                              {% else %}
+                                                  <div id="select_sfv_day"  class="btn btn-light"> Select </div>
+                                              {% endif %}
                                           {% endif %}
-                                          
+
                                       </div>
-                                      <div>
-                                            {% if z.accepted %} Accepted {% endif %}
-                                      </div>
+
+                                            {% if z.accepted %}<div class="alert alert-info"> Acceptedby the tenant.  </div> {% endif %}
+
+
+                                    </div>
                                   {% endfor %}
                                 </div>
+
                         </div>
                        {% endfor %}
                 {% else %}

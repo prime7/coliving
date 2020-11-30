@@ -2,22 +2,24 @@
 
 
 {% block screen_content %}
-<div class='dash-applications-pane' style='display:flex; flex-direction:column'>
-  <div> Scheduled for viewing </div>
+<div class='sfv' style='display:flex; flex-direction:column'>
+  <div class='h3'> Scheduled for viewing </div>
   <div>
       {% for x in request.user.tenant.sfvapplication_set.all %}
           {% if x.scheduled %}
-          <div> Listing {{ x.listing.title }}</div>
-          <div> Landlord Info {{ x.landlord.name }}</div>
-          <div>
-              <div> {{ x.name }} </div>
-              <div> {{ x.phone_number }} </div>
-              <div> {{ x.notes }} </div>
-              {% for z in x.sfvday_set.all %}
-                      {% if z.selected and z.accepted %}
-                            <div> {{ z.date }} </div>
-                      {% endif %}
-             {% endfor %}
+          <div class='sfv-single'>
+              <div>  {{ x.listing.title }}</div>
+              <div>  {{ x.landlord.user.name }}</div>
+              <div>
+                  <div> {{ x.name }} </div>
+                  <div> {{ x.phone_number }} </div>
+                  <div> {{ x.notes }} </div>
+                  {% for z in x.sfvday_set.all %}
+                          {% if z.selected and z.accepted %}
+                                <div> {{ z.date }} </div>
+                          {% endif %}
+                 {% endfor %}
+              </div>
           </div>
           {% endif %}
       {% endfor %}

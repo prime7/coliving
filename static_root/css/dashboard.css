@@ -207,7 +207,6 @@
 
  /* Landlord Apps...................*/
  .land-app-pane{
-   border:3px solid red;
  }
   .land-app-pane > div:nth-child(1){
     margin-bottom: 10px;
@@ -242,7 +241,91 @@
 
   .lasone{
     background-color: #4a1e5c;
+    padding: 5px;
+    border-radius: 5px;
   }
+
+  .lselectday{
+    display: flex;
+    flex-direction: column;
+  }
+
+ /* Tenant Apps...................*/
+.tas{
+  display: flex;
+  flex-direction: column;
+}
+
+.tas > div:nth-child(2){
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tas-ns{
+  display: flex;
+  flex-direction: column;
+  background-color: #4a1e5c;
+  border-radius: 5px;
+  padding: 10px;
+  min-width: 250px;
+  box-shadow: 0px 0px 5px 1px #f7f7f7;
+  color:white;
+  margin-right: 20px;
+}
+
+.tas-s{
+  box-shadow:0px 0px 1px 2px #e6e6e6;
+  padding: 10px;
+  margin-right: 20px;
+}
+
+/*SFV */
+.sfv{
+  display: flex;
+  flex-direction: column;
+}
+
+.sfv > div:nth-child(2){
+  display: flex;
+  flex-wrap:wrap;
+}
+
+.sfv-single{
+  display: flex;
+  flex-direction: column;
+  border-radius:3px;
+  box-shadow:0px 0px 3px 3px #fafafa;
+  margin-right: 10px;
+  background-color: #4a1e5c;
+  padding: 10px;
+  color:white;
+  min-width: 280px;
+}
+
+/*Verificaiton */
+.landv{
+}
+.landv > div{
+  display: flex;
+  flex-direction: column;
+}
+
+.landv-form-area{
+  display: flex;
+}
+.landv-form-area > form{
+flex: 1 0 0;
+}
+.landv-form-area > div{
+  flex: 1 0 0;
+}
+
+.landv-apps{
+   display: flex;
+   flex-direction: column;
+   margin-top: 10px;
+}
+
 
 /*Desktop Media Query ...........................................................*/
 @media screen and (min-width:1000px){

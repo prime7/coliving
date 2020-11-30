@@ -88,9 +88,11 @@ function select_sfv_day(){
        success:function(result_data) {
            if(result_data == 'error'){
              alert("Only 1 day can be selected.");
+
            }
            else if(result_data == 'done'){
-             alert("Sent. Please wait for the acceptance response.");
+             alert("Sent. Please check the scheduled events.");
+             window.location.reload();
            }
        },
        error:function(result_data){
@@ -150,4 +152,37 @@ function land_delete_listing(){
           return ;
       }
   });
+}
+
+$(document).on("click","#vt_form_submit", vt_form_submit);
+function vt_form_submit(){
+
+ var tv_name = $("#tv_name").val();
+ var tv_phone = $("#tv_phone").val();
+ var tv_notes = $("#tv_notes").val();
+ var tv_address = $("#tv_address").val();
+
+ var data = {
+   'tv_name'    : tv_name,
+   'tv_phone'   : tv_phone,
+   'tv_notes'   : tv_notes,
+   'tv_address' : tv_address,
+ }
+
+  $.ajax({
+      url:'verification/send/',
+      data : data,
+      async: true,
+      success:function(result_data) {
+          alert("Verification request has been sent. Please wait for the response.");
+          window.location.reload();
+
+      },
+      error:function(result_data){
+         console.log(result_data);
+          return ;
+      }
+  });
+
+  alert("nice");
 }

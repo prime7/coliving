@@ -48,4 +48,7 @@ urlpatterns = [
     path('tenant/accept_day/'   , dashboard_views.sfv_day_accept),
 
     path('landlord/delete/listing/' , dashboard_views.delete_listing),
+    path('landlord/tenants/verification/send/' , dashboard_views.tenant_verification),
+
+
 ]

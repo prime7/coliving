@@ -2,29 +2,28 @@
 
 
 {% block screen_content %}
-<div class='dash-applications-pane' style='display:flex; flex-direction:column'>
-  <div> Applications </div>
+<div class='tas'>
+  <div class='h5'> Applications </div>
   <div>
      {% if request.user.tenant.sfvapplication_set.all %}
        {% for x in request.user.tenant.sfvapplication_set.all  %}
 
             {% if not x.scheduled %}
-                <div style='display:flex; border:2px solid red; margin-bottom:20px; flex-direction:column'>
+                <div class=tas-ns>
                     <a> Listing {{ x.listing.title }}</a>
-                    <div> Landlord {{ x.listing.landlord.user }} </div>
                     <div>
                           <div> <div> Application </div>
                                 <div> {{ x.name }} </div>
-                                <div> {{ x.sent_at}} </div>
+                                <div> {{ x.notes }} </div>
                           </div>
                           <div>
                                 {% for y in x.sfvday_set.all %}
-                                <div>
-                                      <div> {{ y.date }} </div>
+                                <div style='display:flex; margin-bottom:10px; flex-direction:column; border:1px dotted white;'>
+                                      <div style="display:flex"> <div style="margin-right:10px;"> {{ y.date }} </div> <div> Sent </div> </div>
                                       {% if y.selected %}
                                            <div>
-                                              <div id="accept_sfv_id"> {{ y.id}} </div>
-                                              <div id="accept_sfv_day"> Accept </div>
+                                              <div style='display:none' id="accept_sfv_id"> {{ y.id}} </div>
+                                              <div  id="accept_sfv_day" class="btn btn-success"> Accept </div>
                                            </div>
                                       {% endif %}
                                 </div>
@@ -33,9 +32,9 @@
                     </div>
                 </div>
             {% else %}
-                <div>
-                    <div> {{ x.listing.title }} </div>
-                    <div> Has been scheduled </div>
+                <div class='tas-s'>
+                    <div class='h5'> {{ x.listing.title }} </div>
+                    <div class="alert alert-info"> Has been scheduled </div>
                  </div>
             {% endif %}
        {% endfor %}

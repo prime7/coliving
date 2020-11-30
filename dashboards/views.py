@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .forms import CurrentDashForm
+from .models import TenantVerification
 from django.urls import resolve
 from django.contrib.auth.decorators import login_required
 from rentals.models import SfvDay, SfvApplication, House
@@ -267,3 +268,16 @@ def delete_listing(request):
                 return HttpResponse("error")
     except:
         return HttpResponse("error")
+
+
+@login_required
+def tenant_verification(request):
+    tv_name = request.GET.get('tv_name')
+    tv_phone = request.GET.get('tv_phone')
+    tv_address = request.GET.get('tv_address')
+    tv_notes = request.GET.get('tv_notes')
+    print(tv_name, tv_phone, tv_address, tv_notes)
+
+    TenantVerification.objects.create(landlord=request.user.landlord, name=tv_name, phone_number=tv_phone, notes=tv_notes, address=tv_address)
+
+    return HttpResponse("hi")
