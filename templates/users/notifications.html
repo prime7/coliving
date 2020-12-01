@@ -1,0 +1,21 @@
+{% extends 'users/users_base.html' %}
+{% block content_block %}
+    <small class="text-secondary">Username : {{ user.username }}</small><br>
+    <small class="text-secondary">Email : {{ user.email }}</small><br><br>
+    Notifications
+    <hr>
+    <ul class="list-group">
+      {% for notification in user.profile.get_notifications %}
+          <form method="POST" action="{% url 'notification-delete' pk=notification.pk %}">
+            <li class="list-group-item {% if notification.read %}list-group-item-light{% endif %}">
+                <a class="text-{% if notification.read %}muted{% else %}success{% endif %}" href="{% url 'notification-detail' pk=notification.pk %}">{{ notification.title|truncatechars:40 }}</a>
+                {% csrf_token %}
+                <button type="submit" class="close float-right" aria-label="Close">
+                    <span aria-hidden="true" class="text-danger">&times;</span>
+                </button>
+                <small class="float-right mr-4">{{ notification.date_created }} UTC</small>
+            </li>
+          </form>
+      {% endfor %}
+    </ul>
+{% endblock %}

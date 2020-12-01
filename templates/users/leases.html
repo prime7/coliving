@@ -74,6 +74,62 @@
         {% endfor %}
       </ul>
     </div>
+
+    <div class="card mt-3 box-shadow">
+      <div class="card-header">
+        RentAnything Listings
+      </div>
+      <ul class="list-group list-group-flush">
+        {% for listing in rentanything %}
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-8">
+                <a href="{% url 'rentanything-listing' pk=listing.pk %}">
+                  {{ listing.title }}
+                </a>
+              </div>
+              <div class="col-md-4">
+                <div class="row">
+                  <a href="{% url 'rentanything-update' pk=listing.pk %}" class="btn btn-outline-success">Update</a>
+                  <a href="{% url 'rentanything-deactivate' pk=listing.pk %}" class="btn btn-outline-success">Deactivate</a>
+                  <a href="{% url 'rentanything-application' pk=listing.pk %}" class="btn btn-outline-success">Applicants</a>
+                </div>
+              </div>
+            </div>
+          </li>
+        {% empty %}
+          <li class="list-group-item text-muted">You don't have any RentAnything Listing</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="card mt-3 box-shadow">
+      <div class="card-header">
+        Buy & Sell Listings
+      </div>
+      <ul class="list-group list-group-flush">
+        {% for listing in buyandsell %}
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-8">
+                <a href="{% url 'buyandsell-posting' pk=listing.pk %}">
+                  {{ listing.title }}
+                </a>
+              </div>
+              <div class="col-md-4">
+                <div class="row">
+                  <a href="{% url 'buyandsell-update' pk=listing.pk %}" class="btn btn-outline-success">Update</a>
+                  <a href="{% url 'buyandsell-deactivate' pk=listing.pk %}" class="btn btn-outline-success">Deactivate</a>
+                  <a href="{% url 'buyandsell-application' pk=listing.pk %}" class="btn btn-outline-success">Applicants</a>
+                </div>
+              </div>
+            </div>
+          </li>
+        {% empty %}
+          <li class="list-group-item text-muted">You don't have any Buy & Sell Listing</li>
+        {% endfor %}
+      </ul>
+    </div>
   </div>
 </div>
 {% endblock content %}

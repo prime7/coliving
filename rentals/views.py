@@ -111,7 +111,6 @@ class LeaseDetailView(FormView,DetailView):
         if form.is_valid():
             form.save()
             messages.info(request, 'Please check your email inbox')
-            phone_number = request.POST['mobile_number']
             from django.conf import settings
             link = ""
 
@@ -122,8 +121,8 @@ class LeaseDetailView(FormView,DetailView):
 
             link += request.get_full_path()
 
-            if not Lead.objects.filter(email=email,phone_number=phone_number,link=link).exists():
-                Lead.objects.create(email=email,phone_number=phone_number,link=link)
+            if not Lead.objects.filter(email=email,link=link).exists():
+                Lead.objects.create(email=email,link=link)
             lister_name = context['object'].user.email
             lister_phone = context['object'].user.profile.mobile_number
 

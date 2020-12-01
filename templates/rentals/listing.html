@@ -10,7 +10,7 @@
           {% include "includes/search.html" %}
         </div>
     </div>
-    <div class="container">
+    <div>
         <div class="row justify-content-center">
             {% for house in houses %}
             <div class="card col-md-5 col-sm-12 m-4 p-0 box-shadow">
@@ -29,7 +29,11 @@
                       <hr/>
                       <div class="card-text m-2">
                           {% if house.user.profile.name %}
+<<<<<<< HEAD
                             <a href="{% url 'listing-user' house.landlord.user.username %}"><small>Uploaded by : {{ house.user.profile.name }}</small></a>
+=======
+                            <a href="{% url 'listing-user' house.user.username %}"><small>Uploaded by : {{ house.user.profile.name }}</small></a>
+>>>>>>> origin/rentanything
                           {% else %}
                             <a href="{% url 'listing-user' house.landlord.user.username %}"><small>Uploaded by : {{ house.user.username }}</small></a>
                           {% endif %}
@@ -46,21 +50,21 @@
       <div class="row justify-content-center">
       {% if is_paginated %}
         {% if page_obj.has_previous %}
-          <a class="btn btn-outline-info mb-4" href="?q={{searchq}}&page=1">First</a>
-          <a class="btn btn-outline-info mb-4" href="?q={{searchq}}&page={{ page_obj.previous_page_number }}">Previous</a>
+          <a class="btn btn-outline-success mb-4" href="?q={{searchq}}&page=1">First</a>
+          <a class="btn btn-outline-success mb-4" href="?q={{searchq}}&page={{ page_obj.previous_page_number }}">Previous</a>
         {% endif %}
 
         {% for num in page_obj.paginator.page_range %}
           {% if page_obj.number == num %}
-            <a class="btn btn-info mb-4" href="?q={{searchq}}&page={{ num }}">{{ num }}</a>
+            <a class="btn btn-success mb-4" href="?q={{searchq}}&page={{ num }}">{{ num }}</a>
           {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-            <a class="btn btn-outline-info mb-4" href="?q={{searchq}}&page={{ num }}">{{ num }}</a>
+            <a class="btn btn-outline-success mb-4" href="?q={{searchq}}&page={{ num }}">{{ num }}</a>
           {% endif %}
         {% endfor %}
 
         {% if page_obj.has_next %}
-          <a class="btn btn-outline-info mb-4" href="?q={{searchq}}&page={{ page_obj.next_page_number }}">Next</a>
-          <a class="btn btn-outline-info mb-4" href="?q={{searchq}}&page={{ page_obj.paginator.num_pages }}">Last</a>
+          <a class="btn btn-outline-success mb-4" href="?q={{searchq}}&page={{ page_obj.next_page_number }}">Next</a>
+          <a class="btn btn-outline-success mb-4" href="?q={{searchq}}&page={{ page_obj.paginator.num_pages }}">Last</a>
         {% endif %}
       {% endif %}
       </div>
@@ -68,14 +72,14 @@
     {% if request.path == "/rentals/" %}
     <div class="container mt-4">
       <div class="row justify-content-center">
-        <a class="btn btn-outline-info mb-4" href="{% url 'listing-short' %}">Show short-term rentals</a>
+        <a class="btn btn-outline-success mb-4" href="{% url 'listing-short' %}">Show short-term rentals</a>
       </div>
     </div>
     {% endif %}
     {% if request.path == "/rentals/short/" %}
     <div class="container mt-4">
       <div class="row justify-content-center">
-        <a class="btn btn-outline-info mb-4" href="{% url 'listing' %}">Show long-term rentals</a>
+        <a class="btn btn-outline-success mb-4" href="{% url 'listing' %}">Show long-term rentals</a>
       </div>
     </div>
     {% endif %}
