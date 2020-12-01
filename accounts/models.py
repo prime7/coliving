@@ -133,10 +133,6 @@ class Profile(models.Model):
         return self.user.username
 
     @property
-    def mobile_number(self):
-        return self.mobile_number
-
-    @property
     def get_renter_rating(self):
         total = 0
         amount = 0
