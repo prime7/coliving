@@ -1,0 +1,30 @@
+.home-search{
+  display: flex;
+  flex-wrap: wrap;
+  height: 50px;
+  margin-right: 5px;
+}
+
+.home-search > input:nth-child(1){
+  width: 160px;
+  box-shadow: none;
+  border:2px solid #e8e8e8;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  padding: 4px;
+}
+
+.home-search > select:nth-child(2){
+  width: 160px;
+  background-color: white;
+  font-size: 12px;
+  padding: 2px;
+}
+
+.home-search > input:nth-child(3){
+  border:2px solid #e8e8e8;
+  width: 160px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding: 4px;
+}

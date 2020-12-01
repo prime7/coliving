@@ -24,6 +24,18 @@ from services.models import Service
 
 def home(request):
     services = Service.objects.all()
+    if request.method == 'POST':
+       sa = request.POST.get('sa')
+       c = request.POST.get('c')
+       l = request.POST.get('l')
+
+       if c == 'all':
+            return  redirect(reverse('listing'), permanent=True)
+       elif c == '1':
+           return redirect(reverse('listing-short'))
+       elif c == '2':
+           return redirect(reverse('listing-short'))
+
     return render(request,'accounts/home.html',{'services':services})
 
 
