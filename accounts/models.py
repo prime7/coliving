@@ -273,6 +273,7 @@ class Country(models.Model):
 class Area(models.Model):
     country = models.ForeignKey('accounts.Country', on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
+    country_code = models.CharField(max_length=40,null=True,blank=True)
 
     def __str__(self):
         return self.name
