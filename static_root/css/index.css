@@ -42,6 +42,10 @@ nav{
     background-color: #E9FEE4;;
 }
 
+.fixed-height {
+    max-height: 450px !important;
+}
+
 .center {
     margin: 0 auto; /* Added */
     float: none; /* Added */
@@ -50,6 +54,57 @@ nav{
 
 .topborder {
     border-top: #5cb85c 8px solid !important;
+}
+
+.chatmsg {
+  border: 2px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.darker {
+  border-color: #ccc;
+  background-color: #ddd;
+}
+
+.chatmsg::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.chatmsg img {
+  float: left;
+  max-width: 60px;
+  width: 100%;
+  margin-right: 20px;
+  border-radius: 50%;
+}
+
+.chatmsg img.right {
+  float: right;
+  margin-left: 20px;
+  margin-right:0;
+}
+
+.time-right {
+  float: right;
+  color: #aaa;
+}
+
+.chatgroup {
+    height: 400px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    bottom: 0;
+    position: relative;
+}
+
+.time-left {
+  float: left;
+  color: #999;
 }
 
 .card-img-top {

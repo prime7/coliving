@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{listing.city}} | {{ listing.title }}
+{% endblock %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="container mt-3 mb-5 box-shadow">
+        <div class="row">
+            <div class="card col-md-12 topborder">
+                <div id="carouselExampleInterval" class="carousel slide mb-5" data-ride="carousel">
+                    {% if listing.get_gallery %}
+                    <div class="carousel-inner">
+                            {% for image in listing.get_gallery %}
+                            <div class="carousel-item {% if forloop.first %} active {% endif %}" data-interval="10000" style="height: 500px;">
+                                <img src="{{ image.image.url }}" class="listing-header-image fixed-height" alt="{{ listing.title }}">
+                            </div>
+                            {% endfor %}
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Next</span>
+                    </a>
+                    {% endif %}
+                </div>
+                <div class="row mb4">
+                    <div class="col-md-8 col-sm-12">
+                        <div class="container">
+                            <div class="row">
+                                <h2 class="mr-auto">{{ listing.title }}</h2>
+                            </div>
+                        </div>
+                        <p>{{ listing.city }}, {{ listing.area }}</p>
+                        <h2>Description</h2>
+                        <small>{{ listing.description }}</small>
+                        <div class="card mb-3 mt-3">
+                            <div class="card-header">
+                                Lister
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <img src="{{ listing.user.profile.profile_pic.url }}" width="50" height="50" class="rounded-circle" href="#" alt="Profile picture"/>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="row">{{ listing.user.username }}</div>
+                                        <div class="row text-muted">Joined in {{ listing.user.date_joined|date }}</div>
+                                        <div class="row text-success"><b>{{ listing.user.profile.get_renter_rating.rating }}<i class="fas fa-star"> ({{ listing.user.profile.get_renter_rating.amount }})</i></b></div>
+                                    </div>
+                                    <div class="col-3">
+                                        <a href="{% url 'listing-user' username=listing.user.username %}" class="btn btn-outline-success">View Profile</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-12">
+                        <div class="card p-4">
+                            <h3>${{ listing.price }} {{ listing.get_payment_interval }}</h3>
+                            <hr>
+                            <h5>Already booked in these dates</h5>
+                            <ul>
+                                {% for booking in listing.get_bookings %}
+                                <li>{{booking.start}} - {{ booking.end}}</li>
+                                {% empty %}
+                                <li>No Bookings Yet</li>
+                                {% endfor %}
+                            </ul>
+                            <hr>
+                            <h5>Details</h5>
+                            <ul>
+                                <li>Condition: {{ listing.condition }}</li>
+                                <li>Amount: {{ listing.amount }} (limit: {{ listing.booking_limit }})</li>
+                                <li>Fragile: {% if listing.fragile %}Yes{% else %}No{% endif %}</li>
+                                <li>Packagine: {% if listing.packaging %}Yes{% else %}No{% endif %}</li>
+                            </ul>
+                            <div class="row no-gutters p-2 mb-3">
+                                {% if user.profile.is_notverified %}
+                                    <a href="{% url 'user-verification' %}"><button class="btn btn-outline-success">Verify Profile</button></a>
+                                {% elif user.profile.is_verification_processing %}
+                                    <h5>Verification Status  <span class="badge badge-secondary">Processing</span></h5>
+                                {% elif user == listing.user %}
+                                    <a href="{% url 'rentanything-application' pk=listing.pk %}"><button class="btn btn-success btn-lg btn-block">See Applicants</button></a>
+                                {% elif request.user.is_authenticated %}
+                                    <button class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#staticBackdrop">Request Booking</button>
+                                <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                            <h5 class="modal-title" id="staticBackdropLabel">When do you want this listing?</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            </div>
+
+                                            <form method="POST" id="bookingform" class="p-3">
+                                                {% csrf_token %}
+                                                {{ booking_form|crispy }} <h5 class="mx-auto">${{ listing.price }} {{ listing.get_payment_interval }}</h5>
+                                                <div class="form-group text-center">
+                                                    <button class="btn btn-outline-success" type="submit">Request Booking</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% else %}
+                                    <a class="btn btn-lg btn-block btn-success" href="{% url 'login' %}">Log In To Book</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                {% include "rentals/social_share.html" %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

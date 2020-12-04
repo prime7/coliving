@@ -1,7 +1,4 @@
-from django import forms
-from .validators import validateEmail
 from .models import Profile,Contact
-from django.contrib.auth.password_validation import validate_password
 from django.utils.safestring import mark_safe
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
@@ -13,7 +10,7 @@ class UserRegisterForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('email', 'password1', 'password2', )
+        fields = ('email', 'username','password1', 'password2', )
 
 
 class ImagePreviewWidget(forms.widgets.FileInput):
@@ -30,7 +27,7 @@ class ProfileVerificationForm(forms.ModelForm):
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['name','profile_pic','mobile_number','bio',]
+        fields = ['profile_pic','bio',]
         widgets = {
             'profile_pic': ImagePreviewWidget(),
         }
@@ -38,7 +35,7 @@ class ProfileUpdateForm(forms.ModelForm):
 class ProfileConnectForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['name','mobile_number','bio']
+        fields = ['profile_pic', 'bio']
 
 
 class ContactForm(forms.ModelForm):

@@ -1,44 +1,28 @@
-{% extends "base.html" %}
+{% extends "users/users_base.html" %}
 {% load crispy_forms_tags %}
 
-{% block title %}
-  Coliving | The easiest way to sublet your lease
+{% block content_block %}
+  {% if user.profile.is_notverified %}
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <fieldset class="form-group">
+      <legend class="border-bottom mb-4">Profile Verification</legend>
+      <small>
+      We accept
+      <ul>
+        <li>Passport</li>
+        <li>Government issued ID</li>
+      </ul>
+      </small>
+      {{ p_form|crispy }}
+    </fieldset>
+    <div class="form-group">
+        <button class="btn btn-outline-success" type="submit">Upload</button>
+    </div>
+  </form>
+  {% elif user.profile.is_verification_processing %}
+  <h1>Verification is Proessing</h1>
+  {% else %}
+  <h1>Profile Verified</h1>
+  {% endif %}
 {% endblock %}
-
-{% block content %}
-<div class="container">
-  <div class="row mb-5 mt-5">
-    <div class="col-md-3">
-      <div class="list-group">
-        <a href="{% url 'user-detail'%}"><button type="button" class="list-group-item list-group-item-action {% if request.resolver_match.view_name == 'user-detail' %}active{% endif %}">Profile</button></a>
-        <a href="{% url 'user-verification'%}"><button type="button" class="list-group-item list-group-item-action {% if request.resolver_match.view_name == 'user-verification' %}active{% endif %}">Verify</button></a>
-      </div>
-    </div>
-    <div class="col-md-7 offset-1 card p-2"> 
-      {% if user.profile.is_notverified %}
-      <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <fieldset class="form-group">
-          <legend class="border-bottom mb-4">Profile Verification</legend>
-          <small>
-          We accept
-          <ul>
-            <li>Passport</li>
-            <li>Government issued ID</li>
-          </ul>
-          </small>
-          {{ p_form|crispy }}
-        </fieldset>
-        <div class="form-group">
-            <button class="btn btn-outline-info" type="submit">Upload</button>
-        </div>
-      </form>
-      {% elif user.profile.is_verification_processing %}
-      <h1>Verification is Proessing</h1>
-      {% else %}
-      <h1>Profile Verified</h1>
-      {% endif %}
-    </div>
-  </div>
-</div>
-{% endblock content %}

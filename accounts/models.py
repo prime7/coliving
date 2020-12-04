@@ -1,36 +1,45 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser,PermissionsMixin
-from accounts.manager import UserManager
+from accounts.manager import CustomUserManager
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from time import time
-from django.utils.text import slugify
-from PIL import Image as PILImage
-import uuid
-from os.path import splitext
-from io import BytesIO
-from resizeimage import resizeimage
-from resizeimage.imageexceptions import ImageSizeError
-from django.core.files.base import ContentFile
-from django.core.validators import RegexValidator
+import secrets
+from django.core.validators import RegexValidator, MinValueValidator, MaxValueValidator
 from django_resized import ResizedImageField
 from django.core.mail import send_mail
 from django.conf import settings
 
+PHONE_REGEX = RegexValidator(regex='\d{9,13}$',message="Phone Number must be without +")
+VERIFICATION_STATUS = (
+    (1,'Not Verified'),
+    (2,'Processing'),
+    (3,'Verified'),
+)
 
 class User(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField(max_length=255, unique=True)
-    username = models.SlugField(unique=True,blank=True)
-    email_varified = models.BooleanField(default=False)
+    """
+    User Model For Account Creation.
+    """
+    # User Information
+    username = models.CharField(unique=True, max_length=20)
+    email = models.EmailField(unique=True, max_length=255)
+
     date_joined = models.DateTimeField(auto_now_add=True)
+
+    # User Verification
+    email_verified = models.BooleanField(default=False)
+
+    # User Type/Permissions
     is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     is_approved = models.BooleanField(default=False)
 
-    objects = UserManager()
-
+    # Login/Creation
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['password']
+    REQUIRED_FIELDS = ['username']
+
+    objects = CustomUserManager()
+
 
     def __str__(self):
         return self.email
@@ -38,17 +47,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     def email_user(self, subject, message, from_email=None, **kwargs):
         send_mail(subject, message, settings.EMAIL_HOST_USER, [self.email], **kwargs)
 
-    def save(self, *args, **kwargs):
-        if self.pk is None:
-            print('1')
-            strtime = "".join(str(time()).split(".")[1])
-            string = "%s%s" % (self.email.split("@")[0],strtime[:3])
-            self.username = slugify(string)
-            print('2')
-            super(User, self).save()
-        else:
-            print('3')
-            super(User,self).save()
 
 PHONE_REGEX = RegexValidator(regex='\d{9,13}$',message="Phone Number must be without +")
 VERIFICATION_STATUS = (
@@ -76,15 +74,75 @@ class Tenant(models.Model):
              profile = Tenant(user=instance)
              instance.tenant.save()
 
+class RenterRating(models.Model):
+    renter = models.ForeignKey('accounts.User', on_delete=models.CASCADE, related_name='renter_getting_rated')
+    rentee = models.ForeignKey('accounts.User', on_delete=models.CASCADE, related_name='rentee_giving_rating')
+    rating = models.PositiveIntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(5)])
+
+    def __str__(self):
+        return f"{self.rentee.username}'s rating of {self.renter.username} ({self.rating}/5)"
+
+class RenteeRating(models.Model):
+    renter = models.ForeignKey('accounts.User', on_delete=models.CASCADE, related_name='renter_giving_rating')
+    rentee = models.ForeignKey('accounts.User', on_delete=models.CASCADE, related_name='rentee_getting_rated')
+    rating = models.PositiveIntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(5)])
+
+    def __str__(self):
+        return f"{self.renter.username}'s rating of {self.rentee.username} ({self.rating}/5)"
+
+class Notification(models.Model):
+    user = models.ForeignKey('accounts.User', on_delete=models.CASCADE)
+    title = models.CharField(max_length=100)
+    text = models.CharField(max_length=250)
+    date_created = models.DateTimeField(auto_now_add=True)
+    read = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.title} ({self.user.username})"
+
+class ChatRoomMessage(models.Model):
+    chatroom = models.ForeignKey('accounts.ChatRoom', on_delete=models.CASCADE)
+    sender = models.ForeignKey('accounts.User', on_delete=models.CASCADE, related_name='chatroom_message_sender')
+    text = models.TextField(max_length=500, default="This message no longer exists.")
+    date_created = models.DateTimeField(auto_now_add=True)
+    read = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"Message by {self.sender} in {self.chatroom}"
+
+class ChatRoom(models.Model):
+    users = models.ManyToManyField('accounts.User', related_name='chatroom_users')
+    topic = models.TextField(max_length=250, null=True, blank=True)
+
+    def __str__(self):
+        return f"Chatroom #{self.pk}"
+
+    def is_unread(self, user):
+        for message in ChatRoomMessage.objects.filter(chatroom_id=self.pk):
+            if not message.read:
+                if message.sender != user:
+                    return True
+                else:
+                    return False
+            else:
+                return False
+
 class Profile(models.Model):
-    user = models.OneToOneField(User,on_delete=models.CASCADE, related_name='profile')
-    name = models.CharField(max_length=50)
-    profile_pic = ResizedImageField(size=[640, 480], upload_to='profile_pics',force_format='PNG',default='default-profile.jpg')
+    """
+    Profile Model, Connected To User Model. Used For Extra Account Details.
+    """
+
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
+
+    # Profile Information
     mobile_number = models.CharField(validators=[PHONE_REGEX], max_length=13, blank=True)
-    mobile_number_varified = models.BooleanField(default=False)
+    mobile_number_verified = models.BooleanField(default=False)
+    profile_pic = ResizedImageField(size=[640, 480], upload_to='profile_pics', default='default-profile.png')
     bio = models.CharField(max_length = 400,blank=True,help_text="Describe about yourself in short")
-    registered_at = models.DateField(auto_now=True)
-    verification_doc = ResizedImageField(size=[1200, 1200], upload_to='verifications',force_format='PNG',null=True,blank=True)
+    referral_code = models.CharField(unique=True, max_length=20, null=True)
+
+    # Verification
+    verification_doc = ResizedImageField(size=[1200, 1200], upload_to='verifications', null=True,blank=True)
     verified = models.IntegerField(choices=VERIFICATION_STATUS,default=1)
 
     @property
@@ -97,23 +155,78 @@ class Profile(models.Model):
     def is_notverified(self):
         return self.verified == 1
     @property
-    def get_name(self):
-        if self.name:
-            return self.name
-        return self.user.email.split('@')[0]
+    def name(self):
+        return self.user.username
+
+    @property
+    def get_renter_rating(self):
+        total = 0
+        amount = 0
+        for rating in RenterRating.objects.filter(renter=self.user):
+            total += rating.rating
+            amount += 1
+
+        if amount == 0:
+            return {'amount': amount, 'rating': amount}
+        else:
+            return {'amount': amount, 'rating': round(total / amount, 2)}
+
+    @property
+    def get_rentee_rating(self):
+        total = 0
+        amount = 0
+        for rating in RenteeRating.objects.filter(rentee=self.user):
+            total += rating.rating
+            amount += 1
+
+        if amount == 0:
+            return {'amount': amount, 'rating': amount}
+        else:
+            return {'amount': amount, 'rating': round(total / amount, 2)}
+
+    @property
+    def get_notifications(self):
+        notifications = []
+        for notification in Notification.objects.all().filter(user=self.user).order_by('read', '-date_created'):
+            notifications.append(notification)
+
+        return notifications
+
+    @property
+    def get_unread_notifications(self):
+        notifications= []
+        for notification in Notification.objects.all().filter(user=self.user, read=False).order_by('-date_created'):
+            notifications.append(notification)
+
+        return notifications
+
+    @property
+    def get_chatrooms(self):
+        chatrooms = []
+        for chatroom in ChatRoom.objects.all().filter(users=self.user).order_by():
+            chatrooms.append(chatroom)
+
+        return chatrooms
+
+    @receiver(post_save, sender=User)
+    def create_profile(sender, instance, created, *args, **kwargs):
+        if created:
+            profile = Profile(user=instance)
+        instance.profile.save()
+
+    @receiver(post_save, sender=User)
+    def save_profile(sender, instance, created, *args, **kwargs):
+        instance.profile.save()
+
+    @receiver(post_save, sender=User)
+    def create_referral_code(sender, instance, *args, **kwargs):
+        upper_alpha = "ABCDEFGHJKLMNPQRSTVWXYZ"
+        random_str = "".join(secrets.choice(upper_alpha) for i in range(12))
+        instance.profile.referral_code = (random_str + (str(instance.id)))[-12:]
+        instance.profile.save()
 
     def __str__(self):
-        return f'{self.user.email}s Profile'
-
-
-@receiver(post_save, sender=User)
-def create_profile(sender, instance, created, *args, **kwargs):
-    if created:
-        profile = Profile(user=instance)
-
-@receiver(post_save, sender=User)
-def save_profile(sender, instance, created, *args, **kwargs):
-    instance.profile.save()
+        return f"{self.user.email}'s Profile"
 
 
 Contact_Reason = (
@@ -140,7 +253,6 @@ class Contact(models.Model):
     def __str__(self):
         return self.email + " - "+ self.subject
 
-
 class NewsLetter(models.Model):
     email = models.EmailField(max_length=225)
 
@@ -151,3 +263,25 @@ class NewsLetter(models.Model):
     def create(cls, email):
         registration = cls(email=email)
         return registration
+
+class Country(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+class Area(models.Model):
+    country = models.ForeignKey('accounts.Country', on_delete=models.CASCADE)
+    name = models.CharField(max_length=50)
+    country_code = models.CharField(max_length=40,null=True,blank=True)
+
+    def __str__(self):
+        return self.name
+
+class City(models.Model):
+    area = models.ForeignKey('accounts.Area', on_delete=models.CASCADE)
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
