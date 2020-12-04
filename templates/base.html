@@ -52,7 +52,7 @@
                         {% endif %}
                   </a>
                 <div class="dropdown-divider"></div>
-                {% if request.user.email_varified %}
+                {% if request.user.email_verified %}
                 <a class="dropdown-item" href="{% url 'dashboard' %}"> Dashboard </a>
                 {% else %}
                 <a class="dropdown-item" href="{% url 'user-verification' %}"> Dashboard </a>
