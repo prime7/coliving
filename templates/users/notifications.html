@@ -16,6 +16,8 @@
                 <small class="float-right mr-4">{{ notification.date_created }} UTC</small>
             </li>
           </form>
+      {% empty %}
+          <h6 class="text-center text-muted"><i class="fas fa-folder-open text-success"></i> You don't have any notifications.</h6>
       {% endfor %}
     </ul>
 {% endblock %}

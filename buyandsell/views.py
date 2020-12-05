@@ -37,7 +37,7 @@ class CategoryDetail(ListView):
         if "q" in request.GET:
             query = request.GET["q"]
             postings = list(Posting.objects.filter(
-                Q(title__icontains=query) | Q(city__name__icontains=query) | Q(area__name__icontains=query) | Q(
+                Q(title__icontains=query) | Q(description__icontains=query) | Q(city__name__icontains=query) | Q(area__name__icontains=query) | Q(
                     country__name__icontains=query) | Q(description__icontains=query)).distinct())
             paginator = Paginator(postings, self.paginate_by)
 

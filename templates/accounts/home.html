@@ -87,9 +87,9 @@
 </section>
 <section class="mt3 gbground">
     <div class="container">
-         <div class="row">
+         <div class="row mb4">
             <div class="col-4">
-                <div class="text-center" style="margin: 20%;">
+                <div class="text-center" style="margin-top: 20%;">
                     <h1 class="text-success" style="margin-bottom: 20%;">
                         <b>Move Out Of Your Lease</b>
                     </h1>
@@ -98,7 +98,7 @@
                     </h3>
                     <span class="badge badge-pill badge-success">Cancel Anytime</span>
                     <div style="margin-top: 15%;">
-                        <a href="{% url 'memberships:select' %}" class="btn btn-lg btn-block btn-success">Move Out</a>
+                        <a href="{% url 'memberships:select' %}" class="box-shadow btn btn-lg btn-block btn-success">Move Out</a>
                     </div>
                 </div>
             </div>
@@ -129,19 +129,19 @@
     <div class="container">
          <div class="row">
             <div class="col-8">
-                <div class="ma8">
+                <div style="margin-top: 8%;">
                     <h4 class="text-success">
                         <b><i class="fas fa-hand-holding-heart text-success home-icons" style="font-size: 35px;"></i> List Your Space For Free</b>
                     </h4>
                     <p>Share your space, house, or apartment for long or short term without sign-up charges. You can share as many places as you want without any charges.</p>
                 </div>
-                <div style="margin-top: 8%; margin-left: 8%;">
+                <div>
                     <h4 class="text-success">
                         <b><i class="fas fa-money-bill-wave text-success home-icons" style="font-size: 35px;"></i> Increase Your Rental Revenue</b>
                     </h4>
                     <p>Our marketing platform will help you to manage and market multiple properties, providing you with the option of long and short term renting, at a fraction of the cost with added technology in comparison to management firms.</p>
                 </div>
-                <div style="margin-top: 8%; margin-left: 8%;">
+                <div>
                     <h4 class="text-success">
                         <b><i class="fas fa-business-time text-success home-icons" style="font-size: 35px;"></i> Grow Your Portfolio</b>
                     </h4>
@@ -149,7 +149,7 @@
                 </div>
             </div>
             <div class="col-4">
-                <div class="text-center" style="margin-left: 20%; margin-top: 20%; margin-bottom: 20%; margin-right: 20%;">
+                <div class="text-center" style="margin-top: 20%; margin-bottom: 8%;">
                     <h1 class="text-success" style="margin-bottom: 20%;">
                         <b>Rent Out Your Space</b>
                     </h1>
@@ -158,7 +158,7 @@
                     </h3>
                     <span class="badge badge-pill badge-success mr-6">Cancel Anytime</span>
                     <div style="margin-top: 15%;">
-                        <a href="{% url 'listing-create' %}" class="btn btn-lg btn-block btn-success text-center">Start Listing</a>
+                        <a href="{% url 'memberships:select' %}" class="box-shadow btn btn-lg btn-block btn-success text-center">Start Listing</a>
                     </div>
                 </div>
             </div>
@@ -166,6 +166,81 @@
     </div>
 </section>
 <section class="mt3 gbground">
+  <div class="container">
+      <div class="mx-auto ma4">
+          <div class="text-center">
+              <h1 class="text-success"><b>Memberships</b></h1>
+              <h4 class="mt4">
+                  <p>
+                      See all of our membership options and plans, and choose the one that fits you best.
+                  </p>
+              </h4>
+          </div>
+      </div>
+      <div class="card-deck mb-3 text-center">
+        {% for object in memberships %}
+        <div class="card box-shadow mb-4">
+            <div class="card-header">
+                <h4>{{ object.membership_type }}</h4>
+            </div>
+            <div class="card-body">
+            {% if object.membership_type == 'Landlord' %}
+                <h3 class="card-title pricing-card-title">$63 <small class="text-muted">/ mo</small></h3>
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li>Everything in free plan</li><hr>
+                    <li>Unlimited listing</li><hr>
+                    <li>Grow your income while lowering workload</li><hr>
+                    <li>We select the most qualified tenant</li><hr>
+                    <li>We do the hardwork,applicant's and tenants will get service from us</li><hr>
+                    <li>Property showing on autopilot by magic box</li>
+                </ul>
+            {% endif %}
+            {% if object.membership_type == 'Lease Holder' %}
+                <h3 class="card-title pricing-card-title">$15 <small class="text-muted">/ mo</small></h3>
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li>Everything in free plan</li><hr>
+                    <li>Leave as soon as you are approved</li><hr>
+                    <li>We will take care of the paperwork</li><hr>
+                    <li>We will do the scheduling</li>
+                </ul>
+            {% endif %}
+            {% if object.membership_type == 'Free' %}
+                <h3 class="card-title pricing-card-title">$0 <small class="text-muted">/ mo</small></h3>
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li>Full service without hiring anyone</li><hr>
+                    <li>24/7 Customer Support</li><hr>
+                    <li>Security Deposit Gurantee</li><hr>
+                    <li>Basic listings</li><hr>
+                    <li>Tenant Verifications</li><hr>
+                    <li>Email support</li>
+                </ul>
+            {% endif %}
+
+            {% if object.membership_type != 'Free' %}
+                <form method="POST" action="{% url 'memberships:select' %}">
+                    {% csrf_token %}
+                    {% if object.membership_type != current_membership %}
+                        <button class="btn btn-lg btn-block btn-success">Select</button>
+                    {% else %}
+                        <small class="text-dark">This is your current membership</small>
+                    {% endif %}
+                    <input type="hidden" name="membership_type" value="{{ object.membership_type }}">
+                </form>
+            {% elif object.membership_type == 'Free' %}
+                <small class="text-dark">This is your current membership</small>
+            {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="row mb4">
+          <div class="mx-auto text-center" style="margin-top: 5%;">
+            <a href="{% url 'memberships:select' %}" class="btn btn-lg btn-success">See Memberships</a><br><br>
+          </div>
+      </div>
+  </div>
+</section>
+<section class="mt3 bg-light">
   <div class="container">
       <div class="mx-auto ma4">
           <div class="text-center">
@@ -202,9 +277,9 @@
       </div>
   </div>
 </section>
-<section class="mt3 bg-light">
+<section class="mt3 gbground">
   <div class="container">
-      <div class="row">
+      <div class="row ma4">
           <div class="mx-auto text-center">
               <h1 class="text-success"><b>Rent Anything</b></h1>
               <h4 class="mt4">
@@ -247,7 +322,7 @@
       </div>
   </div>
 </section>
-<section class="mt3 gbground">
+<section class="mt3 bg-light">
   <div class="container">
     <div class="row ma4">
       <div class="text-center mx-auto">

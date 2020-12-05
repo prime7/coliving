@@ -4,6 +4,10 @@ from django.db.models.signals import post_save
 
 from datetime import datetime
 import stripe
+from django.dispatch import receiver
+
+from accounts.models import User
+
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
@@ -34,10 +38,11 @@ class UserMembership(models.Model):
     def __str__(self):
         return self.user.username
 
-    def post_save_usermembership_create(sender, instance, created, *args, **kwargs):
-            user_membership, created = UserMembership.objects.get_or_create(    user=instance)
-
-
+    @receiver(post_save, sender=User)
+    def create_landlord(sender, instance, created, *args, **kwargs):
+        if created:
+            membership, created = UserMembership.objects.get_or_create(user=instance, membership_id=1)
+            membership.save()
 
 class Subscription(models.Model):
     user_membership = models.ForeignKey(

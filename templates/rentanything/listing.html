@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-    {{listing.city}} | {{ listing.title }}
+    Rent Anything | {{ listing.title }}sadddddddddddddddddddddddddddddddddddddddddddddddddddd
 {% endblock %}
 
 {% load crispy_forms_tags %}
@@ -48,7 +48,7 @@
                                         <img src="{{ listing.user.profile.profile_pic.url }}" width="50" height="50" class="rounded-circle" href="#" alt="Profile picture"/>
                                     </div>
                                     <div class="col-6">
-                                        <div class="row">{{ listing.user.username }}</div>
+                                        <div class="row"><b>{{ listing.user.username }} <i class="ml-2 fas fa-user-{% if listing.user.profile.verified == 3 %}check text-success{% else %}times text-danger{% endif %}"></i><small>{% if listing.user.profile.verified != 3 %} Not{% endif %} Verified</small></b></div>
                                         <div class="row text-muted">Joined in {{ listing.user.date_joined|date }}</div>
                                         <div class="row text-success"><b>{{ listing.user.profile.get_renter_rating.rating }}<i class="fas fa-star"> ({{ listing.user.profile.get_renter_rating.amount }})</i></b></div>
                                     </div>

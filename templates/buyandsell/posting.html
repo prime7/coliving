@@ -48,7 +48,7 @@
                                         <img src="{{ posting.user.profile.profile_pic.url }}" width="50" height="50" class="rounded-circle" href="#" alt="Profile picture"/>
                                     </div>
                                     <div class="col-6">
-                                        <div class="row">{{ posting.user.username }}</div>
+                                        <div class="row"><b>{{ posting.user.username }} <i class="ml-2 fas fa-user-{% if posting.user.profile.verified == 3 %}check text-success{% else %}times text-danger{% endif %}"></i><small>{% if posting.user.profile.verified != 3 %} Not{% endif %} Verified</small></b></div>
                                         <div class="row text-muted">Joined in {{ posting.user.date_joined|date }}</div>
                                         <div class="row text-success"><b>{{ posting.user.profile.get_renter_rating.rating }}<i class="fas fa-star"> ({{ posting.user.profile.get_renter_rating.amount }})</i></b></div>
                                     </div>

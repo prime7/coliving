@@ -6,21 +6,23 @@
     <hr>
     <ul class="list-group">
       {% for chatroom, unread in chatrooms.items %}
-            <li class="list-group-item {% if chatroom.read %}list-group-item-light{% endif %}">
-                <a class="text-{% if chatroom.read %}muted{% else %}success{% endif %}" href="{% url 'chatroom-detail' pk=chatroom.pk %}">
-                    {% for member in chatroom.users.all %}
-                        {% if member != user %}
-                            {{ member.username }}
-                        {% endif %}
-                    {% endfor %}
-                    {% if chatroom.users.all.count == 1 %}
-                        Solo Chatroom
+        <li class="list-group-item {% if chatroom.read %}list-group-item-light{% endif %}">
+            <a class="text-{% if chatroom.read %}muted{% else %}success{% endif %}" href="{% url 'chatroom-detail' pk=chatroom.pk %}">
+                {% for member in chatroom.users.all %}
+                    {% if member != user %}
+                        {{ member.username }}
                     {% endif %}
-                </a>
-                <span class="float-right">
-                    {% if unread %}<span class="badge badge-pill badge-success">New</span>{% endif %}
-                </span>
-            </li>
+                {% endfor %}
+                {% if chatroom.users.all.count == 1 %}
+                    Solo Chatroom
+                {% endif %}
+            </a>
+            <span class="float-right">
+                {% if unread %}<span class="badge badge-pill badge-success">New</span>{% endif %}
+            </span>
+        </li>
+      {% empty %}
+          <h6 class="text-center text-muted"><i class="fas fa-folder-open text-success"></i> You aren't in any chatrooms.</h6>
       {% endfor %}
     </ul>
 {% endblock %}

@@ -187,13 +187,12 @@ class UserLeaseListView(ListView):
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
         landlord = user.landlord
-        return House.objects.active_by_user(landlord)
+        return House.objects.active_by_landlord(landlord)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = get_object_or_404(User, username=self.kwargs.get('username'))
-        user = User.objects.get(email=user)
-        context['user'] = user.landlord
+        context['user'] = user
         return context
 
 @method_decorator(login_required(login_url='/login'), name='dispatch')
