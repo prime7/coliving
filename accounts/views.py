@@ -21,12 +21,22 @@ from django.utils.encoding                  import force_text
 from django.utils.http                      import urlsafe_base64_decode
 from django.shortcuts                       import render_to_response
 from django.template                        import RequestContext
-from django.contrib.auth import logout
-from services.models import Service
-from accounts.models import Notification, ChatRoom, ChatRoomMessage
+from django.contrib.auth                    import logout
+from services.models                        import Service
+from accounts.models                        import Notification, ChatRoom, ChatRoomMessage, Landlord
+from memberships.models                     import Membership
 
 def home(request):
     services = Service.objects.all()
+    memberships = Membership.objects.all()
+    service_list = []
+    if 0 < len(services) < 9:
+        for i in range(len(services)):
+            service_list.append(services[i])
+    elif len(services) >= 9:
+        for i in range(9):
+            service_list.append(services[i])
+
     if request.method == 'POST':
        sa = request.POST.get('sa')
        c = request.POST.get('c')
@@ -39,7 +49,7 @@ def home(request):
        elif c == '2':
            return redirect(reverse('listing-short'))
 
-    return render(request,'accounts/home.html',{'services':services})
+    return render(request,'accounts/home.html',{'services':service_list, 'memberships':memberships})
 
 
 def signup(request):
@@ -70,6 +80,7 @@ def signup(request):
 @login_required
 def userDetail(request):
     if request.method == 'POST':
+        print(request)
         p_form = ProfileUpdateForm(request.POST,request.FILES,instance=request.user.profile)
         if p_form.is_valid():
             p_form.save()
@@ -211,9 +222,10 @@ class UserLease(LoginRequiredMixin,ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['active_houses'] = House.objects.active_by_user(self.request.user)
-        context['inactive_houses'] = House.objects.filter(user=self.request.user,rented=True,active=True)
-        context['short_houses'] = House.objects.filter(user=self.request.user,short_term=True,rented=False)
+        landlord = Landlord.objects.filter(user=self.request.user)[0]
+        context['active_houses'] = House.objects.active_by_landlord(landlord=landlord)
+        context['inactive_houses'] = House.objects.filter(landlord=landlord,rented=True,active=True)
+        context['short_houses'] = House.objects.filter(landlord=landlord,short_term=True,rented=False)
         context['rentanything'] = Listing.objects.filter(user=self.request.user)
         context['buyandsell'] = Posting.objects.filter(user=self.request.user)
         return context

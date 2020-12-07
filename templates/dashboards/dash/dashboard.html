@@ -27,16 +27,16 @@
             </div>
           </div>
 
-          <div class="dn3_sub">
-                <div class='dash-font1'> Current Subscription </div>
-                <div>
-                          <div class='dash-font2'> {{ membership_type }} </div>
-                          <a href="{% url 'user-membership' %}"  class="btn btn-primary">Upgrade </a>
-                </div>
-          </div>
+
 
       </div>
-
+      <div class="dn3_sub" style='width:180px'>
+            <div class='dash-font1'> Current Subscription </div>
+            <div>
+                      <div class='dash-font2'> {{ membership_type }} </div>
+                      <a href="{% url 'user-membership' %}"  class="btn btn-primary">Upgrade </a>
+            </div>
+      </div>
       <div>
           <!--Varies -->
          {% if dashboard_type == 'landlord' %}

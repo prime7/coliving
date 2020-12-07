@@ -21,8 +21,8 @@
     </div>
   </form>
   {% elif user.profile.is_verification_processing %}
-  <h1>Verification is Proessing</h1>
+  <h1 class="text-center"><i class="fas fa-spinner text-success"></i> Verification is Proessing</h1>
   {% else %}
-  <h1>Profile Verified</h1>
+  <h1 class="text-center"><i class="fas fa-user-check text-success"></i> Profile Verified</h1>
   {% endif %}
 {% endblock %}
