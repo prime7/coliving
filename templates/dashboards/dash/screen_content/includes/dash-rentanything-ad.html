@@ -1,0 +1,22 @@
+{% load static %}
+
+
+<div class='dash-listing-ad'>
+    <div>
+        <div style="display:none"> {{ listing.id}} </div>
+        <div> {{ listing.title }} </div>
+        <div> <small>{{ listing.description|truncatewords:12 }}</small> </div>
+    </div>
+    <div>
+        <a class="btn btn-success" href="{% url 'rentanything-update' pk=listing.id %}">Update  </a>
+        <a class="btn btn-info ml-2 mr-2" href="{% url 'rentanything-listing' pk=listing.id %}">View </a>
+        <a id="land_delete_listing" class="btn btn-danger" href="{% url 'rentanything-deactivate' pk=listing.pk %}">Delete </a>
+    </div>
+    <div>
+        {% if listing.applications.all|length == 0 %}
+              <div> 0 Applications </div>
+        {% else %}
+            <a class="btn btn-primary btn-lg btn-block" href="{% url 'rentanything_applications' %}"> {{ listing.applications.all|length }} Applications </a>
+        {% endif %}
+    </div>
+</div>

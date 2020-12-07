@@ -1,0 +1,13 @@
+{% extends './base.html' %}
+
+
+{% block screen_content %}
+<div class='land-listing-pane'>
+  <div>  <div class='dash-font3'> Active Listings </div> </div>
+  <div>
+  {% for posting in postings %}
+      {% include "dashboards/dash/screen_content/includes/dash-buyandsell-ad.html" with posting=posting %}
+  {% endfor %}
+  </div>
+</div>
+{% endblock %}

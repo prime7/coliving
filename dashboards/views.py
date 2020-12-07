@@ -1,6 +1,12 @@
-from django.shortcuts import render
+from django.contrib import messages
+from django.shortcuts import render, redirect
+
+from buyandsell.models import Offer, Posting
+from memberships.views import get_user_membership
+from rentanything.models import Listing, Booking
 from .forms import CurrentDashForm
 from .models import TenantVerification
+from accounts.models import ChatRoom, ChatRoomMessage
 from django.urls import resolve
 from django.contrib.auth.decorators import login_required
 from rentals.models import SfvDay, SfvApplication, House
@@ -13,8 +19,7 @@ from django.http import HttpResponse
 def dashboard_landlord(request):
     user            = request.user
     is_tasker       = False
-    #membership_type = user.usermembership.membership.membership_type
-    membership_type = 'premium'
+    membership_type = get_user_membership(request).membership
     current_url     = resolve(request.path_info).url_name
     template        = None
     context         = None
@@ -84,8 +89,7 @@ def dashboard_landlord(request):
 @login_required
 def dashboard_tenant(request):
     user            = request.user
-    #membership_type = user.usermembership.membership.membership_type
-    membership_type = 'premium'
+    membership_type = get_user_membership(request).membership
     current_url     = resolve(request.path_info).url_name
     template        = None
     context         = None
@@ -134,8 +138,7 @@ def dashboard_tasker(request):
     print("1")
     user            = request.user
     is_tasker       = False
-    #membership_type = user.usermembership.membership.membership_type
-    membership_type = 'premium'
+    membership_type = get_user_membership(request).membership
     current_url     = resolve(request.path_info).url_name
     template        = None
     context         = None
@@ -176,15 +179,125 @@ def dashboard_tasker(request):
     print('5' , template)
     return render(request, template, context)
 
+@login_required
+def dashboard_rentanything(request):
+    user            = request.user
+    membership_type = get_user_membership(request).membership
+    current_url     = resolve(request.path_info).url_name
+    template        = None
+    context         = None
+    dash_active1    = 'dash'
+    dash_active2    = None
+    dashboard_type   = 'rentanything'
+
+    form = CurrentDashForm()
+    form.fields['dashboard_types'].initial = dashboard_type
+
+
+    if current_url == 'dashboard_rentanything':
+            dash_active2 = 'rentanything_listings'
+            template = 'dashboards/dash/screen_content/rentanything/listings.html'
+
+    elif current_url == 'rentanything_applications':
+            dash_active2 = 'rentanything_applications_all'
+            template = 'dashboards/dash/screen_content/rentanything/applications.html'
+
+    elif current_url == 'rentanything_applications_accepted':
+            dash_active2 = 'rentanything_applications_accepted'
+            template = 'dashboards/dash/screen_content/rentanything/applications_accepted.html'
+
+    context = {
+        "dashboard_type"      : dashboard_type,
+        "membership_type"     : membership_type,
+        'form'                : form,
+        "dash_active1"        : dash_active1,
+        "dash_active2"        : dash_active2,
+        "listings"            : Listing.objects.filter(user=user),
+        "bookings"            : Booking.objects.all(),
+    }
+    return render(request, template, context)
+
+@login_required
+def dashboard_buyandsell(request):
+    user            = request.user
+    membership_type = get_user_membership(request).membership
+    current_url     = resolve(request.path_info).url_name
+    template        = None
+    context         = None
+    dash_active1    = 'dash'
+    dash_active2    = None
+    dashboard_type   = 'buyandsell'
+
+    form = CurrentDashForm()
+    form.fields['dashboard_types'].initial = dashboard_type
+
+
+    if current_url == 'dashboard_buyandsell':
+            dash_active2 = 'buyandsell_postings'
+            template = 'dashboards/dash/screen_content/buyandsell/postings.html'
+
+    elif current_url == 'buyandsell_applications':
+            dash_active2 = 'buyandsell_applications_all'
+            template = 'dashboards/dash/screen_content/buyandsell/applications.html'
+
+    elif current_url == 'buyandsell_applications_accepted':
+            dash_active2 = 'buyandsell_applications_accepted'
+            template = 'dashboards/dash/screen_content/buyandsell/applications_accepted.html'
+
+    context = {
+        "dashboard_type"      : dashboard_type,
+        "membership_type"     : membership_type,
+        'form'                : form,
+        "dash_active1"        : dash_active1,
+        "dash_active2"        : dash_active2,
+        "postings"            : Posting.objects.filter(user=user),
+        "offers"            : Offer.objects.all(),
+    }
+    return render(request, template, context)
+
 
 
 @login_required
-def chats(request):
+def chats(request, pk=None):
     dash_active1 = 'chats'
-    template = 'dashboards/chats/chats.html'
-    context = {
-       'dash_active1' : 'chats'
-    }
+    template = 'dashboards/chats/chats-list.html'
+    current_url = resolve(request.path_info).url_name
+    context = {}
+
+    if current_url == 'chats':
+        context['empty'] = True
+
+    elif current_url == 'chats_detail':
+        context['chatroom'] = ChatRoom.objects.filter(pk=pk).first()
+        if request.user in context['chatroom'].users.all() or request.user.is_superuser:
+            if request.method == "POST":
+                if request.POST.get('message'):
+                    ChatRoomMessage.objects.create(sender=request.user, text=request.POST.get('message'),
+                                                   chatroom_id=pk)
+                elif request.POST.get('hidden'):
+                    context['chatroom'].users.remove(request.user)
+                    if context['chatroom'].users.all().count() == 0:
+                        ChatRoomMessage.objects.filter(chatroom=context['chatroom']).delete()
+                        context['chatroom'].delete()
+                    messages.success(request, "You have left the chatroom.")
+                    return redirect('chats')
+                return redirect('chats_detail', pk=pk)
+            else:
+                chatroom_messages = []
+                for chatroom_message in ChatRoomMessage.objects.filter(chatroom=context['chatroom']):
+                    chatroom_messages.append(chatroom_message)
+                    if chatroom_message.sender != request.user:
+                        chatroom_message.read = True
+                        chatroom_message.save()
+                context['chatroom_messages'] = chatroom_messages
+
+    chatrooms = {}
+    for chatroom in request.user.profile.get_chatrooms:
+        chatrooms[chatroom] = chatroom.is_unread(user=request.user)
+
+    context['dash_active1'] = 'chats'
+    context['chatrooms'] = chatrooms
+
     return render(request, template, context)
 
 @login_required
