@@ -85,7 +85,7 @@
                                 {% elif user.profile.is_verification_processing %}
                                     <h5>Verification Status  <span class="badge badge-secondary">Processing</span></h5>
                                 {% elif user == listing.user %}
-                                    <a href="{% url 'rentanything-application' pk=listing.pk %}"><button class="btn btn-success btn-lg btn-block">See Applicants</button></a>
+                                    <a href="{% url 'rentanything_applications' %}"><button class="btn btn-success btn-lg btn-block">See Applicants</button></a>
                                 {% elif request.user.is_authenticated %}
                                     <button class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#staticBackdrop">Request Booking</button>
                                 <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">

@@ -1,0 +1,64 @@
+{% load static %}
+<div>
+    <a  class="dash-button1" type="button" style="font-size:10px; text-decoration:none; color:black;" href="{% url 'rentanything-create' %}"> Create Listing </a>
+</div>
+
+<div class='dashnav3-updown'>
+      <div>
+          <img id="dashnavbar3_click" style="display:none" src="{% static 'img/cright.svg' %}">
+          <img id="dashnavbar3_click" src="{% static 'img/cdown.svg' %}">
+         <div class="dash-font1"> Listings </div>
+       </div>
+
+      <div class='dn3-ud-r2'>
+            {% if dash_active2 == 'rentanything_listings' %}
+                {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All' lurl='dashboard_rentanything' da2=True %}
+            {% else %}
+                {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All' lurl='dashboard_rentanything' da2=False %}
+            {% endif %}
+      </div>
+
+</div>
+
+<div class='dashnav3-updown'>
+      <div>
+          <img id="dashnavbar3_click" style="display:none" src="{% static 'img/cright.svg' %}">
+          <img id="dashnavbar3_click" src="{% static 'img/cdown.svg' %}">
+         <div class="dash-font1"> Applications </div>
+      </div>
+
+       <div class='dn3-ud-r2'>
+
+             {% if dash_active2 == 'rentanything_applications_all' %}
+                  {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All' lurl='rentanything_applications' da2=True %}
+             {% else %}
+                  {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All' lurl='rentanything_applications' da2=False %}
+             {% endif %}
+
+             {% if dash_active2 == 'rentanything_applications_accepted' %}
+                  {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='Accepted' lurl='rentanything_applications_accepted' da2=True %}
+             {% else %}
+                  {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='Accepted' lurl='rentanything_applications_accepted' da2=False %}
+             {% endif %}
+
+       </div>
+</div>
+
+
+<div class='dashnav3-updown'>
+      <div>
+          <img id="dashnavbar3_click" style="display:none" src="{% static 'img/cright.svg' %}">
+          <img id="dashnavbar3_click" src="{% static 'img/cdown.svg' %}">
+         <div class="dash-font1">  Rental Insurance  </div>
+      </div>
+
+       <div class='dn3-ud-r2'>
+
+             {% if dash_active2 == 'landlord_rental_insurance' %}
+                  {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All' lurl='landlord_rental_insurance' da2=True %}
+             {% else %}
+                  {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All' lurl='landlord_rental_insurance' da2=False %}
+             {% endif %}
+       </div>
+</div>
+

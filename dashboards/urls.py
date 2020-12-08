@@ -32,10 +32,19 @@ urlpatterns = [
     path('tasker/wev_dev' , dashboard_views.dashboard_tasker, name='tasker_web_dev'),
 
 
+    #RentAnything
+    path('rentanything', dashboard_views.dashboard_rentanything, name='dashboard_rentanything'),
+    path('rentanything/applications/all', dashboard_views.dashboard_rentanything, name='rentanything_applications'),
+    path('rentanything/applications/accepted', dashboard_views.dashboard_rentanything, name='rentanything_applications_accepted'),
 
+    #RentAnything
+    path('buyandsell', dashboard_views.dashboard_buyandsell, name='dashboard_buyandsell'),
+    path('buyandsell/applications/all', dashboard_views.dashboard_buyandsell, name='buyandsell_applications'),
+    path('buyandsell/applications/accepted', dashboard_views.dashboard_buyandsell, name='buyandsell_applications_accepted'),
 
     #Chats
     path('chats/' , dashboard_views.chats, name='chats'),
+    path('chats/<pk>/' , dashboard_views.chats, name='chats_detail'),
 
     #Email
     path('email/' , dashboard_views.email, name='email'),

@@ -87,18 +87,6 @@ class PostingDetail(FormView, DetailView):
         messages.success(request, 'You have been entered as an applicant!')
         return self.render_to_response(context=context)
 
-@method_decorator(login_required(login_url='/login'), name='dispatch')
-class PostingApplicationView(DetailView):
-    model = Posting
-    template_name = 'buyandsell/buyandsell_applications.html'
-
-    def get_context_data(self,**kwargs):
-        context = {}
-        posting = Posting.objects.get(pk=self.object.pk)
-        context['applications'] = posting.applications.all()
-        context['posting'] = self.object
-        return context
-
 def ApplicationAcceptView(request, postingpk, offerpk):
 
     if request.user:
@@ -106,7 +94,7 @@ def ApplicationAcceptView(request, postingpk, offerpk):
         offer = list(Offer.objects.filter(posting=posting, pk=offerpk))[-1]
         offer.accepted = True
         offer.save()
-        posting.delete()
+        posting.applications.remove(offer)
         messages.success(request, 'Application Accepted!')
         chatroom = ChatRoom.objects.create(topic=f"{posting.title} (${offer.offering_price})")
         chatroom.users.add(request.user, offer.applicant)
@@ -125,7 +113,7 @@ def ApplicationAcceptView(request, postingpk, offerpk):
             message=f"{request.user} has accepted your offer of ${offer.offering_price} for their posting! Head to https://meetquoteshack.com/user/chatrooms to coordinate the rental process with them!",
         )
 
-    return redirect('user-lease')
+    return redirect('buyandsell_applications_accepted')
 
 @method_decorator(login_required(login_url='/login'), name='dispatch')
 class PostingCreateView(LoginRequiredMixin, CreateView):

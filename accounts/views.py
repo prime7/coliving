@@ -152,45 +152,6 @@ def notificationDelete(request, pk):
     else:
         return redirect('user-notifications')
 
-@login_required
-def chatrooms(request):
-
-    chatrooms = {}
-    for chatroom in request.user.profile.get_chatrooms:
-        chatrooms[chatroom] = chatroom.is_unread(user=request.user)
-
-    return render(request, 'users/chatrooms.html', {'chatrooms': chatrooms})
-
-@login_required
-def chatroomsDetail(request, pk):
-
-    chatroom = list(ChatRoom.objects.filter(pk=pk))[0]
-
-    if request.user in chatroom.users.all() or request.user.is_superuser:
-        if request.method == "POST":
-            if request.POST.get('message'):
-                ChatRoomMessage.objects.create(sender=request.user, text=request.POST.get('message'), chatroom_id=pk)
-            elif request.POST.get('hidden'):
-                chatroom.users.remove(request.user)
-                if chatroom.users.all().count() == 0:
-                    ChatRoomMessage.objects.filter(chatroom=chatroom).delete()
-                    chatroom.delete()
-                messages.success(request, "You have left the chatroom.")
-                return redirect('user-chatrooms')
-            return redirect('chatroom-detail', pk=pk)
-        else:
-            chatroom_messages = []
-            for chatroom_message in ChatRoomMessage.objects.filter(chatroom=chatroom):
-                chatroom_messages.append(chatroom_message)
-                if chatroom_message.sender != request.user:
-                    chatroom_message.read = True
-                    chatroom_message.save()
-
-            return render(request, 'users/chatroomsdetail.html', {'chatroom': chatroom, 'chatroom_messages': chatroom_messages})
-    else:
-        return redirect('user-chatrooms')
-
-
 def contact(request):
     if request.method == 'POST':
         c_form = ContactForm(request.POST)

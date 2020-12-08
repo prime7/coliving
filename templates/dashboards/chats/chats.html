@@ -1,1 +1,41 @@
 {% extends '../dashboardbase.html' %}
+{% load static %}
+
+{% block dashboardbase_content %}
+
+        <div class="dashnav3">
+          <div>
+            <h2>Chats</h2>
+          </div>
+          <div style="border-top: 1px solid gray; margin-right: 20px;"></div>
+          <div>
+             <ul class="list-group">
+             {% for chatroom, unread in chatrooms.items %}
+                 <li class="list-group-item {% if chatroom.read %}list-group-item-light{% endif %}" style="margin-top: 5%; margin-right: 20px;">
+                    <a class="text-{% if chatroom.read %}muted{% else %}success{% endif %}" href="{% url 'chats_detail' pk=chatroom.pk %}">
+                        {% for member in chatroom.users.all %}
+                            {% if member != user %}
+                                {{ member.username }}
+                            {% endif %}
+                        {% endfor %}
+                        {% if chatroom.users.all.count == 1 %}
+                            Solo Chatroom
+                        {% endif %}
+                    </a>
+                    <span class="float-right">
+                        {% if unread %}<span class="badge badge-pill badge-success">New</span>{% endif %}
+                    </span>
+                 </li>
+             {% empty %}
+                 <h6 class="text-center text-muted"><i class="fas fa-folder-open text-success"></i> You aren't in any chatrooms.</h6>
+             {% endfor %}
+             </ul>
+          </div>
+
+
+    </div>
+    <div class='lscreen'>
+      {% block screen_content %} {% endblock %}
+    </div>
+
+{% endblock %}
