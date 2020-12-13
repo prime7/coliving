@@ -4,7 +4,7 @@ from django.urls import reverse
 from services.choices import VERIFICATION_STATUS,SERVICES
 from accounts.models import User
 
-
+#Add quote
 class Service(models.Model):
     name = models.CharField(max_length=100)
     banner = ResizedImageField(size=[640, 480], upload_to='services',force_format='PNG',default='default-profile.jpg')
