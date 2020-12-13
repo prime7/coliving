@@ -14,6 +14,7 @@ INSTALLED_APPS = [
     'agreements',
     'services',
     'faq',
+    'finances',
     'dashboards',
     'rentanything',
     'buyandsell',
@@ -22,6 +23,13 @@ INSTALLED_APPS = [
     'storages',
     'meta',
     'robots',
+    'rest_framework',
 ]
 
 SITE_ID = 1
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+    ]
+}

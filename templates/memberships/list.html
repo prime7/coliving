@@ -24,19 +24,21 @@
 				<ul class="list-unstyled mt-3 mb-4">
 					<li>Everything in free plan</li><hr>
 					<li>Unlimited listing</li><hr>
-					<li>Grow your income while lowering workload</li><hr>
-					<li>We select the most qualified tenant</li><hr>
-					<li>We do the hardwork,applicant's and tenants will get service from us</li><hr>
-					<li>Property showing on autopilot by magic box</li>
+					<li>Selection of qualified tenants </li><hr>
+					<li>Applicants & Tenant</li><hr>
+					<li>  More time in the day </li><hr>
+					<li>Services</li>
 				</ul>
 			{% endif %}
 			{% if object.membership_type == 'Lease Holder' %}
 				<h3 class="card-title pricing-card-title">$15 <small class="text-muted">/ mo</small></h3>
 				<ul class="list-unstyled mt-3 mb-4">
-					<li>Everything in free plan</li><hr>
-					<li>Leave as soon as you are approved</li><hr>
-					<li>We will take care of the paperwork</li><hr>
-					<li>We will do the scheduling</li>
+          Everything Free Plan
+          	<li>    Everything Free Plan   </li><hr>
+					<li> Listing up to 50 units </li><hr>
+					<li>    Paperless Agreement </li><hr>
+					<li>Contactless Viewing </li><hr>
+					<li>Free Smart Lock </li>
 				</ul>
 			{% endif %}
 			{% if object.membership_type == 'Free' %}
@@ -60,10 +62,10 @@
 						<small class="text-dark">This is your current membership</small>
 					{% endif %}
 					<input type="hidden" name="membership_type" value="{{ object.membership_type }}">
-				</form>	
+				</form>
 			{% elif object.membership_type == 'Free' %}
 				<small class="text-dark">This is your current membership</small>
-			{% endif %}	
+			{% endif %}
 			</div>
 		</div>
 		{% endfor %}
