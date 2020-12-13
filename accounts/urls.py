@@ -32,6 +32,7 @@ urlpatterns = [
     path('partners/', TemplateView.as_view(template_name="accounts/partners.html"),name='partners'),
     path('newsletter/', views.newsletter_signup, name='newsletter-signup'),
     path('contact-us/', views.contact,name='contact-us'),
+    path('datalist/', views.DataListCreateView.as_view(), name='datalist'),
 
     path('account_activation_sent/', views.account_activation_sent, name='account_activation_sent'),
     path('activation/<str:uidb64>/<str:token>/',views.activate, name='activate'),
