@@ -18,6 +18,7 @@ from django.http import HttpResponse
 @login_required
 def dashboard_landlord(request):
     user            = request.user
+    print(user)
     is_tasker       = False
     membership_type = get_user_membership(request).membership
     current_url     = resolve(request.path_info).url_name
