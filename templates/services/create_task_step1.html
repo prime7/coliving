@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+
+{% block content %}
+
+   <div class='ct_container'>
+      <div class='ctc-box'>
+             <form method='post'>
+                {% csrf_token %}
+
+                <input type="submit" value="Create">
+             </form>
+      </div>
+   </div>
+   
+{% endblock %}
