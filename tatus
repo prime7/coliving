@@ -1,0 +1,1493 @@
+[33mcommit 57c1fcebc426fde2f24522a2f3cb17bc383547cd[m[33m ([m[1;36mHEAD -> [m[1;32mdevelopment[m[33m, [m[1;32mtaskerandchanges[m[33m)[m
+Author: =Vikram <vikram.s8541@gmail.com>
+Date:   Sat Dec 12 22:12:56 2020 -0800
+
+    add quote
+
+[33mcommit 32d01c75a70f61bbed132741259efa128d40b453[m[33m ([m[1;31morigin/taskerandchanges[m[33m)[m
+Merge: 367a4a1 d75fb54
+Author: =Vikram <vikram.s8541@gmail.com>
+Date:   Sat Dec 12 22:10:59 2020 -0800
+
+    ok
+
+[33mcommit 367a4a10259c9f2ccc3d20fa77256552cc28b8aa[m
+Author: =Vikram <vikram.s8541@gmail.com>
+Date:   Sat Dec 12 22:10:20 2020 -0800
+
+    merging commit
+
+[33mcommit d75fb54498ea6be1870c145e06c9c843c74007b0[m
+Author: =Vikram <vikram.s8541@gmail.com>
+Date:   Tue Dec 8 22:48:09 2020 -0800
+
+    removed processing and verify profile
+
+[33mcommit 93efcce1887d7ed4e0ef9ee65da93e84b245db2a[m
+Author: =Vikram <vikram.s8541@gmail.com>
+Date:   Tue Dec 8 22:31:37 2020 -0800
+
+    testing commit
+
+[33mcommit b12371c8b403ec69d8e29c69af793d2dc1dc2678[m
+Author: =Vikram <vikram.s8541@gmail.com>
+Date:   Tue Dec 8 22:21:22 2020 -0800
+
+    corrected spelling of membership
+
+[33mcommit e07055d08d7d7e90b46386887d1f9d467562eee4[m
+Author: =Vikram <vikram.s8541@gmail.com>
+Date:   Tue Dec 8 16:46:08 2020 -0800
+
+    created new branch
+
+[33mcommit 03a28046265650c41687fee178e9e0b638a03dd2[m
+Merge: 6a9ea0a 14c0318
+Author: Diljodh Nahal <47072341+DiljodhNahal@users.noreply.github.com>
+Date:   Mon Dec 7 16:06:41 2020 -0800
+
+    Merge pull request #9 from prime7/dashboardchanges
+    
+    Moved Rent Anything, Buy & Sell, Chats to Dashboard
+
+[33mcommit 14c03187944e6d4bccbb021846fd3c4e6d15cc04[m[33m ([m[1;31morigin/dashboardchanges[m[33m, [m[1;32mfinances[m[33m, [m[1;32mdashboardchanges[m[33m)[m
+Author: DIljodhNahal <47072341+DIljodhNahal@users.noreply.github.com>
+Date:   Mon Dec 7 14:26:19 2020 -0800
+
+    Bug fix
+
+[33mcommit 074c04650f45fbb4ff1b151b64814e2e37e2886c[m
+Author: DIljodhNahal <47072341+DIljodhNahal@users.noreply.github.com>
+Date:   Mon Dec 7 14:10:56 2020 -0800
+
+    Moved Rent Anything, Buy & Sell, Chats to Dashboard
+
+[33mcommit 6a9ea0af4016d75f7d9f97c87473566bc60fb6b9[m
+Author: DIljodhNahal <47072341+DIljodhNahal@users.noreply.github.com>
+Date:   Sat Dec 5 15:58:07 2020 -0800
+
+    Fixed Mobile View, Bug Fixes, Cleanup
+
+[33mcommit 2b96b0f4d48133d39c5c22ed0349ef31eb9ea2a7[m
+Author: =Vikram <vikram.s8541@gmail.com>
+Date:   Thu Dec 3 18:08:29 2020 -0800
+
+    removed search bar and merged changes
+
+[33mcommit 265d12de9d03884bb4ec04c7321e984c937a5a31[m
+Merge: 8fd5e28 a1b453b
+Author: =Vikram <vikram.s8541@gmail.com>
+Date:   Thu Dec 3 17:56:46 2020 -0800
+
+    merging with origin dev
+
+[33mcommit 8fd5e2823e445ffec764d14e46ebec5bd6d10816[m
+Author: =Vikram <vikram.s8541@gmail.com>
+Date:   Thu Dec 3 17:54:33 2020 -0800
+
+    removed search bar and added some changes in dashboard
+
+[33mcommit a1b453ba96b5e7ee4a23740d6fd7af42599815e6[m
+Author: Diljodh Nahal <47072341+DiljodhNahal@users.noreply.github.com>
+Date:   Tue Dec 1 17:44:26 2020 -0800
+
+    Changed button from info to success to match theme
+
+[33mcommit 38f5e18e48a44315785e1b2bc3298b72a442ab34[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Tue Dec 1 16:48:29 2020 -0800
+
+    removed fake-initials from django.config
+
+[33mcommit 6ab75ac997ac008f2079161b05e193ed5808faf8[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Tue Dec 1 16:14:19 2020 -0800
+
+    Changed 01_migration command to bypass accounts_area error
+
+[33mcommit 67627b55c12291c32c821f5511e859eb1733538d[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Tue Dec 1 16:12:03 2020 -0800
+
+    Migrations reset
+
+[33mcommit 7f46cca1941933b8cc031783a92cf28fa4db8d55[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Tue Dec 1 15:37:47 2020 -0800
+
+    Added extra country_code model field to bypass accounts.area not found error in production
+
+[33mcommit e3e263c95a7b01e319b7c8272aa332b6d410862d[m
+Merge: ed18956 20ef1e8
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Tue Dec 1 15:18:02 2020 -0800
+
+    Merged rentanything to development
+
+[33mcommit ed18956caf75d0b1b848ebb33472416d46caf224[m
+Author: =Vikram <vikram.s8541@gmail.com>
+Date:   Tue Dec 1 10:20:51 2020 -0800
+
+    added long term listings
+
+[33mcommit 986a85c35026fc3e97e0d63f7b23ff0196913d13[m
+Author: =Vikram <vikram.s8541@gmail.com>
+Date:   Tue Dec 1 10:19:39 2020 -0800
+
+    added search bar basic
+
+[33mcommit 796b4cf865d3b279c56542b9077ee0888fa5ff5b[m
+Author: =Vikram <vikram.s8541@gmail.com>
+Date:   Tue Dec 1 09:21:15 2020 -0800
+
+    added is_verification option in nav
+
+[33mcommit 20ef1e820ad14bafd44b1c8176598ed61b49d70f[m[33m ([m[1;31morigin/rentanything[m[33m)[m
+Author: DIljodhNahal <47072341+DIljodhNahal@users.noreply.github.com>
+Date:   Mon Nov 30 16:04:01 2020 -0800
+
+    Fixed bug
+
+[33mcommit 5e5b4cdf5bc98d7718d7a1c974c32dc8b73b057b[m
+Author: DIljodhNahal <47072341+DIljodhNahal@users.noreply.github.com>
+Date:   Mon Nov 30 15:59:15 2020 -0800
+
+    Moved mobile number to profile
+
+[33mcommit 0c13dadc3c29fca97203aecb06ba7e592690acfa[m
+Author: DIljodhNahal <47072341+DIljodhNahal@users.noreply.github.com>
+Date:   Mon Nov 30 15:55:19 2020 -0800
+
+    Changed user.mobile_number to user.profile.mobile_numer
+
+[33mcommit 0dc6afa52c103462f3ef6360b03c883bae746969[m
+Author: =Vikram <vikram.s8541@gmail.com>
+Date:   Mon Nov 30 14:51:27 2020 -0800
+
+    dashboard completed before launch
+
+[33mcommit b483a31ca7c098fa6770925557005fad2e1474d9[m
+Author: DIljodhNahal <47072341+DIljodhNahal@users.noreply.github.com>
+Date:   Mon Nov 30 14:26:02 2020 -0800
+
+    Rent Anything Done, Buy&Sell Done, Messages Done, Notifications Done, Various Bug Fixes Done
+
+[33mcommit b7e5d1698f3086100c7aaa36f46e719bf20f0fe7[m
+Author: =Vikram <vikram.s8541@gmail.com>
+Date:   Mon Nov 30 13:55:55 2020 -0800
+
+    completed tv and sfv
+
+[33mcommit c14d758ba8ef96fb03b6e824944e0290b59cd743[m
+Author: DIljodhNahal <47072341+DIljodhNahal@users.noreply.github.com>
+Date:   Mon Nov 30 09:38:07 2020 -0800
+
+    Finished Direct Messanging, Notifications, Rent Anything & Buy/Sale. Payment Proccesing still TODO
+
+[33mcommit cb7616db5cdd69df4eb2db6d7154cc959e893e26[m
+Author: =Vikram <vikram.s8541@gmail.com>
+Date:   Mon Nov 30 09:01:36 2020 -0800
+
+    making changes in dashboard
+
+[33mcommit 04da497332f5c23ddd6ec5c092c2290bdbb24f97[m
+Author: =Vikram <vikram.s8541@gmail.com>
+Date:   Mon Nov 30 07:24:45 2020 -0800
+
+    dash listning ready
+
+[33mcommit 045cf042566e1454e08a991ecea79c8848bb19f7[m
+Author: DIljodhNahal <47072341+DIljodhNahal@users.noreply.github.com>
+Date:   Sun Nov 29 15:53:56 2020 -0800
+
+    Added Direct Messages and Notifications
+
+[33mcommit 43f3c48878733daf0c29f78cc6ebcb4f900994ad[m
+Author: DIljodhNahal <47072341+DIljodhNahal@users.noreply.github.com>
+Date:   Sat Nov 28 15:57:33 2020 -0800
+
+    Added Buy/Sell, Worked on Rent Anything. Still WIP
+
+[33mcommit a92d4c866ebe77b5aa6cd23ef20742364a35a39f[m
+Author: =Vikram <vikram.s8541@gmail.com>
+Date:   Sat Nov 28 14:23:59 2020 -0800
+
+    made sfv app
+
+[33mcommit 3688576244e0e9c7e9214f53da1903e44847ae14[m
+Author: =Vikram <vikram.s8541@gmail.com>
+Date:   Sat Nov 28 09:14:49 2020 -0800
+
+    dashboard under construction
+
+[33mcommit fde65638adb5e2f6bf2695a186b755bc6b33f163[m
+Author: =Vikram <vikram.s8541@gmail.com>
+Date:   Fri Nov 27 01:00:22 2020 -0800
+
+    Dashbaord changes include removing the extra col and css changes. Added two new tables landlord and tenant
+
+[33mcommit 1c2c863840ac5eecf5fc00a2978d1da25de887f0[m
+Author: =Vikram <vikram.s8541@gmail.com>
+Date:   Wed Nov 25 04:28:31 2020 -0800
+
+    before updating dashboard for changes that includes adding links
+
+[33mcommit e1124d2648b822749df61a0fcddc244d88b63485[m
+Author: DIljodhNahal <47072341+DIljodhNahal@users.noreply.github.com>
+Date:   Mon Nov 23 15:53:17 2020 -0800
+
+    Rent Anything Initial Commit, WIP, Do Not Merge
+
+[33mcommit 40620fb0a6da59a6f8f67642fb8959fa7408761b[m
+Merge: b1762f6 89c5529
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sun Nov 22 22:50:23 2020 -0800
+
+    Merge branch 'master' of https://github.com/prime7/coliving
+
+[33mcommit b1762f6a84faa747f3400022f5b673f0a8fa4753[m
+Merge: 27439fd a204d4b
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sun Nov 22 22:49:15 2020 -0800
+
+    Merge branch 'newsletter' into development
+
+[33mcommit a204d4ba170901fc19bcea1d71ea11faaa983a44[m[33m ([m[1;31morigin/newsletter[m[33m)[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sun Nov 22 22:48:47 2020 -0800
+
+    migrated newletter model
+
+[33mcommit 112c8114019613d467c8f77221f2dd9f2a7b0ef1[m
+Merge: 6d4d202 1d84b32
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sun Nov 22 22:46:36 2020 -0800
+
+    Merge branch 'newsletter' of https://github.com/prime7/coliving into newsletter
+
+[33mcommit 89c55290fcf9dd3b9cc1b2a46e502ad203742ee2[m
+Merge: 6d4d202 27439fd
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sun Nov 22 22:38:30 2020 -0800
+
+    Merge pull request #6 from prime7/development
+    
+    Development
+
+[33mcommit 27439fd8f98d416e361650d53cb0e48c9b4dcceb[m
+Merge: 2781e38 6d4d202
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sun Nov 22 22:37:53 2020 -0800
+
+    Merge branch 'newsletter' into development
+
+[33mcommit 1d84b32a2a822b06aefc46203879cd276e34745f[m
+Author: DIljodhNahal <47072341+DIljodhNahal@users.noreply.github.com>
+Date:   Sat Nov 21 08:38:16 2020 -0800
+
+    Added newsletter signup
+
+[33mcommit 6d4d2027a4c386012fee0246d01ef857cffb31aa[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Wed Nov 18 08:41:57 2020 -0800
+
+    Updated SSL for the route www.meetquoteshack.com
+
+[33mcommit 2781e3830055237934308dac64c6cc8e96c11042[m
+Merge: 071dfd4 5b9e9c4
+Author: Diljodh Nahal <47072341+DiljodhNahal@users.noreply.github.com>
+Date:   Mon Nov 16 15:04:39 2020 -0800
+
+    Merge pull request #4 from prime7/landingpage
+    
+    Landing Page
+
+[33mcommit 5b9e9c423140a06fc2c88866fc18460e044b3ed9[m
+Author: DIljodhNahal <47072341+DIljodhNahal@users.noreply.github.com>
+Date:   Mon Nov 16 14:30:29 2020 -0800
+
+    Updating footer links
+
+[33mcommit 4b594f4db74205d558a8ee718dc7ae30bd77256a[m
+Author: DIljodhNahal <47072341+DIljodhNahal@users.noreply.github.com>
+Date:   Sat Nov 14 16:37:32 2020 -0800
+
+    New Branch, Landing Page, Do Not Merge, Still In Development
+
+[33mcommit 071dfd4f38904a0379f12cf289974f1ae7cf53d5[m
+Merge: 280da73 370bce2
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Mon Nov 9 23:50:37 2020 -0800
+
+    Merge branch 'development'
+
+[33mcommit 370bce244333265c478f81925dc2ed94a931b6b7[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Mon Nov 9 23:49:46 2020 -0800
+
+    User Signup - email template updated
+
+[33mcommit 280da73e64ba0449dedef593adcb8fddbb2edfcc[m
+Merge: 1528419 506c097
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Mon Nov 9 23:28:35 2020 -0800
+
+    Merge branch 'development'
+
+[33mcommit 506c09739c650ad3c4accbc26de70f42b7fa9c56[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Mon Nov 9 23:28:10 2020 -0800
+
+    Fixed email confirmation bug - added proper configuration for email backend
+
+[33mcommit 15284198dd7735446303d75a76ac33dfae335f77[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Mon Nov 9 23:25:30 2020 -0800
+
+    Fixed email confirmation bug - added proper configuration for email backend
+
+[33mcommit 8d9de2cbf211149cc8ef651382988f4d5aea2cd2[m
+Merge: 10756d4 64055b5
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Wed Nov 4 14:07:00 2020 -0800
+
+    Merge branch 'development'
+
+[33mcommit 64055b51f49878d32ba83b013ba727a250117e0d[m
+Author: =Vikram <vikram.s8541@gmail.com>
+Date:   Mon Nov 2 01:16:36 2020 -0800
+
+    Completed Responsive Design and Raj's Suggestions
+
+[33mcommit 5b6694a9959de14be3d5d05e5ed910a6283b763a[m
+Author: =Vikram <vikram.s8541@gmail.com>
+Date:   Sun Oct 25 01:16:31 2020 -0700
+
+    Dashboard basic design1 finish contains dashboard, buttons and desktop design. Working on mobile.
+
+[33mcommit cd0ef170a4ce87a24a22c9785b7e59cebc035023[m
+Author: =Vikram <vikram.s8541@gmail.com>
+Date:   Fri Oct 23 11:59:30 2020 -0700
+
+    basic desktop design navbar3 working divided them into three files the navbar3
+
+[33mcommit 2b703028a743539370bac8ec7ca1c138aa98d9f3[m
+Author: =Vikram <vikram.s8541@gmail.com>
+Date:   Wed Oct 21 20:06:08 2020 -0700
+
+    Created basic layout for dashboard responsive
+
+[33mcommit 40b0d1f674f9f01928357155af986c575fdf4315[m
+Merge: 7d17453 8d807e6
+Author: =Vikram <vikram.s8541@gmail.com>
+Date:   Tue Oct 20 21:33:59 2020 -0700
+
+    new changes
+
+[33mcommit 7d1745392a73af70fd65cc729078471dca96ac94[m
+Author: =Vikram <vikram.s8541@gmail.com>
+Date:   Tue Oct 20 21:27:00 2020 -0700
+
+    added data to database to get the project running and log into rentals
+
+[33mcommit 8d807e6c368906c38a6270d228c5884f87b30fed[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Tue Oct 20 13:52:50 2020 -0700
+
+    Update README.md
+
+[33mcommit 10756d4b217a9736d83b95fb8a0344f3e1e14ea5[m[33m ([m[1;32mmaster[m[33m)[m
+Merge: 12c1a4f 48cd517
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sun Oct 18 13:06:29 2020 -0700
+
+    Merge branch 'development'
+
+[33mcommit 48cd517676f0a2bc6d042db1d4ad5b1b1db78ad0[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sun Oct 18 12:53:34 2020 -0700
+
+    Create README.md
+
+[33mcommit 12c1a4f6f03e6b331f2f93c32de183e8e8edb52d[m
+Merge: 184a4da d9e43f9
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sun Oct 18 12:44:03 2020 -0700
+
+    Merge pull request #1 from prime7/development
+    
+    Added env sample
+
+[33mcommit d9e43f9cc97ecbdd9559f986a148a39faf6f3c7f[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sun Oct 18 12:42:32 2020 -0700
+
+    Added env sample
+
+[33mcommit 184a4da28d49397fbaf277f52f46339b91a3a0e5[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sun Sep 20 22:57:25 2020 -0700
+
+    Tasker signup added
+
+[33mcommit 660b2f99a3f69751f8ecf087b92548bdecaf6e96[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Wed Sep 16 17:56:16 2020 -0700
+
+    FAQ answer | safe added
+
+[33mcommit f1d8020b419aee7fa54490187c9a16add8fb6b11[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Wed Sep 16 12:31:37 2020 -0700
+
+    Duuos link added in application section
+
+[33mcommit 81b4335856ad67b46d33327a3c9005aaf78e0d42[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Wed Sep 16 12:22:55 2020 -0700
+
+    Faq added
+
+[33mcommit 628162f93da5f121859a8a55ade4d469420f1164[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Wed Sep 16 11:50:19 2020 -0700
+
+    FAQ added
+
+[33mcommit 448aaa5605f3f17cc6b89da5ecc81e1c34736faa[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Fri Sep 4 15:50:43 2020 -0700
+
+    Social share added
+
+[33mcommit 16c1a0b7750339a485448c5f857f7741e476e0c0[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Tue Aug 25 21:05:28 2020 -0700
+
+    Added alt in imges
+
+[33mcommit f56d36ad6b6f2df1ee58ed3a0b2f7d420ef9467d[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Tue Aug 25 20:07:27 2020 -0700
+
+    keywords added
+
+[33mcommit e908ab2d9b92571f9b70c2cb55f567c9eac32ee6[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Tue Aug 25 15:24:49 2020 -0700
+
+    Added google site verfiication
+
+[33mcommit f1302e1b465967e20d9d1c5943ea814e8a2b2cb2[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Tue Aug 25 14:33:57 2020 -0700
+
+    Added h1
+
+[33mcommit 7983f17892e7c512bfb2c288fde63bf6a4705467[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Tue Aug 25 14:18:40 2020 -0700
+
+    Error fix
+
+[33mcommit d1e309e0c8b2ba8c84ef5eb4d3a7b3b98e647ae1[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Tue Aug 25 14:17:48 2020 -0700
+
+    Robots lib added
+
+[33mcommit 248932a5b1cb51c39f0562810a1b9afc9325ee04[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Tue Aug 25 14:09:28 2020 -0700
+
+    *
+
+[33mcommit 79dfffe4f69696dc421439746671f0a432d4b06d[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Tue Aug 25 14:00:41 2020 -0700
+
+    Added robots.txt
+
+[33mcommit 21c18eab3d1dc1bfd446e93e47df5c9ccc218e97[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Tue Aug 25 11:03:15 2020 -0700
+
+    Added google analytics
+
+[33mcommit ec9a757d7bff0a00c593a02c3604fe186f846cd2[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Tue Aug 25 10:35:11 2020 -0700
+
+    Pixel for registration
+
+[33mcommit 5530a8a2796d5dd866cc5ad4b2c6444427e839ff[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Tue Aug 25 10:32:59 2020 -0700
+
+    removed pixel event to rregistration page
+
+[33mcommit cd59701007526457f87075af24299d32f6c3b351[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Tue Aug 25 10:25:02 2020 -0700
+
+    Added fbq
+
+[33mcommit 804b7f1180c8a5de5b9a849ad29bb651e6970e78[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Tue Aug 25 10:15:52 2020 -0700
+
+    Added facebook pixel for analytics
+
+[33mcommit e6147ac5bc103deb9580e2ac26dbe735bbc945a4[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Mon Aug 24 18:09:38 2020 -0700
+
+    description model length updated
+
+[33mcommit 72c6f54cbd2d2610b07553fe6d593111ac0902bb[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Mon Aug 24 18:02:43 2020 -0700
+
+    Crawler updated
+
+[33mcommit 4af18c5891ab874449b6ec6a63aa97a63823bcff[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Mon Aug 24 17:37:57 2020 -0700
+
+    page title added in every page
+
+[33mcommit 949c9bd7a55375bf258c13707f5b2f87f236bec7[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Mon Aug 24 16:31:35 2020 -0700
+
+    django-seo installed
+
+[33mcommit bd780bac44f22488bc507eb568756f2e9a2c3fe4[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Mon Aug 24 16:21:31 2020 -0700
+
+    sitemap added
+
+[33mcommit dcf1057a59f6e4d82b0d2880d0682ac3f199fb4c[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Mon Aug 24 14:02:51 2020 -0700
+
+    404 page added
+
+[33mcommit 97d74bd811ccbd4ff0d47e0d4baa1013e6238247[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Wed Aug 19 13:43:14 2020 -0700
+
+    updated ui errors
+
+[33mcommit f590501eb1b3fc1894c933755e1eda074ef8188e[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Wed Aug 19 13:19:35 2020 -0700
+
+    Service section added in menu
+
+[33mcommit d48c4664efbf864f008dd7118f15c2627727ce85[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Wed Aug 19 12:05:53 2020 -0700
+
+    migration cleared
+
+[33mcommit 12037cf552a7dab3bb457b7f1d5477cfdbef8206[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Wed Aug 19 11:59:03 2020 -0700
+
+    Task time removed from task mdoel
+
+[33mcommit feac0f6404d012ce6d421675074e727732b6ba38[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Wed Aug 19 11:34:12 2020 -0700
+
+    Taskcreation form modal name changed
+
+[33mcommit 2a9762cb5d2806d4844ac53dcb0d64f0e53591f2[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Wed Aug 19 11:24:05 2020 -0700
+
+    Services app added
+
+[33mcommit 0bbcec9a13aedb094095272cbe50bc4cb686cc1e[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Tue Aug 18 18:27:14 2020 -0700
+
+    Partners added in homepage
+
+[33mcommit f79717dbf94af8a0bf035eaf1598eed1045ec8a7[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Tue Aug 18 16:38:29 2020 -0700
+
+    Parnter page updated with links and images - duuo and square one
+
+[33mcommit b6c715a4ad3a47bdd282575ceb63c19185004162[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Tue Aug 18 16:12:13 2020 -0700
+
+    FB social media link in footer changed
+
+[33mcommit b7c7bf34fcd88b1b81eee13235e7d9b30141eb74[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Mon Aug 10 11:58:39 2020 -0700
+
+    Pricing model changed
+
+[33mcommit 885bb64aa543f7260cbeb1dc46b39cbd0dea82ef[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Tue Aug 4 14:12:59 2020 -0700
+
+    Added hellobar script
+
+[33mcommit f038d10770fd1b08ace8cacbafe01a3ec552576c[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Mon Aug 3 12:37:24 2020 -0700
+
+    Updated EMAIL_BACKEND
+
+[33mcommit 2cf23c53ea72c8ed8af153dec8c4172ad325e79b[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Mon Aug 3 12:31:00 2020 -0700
+
+    Test
+
+[33mcommit 412542ed57e6be294e20dbfeffbe23439bde6041[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Mon Aug 3 12:27:33 2020 -0700
+
+    Updated settings
+
+[33mcommit a064ee2ce053ace721906445b401292f3f04a7c9[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Mon Aug 3 12:17:19 2020 -0700
+
+    Email_backend updated
+
+[33mcommit cafa05539fc24aa5ab4caeee3db3e18beccc526e[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Mon Aug 3 11:05:31 2020 -0700
+
+    Superuser command- if admin created by command then added active status by default
+
+[33mcommit 82fbc71351eaa6df74464b929320a14b1b5f4d3a[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Mon Aug 3 10:47:42 2020 -0700
+
+    updated requirements.txt
+
+[33mcommit f593ddaf2758c8f6616deb9b920f547cba127262[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Mon Aug 3 10:36:08 2020 -0700
+
+    added script for automation
+
+[33mcommit a37f126908657e0c9571ac597613fa0ef3265b73[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sun Aug 2 14:44:39 2020 -0700
+
+    updated requirements.txt
+
+[33mcommit 91472e63ec1299e3cf84020e2b6947109ed33972[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sun Aug 2 14:41:05 2020 -0700
+
+    Updated script for external links scripts
+
+[33mcommit c01a54c8ac0fca0ad744f6199197376fd63a6930[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Fri Jul 31 11:57:56 2020 -0700
+
+    Templates updated
+
+[33mcommit 1f65b5637ad01ae74174bbf0d6fc3e8793bd3262[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Wed Jul 29 02:22:21 2020 -0700
+
+    some tweeks
+
+[33mcommit 01b0890764c112accc3cf2195d4c4971382359d8[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Wed Jul 29 01:42:58 2020 -0700
+
+    Template aupdated
+
+[33mcommit c3930bdae69df8ef6396c1a5a70e588f89b791ea[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Tue Jul 28 17:11:39 2020 -0700
+
+    Updated contact page
+
+[33mcommit 0884dd275db8feb9d817a3e458faa3fca6f4fe77[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Mon Jul 27 22:45:37 2020 -0700
+
+    Contact page added
+
+[33mcommit f7640f59bfc8fa9cee98479eb2e0fef8d5ace8de[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Mon Jul 27 22:28:35 2020 -0700
+
+    account on save username,email_verified error fix
+
+[33mcommit 58d722eaf7d697571fdbbb7ed1cc923771ac69e2[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Mon Jul 27 22:14:06 2020 -0700
+
+    Profile verification process complete
+
+[33mcommit 972ced29806fb0fdc654ddea7edd5db6e3eb67d6[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Mon Jul 27 17:37:10 2020 -0700
+
+    Verification user model and view added
+
+[33mcommit ef057f1bfcf6cdbb676e9ba2fae7463a1c260aac[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Mon Jul 27 15:00:32 2020 -0700
+
+    membership route-unauthenticated template updated
+
+[33mcommit 54b416f66eebe558d4e512937be2bf6a7a78c999[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Wed Jul 22 15:57:56 2020 -0700
+
+    Register view added
+
+[33mcommit cc0fb0472c2addbc06b27e0b04a26d9e69a5c325[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Tue Jul 21 15:26:29 2020 -0700
+
+    Testing done
+
+[33mcommit e8b8b3c36ff7bd045d492b3bac8819983777d66e[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Tue Jul 21 14:49:37 2020 -0700
+
+    Error fix
+
+[33mcommit ccf9dacacfeefcd387499cfe0e5f679da7d7ee80[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Tue Jul 21 14:11:43 2020 -0700
+
+    Final check
+
+[33mcommit 15593fc873a5a1efcd0e37f3bf56685402739983[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Tue Jul 21 02:24:17 2020 -0700
+
+    Added short term rentals and error fix
+
+[33mcommit d0a4c2ff51ead1f8b9208dc72d25b6bf03751c3d[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Mon Jul 20 17:11:38 2020 -0700
+
+    *
+
+[33mcommit fb6a89f8b82cfc7c0f249b578c54931a4495fb0b[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Mon Jul 20 12:54:00 2020 -0700
+
+    Html updated
+
+[33mcommit 8cbfe997351cf15d87fdea5d8b9135d664cf4389[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sun Jul 19 14:41:56 2020 -0700
+
+    Template updated
+
+[33mcommit 8f1aa85f8b68b41b68988ed18e237efc5b7b3492[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Wed Jul 15 23:43:54 2020 -0700
+
+    Short term rental without test
+
+[33mcommit 71523086ed373a118b02941216fdcc41579ea371[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Wed Jul 15 18:59:40 2020 -0700
+
+    Short term rental
+
+[33mcommit 45cf236447e38b6b49d6da5f12ed7ff7d954f008[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Tue Jul 14 01:27:24 2020 -0700
+
+    Terms and condition and privacy policy added
+
+[33mcommit 05bb6bca860250acb795fc62537e8cd35671821d[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Mon Jul 13 15:12:09 2020 -0700
+
+    listing html template updated
+
+[33mcommit c98d3228b4514c6641012f5b204019337d71aba7[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Mon Jul 13 15:02:34 2020 -0700
+
+    Added external link
+
+[33mcommit a14511d795da9331d776aebc759b9303dc4fad27[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sun Jul 5 15:17:55 2020 -0700
+
+    leases detail view updated
+
+[33mcommit 6cdbf38d7a1a5a1071a034e8c757645d721d8d45[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Thu Jul 2 00:37:08 2020 -0700
+
+    model Lead - link length fixed
+
+[33mcommit c3f6e538e398e056662eed3bc163d6c5119b30ad[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sat Jun 27 13:21:36 2020 -0700
+
+    Https forward
+
+[33mcommit cbf97c0abc07434b8db95d06c84af149a03944c8[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sat Jun 27 13:12:05 2020 -0700
+
+    Slug max length added
+
+[33mcommit 308165f976b5589b950cbf3f0d4326f670a83716[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sat Jun 27 13:10:32 2020 -0700
+
+    SSL redirect added
+
+[33mcommit 09210dc0ab8e5bca3c2341705fe11244cbad63e1[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Fri Jun 26 13:33:56 2020 -0700
+
+    Reset migrations
+
+[33mcommit d842c5f6492db4ab3020b20a4a0f580b81b45069[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Fri Jun 26 11:33:08 2020 -0700
+
+    Lease agreement view fixed
+
+[33mcommit 78f59a17f1f433ccaacca21cb36c74ac937ad86d[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Tue Jun 23 23:36:41 2020 -0700
+
+    *
+
+[33mcommit ff6e2f1fdb4e807d30d792040aa6cd61e151929b[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Tue Jun 23 23:23:14 2020 -0700
+
+    Template redisgned
+
+[33mcommit 63372880e983bbd90de29a97abe511284499935b[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Tue Jun 23 23:06:14 2020 -0700
+
+    template change
+
+[33mcommit b08965848da6a7834fad754add2e355c6d8a7ea7[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Tue Jun 23 17:01:26 2020 -0700
+
+    City added
+
+[33mcommit f3095a91170743c4166dc1b8a8e8c109a919a462[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Mon Jun 15 20:40:31 2020 -0700
+
+    template updated
+
+[33mcommit 56644a9350433ba9cf022d2cbbd0cd2c007c7574[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Mon Jun 15 16:14:44 2020 -0700
+
+    SSL
+
+[33mcommit 1ad267e35ab0b95327a762ed4d143854e6b3f580[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Mon Jun 15 15:06:22 2020 -0700
+
+    A
+
+[33mcommit 93e98f7110e69363c781f79b0f7d7b44d7c2372e[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Mon Jun 15 02:02:20 2020 -0700
+
+    SSL
+
+[33mcommit 605f6ff705fd24e1d08929bb72151f3cc0420e22[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Mon Jun 15 00:39:02 2020 -0700
+
+    Ssl removed
+
+[33mcommit c3c80933dd1d4b659c817453f7d4559b9f234375[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Mon Jun 15 00:36:45 2020 -0700
+
+    lease createview restriction added
+
+[33mcommit ca9f378e06fc2bda096bf21433d5022c0e707585[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sun Jun 14 20:46:05 2020 -0700
+
+    SSL Redirect to https removed
+
+[33mcommit a6b5bd3d5d725eeee0e8a6de09d2b2d2ad4f1d93[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sun Jun 14 20:42:17 2020 -0700
+
+    SSL Redirect to https
+
+[33mcommit 56896a94afd08cf661045efffbd0f8af9a77ea0a[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sun Jun 14 03:17:46 2020 -0700
+
+    Connecting with landlord
+
+[33mcommit 0d5bda9d55bfe00d333340965d652adcd58a2a40[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sun Jun 14 02:45:59 2020 -0700
+
+    Bug fix
+
+[33mcommit c48e01102a7c50b9810d5b3f493e4ceb11f9aa5d[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sun Jun 14 00:13:20 2020 -0700
+
+    Tenant application for landlords
+
+[33mcommit ae016ab6e3e33926db63a0887bb796c813caaa54[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sat Jun 13 20:58:26 2020 -0700
+
+    *
+
+[33mcommit 94f4ae3963e3af142ac95e39961913b6041a8b54[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sat Jun 13 13:01:27 2020 -0700
+
+    CSS
+
+[33mcommit 3f16a15777d56444355d489737e9310c0e8babbf[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sat Jun 13 12:53:05 2020 -0700
+
+    *()
+
+[33mcommit ea4cb257f3f41fe8388ab19ac77daa0194bd65e9[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sat Jun 13 12:48:39 2020 -0700
+
+    *
+
+[33mcommit abb08cb0609bc4fe4adb8baa17ecd7ff05640615[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sat Jun 13 12:42:15 2020 -0700
+
+    Refactored models
+
+[33mcommit fda44f7a5a897e1345c7c3ea48f12f2367d47c71[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sat Jun 13 12:32:25 2020 -0700
+
+    *
+
+[33mcommit bb390175aff6f66166b312c27912a7159fca9d3e[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sat Jun 13 12:27:05 2020 -0700
+
+    Media url made common for debug
+
+[33mcommit 1db81fc3adbb0c2c3f72d9e7bb62441412ed1a29[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sat Jun 13 11:38:14 2020 -0700
+
+    *
+
+[33mcommit b29699c9df2852498aa2f1d03d4263f86cf83933[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sat Jun 13 11:32:07 2020 -0700
+
+    *
+
+[33mcommit 165883c318f1cfce664571b4a8793066a663c27e[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sat Jun 13 11:25:24 2020 -0700
+
+    SSL
+
+[33mcommit 044546b239ef6eea48504af5019e7077b39cdad2[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sat Jun 13 11:05:57 2020 -0700
+
+    SSL added
+
+[33mcommit ada6f0cbd4635b50b55634527f00f473d8726047[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sat Jun 13 11:02:44 2020 -0700
+
+    SSL added
+
+[33mcommit c1520fbc160e19a951c19be4adb1e0f1d97277f7[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sat Jun 13 02:51:57 2020 -0700
+
+    Favourite listing template, also added in navbar, created new page
+
+[33mcommit 930c9838b12ac0498bc989e6b9c0d2a89ed3693d[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sat Jun 13 02:26:13 2020 -0700
+
+    Favourite model added
+
+[33mcommit c7869b0d435f48eda460f4b0210d89a2cb0d720d[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Fri Jun 12 19:35:41 2020 -0700
+
+    Agreement section done
+
+[33mcommit 0160ebb31ff308228c6588602c740569bc3c5e2a[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Fri Jun 12 12:54:29 2020 -0700
+
+    Lease model changed and templates updated
+
+[33mcommit 9b9a8ffd26bce155671d56de9bf8306c24e092f0[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Fri Jun 12 12:26:45 2020 -0700
+
+    Profile picture bug fixed
+
+[33mcommit 8f8d8e9026d21dfa9852121686aa702b89864220[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Thu Jun 11 12:43:32 2020 -0700
+
+    Agreement detail page done
+
+[33mcommit 64fa6cfded575369d6ae918e3445a1aa79f65335[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Thu Jun 11 11:55:45 2020 -0700
+
+    Agreement sign view done
+
+[33mcommit 222613578ba7d89156d9eddb8f6a2a5e2f0ad170[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Wed Jun 10 23:28:13 2020 -0700
+
+    Tempaltes updated
+
+[33mcommit 7f26bfc46d935116bd99d3372c468567ea4be515[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Wed Jun 10 23:10:04 2020 -0700
+
+    Listing detail template updated
+
+[33mcommit 0dde1db08890eda0f780cb0cf75f41fbd7a51520[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Wed Jun 10 01:24:56 2020 -0700
+
+    Agreement view updated
+
+[33mcommit 39a2d0ce9b07c9debb8617c64720afd15ec77c4e[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Wed Jun 10 00:27:37 2020 -0700
+
+    Bug fix
+
+[33mcommit 23367f7beeb49d661058e465ada2e653318e6d32[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Tue Jun 9 20:48:23 2020 -0700
+
+    Deactivate a lease after rented
+
+[33mcommit 96a159e298200f99a8a9d8bef59a14a83a3a69fd[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Tue Jun 9 19:35:05 2020 -0700
+
+    User LeaseListview complete
+
+[33mcommit f4d5d319113bf7abd75226b1b98f8b38bb8f8400[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Tue Jun 9 17:09:29 2020 -0700
+
+    User list view template updated
+
+[33mcommit 149d160f648531b6fa655d35bb13985a2d9bad9d[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Tue Jun 9 16:52:16 2020 -0700
+
+    Updated user listview
+
+[33mcommit 6abea805e8188e002a0b8818f917e281fa3cd467[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Tue Jun 9 16:47:23 2020 -0700
+
+    Updated user listview
+
+[33mcommit 7951c918177aa1f7ab4c710e6eafc15c9be2dfd8[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Tue Jun 9 15:47:33 2020 -0700
+
+    User leases
+
+[33mcommit e8b63dbe0aeca73552100465422576f458dea129[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Tue Jun 9 13:13:55 2020 -0700
+
+    User leases
+
+[33mcommit c2dd44f728ab6493047a64aa71c7d37207403ea7[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Tue Jun 9 11:26:33 2020 -0700
+
+    template updated
+
+[33mcommit c0e9bbbc785ccc415eee70946334176ca2543bd7[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Tue Jun 9 10:43:05 2020 -0700
+
+    Bug fixed
+
+[33mcommit 81f9cb3de80624aadaa109c14e02f511b6e2db02[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Mon Jun 8 22:23:20 2020 -0700
+
+    Stable
+
+[33mcommit 348c79ddfbb8fabcc57d0f6c0427e5c25190c152[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Mon Jun 8 17:12:38 2020 -0700
+
+    profile template updated
+
+[33mcommit 8eb3579da9e1cacbdd858fe3ccaddb96bf40f8c2[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Mon Jun 8 16:52:17 2020 -0700
+
+    *
+
+[33mcommit 2743e71576b9fad90d6b933082d4e21cd64fd7cc[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Mon Jun 8 15:30:00 2020 -0700
+
+    templates redesigned
+
+[33mcommit 698032c6b5e59dfa169a43cdea2036a86dce24a2[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Mon Jun 8 13:24:33 2020 -0700
+
+    Menu redesigned
+
+[33mcommit aaa1fdb63f87a86abe592314011e3635c49ea389[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sun Jun 7 23:20:21 2020 -0700
+
+    Navbar changed
+
+[33mcommit ae0f17327a18261e2b0da6fc96fb3e5f35dda092[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sun Jun 7 22:52:58 2020 -0700
+
+    lat lng removed from lease model and form
+
+[33mcommit 57f1510f4e137c350826a5777b218dae071e018d[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sun Jun 7 20:41:54 2020 -0700
+
+    Alert relative css
+
+[33mcommit a3acfb12e65f8e3d6589ab603eddd3a48cc47af4[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sun Jun 7 20:35:19 2020 -0700
+
+    Tooltip added in resign option
+
+[33mcommit 758511f8399ca4fa4e3111ccfcb94f918ca4212e[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sun Jun 7 18:59:35 2020 -0700
+
+    Lease model - added uploaded at and re-sign option
+
+[33mcommit 7ee8a8e2a4365d4606109aa6a7bc11559473ce82[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sun Jun 7 18:50:58 2020 -0700
+
+    menu bar home removed
+
+[33mcommit aed43c31fa5548743c0f2e51be0238ce16be3b21[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sat Jun 6 01:21:13 2020 -0700
+
+    added flip views
+
+[33mcommit 94795928d5957b37d09e79ac418c7a91c4bba7c5[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Fri Jun 5 16:40:54 2020 -0700
+
+    Start
+
+[33mcommit 31024c53bbae31d7f7524604ffec721820943550[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Tue Jun 2 14:06:06 2020 -0700
+
+    Contract option added
+
+[33mcommit 924d18a9e3dfec30e7e7ef864f0ecb223f7ef6c1[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sun May 31 16:35:43 2020 -0700
+
+    hr added above footer
+
+[33mcommit 02c04a6dd7d8b2199ddd0bae77e24cbe96ce1e15[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Sun May 31 16:31:54 2020 -0700
+
+    homepage html change
+
+[33mcommit dc8891e7dc02978e7ffcb74a4efc8676d6343fb9[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Fri May 29 20:13:35 2020 -0700
+
+    AWS settings updated
+
+[33mcommit d06f3047c7f52f82aa9a4b498a4ee9d07046062d[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Fri May 29 19:38:10 2020 -0700
+
+    S
+
+[33mcommit 62721aa52de9364d87720864a84afd99eadfef15[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Fri May 29 03:44:22 2020 -0700
+
+    background image resized
+
+[33mcommit c938caa9ad3ec7108df40150f3cc2e44acc92835[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Fri May 29 00:27:48 2020 -0700
+
+    Check
+
+[33mcommit d3ec17935b4881eda6b5bd54b8c094225a51451b[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Fri May 29 00:25:24 2020 -0700
+
+    *
+
+[33mcommit 1fb8cabb587f1c727861a77d99f1cc3b2d05747f[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Thu May 28 22:04:28 2020 -0700
+
+    requirements.txt psycopg2 added
+
+[33mcommit 2003230ea288e3e54a4434d88ec6df546bbb64cd[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Thu May 28 22:02:20 2020 -0700
+
+    removed database from settings
+
+[33mcommit ebb65443b27062c27ee18a95ce6e0ad4c6b9aa2f[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Thu May 28 20:45:40 2020 -0700
+
+    .ebextensions postgresql version 93
+
+[33mcommit 569ac010fe995a6d9bbb44f08d72dd13a15c13ce[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Thu May 28 20:16:56 2020 -0700
+
+    pos
+
+[33mcommit 248e19f4e55d73e02443c82eb4a0f42b5d3602e8[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Thu May 28 20:12:28 2020 -0700
+
+    .ebextensions - added python34 devel
+
+[33mcommit caf843c055da887adbcf5f63e9c1ce5e88f4cbee[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Thu May 28 19:33:28 2020 -0700
+
+    .ebextensions added
+
+[33mcommit e2ff4615d15293f2115219e9f81d7932d0cc0300[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Thu May 28 18:50:32 2020 -0700
+
+    Media and Static files ignored in git
+
+[33mcommit 26f8e1e2ebc687a66c9e5fd2978cb4d6b5fdb358[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Thu May 28 18:46:21 2020 -0700
+
+    AWS configuration for s3 and settings separated for debug and production
+
+[33mcommit 01d1a44f1e16fdaaecf38d3d022a3f0f4acc7f79[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Thu May 28 18:15:47 2020 -0700
+
+    Feature AWS configured for storage backends
+
+[33mcommit be6948f54eec502a44234ec68924cf4ebc2c0dc6[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Thu May 28 17:45:51 2020 -0700
+
+    UI twweeks again
+
+[33mcommit bb252d028d1797b75ea0e0a68c37cb3705aae0d1[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Thu May 28 17:11:58 2020 -0700
+
+    Templates separated
+
+[33mcommit 3b7d5fc252edfbb04d4b1bafdd4a37e69218b41b[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Thu May 28 16:51:42 2020 -0700
+
+    Updated
+
+[33mcommit 9a03db4df5167941a9d9cf2fbe2f7d880837f76c[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Wed May 27 13:53:29 2020 -0700
+
+    added decouple
+
+[33mcommit 906f0ff8965d83b8a6b2281e1e63bb60f1226f46[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Wed May 27 13:07:01 2020 -0700
+
+    Design tweeks
+
+[33mcommit 47d8994937aa9f49a8a9956dc1390a03a5eba45e[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Wed May 27 11:40:24 2020 -0700
+
+    some ui tweeks
+
+[33mcommit 08affcb4730942effcfeff504b395dc83034ee1b[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Tue May 26 14:46:19 2020 -0700
+
+    refactor design
+
+[33mcommit 1fbcc31cd73cf13735b5fdcdcd6fd6349b9d609b[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Tue May 26 10:49:37 2020 -0700
+
+    Code refactor, login required added in profile
+
+[33mcommit de86e47d5edb280e0a5fc4f28c283eefd021ae4b[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Mon May 25 18:32:30 2020 -0700
+
+    responsive design
+
+[33mcommit 4f56d8023b5c395f2a1b8fb1b1eeecb7046c16fe[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Mon May 25 18:15:44 2020 -0700
+
+    profile view added
+
+[33mcommit f67771ef565997972ccd5e2dc7950846389efd60[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Mon May 25 16:47:29 2020 -0700
+
+    restrict to create lease
+
+[33mcommit 8aadb6517a728a8385487b3a27a6efd87c28c423[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Mon May 25 15:55:17 2020 -0700
+
+    Connect view added
+
+[33mcommit 697010bf30e7a3e8dd77bda49feaeac52a05a82a[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Mon May 25 11:04:23 2020 -0700
+
+    Start
+
+[33mcommit 55544f7de6903bd71c1f310030564dbaba6f7084[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Fri May 22 23:33:58 2020 -0700
+
+    memberships app created
+
+[33mcommit 7e20918e02be6d1112207c15383f7823d1a79d33[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Fri May 22 23:03:11 2020 -0700
+
+    without subscription
+
+[33mcommit c4e1d201f899160c8cd86606f3e8624c088ffba0[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Fri May 22 16:03:46 2020 -0700
+
+    removed unwanted files
+
+[33mcommit 8c46b0860c90af5805a24b377bb4456a2ee10559[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Fri May 22 01:34:44 2020 -0700
+
+    image upload
+
+[33mcommit 19177779c38d9bbc16cdfbfb015293f513e0ab25[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Thu May 21 21:11:23 2020 -0700
+
+    temp
+
+[33mcommit 3eb3a5edfb24278b69f8cd7611f091ae50525d25[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Wed May 20 16:25:25 2020 -0700
+
+    listing create
+
+[33mcommit 6f3158a419e837801f7489f17fcb546272d1a3eb[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Wed May 20 13:39:13 2020 -0700
+
+    Detail view added
+
+[33mcommit ae7bf87599d580b115ebaad83f3cb81daef15b41[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Wed May 20 12:54:59 2020 -0700
+
+    Listing page implementing
+
+[33mcommit 8fbfd030c7bfa80fac7a9d5e3c22af9a73024019[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Wed May 20 10:23:32 2020 -0700
+
+    Feature
+    
+    Rental app added
+
+[33mcommit 5ed77b66739e18acd68103f45dc6a42b85419bf5[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Wed May 20 10:22:25 2020 -0700
+
+    Bug Fix
+    
+    account manager not creating superuser, is_superuser fixed
+
+[33mcommit 4ba2d35a22bb227a0a469106b91e03dad0b7bf27[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Wed May 20 08:30:23 2020 -0700
+
+    Added validation in password at registration
+
+[33mcommit ed83bc903015bb7eef4a71c52df02eceb8bf0185[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Wed May 20 08:18:51 2020 -0700
+
+    Added requirements.txt
+
+[33mcommit 6902d09a51360efc1253b9029769621e4bc2e60d[m
+Author: Tarek Ahmed <tarek5701@gmail.com>
+Date:   Wed May 20 00:19:20 2020 -0700
+
+    Feat-Basic Authentication
+    
+    Initial commit
