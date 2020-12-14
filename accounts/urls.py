@@ -18,8 +18,6 @@ urlpatterns = [
     path('user/notifications/', views.userNotifications, name='user-notifications'),
     path('user/notifications/<pk>', views.notificationDetail, name='notification-detail'),
     path('user/notifications/<pk>/delete/', views.notificationDelete, name='notification-delete'),
-    path('user/chatrooms/', views.chatrooms, name='user-chatrooms'),
-    path('user/chatrooms/<pk>/', views.chatroomsDetail, name='chatroom-detail'),
     path('user/membership/', views.userMembership, name='user-membership'),
     path('user/lease/', views.UserLease.as_view(), name='user-lease'),
     path('user/agreements/', AgreementListView.as_view(),name='user-agreements'),
@@ -34,6 +32,7 @@ urlpatterns = [
     path('partners/', TemplateView.as_view(template_name="accounts/partners.html"),name='partners'),
     path('newsletter/', views.newsletter_signup, name='newsletter-signup'),
     path('contact-us/', views.contact,name='contact-us'),
+    path('datalist/', views.DataListCreateView.as_view(), name='datalist'),
 
     path('account_activation_sent/', views.account_activation_sent, name='account_activation_sent'),
     path('activation/<str:uidb64>/<str:token>/',views.activate, name='activate'),

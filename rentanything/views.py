@@ -86,18 +86,6 @@ class ListingDetail(FormView, DetailView):
         messages.success(request, 'You have been entered as an applicant!')
         return self.render_to_response(context=context)
 
-@method_decorator(login_required(login_url='/login'), name='dispatch')
-class ListingApplicationView(DetailView):
-    model = Listing
-    template_name = 'rentanything/rentanything_applications.html'
-
-    def get_context_data(self,**kwargs):
-        context = {}
-        listing = Listing.objects.get(pk=self.object.pk)
-        context['applications'] = listing.applications.all()
-        context['listing'] = self.object
-        return context
-
 def ApplicationAcceptView(request, listingpk, bookingpk):
 
     if request.user:

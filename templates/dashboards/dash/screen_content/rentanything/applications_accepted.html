@@ -1,0 +1,46 @@
+{% extends './base.html' %}
+
+
+{% block screen_content %}
+<div class='land-app-pane'>
+  <div>
+        <div class='dash-font3'> Applications </div>
+  </div>
+
+  <div>
+  {% for listing in listings %}
+      <div class='las'>
+
+            <div>
+               <div style="color:black; font-size:18px;"> {{ listing }} </div>
+               <div> {{ listing.description|truncatewords:12 }} </div>
+               <a class="btn btn-info" style="color:white" href="{% url 'rentanything-listing' pk=listing.pk %}">View </a>
+            </div>
+
+            <div class='las-apps'>
+               <div class='dash-font2'> Applications </div>
+               {% for application in bookings %}
+                     {% if application.accepted and application.listing == listing %}
+                     <div class="card mb-3" style="max-width: 540px; color: black;">
+                        <div class="card-header">
+                            <div class="row">
+                                <h5 class="card-title mr-auto">{{ application.rentee.email }}</h5>
+                                <small class="mr-2">{{ application.start }} - {{ application.end }}</small>
+                                {% if application.rentee.profile.verified %}
+                                <i class="fas fa-check text-center text-success mb-2"></i>
+                                {% else %}
+                                <i class="far fa-times-circle text-danger mb-2"></i>
+                                {% endif %}
+                            </div>
+                        </div>
+                     </div>
+                     {% endif %}
+               {% endfor %}
+            </div>
+      </div>
+  {% endfor %}
+  </div>
+
+</div>
+
+{% endblock %}

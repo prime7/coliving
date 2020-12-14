@@ -1,0 +1,22 @@
+{% load static %}
+
+
+<div class='dash-listing-ad'>
+    <div>
+        <div style="display:none"> {{ posting.id}} </div>
+        <div> {{ posting.title }} </div>
+        <div> <small>{{ posting.description|truncatewords:12 }}</small> </div>
+    </div>
+    <div>
+        <a class="btn btn-success" href="{% url 'buyandsell-update' pk=posting.id %}">Update  </a>
+        <a class="btn btn-info ml-2 mr-2" href="{% url 'buyandsell-posting' pk=posting.id %}">View </a>
+        <a id="land_delete_listing" class="btn btn-danger" href="{% url 'buyandsell-deactivate' pk=posting.pk %}">Delete </a>
+    </div>
+    <div>
+        {% if posting.applications.all|length == 0 %}
+              <div> 0 Applications </div>
+        {% else %}
+            <a class="btn btn-primary btn-lg btn-block" href="{% url 'buyandsell_applications' %}"> {{ posting.applications.all|length }} Applications </a>
+        {% endif %}
+    </div>
+</div>

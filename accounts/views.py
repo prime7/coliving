@@ -1,14 +1,17 @@
+from django.contrib.messages.views import SuccessMessageMixin
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http                            import HttpResponse,HttpResponseRedirect
 from django.contrib.auth                    import login, authenticate
 from django.contrib.auth.forms              import UserCreationForm
 from django.shortcuts                       import render, redirect,reverse
 from .forms                                 import UserRegisterForm,ProfileUpdateForm,ProfileVerificationForm,ContactForm
-from .models                                import User, NewsLetter
+from .models import User, NewsLetter, DataList
 from rentanything.models                    import Listing
 from buyandsell.models                      import Posting
 from django.contrib.auth.decorators         import login_required
 from django.contrib                         import messages
-from django.views.generic                   import ListView,UpdateView,DetailView
+from django.views.generic import ListView, UpdateView, DetailView, CreateView
+from django.db.models                       import Q
 from rentals.models                         import House
 from memberships.views                      import get_user_membership,get_user_subscription
 from django.contrib.auth.mixins             import LoginRequiredMixin
@@ -25,6 +28,8 @@ from django.contrib.auth                    import logout
 from services.models                        import Service
 from accounts.models                        import Notification, ChatRoom, ChatRoomMessage, Landlord
 from memberships.models                     import Membership
+from itertools                              import chain
+from django.urls                            import resolve
 
 def home(request):
     services = Service.objects.all()
@@ -37,20 +42,56 @@ def home(request):
         for i in range(9):
             service_list.append(services[i])
 
-    if request.method == 'POST':
-       sa = request.POST.get('sa')
-       c = request.POST.get('c')
-       l = request.POST.get('l')
+    query = request.GET.get('q')
+    if query:
+        rentanything = Listing.objects.filter(Q(title__icontains=query) |
+                                              Q(description__icontains=query) |
+                                              Q(city__name__icontains=query) |
+                                              Q(area__name__icontains=query) |
+                                              Q(country__name__icontains=query)
+                                              ).distinct()
+        buyandsell = Posting.objects.filter(Q(title__icontains=query) |
+                                            Q(description__icontains=query) |
+                                            Q(city__name__icontains=query) |
+                                            Q(area__name__icontains=query) |
+                                            Q(country__name__icontains=query)
+                                            ).distinct()
+        listing = House.objects.filter(Q(title__icontains=query) |
+                                       Q(description__icontains=query) |
+                                       Q(city__icontains=query)
+                                       ).distinct().order_by('-earliest_move_in')
 
-       if c == 'all':
-            return  redirect(reverse('listing'), permanent=True)
-       elif c == '1':
-           return redirect(reverse('listing-short'))
-       elif c == '2':
-           return redirect(reverse('listing-short'))
+        results = list(chain(rentanything, listing, buyandsell))
+
+        if len(results) > 0:
+
+            return render(request, 'accounts/query.html', {'results': results[:25], 'query': query})
+
 
     return render(request,'accounts/home.html',{'services':service_list, 'memberships':memberships})
 
+# START TEMPORARY VIEW
+class DataListCreateView(SuccessMessageMixin, CreateView):
+    model = DataList
+    success_message = 'Thank you for your response!'
+
+    fields = ['name', 'email', 'phone', 'text']
+    labels = {
+        'name': "Your Name",
+        'email': "Your Email Address",
+        'phone': "Your Phone Number",
+        'text': "Please Tell Us What You Are Looking For"
+    }
+
+    def get_success_url(self):
+        self.object.phone = self.object.get_phone_number
+        self.object.save()
+
+        if self.request.META.get('HTTP_REFERER'):
+            return self.request.META.get('HTTP_REFERER')
+        else:
+            return reverse('home')
+# END TEMPORARY VIEW
 
 def signup(request):
 
@@ -60,7 +101,6 @@ def signup(request):
             user = form.save(commit=False)
             user.is_active = False
             user.save()
-            print("b")
             current_site = get_current_site(request)
             subject = 'Welcome to Meetquoteshack <3 Activate your account'
             message = render_to_string('accounts/account_activation_email.html', {
@@ -70,7 +110,6 @@ def signup(request):
                 'token': account_activation_token.make_token(user),
             })
             user.email_user(subject, message,fail_silently=False)
-            print("a")
             return redirect('account_activation_sent')
     else:
         form = UserRegisterForm()
@@ -80,7 +119,6 @@ def signup(request):
 @login_required
 def userDetail(request):
     if request.method == 'POST':
-        print(request)
         p_form = ProfileUpdateForm(request.POST,request.FILES,instance=request.user.profile)
         if p_form.is_valid():
             p_form.save()
@@ -151,45 +189,6 @@ def notificationDelete(request, pk):
             return redirect('user-notifications')
     else:
         return redirect('user-notifications')
-
-@login_required
-def chatrooms(request):
-
-    chatrooms = {}
-    for chatroom in request.user.profile.get_chatrooms:
-        chatrooms[chatroom] = chatroom.is_unread(user=request.user)
-
-    return render(request, 'users/chatrooms.html', {'chatrooms': chatrooms})
-
-@login_required
-def chatroomsDetail(request, pk):
-
-    chatroom = list(ChatRoom.objects.filter(pk=pk))[0]
-
-    if request.user in chatroom.users.all() or request.user.is_superuser:
-        if request.method == "POST":
-            if request.POST.get('message'):
-                ChatRoomMessage.objects.create(sender=request.user, text=request.POST.get('message'), chatroom_id=pk)
-            elif request.POST.get('hidden'):
-                chatroom.users.remove(request.user)
-                if chatroom.users.all().count() == 0:
-                    ChatRoomMessage.objects.filter(chatroom=chatroom).delete()
-                    chatroom.delete()
-                messages.success(request, "You have left the chatroom.")
-                return redirect('user-chatrooms')
-            return redirect('chatroom-detail', pk=pk)
-        else:
-            chatroom_messages = []
-            for chatroom_message in ChatRoomMessage.objects.filter(chatroom=chatroom):
-                chatroom_messages.append(chatroom_message)
-                if chatroom_message.sender != request.user:
-                    chatroom_message.read = True
-                    chatroom_message.save()
-
-            return render(request, 'users/chatroomsdetail.html', {'chatroom': chatroom, 'chatroom_messages': chatroom_messages})
-    else:
-        return redirect('user-chatrooms')
-
 
 def contact(request):
     if request.method == 'POST':

@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+  Coliving | {{ category.title }}
+{% endblock %}
+
+{% block content %}
+<section class="jumbotron text-center m-0">
+  <div class="container">
+      <h1>Results</h1>
+  </div>
+</section>
+<div class="album py-5 bg-light">
+  <div class="container">
+    <div class="mx-auto mb4">
+        <h5 class="text-center">For "{{ query }}"</h5>
+    </div>
+    <div class="row">
+        <div class="card" style="width: 100%;">
+            <div class="card-body topborder">
+                <ul class="list-group list-group-flush">
+                    {% for result in results %}
+                        {% if result.payment_interval %} <!-- Rent Anything Check -->
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-6 col-md-4">
+                                    <div class="ma4"><h3><a href="{% url 'rentanything-listing' pk=result.pk %}" class="text-dark">{{ result.title }}</a></h3><small class="text-success">({{ result.city }}, {{ result.country }})</small><br>(Rent Anything)</div>
+                                    <h6 class="ma4 text-muted">{{ result.description|truncatewords:15 }}</h6>
+                                </div>
+                                <div class="col-12 col-md-8">
+                                    <div class="col" style="margin-left: 80%;">
+                                        <div class="row ma4">
+                                            <span class="badge badge-pill badge-success" style="width: 100px;"><b>${{ result.price }}</b> {{ result.get_payment_interval }}</span>
+                                        </div>
+                                        <div class="row ma4 text-success">
+                                            <b>{{ result.get_listing_rating.rating }}<i class="fas fa-star"></i></b> ({{ result.get_listing_rating.amount }})
+                                        </div>
+                                        <div class="row ma4">
+                                            <a class="btn btn-success" style="color: white;" href="{% url 'rentanything-listing' pk=result.pk %}">
+                                                <b>See Listing</b>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        {% elif result.earliest_move_in %} <!-- Rental Listing Check -->
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-6 col-md-4">
+                                    <div class="ma4"><h3><a href="{% url 'listing-detail' result.slug %}" class="text-dark">{{ result.title }}</a></h3><small class="text-success">({{ result.address }})</small><br>(Listings)</div>
+                                    <h6 class="ma4 text-muted">{{ result.description|truncatewords:15 }}</h6>
+                                </div>
+                                <div class="col-12 col-md-8">
+                                    <div class="col" style="margin-left: 80%;">
+                                        <div class="row ma4">
+                                            <span class="badge badge-pill badge-success" style="width: 100px;"><b>${{ result.monthly_rent }}</b> /month</span>
+                                        </div>
+                                        <div class="row ma4 text-success">
+                                            <b>Seller: {{ result.landlord.user.profile.get_renter_rating.rating }}<i class="fas fa-star"></i></b> ({{ result.landlord.user.profile.get_renter_rating.amount }})
+                                        </div>
+                                        <div class="row ma4">
+                                            <a class="btn btn-success" style="color: white;" href="{% url 'listing-detail' result.slug %}">
+                                                <b>See Listing</b>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        {% else %} <!-- Otherwise Buy & Sell -->
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-6 col-md-4">
+                                    <div class="ma4"><h3><a href="{% url 'buyandsell-posting' pk=result.pk %}" class="text-dark">{{ result.title }}</a></h3><small class="text-success">({{ result.city }}, {{ result.country }})</small><br>(Buy & Sell)</div>
+                                    <h6 class="ma4 text-muted">{{ result.description|truncatewords:15 }}</h6>
+                                </div>
+                                <div class="col-12 col-md-8">
+                                    <div class="col" style="margin-left: 80%;">
+                                        <div class="row ma4">
+                                            <span class="badge badge-pill badge-success" style="width: 100px;"><b>${{ result.price }}</b></span>
+                                        </div>
+                                        <div class="row ma4 text-success">
+                                            <b>Seller: {{ result.user.profile.get_renter_rating.rating }}<i class="fas fa-star"></i></b> ({{ result.user.profile.get_renter_rating.amount }})
+                                        </div>
+                                        <div class="row ma4">
+                                            <a class="btn btn-success" style="color: white;" href="{% url 'buyandsell-posting' pk=result.pk %}">
+                                                <b>See Listing</b>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                            </div>
+                        </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

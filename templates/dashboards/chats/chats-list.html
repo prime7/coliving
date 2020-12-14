@@ -1,0 +1,91 @@
+{% extends './chats.html' %}
+
+{% block screen_content %}
+    <div class="mt-4 ml-4">
+        {% if not empty %}
+        <div class='dash-font3'> Chatroom </div>
+            <div class="row">
+                <div class="col-8">
+                    <small class="text-secondary">Username : {{ user.username }}</small><br>
+                    <small class="text-secondary">Email : {{ user.email }}</small><br><br>
+                </div>
+                <div class="col-4">
+                    <button class="btn btn-danger float-right" data-toggle="modal" data-target="#staticBackdrop">Leave Chat</button>
+                    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content topborder">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Are you sure you want to leave?</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>
+                                <div class="modal-body">
+                                    This action is irreversible. If you leave this chat, you will not be allowed back and will lose access to the chat history.
+                                </div>
+                                <form method="POST" id="deleteform" class="p-3">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="hidden" value="true">
+                                    <div class="form-group text-center">
+                                        <button class="btn btn-outline-danger" name="delete" type="submit">Leave Chat Forever</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            Other Member(s):
+            {% for member in chatroom.users.all %}
+                {% if member != user %}
+                    {{ member.username }}
+                {% endif %}
+            {% empty %}
+                None
+            {% endfor %}<br><br>
+            Topic: {{ chatroom.topic }}
+            <hr>
+            <ul class="list-group chatgroup" style="list-style-type: none;">
+            {% for message in chatroom_messages %}
+                {% if message.sender == user %}
+                    <li class="chatmsg">
+                      <img src="{{ user.profile.profile_pic.url }}" class="right" alt="Avatar" style="width:100%;"/>
+                      <div class="col" style="color: #aaa;">
+                          <small>{{ message.date_created }}</small>
+                      </div>
+                      <hr>
+                      <div class="col">
+                            {{ message.text }}
+                      </div>
+                    </li>
+                {% else %}
+                    <li class="chatmsg darker">
+                        <img src="{{ message.sender.profile.profile_pic.url }}" alt="Avatar" style="width:100%;"/>
+                        <div class="col">
+                            {{ message.sender.username }} <div class="time-right"><small>{{ message.date_created }}</small></div>
+                            <hr>
+                        </div>
+                        <div class="col">
+                            {{ message.text }}
+                        </div>
+                    </li>
+                {% endif %}
+            {% endfor %}
+            </ul>
+            <div class="card ma4">
+                <form method='POST'>
+                    {% csrf_token %}
+                    <div class='input-group'>
+                        <input class='form-control' type='text' name='message' placeholder='Send Message'/>
+                        <span class='input-group-btn'>
+                            <button class='btn btn-success search-button' type='submit'><i class="fa fa-send"></i></button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+        {% else %}
+            <h2>Select A Chatroom.</h2>
+        {% endif %}
+    </div>
+{% endblock %}

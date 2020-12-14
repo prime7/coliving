@@ -8,6 +8,7 @@ from django.core.validators import RegexValidator, MinValueValidator, MaxValueVa
 from django_resized import ResizedImageField
 from django.core.mail import send_mail
 from django.conf import settings
+import re
 
 PHONE_REGEX = RegexValidator(regex='\d{9,13}$',message="Phone Number must be without +")
 VERIFICATION_STATUS = (
@@ -46,14 +47,6 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def email_user(self, subject, message, from_email=None, **kwargs):
         send_mail(subject, message, settings.EMAIL_HOST_USER, [self.email], **kwargs)
-
-
-PHONE_REGEX = RegexValidator(regex='\d{9,13}$',message="Phone Number must be without +")
-VERIFICATION_STATUS = (
-    (1,'Not Verified'),
-    (2,'Processing'),
-    (3,'Verified'),
-)
 
 class Landlord(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='landlord')
@@ -212,17 +205,13 @@ class Profile(models.Model):
     def create_profile(sender, instance, created, *args, **kwargs):
         if created:
             profile = Profile(user=instance)
+        upper_alpha = "ABCDEFGHJKLMNPQRSTVWXYZ"
+        random_str = "".join(secrets.choice(upper_alpha) for i in range(12))
+        instance.profile.referral_code = (random_str + (str(instance.id)))[-12:]
         instance.profile.save()
 
     @receiver(post_save, sender=User)
     def save_profile(sender, instance, created, *args, **kwargs):
-        instance.profile.save()
-
-    @receiver(post_save, sender=User)
-    def create_referral_code(sender, instance, *args, **kwargs):
-        upper_alpha = "ABCDEFGHJKLMNPQRSTVWXYZ"
-        random_str = "".join(secrets.choice(upper_alpha) for i in range(12))
-        instance.profile.referral_code = (random_str + (str(instance.id)))[-12:]
         instance.profile.save()
 
     def __str__(self):
@@ -285,3 +274,20 @@ class City(models.Model):
     def __str__(self):
         return self.name
 
+
+# START TEMPORARY MODEL
+class DataList(models.Model): # Used to store email, name, phone while we are still < 100 listings
+    name = models.CharField(max_length=50)
+    email = models.EmailField(max_length=255)
+    phone = models.CharField(max_length=14)
+    text = models.TextField(max_length=500)
+
+    def __str__(self):
+        return self.email
+
+    @property
+    def get_phone_number(self): # Cleans phone number field for usage
+        return re.sub('[^0-9]', '', self.phone)
+
+
+# END TEMPORARY MODEL
