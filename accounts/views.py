@@ -4,8 +4,8 @@ from django.http                            import HttpResponse,HttpResponseRedi
 from django.contrib.auth                    import login, authenticate
 from django.contrib.auth.forms              import UserCreationForm
 from django.shortcuts                       import render, redirect,reverse
-from .forms                                 import UserRegisterForm,ProfileUpdateForm,ProfileVerificationForm,ContactForm
-from .models import User, NewsLetter, DataList
+from .forms import UserRegisterForm, ProfileUpdateForm, ProfileVerificationForm, ContactForm, DataListForm
+from .models import User, NewsLetter, DataList, Profile
 from rentanything.models                    import Listing
 from buyandsell.models                      import Posting
 from django.contrib.auth.decorators         import login_required
@@ -64,8 +64,9 @@ def home(request):
         results = list(chain(rentanything, listing, buyandsell))
 
         if len(results) > 0:
-
             return render(request, 'accounts/query.html', {'results': results[:25], 'query': query})
+        else:
+            messages.warning(request, "No Matching Requests Found.")
 
 
     return render(request,'accounts/home.html',{'services':service_list, 'memberships':memberships})
@@ -74,17 +75,11 @@ def home(request):
 class DataListCreateView(SuccessMessageMixin, CreateView):
     model = DataList
     success_message = 'Thank you for your response!'
-
-    fields = ['name', 'email', 'phone', 'text']
-    labels = {
-        'name': "Your Name",
-        'email': "Your Email Address",
-        'phone': "Your Phone Number",
-        'text': "Please Tell Us What You Are Looking For"
-    }
+    form_class = DataListForm
 
     def get_success_url(self):
         self.object.phone = self.object.get_phone_number
+        self.object.price = self.object.get_price_range
         self.object.save()
 
         if self.request.META.get('HTTP_REFERER'):
@@ -101,6 +96,12 @@ def signup(request):
             user = form.save(commit=False)
             user.is_active = False
             user.save()
+            # Referral Code Usage
+            if form.cleaned_data['code']:
+                referrer = Profile.objects.filter(referral_code=form.cleaned_data['code']).first()
+                if referrer:
+                    referrer.referred_users.add(user)
+
             current_site = get_current_site(request)
             subject = 'Welcome to Meetquoteshack <3 Activate your account'
             message = render_to_string('accounts/account_activation_email.html', {
@@ -151,28 +152,6 @@ def userVerification(request):
     return render(request, 'users/verification.html',context)
 
 @login_required
-def userNotifications(request):
-    return render(request, 'users/notifications.html')
-
-@login_required
-def notificationDetail(request, pk):
-
-        notification = list(Notification.objects.all().filter(pk=pk, user=request.user).order_by('-date_created'))[0]
-
-        if request.user == notification.user:
-            if notification.read == False:
-                notification.read = True
-                notification.save()
-
-            context = {
-                'notification': notification
-            }
-
-            return render(request, 'users/notificationdetail.html',context)
-        else:
-            return redirect('user-notifications')
-
-@login_required
 def notificationDelete(request, pk):
 
     notification = list(Notification.objects.all().filter(pk=pk, user=request.user).order_by('-date_created'))[0]
@@ -184,11 +163,11 @@ def notificationDelete(request, pk):
 
             notification.delete()
 
-            return redirect('user-notifications')
+            return redirect('notifications')
         else:
-            return redirect('user-notifications')
+            return redirect('notifications')
     else:
-        return redirect('user-notifications')
+        return redirect('notifications')
 
 def contact(request):
     if request.method == 'POST':

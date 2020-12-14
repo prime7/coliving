@@ -6,7 +6,7 @@ from memberships.views import get_user_membership
 from rentanything.models import Listing, Booking
 from .forms import CurrentDashForm
 from .models import TenantVerification
-from accounts.models import ChatRoom, ChatRoomMessage
+from accounts.models import ChatRoom, ChatRoomMessage, Notification
 from django.urls import resolve
 from django.contrib.auth.decorators import login_required
 from rentals.models import SfvDay, SfvApplication, House
@@ -256,12 +256,10 @@ def dashboard_buyandsell(request):
     }
     return render(request, template, context)
 
-
-
 @login_required
 def chats(request, pk=None):
     dash_active1 = 'chats'
-    template = 'dashboards/chats/chats-list.html'
+    template = 'dashboards/chats/chats-detail.html'
     current_url = resolve(request.path_info).url_name
     context = {}
 
@@ -296,8 +294,33 @@ def chats(request, pk=None):
     for chatroom in request.user.profile.get_chatrooms:
         chatrooms[chatroom] = chatroom.is_unread(user=request.user)
 
-    context['dash_active1'] = 'chats'
+    context['dash_active1'] = dash_active1
     context['chatrooms'] = chatrooms
+
+    return render(request, template, context)
+
+@login_required
+def notifications(request, pk=None):
+    dash_active1 = 'notifications'
+    template = 'dashboards/notifications/notifications-detail.html'
+    current_url = resolve(request.path_info).url_name
+    context = {}
+
+    if current_url == 'notifications':
+        context['empty'] = True
+
+    elif current_url == 'notifications_detail':
+        context['notification'] = Notification.objects.filter(pk=pk).first()
+        if request.user == context['notification'].user:
+            context['notification'].read = True
+            context['notification'].save()
+
+    notifications = []
+    for notification in Notification.objects.filter(user=request.user):
+        notifications.append(notification)
+
+    context['dash_active1'] = dash_active1
+    context['notifications'] = notifications
 
     return render(request, template, context)
 

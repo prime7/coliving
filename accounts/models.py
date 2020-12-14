@@ -115,10 +115,6 @@ class ChatRoom(models.Model):
             if not message.read:
                 if message.sender != user:
                     return True
-                else:
-                    return False
-            else:
-                return False
 
 class Profile(models.Model):
     """
@@ -137,6 +133,8 @@ class Profile(models.Model):
     # Verification
     verification_doc = ResizedImageField(size=[1200, 1200], upload_to='verifications', null=True,blank=True)
     verified = models.IntegerField(choices=VERIFICATION_STATUS,default=1)
+
+    referred_users = models.ManyToManyField('accounts.User', related_name='referred_users', null=True, blank=True)
 
     @property
     def is_profile_ready(self):
@@ -205,10 +203,12 @@ class Profile(models.Model):
     def create_profile(sender, instance, created, *args, **kwargs):
         if created:
             profile = Profile(user=instance)
-        upper_alpha = "ABCDEFGHJKLMNPQRSTVWXYZ"
-        random_str = "".join(secrets.choice(upper_alpha) for i in range(12))
-        instance.profile.referral_code = (random_str + (str(instance.id)))[-12:]
-        instance.profile.save()
+
+        if not instance.profile.referral_code:
+            upper_alpha = "ABCDEFGHJKLMNPQRSTVWXYZ"
+            random_str = "".join(secrets.choice(upper_alpha) for i in range(12))
+            instance.profile.referral_code = (random_str + (str(instance.id)))[-12:]
+            instance.profile.save()
 
     @receiver(post_save, sender=User)
     def save_profile(sender, instance, created, *args, **kwargs):
@@ -276,10 +276,43 @@ class City(models.Model):
 
 
 # START TEMPORARY MODEL
+
+locations = (
+    (1, "North Vancouver"),
+    (2, "West Vancouver"),
+    (3, "East Vancouver"),
+    (4, "South Vancouver"),
+    (5, "Downtown Vancouver"),
+    (6, "Burnaby"),
+    (7, "Surrey"),
+    (8, "Richmond"),
+    (9, "Abbotsford"),
+    (10, "Langley"),
+)
+
+category = (
+    (1, "Basement"),
+    (2, "1 Bedroom"),
+    (3, "2 Bedroom"),
+    (4, "Condo"),
+    (5, "Townhouse"),
+    (6, "Co-Living"),
+    (7, "Other"),
+)
+
+rental_type = (
+    (1, "Daily"),
+    (2, "Monthly")
+)
+
 class DataList(models.Model): # Used to store email, name, phone while we are still < 100 listings
     name = models.CharField(max_length=50)
     email = models.EmailField(max_length=255)
     phone = models.CharField(max_length=14)
+    location = models.IntegerField(choices=locations, default=1)
+    category = models.IntegerField(choices=category, default=1)
+    price = models.CharField(max_length=25)
+    type = models.IntegerField(choices=rental_type, default=1)
     text = models.TextField(max_length=500)
 
     def __str__(self):
@@ -288,6 +321,10 @@ class DataList(models.Model): # Used to store email, name, phone while we are st
     @property
     def get_phone_number(self): # Cleans phone number field for usage
         return re.sub('[^0-9]', '', self.phone)
+
+    @property
+    def get_price_range(self): # Cleans price range for usage
+        return self.price.replace('$', '')
 
 
 # END TEMPORARY MODEL

@@ -6,10 +6,11 @@ from .models import User, DataList, Profile, Contact, PHONE_REGEX
 
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
+    code = forms.CharField(max_length=25, required=False, label='Referral Code (Optional)', help_text='The person who referred you can get this from their profile page.')
 
     class Meta:
         model = User
-        fields = ('email', 'username','password1', 'password2', )
+        fields = ('email', 'username','password1', 'password2', 'code')
 
 
 class ImagePreviewWidget(forms.widgets.FileInput):
@@ -26,7 +27,7 @@ class ProfileVerificationForm(forms.ModelForm):
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['profile_pic','bio',]
+        fields = ['profile_pic', 'bio']
         widgets = {
             'profile_pic': ImagePreviewWidget(),
         }
@@ -51,15 +52,18 @@ class ContactForm(forms.ModelForm):
 
 # START TEMPORARY FORM
 class DataListForm(forms.ModelForm):
-    phone = forms.CharField(min_length=14, max_length=14, widget=forms.TextInput(attrs={'data-mask':"(000)-000-0000"}))
+    phone = forms.CharField(min_length=14, max_length=14, label='Your Phone Number', widget=forms.TextInput(attrs={'data-mask':"(000)-000-0000"}))
+    price = forms.CharField(min_length=2, max_length=25, label='Price Range', widget=forms.TextInput(attrs={'data-mask': "$0000000000"}))
 
     class Meta:
         model = DataList
-        fields = ['name', 'email', 'phone', 'text']
+        fields = ['name', 'email', 'phone', 'location', 'category', 'type', 'price', 'text']
         labels = {
             'name': "Your Name",
             'email': "Your Email Address",
-            'phone': "Your Phone Number",
-            'text': "Please Tell Us What You Are Looking For"
+            'location': "Which Area Are You Looking For A Rental",
+            'category': "Choose A Rental Category",
+            'type': "Choose A Rental Type",
+            'text': "Please Share Any Other Details"
         }
 # END TEMPORARY FORM
