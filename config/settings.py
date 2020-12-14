@@ -40,6 +40,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'memberships.context_processors.get_user_membership',
+                'accounts.context_processor.include_modal_context_processor',
             ],
         },
     },

@@ -1,8 +1,7 @@
-from .models import Profile,Contact
 from django.utils.safestring import mark_safe
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import User
+from .models import User, DataList, Profile, Contact, PHONE_REGEX
 
 
 class UserRegisterForm(UserCreationForm):
@@ -49,3 +48,18 @@ class ContactForm(forms.ModelForm):
         widgets = {
             'description': forms.Textarea
         }
+
+# START TEMPORARY FORM
+class DataListForm(forms.ModelForm):
+    phone = forms.CharField(min_length=14, max_length=14, widget=forms.TextInput(attrs={'data-mask':"(000)-000-0000"}))
+
+    class Meta:
+        model = DataList
+        fields = ['name', 'email', 'phone', 'text']
+        labels = {
+            'name': "Your Name",
+            'email': "Your Email Address",
+            'phone': "Your Phone Number",
+            'text': "Please Tell Us What You Are Looking For"
+        }
+# END TEMPORARY FORM
