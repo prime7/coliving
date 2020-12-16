@@ -76,6 +76,32 @@
                                     </a>
                               {% endif %}
 
+
+                              {% if dash_active1 == 'notifications' %}
+                                       <a style='background-color:#9100c2' class="mobilenoti" href="{% url 'notifications' %}">
+                                          <div>  <img  src="{% static 'img/bell.svg' %}">
+                                              {% if user.profile.get_unread_notifications|length > 0 %}
+                                                <span class="badge badge-danger">
+                                                    {% if user.profile.get_unread_notifications|length > 10 %}10+{% else %}{{ user.profile.get_unread_notifications|length }}{% endif %}
+                                                </span>
+                                              {% endif %}
+                                          </div>
+                                          <div> Notifications </div>
+                                        </a>
+                                  {% else %}
+                                      <a href="{% url 'notifications' %}">
+                                          <div>  <img  src="{% static 'img/bell.svg' %}">
+                                              {% if user.profile.get_unread_notifications|length > 0 %}
+                                                <span class="badge badge-danger">
+                                                    {% if user.profile.get_unread_notifications|length > 10 %}10+{% else %}{{ user.profile.get_unread_notifications|length }}{% endif %}
+                                                </span>
+                                              {% endif %}
+                                          </div>
+                                          <div> Notifications </div>
+                                        </a>
+                              {% endif %}
+
+
                               {% if dash_active1 == 'email' %}
                                     <a style='background-color:#9100c2' href="{% url 'email' %}">
                                        <div>  <img  src="{% static 'img/email.svg' %}">  </div>
@@ -162,6 +188,32 @@
                                          <div> Chats </div>
                                        </a>
                                   {% endif %}
+
+                                  {% if dash_active1 == 'notifications' %}
+                                       <a class='dashnav2_active notification'  href="{% url 'notifications' %}">
+                                          <div>
+                                               <img  src="{% static 'img/bell.svg' %}">
+                                                {% if user.profile.get_unread_notifications|length > 0 %}
+                                                <span class="badge">
+                                                    {% if user.profile.get_unread_notifications|length > 10 %}10+{% else %}{{ user.profile.get_unread_notifications|length }}{% endif %}
+                                                </span>
+                                                {% endif %}
+                                          </div>
+                                          <div> Notifications </div>
+                                        </a>
+                                  {% else %}
+                                        <a class='notification'  href="{% url 'notifications' %}">
+                                            <div>
+                                               <img  src="{% static 'img/bell.svg' %}">
+                                                {% if user.profile.get_unread_notifications|length > 0 %}
+                                                <span class="badge">
+                                                    {% if user.profile.get_unread_notifications|length > 10 %}10+{% else %}{{ user.profile.get_unread_notifications|length }}{% endif %}
+                                                </span>
+                                                {% endif %}
+                                            </div>
+                                            <div> Notifications </div>
+                                        </a>
+                                        {% endif %}
 
                                   {% if dash_active1 == 'email' %}
                                       <a class='dashnav2_active'  href="{% url 'email' %}">

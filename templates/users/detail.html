@@ -4,15 +4,6 @@
 {% block content_block %}
     <small class="text-secondary">Username : {{ user.username }}</small><br>
     <small class="text-secondary">Email : {{ user.email }}</small>
-    <div class='form-group mt4'>
-        <label for="referralcode">Referral Code:</label>
-        <div class="input-group">
-            <input class='form-control col-6' type='text' name='referralcode' id='referralcode' value={{ user.profile.referral_code }} placeholder={{ user.profile.referral_code }} />
-            <span class='input-group-btn'>
-                <button class='btn btn-success' type='submit' onclick='copyToClipboard();' ><i class="fa fa-copy"></i></button>
-            </span>
-        </div>
-    </div>
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <fieldset class="form-group">
@@ -23,6 +14,17 @@
             <button class="btn btn-outline-success" type="submit">Update</button>
         </div>
     </form>
+    <hr>
+    <div class='form-group mt4'>
+        <label for="referralcode">Referral Code:</label>
+        <div class="input-group">
+            <input class='form-control col-6' type='text' name='referralcode' id='referralcode' value={{ user.profile.referral_code }} placeholder={{ user.profile.referral_code }} />
+            <span class='input-group-btn'>
+                <button class='btn btn-success' type='submit' onclick='copyToClipboard();' ><i class="fa fa-copy"></i></button>
+            </span>
+        </div>
+        <br>Referred Members: {{ user.profile.referred_users.all|length }}
+    </div>
     <script>
         function copyToClipboard() {
           var text = document.getElementById("referralcode");

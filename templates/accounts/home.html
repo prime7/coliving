@@ -8,11 +8,11 @@
 
 {% block content %}
 <div class="bg-light">
-<div class="text-white text-center bg">
+<section class="text-white text-center bg">
     <div class="container">
       <div class="row section-margin">
         <div class="col-xl-9 mx-auto mb4">
-          <h1 class="mb-1">Easy & Quick way to Find Anything</h1>
+          <h1 class="mb-1">Fastest Way To Rent Anything</h1>
           <h5 class="mt-2">Our Listings Are All Vetted & Insurance Is Offered</h5>
           <div class="col-md-12 col-lg-12 col-xl-12 mx-auto mt4">
               <form method='GET'>
@@ -26,12 +26,12 @@
                   </div>
                 </div>
               </form>
+              <a href="#" class="btn btn-lg btn-success" style="margin-top: 15%;" data-toggle="modal" data-target="#staticBackdrop">What You Are Looking For?</a>
           </div>
-          <a href="#" class="btn btn-lg btn-success" style="margin-top: 52%;" data-toggle="modal" data-target="#staticBackdrop">What You Are Looking For?</a>
         </div>
       </div>
     </div>
-</div>
+</section>
 <section class="mt3 bg-light">
     <div class="container">
         <div class="row">
@@ -73,7 +73,7 @@
                             <a href="{% url 'memberships:select' %}" class="text-success">Learn more about tenant services</a>
                         </h5>
                     </div>
-                    <a href="{% url 'listing' %}" class="btn btn-lg btn-block btn-outline-success text-success mx-auto">Find Listings</a>
+                    <a href="#" class="btn btn-lg btn-block btn-outline-success text-success mx-auto" data-toggle="modal" data-target="#staticBackdrop">Find Listings</a>
                   </div>
                 </div>
             </div>
@@ -185,118 +185,6 @@
 </section>
 <section class="mt3 gbground">
   <div class="container">
-      <div class="mx-auto ma4">
-          <div class="text-center">
-              <h1 class="text-success"><b>Memberships</b></h1>
-              <h4 class="mt4">
-                  <p>
-                      See all of our membership options and plans, and choose the one that fits you best.
-                  </p>
-              </h4>
-          </div>
-      </div>
-      <div class="card-deck mb-3 text-center">
-        {% for object in memberships %}
-        <div class="card box-shadow mb-4">
-            <div class="card-header">
-                <h4>{{ object.membership_type }}</h4>
-            </div>
-            <div class="card-body">
-            {% if object.membership_type == 'Landlord' %}
-                <h3 class="card-title pricing-card-title">$63 <small class="text-muted">/ mo</small></h3>
-                <ul class="list-unstyled mt-3 mb-4">
-                    <li>Everything in free plan</li><hr>
-                    <li>Unlimited listing</li><hr>
-                    <li>Grow your income while lowering workload</li><hr>
-                    <li>We select the most qualified tenant</li><hr>
-                    <li>We do the hardwork,applicant's and tenants will get service from us</li><hr>
-                    <li>Property showing on autopilot by magic box</li>
-                </ul>
-            {% endif %}
-            {% if object.membership_type == 'Lease Holder' %}
-                <h3 class="card-title pricing-card-title">$15 <small class="text-muted">/ mo</small></h3>
-                <ul class="list-unstyled mt-3 mb-4">
-                    <li>Everything in free plan</li><hr>
-                    <li>Leave as soon as you are approved</li><hr>
-                    <li>We will take care of the paperwork</li><hr>
-                    <li>We will do the scheduling</li>
-                </ul>
-            {% endif %}
-            {% if object.membership_type == 'Free' %}
-                <h3 class="card-title pricing-card-title">$0 <small class="text-muted">/ mo</small></h3>
-                <ul class="list-unstyled mt-3 mb-4">
-                    <li>Full service without hiring anyone</li><hr>
-                    <li>24/7 Customer Support</li><hr>
-                    <li>Security Deposit Gurantee</li><hr>
-                    <li>Basic listings</li><hr>
-                    <li>Tenant Verifications</li><hr>
-                    <li>Email support</li>
-                </ul>
-            {% endif %}
-
-            {% if object.membership_type != 'Free' %}
-                <form method="POST" action="{% url 'memberships:select' %}">
-                    {% csrf_token %}
-                    {% if object.membership_type != current_membership %}
-                        <button class="btn btn-lg btn-block btn-success">Select</button>
-                    {% else %}
-                        <small class="text-dark">This is your current membership</small>
-                    {% endif %}
-                    <input type="hidden" name="membership_type" value="{{ object.membership_type }}">
-                </form>
-            {% elif object.membership_type == 'Free' %}
-                <small class="text-dark">This is your current membership</small>
-            {% endif %}
-            </div>
-        </div>
-        {% endfor %}
-      </div>
-      <div class="row mb4">
-          <div class="mx-auto text-center" style="margin-top: 5%;">
-            <a href="{% url 'memberships:select' %}" class="btn btn-lg btn-success">See Memberships</a><br><br>
-          </div>
-      </div>
-  </div>
-</section>
-<section class="mt3 bg-light">
-  <div class="container">
-      <div class="mx-auto ma4">
-          <div class="text-center">
-              <h1 class="text-success"><b>Services</b></h1>
-              <h4 class="mt4">
-                  <p>
-                      We will help you get everything done in a quick and easy way. Just find the service you are looking for from our available list and allow our marketplace to find the best match for your service.
-                  </p>
-              </h4>
-          </div>
-      </div>
-      <div class="row text-center ma4">
-          {% for service in services %}
-          <div class="col-md-4 col-sm-12">
-              <div class="card mb-4 shadow-sm topborder">
-                  <img src="{{ service.banner.url }}" height="200" alt="Service we offer">
-                  <div class="card-body">
-                      <h5 class="title">{{ service.name }}</h5>
-                      <p class="card-text">{{ service.description|truncatewords:12 }}</p>
-                      <p class="card-text">Average project budget <b>{{ service.average_project_budget }}</b></p>
-                      <a href="{% url 'service-detail' service.slug %}" class="btn btn-lg btn-success btn-icon mt-3 mb-sm-0">
-                          See Details
-                      </a>
-                  </div>
-              </div>
-          </div>
-          {% endfor %}
-      </div>
-      <div class="row mb4">
-          <div class="mx-auto text-center" style="margin-top: 5%;">
-            <a href="{% url 'services' %}" class="btn btn-lg btn-success">See All Services</a><br><br>
-            <a href="{% url 'tasker-signup' %}" class="btn btn-lg btn-success">Join As A Tasker</a>
-          </div>
-      </div>
-  </div>
-</section>
-<section class="mt3 gbground">
-  <div class="container">
       <div class="row ma4">
           <div class="mx-auto text-center">
               <h1 class="text-success"><b>Rent Anything</b></h1>
@@ -336,6 +224,43 @@
                     <a href="{% url 'category-list' %}" class="btn btn-lg btn-success">Let's Get Started</a>
                   </div>
               </div>
+          </div>
+      </div>
+  </div>
+</section>
+<section class="mt3 bg-light">
+  <div class="container">
+      <div class="mx-auto ma4">
+          <div class="text-center">
+              <h1 class="text-success"><b>Services</b></h1>
+              <h4 class="mt4">
+                  <p>
+                      We will help you get everything done in a quick and easy way. Just find the service you are looking for from our available list and allow our marketplace to find the best match for your service.
+                  </p>
+              </h4>
+          </div>
+      </div>
+      <div class="row text-center ma4">
+          {% for service in services %}
+          <div class="col-md-4 col-sm-12">
+              <div class="card mb-4 shadow-sm topborder">
+                  <img src="{{ service.banner.url }}" height="200" alt="Service we offer">
+                  <div class="card-body">
+                      <h5 class="title">{{ service.name }}</h5>
+                      <p class="card-text">{{ service.description|truncatewords:12 }}</p>
+                      <p class="card-text">Average project budget <b>{{ service.average_project_budget }}</b></p>
+                      <a href="{% url 'service-detail' service.slug %}" class="btn btn-lg btn-success btn-icon mt-3 mb-sm-0">
+                          See Details
+                      </a>
+                  </div>
+              </div>
+          </div>
+          {% endfor %}
+      </div>
+      <div class="row mb4">
+          <div class="mx-auto text-center" style="margin-top: 5%;">
+            <a href="{% url 'services' %}" class="btn btn-lg btn-success">See All Services</a><br><br>
+            <a href="{% url 'tasker-signup' %}" class="btn btn-lg btn-success">Join As A Tasker</a>
           </div>
       </div>
   </div>

@@ -15,8 +15,6 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(next_page='/'), name='logout'),
     path('user/detail/', views.userDetail, name='user-detail'),
     path('user/verification/', views.userVerification, name='user-verification'),
-    path('user/notifications/', views.userNotifications, name='user-notifications'),
-    path('user/notifications/<pk>', views.notificationDetail, name='notification-detail'),
     path('user/notifications/<pk>/delete/', views.notificationDelete, name='notification-delete'),
     path('user/membership/', views.userMembership, name='user-membership'),
     path('user/lease/', views.UserLease.as_view(), name='user-lease'),

@@ -46,6 +46,10 @@ urlpatterns = [
     path('chats/' , dashboard_views.chats, name='chats'),
     path('chats/<pk>/' , dashboard_views.chats, name='chats_detail'),
 
+    #Notifications
+    path('notifications/', dashboard_views.notifications, name='notifications'),
+    path('notifications/<pk>/', dashboard_views.notifications, name='notifications_detail'),
+
     #Email
     path('email/' , dashboard_views.email, name='email'),
 

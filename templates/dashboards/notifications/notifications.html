@@ -1,0 +1,35 @@
+{% extends '../dashboardbase.html' %}
+{% load static %}
+
+{% block dashboardbase_content %}
+
+        <div class="dashnav3">
+          <div>
+            <h2>Notifications</h2>
+          </div>
+          <div style="border-top: 1px solid gray; margin-right: 20px;"></div>
+          <div>
+             <ul class="list-group">
+                {% for notification in notifications %}
+                  <form method="POST" action="{% url 'notification-delete' pk=notification.pk %}">
+                    <li style="margin-right: 20px; margin-top: 5%;" class="list-group-item {% if notification.read %}list-group-item-light{% endif %}">
+                        <a class="text-{% if notification.read %}muted{% else %}success{% endif %}" href="{% url 'notifications_detail' pk=notification.pk %}">{{ notification.title|truncatechars:40 }}</a>
+                        {% csrf_token %}
+                        <button type="submit" class="close float-right" aria-label="Close">
+                            <span aria-hidden="true" class="text-danger">&times;</span>
+                        </button>
+                    </li>
+                  </form>
+                {% empty %}
+                  <h6 class="text-center text-muted"><i class="fas fa-folder-open text-success"></i> You don't have any notifications.</h6>
+                {% endfor %}
+             </ul>
+          </div>
+
+
+    </div>
+    <div class='lscreen'>
+      {% block screen_content %} {% endblock %}
+    </div>
+
+{% endblock %}
