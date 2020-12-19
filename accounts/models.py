@@ -134,7 +134,7 @@ class Profile(models.Model):
     verification_doc = ResizedImageField(size=[1200, 1200], upload_to='verifications', null=True,blank=True)
     verified = models.IntegerField(choices=VERIFICATION_STATUS,default=1)
 
-    referred_users = models.ManyToManyField('accounts.User', related_name='referred_users', null=True, blank=True)
+    referred_users = models.ManyToManyField('accounts.User', related_name='referred_users', blank=True)
 
     @property
     def is_profile_ready(self):
@@ -305,7 +305,7 @@ rental_type = (
     (2, "Monthly")
 )
 
-class DataList(models.Model): # Used to store email, name, phone while we are still < 100 listings
+class ListingDataList(models.Model): # Used to store email, name, phone while we are still < 100 listings
     name = models.CharField(max_length=50)
     email = models.EmailField(max_length=255)
     phone = models.CharField(max_length=14)
@@ -326,5 +326,17 @@ class DataList(models.Model): # Used to store email, name, phone while we are st
     def get_price_range(self): # Cleans price range for usage
         return self.price.replace('$', '')
 
+class LookingDataList(models.Model):
+    name = models.CharField(max_length=50)
+    email = models.EmailField(max_length=255)
+    phone = models.CharField(max_length=14)
+    text = models.TextField(max_length=250)
+
+    def __str__(self):
+        return self.email
+
+    @property
+    def get_phone_number(self):  # Cleans phone number field for usage
+        return re.sub('[^0-9]', '', self.phone)
 
 # END TEMPORARY MODEL

@@ -1,6 +1,6 @@
 {% load crispy_forms_tags %}
 
-<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="staticBackdrop2" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content topborder">
             <div class="modal-header">
@@ -10,11 +10,11 @@
             </button>
             </div>
 
-            <form method="POST" action="{% url 'datalist-listing' %}" class="p-3">
+            <form method="POST" action="{% url 'datalist-looking' %}" class="p-3">
                 {% csrf_token %}
                 <small>We apologize, we have launched but are still in a development phase. Please fill the application below and we will help you find what you are looking for.</small>
                 <br><hr/>
-                {{ listingdatalistform|crispy }}
+                {{ lookingdatalistform|crispy }}
                 <div class="form-group text-center">
                     <button class="btn btn-outline-success" type="submit">Submit</button>
                 </div>

@@ -1,7 +1,7 @@
 from django.utils.safestring import mark_safe
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import User, DataList, Profile, Contact, PHONE_REGEX
+from .models import User, Profile, Contact, ListingDataList, LookingDataList
 
 
 class UserRegisterForm(UserCreationForm):
@@ -51,12 +51,12 @@ class ContactForm(forms.ModelForm):
         }
 
 # START TEMPORARY FORM
-class DataListForm(forms.ModelForm):
+class ListingDataListForm(forms.ModelForm):
     phone = forms.CharField(min_length=14, max_length=14, label='Your Phone Number', widget=forms.TextInput(attrs={'data-mask':"(000)-000-0000"}))
     price = forms.CharField(min_length=2, max_length=25, label='Price Range', widget=forms.TextInput(attrs={'data-mask': "$0000000000"}))
 
     class Meta:
-        model = DataList
+        model = ListingDataList
         fields = ['name', 'email', 'phone', 'location', 'category', 'type', 'price', 'text']
         labels = {
             'name': "Your Name",
@@ -66,4 +66,17 @@ class DataListForm(forms.ModelForm):
             'type': "Choose A Rental Type",
             'text': "Please Share Any Other Details"
         }
+
+class LookingDataListForm(forms.ModelForm):
+    phone = forms.CharField(min_length=14, max_length=14, label='Your Phone Number', widget=forms.TextInput(attrs={'data-mask': "(000)-000-0000"}))
+
+    class Meta:
+        model = LookingDataList
+        fields = ['name', 'email', 'phone', 'text']
+        labels = {
+            'name': "Your Name",
+            'email': "Your Email Address",
+            'text': "Please Provide Details"
+        }
+
 # END TEMPORARY FORM

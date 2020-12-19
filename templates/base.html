@@ -41,7 +41,7 @@
             <a class="nav-item nav-link m-2" href="{% url 'services' %}">Services</a>
             <a class="nav-item nav-link m-2" href="{% url 'category-list' %}">Rent Anything</a>
             <a class="nav-item nav-link m-2" href="{% url 'buyandsell-category-list' %}">Buy & Sell</a>
-            <a class="nav-item nav-link m-2" data-toggle="modal" data-target="#staticBackdrop" href="#">Listings</a>
+            <a class="nav-item nav-link m-2" data-toggle="modal" data-target="#staticBackdrop2" href="#">Listings</a>
             <li class="nav-item dropdown">
                 <img src="{{ user.profile.profile_pic.url }}" alt="Profile Picture" width="60" height="60" class="rounded-circle nav-item nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="false" aria-expanded="true"/>
                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -81,7 +81,7 @@
           {% else %}
             <a class="nav-item nav-link m-2" href="{% url 'category-list' %}">Rent Anything</a>
             <a class="nav-item nav-link m-2" href="{% url 'memberships:select' %}">Membership</a>
-            <a class="nav-item nav-link m-2" href="#" data-toggle="modal" data-target="#staticBackdrop">Listings</a>
+            <a class="nav-item nav-link m-2" href="#" data-toggle="modal" data-target="#staticBackdrop2">Listings</a>
             <a class="nav-item nav-link m-2" href="{% url 'login' %}">Login</a>
             <a class="nav-item nav-link m-2" href="{% url 'signup' %}">Register</a>
             <li class="nav-item m-2 dropdown">
@@ -118,7 +118,8 @@
 
     {% include "includes/footer.html" %}
 
-    {% include "includes/datalist_form.html" %}
+    {% include "includes/listingdatalist_form.html" %}
+    {% include "includes/lookingdatalist_form.html" %}
 
     <script type="text/javascript" src="https://my.hellobar.com/89223a3c57954ba60408b6462dae0a365cb50656.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
