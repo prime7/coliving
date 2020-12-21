@@ -21,8 +21,16 @@
     </div>
   </form>
   {% elif user.profile.is_verification_processing %}
-  <h1 class="text-center"><i class="fas fa-spinner text-success"></i> Verification is Proessing</h1>
+  <h1 class="text-center"><i class="fas fa-spinner text-success"></i> Profile Verification is Processing</h1>
   {% else %}
   <h1 class="text-center"><i class="fas fa-user-check text-success"></i> Profile Verified</h1>
   {% endif %}
+  {% if user.business.is_notverified %}
+  <h1 class="text-center mt4"><i class="fas fa-spinner text-success"></i> Business Pending Verification</h1>
+  {% elif user.business.is_verification_processing %}
+  <h1 class="text-center mt4"><i class="fas fa-spinner text-success"></i> Business Verification is Processing</h1>
+  {% elif user.business.is_profile_ready %}
+  <h1 class="text-center mt4"><i class="fas fa-user-check text-success"></i> Business Verified</h1>
+  {% endif %}
+
 {% endblock %}

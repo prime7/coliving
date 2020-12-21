@@ -18,12 +18,14 @@ INSTALLED_APPS = [
     'dashboards',
     'rentanything',
     'buyandsell',
+    'deliveranything',
 
     'crispy_forms',
     'storages',
     'meta',
     'robots',
     'rest_framework',
+    'easypost',
 ]
 
 SITE_ID = 1

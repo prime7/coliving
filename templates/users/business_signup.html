@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+  Coliving | Business Signup
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-sm-center">
+            <div class="col-sm-10 col-md-6">
+                <div class="card m-4 p-4 box-shadow">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <fieldset class="form-group">
+                            <legend class="border-bottom mb-4">Register Your Business</legend>
+                            {{ u_form|crispy }}
+                            {{ b_form|crispy }}
+                            {{ a_form|crispy }}
+                        </fieldset>
+                        <input type="checkbox" id="chk" name="chk" onchange="document.getElementById('submit').disabled = !this.checked;"> 
+                        <label for="chk">Accept our <a href="{% url 'terms-and-condition' %}">terms and conditions</a> and <a href="{% url 'privacy-policy' %}">privacy policy</a></label>
+                        <div class="form-group">
+                            <button class="btn btn-success" type="submit" name="submit" id="submit" disabled>Sign Up</button>
+                        </div>
+
+                    </form>
+                    <div class="border-top pt-3">
+                        <small class="text-muted">
+                            Already Have An Account? <a class="ml-2" href="{% url 'login' %}">Sign In</a>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
