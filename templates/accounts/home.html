@@ -13,7 +13,7 @@
       <div class="row section-margin">
         <div class="col-xl-9 mx-auto mb4">
           <h1 class="mb-1">Fastest Way To Rent Anything</h1>
-          <h5 class="mt-2">Our Listings Are All Vetted & Insurance Is Offered</h5>
+          <h5 class="mt-2">Start Renting with Confidence & Safety</h5>
           <div class="col-md-12 col-lg-12 col-xl-12 mx-auto mt4">
               <form method='GET'>
                 {% csrf_token %}
@@ -26,11 +26,58 @@
                   </div>
                 </div>
               </form>
-              <a href="#" class="btn btn-lg btn-success" style="margin-top: 15%;" data-toggle="modal" data-target="#staticBackdrop">What You Are Looking For?</a>
+              <a href="#" class="btn btn-lg btn-success" style="margin-top: 15%;" data-toggle="modal" data-target="#staticBackdrop2">What You Are Looking For?</a>
           </div>
         </div>
       </div>
     </div>
+</section>
+<section class="gbground">
+  <div class="container">
+      <div class="row ma4">
+          <div class="mx-auto text-center">
+              <h1 class="text-success"><b>Rent Anything</b></h1>
+              <h4 class="mt4">
+                  <p>
+                      Our platform will allow for online person-to-person renting in an easy and secure way. You can post and/or rent anything you'd like.
+                  </p>
+              </h4>
+              <div class="row text-center ma4">
+                  <div class="col-6">
+                      <div class="mx-auto">
+                          <h3><b class="text-success"><i class="fas fa-exchange-alt text-success home-icons" style="font-size: 35px;"></i> Automated System</b></h3>
+                          <p class="lead mb-0">Take the stress out of finding products or renters, and making sure payments are processed properly. Our automated system will handle all of it for you.</p>
+                      </div>
+                  </div>
+                  <div class="col-6">
+                      <div class="mx-auto">
+                          <h3><b class="text-success"><i class="fas fa-user-shield text-success home-icons" style="font-size: 35px;"></i> Protected Products</b></h3>
+                          <p class="lead mb-0">Choose from our protection and insurance options to protect your rentable products. Keep peace of mind knowing that your products are covered for and safe.</p>
+                      </div>
+                  </div>
+              </div>
+              <div class="row text-center ma4">
+                  <div class="col-6">
+                      <div class="mx-auto">
+                          <h3><b class="text-success"><i class="fas fa-lock text-success home-icons" style="font-size: 35px;"></i> Secure Transactions</b></h3>
+                          <p class="lead mb-0">Our system assures that both sides of the transaction are made successfully with no margin for error, getting rid of any possibility for renter-rentee conflict.</p>
+                      </div>
+                  </div>
+                  <div class="col-6">
+                      <div class="mx-auto">
+                          <h3><b class="text-success"><i class="fas fa-th-list text-success home-icons" style="font-size: 35px;"></i> Many Options</b></h3>
+                          <p class="lead mb-0">Whether it be for products or potential rentees, Rent Anything will provide you with many options to pick from to make your experience as hands on as possible.</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="row mb4">
+          <div class="mx-auto text-center">
+              <a href="{% url 'category-list' %}" class="btn btn-lg btn-success">Let's Get Started</a>
+          </div>
+      </div>
+  </div>
 </section>
 <section class="mt3 bg-light">
     <div class="container">
@@ -140,7 +187,7 @@
          </div>
     </div>
 </section>
-<section>
+<section class="mb4">
     <div class="container">
          <div class="row">
             <div class="col-8">
@@ -179,90 +226,88 @@
             </div>
          </div>
     </div>
-    <div class="row">
-        <a href="#" class="btn btn-lg btn-success mt3 mx-auto" data-toggle="modal" data-target="#staticBackdrop">What Are You Looking For?</a>
-    </div>
+    <div class="row mt4">
+          <div class="mx-auto text-center">
+              <a href="#" class="btn btn-lg btn-success mt3 mx-auto" data-toggle="modal" data-target="#staticBackdrop">What Are You Looking For?</a>
+          </div>
+      </div>
 </section>
 <section class="mt3 gbground">
   <div class="container">
-      <div class="row ma4">
-          <div class="mx-auto text-center">
-              <h1 class="text-success"><b>Rent Anything</b></h1>
-              <h4 class="mt4">
-                  <p>
-                      Our platform will allow for online person-to-person renting in an easy and secure way. You can post and/or rent anything you'd like.
-                  </p>
-              </h4>
-              <div class="row text-center ma4">
-                  <div class="col-6">
-                      <div class="mx-auto">
-                          <h3><b class="text-success"><i class="fas fa-exchange-alt text-success home-icons" style="font-size: 35px;"></i> Automated System</b></h3>
-                          <p class="lead mb-0">Take the stress out of finding products or renters, and making sure payments are processed properly. Our automated system will handle all of it for you.</p>
-                      </div>
-                  </div>
-                  <div class="col-6">
-                      <div class="mx-auto">
-                          <h3><b class="text-success"><i class="fas fa-user-shield text-success home-icons" style="font-size: 35px;"></i> Protected Products</b></h3>
-                          <p class="lead mb-0">Choose from our protection and insurance options to protect your rentable products. Keep peace of mind knowing that your products are covered for and safe.</p>
-                      </div>
-                  </div>
+    <div class="row ma4">
+      <div class="text-center mx-auto">
+        <h1 class="text-success"><b>Our Partners</b></h1>
+      </div>
+    </div>
+    <div class="row mb4">
+      <div class="row">
+        <div class="col-md-4 col-sm-12">
+          <div class="card mb-4 shadow-sm">
+            <img class="bd-placeholder-img card-img-top" width="100%" height="225" style="min-height: 225px;" src="https://www.lawdepot.com/images/microdata/LawDepot-Homepage.jpg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail" alt="Lawdepot">
+            <div class="card-body box-shadow">
+              <p class="card-text">Create the legal document you need in minutes!</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a target="blank" href="https://www.lawdepot.com/?pid=pg-BSHO4CDVKR-generaltextlink"><button type="button" class="btn btn-sm btn-outline-secondary">Click here to start</button></a>
+                </div>
               </div>
-              <div class="row text-center ma4">
-                  <div class="col-6">
-                      <div class="mx-auto">
-                          <h3><b class="text-success"><i class="fas fa-lock text-success home-icons" style="font-size: 35px;"></i> Secure Transactions</b></h3>
-                          <p class="lead mb-0">Our system assures that both sides of the transaction are made successfully with no margin for error, getting rid of any possibility for renter-rentee conflict.</p>
-                      </div>
-                  </div>
-                  <div class="col-6">
-                      <div class="mx-auto">
-                          <h3><b class="text-success"><i class="fas fa-th-list text-success home-icons" style="font-size: 35px;"></i> Many Options</b></h3>
-                          <p class="lead mb-0">Whether it be for products or potential rentees, Rent Anything will provide you with many options to pick from to make your experience as hands on as possible.</p>
-                      </div>
-                  </div>
-                  <div class="mx-auto text-center" style="margin-top: 5%;">
-                    <a href="{% url 'category-list' %}" class="btn btn-lg btn-success">Let's Get Started</a>
-                  </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4  col-sm-12">
+          <div class="card mb-4 shadow-sm">
+            <img class="bd-placeholder-img card-img-top" alt="Certn" width="100%" height="225" style="min-height: 225px;" src="https://nationalpardon.org/wp-content/uploads/2019/04/free-background-check-canada-800x394.png" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
+            <div class="card-body box-shadow">
+              <p class="card-text">Fast, compliant, affordable criminal & other background checks for landlords</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a target="blank" href="https://certn.co/"><button type="button" class="btn btn-sm btn-outline-secondary">Click here to start</button></a>
+                </div>
               </div>
+            </div>
           </div>
-      </div>
-  </div>
-</section>
-<section class="mt3 bg-light">
-  <div class="container">
-      <div class="mx-auto ma4">
-          <div class="text-center">
-              <h1 class="text-success"><b>Services</b></h1>
-              <h4 class="mt4">
-                  <p>
-                      We will help you get everything done in a quick and easy way. Just find the service you are looking for from our available list and allow our marketplace to find the best match for your service.
-                  </p>
-              </h4>
-          </div>
-      </div>
-      <div class="row text-center ma4">
-          {% for service in services %}
-          <div class="col-md-4 col-sm-12">
-              <div class="card mb-4 shadow-sm topborder">
-                  <img src="{{ service.banner.url }}" height="200" alt="Service we offer">
-                  <div class="card-body">
-                      <h5 class="title">{{ service.name }}</h5>
-                      <p class="card-text">{{ service.description|truncatewords:12 }}</p>
-                      <p class="card-text">Average project budget <b>{{ service.average_project_budget }}</b></p>
-                      <a href="{% url 'service-detail' service.slug %}" class="btn btn-lg btn-success btn-icon mt-3 mb-sm-0">
-                          See Details
-                      </a>
-                  </div>
+        </div>
+        <div class="col-md-4  col-sm-12">
+          <div class="card mb-4 shadow-sm" style="min-height: 360px;">
+            <img class="bd-placeholder-img card-img-top img-thumbnail" alt="Squareone" width="100%" height="225" style="object-fit: cover;" style="min-height: 225px;" src="https://lh6.googleusercontent.com/proxy/hiVk1Pdp9uAY0KjpvSZXLaopyr__lC8gjWgCqx92gxsXwuV3nrPsoNcrgGtANDoZzvYga53lU4aSGtYorICSbthzgmtA9f9jwKqlXPVJEig6_6SHBZbkA9znP1q2eA" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
+            <div class="card-body box-shadow">
+              <p class="card-text">Home insurance policies from $12/ month with lot of features</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a target="blank" href="https://www.squareoneinsurance.com/"><button type="button" class="btn btn-sm btn-outline-secondary">Click here to start</button></a>
+                </div>
               </div>
+            </div>
           </div>
-          {% endfor %}
-      </div>
-      <div class="row mb4">
-          <div class="mx-auto text-center" style="margin-top: 5%;">
-            <a href="{% url 'services' %}" class="btn btn-lg btn-success">See All Services</a><br><br>
-            <a href="{% url 'tasker-signup' %}" class="btn btn-lg btn-success">Join As A Tasker</a>
+        </div>
+        <div class="col-md-4 col-sm-12">
+          <div class="card mb-4 shadow-sm">
+            <img class="bd-placeholder-img card-img-top" alt="Duoo" width="100%" style="min-height: 225px;" src="https://duuo.ca/wp-content/uploads/2019/10/email-hero.png" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
+            <div class="card-body box-shadow">
+              <p class="card-text">Affordable, online tenant insurance that can be purchased in minutes!</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a target="blank" href="https://duuo.ca/tenant-insurance/"><button type="button" class="btn btn-sm btn-outline-secondary">Click here to start</button></a>
+                </div>
+              </div>
+            </div>
           </div>
+        </div>
+        <div class="col-md-4 col-sm-12">
+          <div class="card mb-4 shadow-sm">
+            <img class="img-fluid" alt="Duoo" style="min-height: 225px;" src="https://images.ctfassets.net/t21gix3kzulv/2p7Id1a8N5yRSczCxNOyTP/fa2a7a27be1107fd587fa0e335fa095a/ctct_logo_facebook_opengraph.png" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
+            <div class="card-body box-shadow">
+              <p class="card-text">Create email marketing campaigns like a pro with our easy-to-use features.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a target="blank" href="http://www.constantcontact.com/signup.jsp?pn=meetquoteshack"><button type="button" class="btn btn-sm btn-outline-secondary">Click here to start</button></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+    </div>
   </div>
 </section>
 <section class="bg-white">
@@ -270,7 +315,7 @@
         <div class="mx-auto text-center ma4">
             <h3 class="text-success">What Are You Looking For?</h3>
             <div class="mx-auto text-center" style="margin-bottom:6%;">
-               <a href="#" class="btn btn-lg btn-success mt3" data-toggle="modal" data-target="#staticBackdrop">Let Us Help You Find It</a>
+               <a href="#" class="btn btn-lg btn-success mt3" data-toggle="modal" data-target="#staticBackdrop2">Let Us Help You Find It</a>
             </div>
             <h3 class="text-success">Newsletter</h3>
             <h5 class="mt3">Subscribe to our Newsletter to stay up to date.</h5>

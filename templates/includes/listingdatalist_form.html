@@ -10,11 +10,11 @@
             </button>
             </div>
 
-            <form method="POST" action="{% url 'datalist' %}" id="bookingform" class="p-3">
+            <form method="POST" action="{% url 'datalist-listing' %}" class="p-3">
                 {% csrf_token %}
                 <small>We apologize, we have launched but are still in a development phase. Please fill the application below and we will help you find what you are looking for.</small>
                 <br><hr/>
-                {{ form|crispy }}
+                {{ listingdatalistform|crispy }}
                 <div class="form-group text-center">
                     <button class="btn btn-outline-success" type="submit">Submit</button>
                 </div>

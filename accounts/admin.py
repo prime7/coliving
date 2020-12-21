@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Profile,User,Contact, NewsLetter, Country, Area, City, Notification, ChatRoom, ChatRoomMessage, Landlord, Tenant, DataList
+from .models import Profile,User,Contact, NewsLetter, Country, Area, City, Notification, ChatRoom, ChatRoomMessage, Landlord, Tenant, ListingDataList, LookingDataList
 
 admin.site.register(Profile)
 admin.site.register(User)
@@ -13,4 +13,5 @@ admin.site.register(ChatRoom)
 admin.site.register(ChatRoomMessage)
 admin.site.register(Landlord)
 admin.site.register(Tenant)
-admin.site.register(DataList)
+admin.site.register(ListingDataList)
+admin.site.register(LookingDataList)

@@ -1,16 +1,16 @@
-from django.contrib.messages.views import SuccessMessageMixin
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.contrib.messages.views          import SuccessMessageMixin
+from django.core.paginator                  import Paginator, PageNotAnInteger, EmptyPage
 from django.http                            import HttpResponse,HttpResponseRedirect
 from django.contrib.auth                    import login, authenticate
 from django.contrib.auth.forms              import UserCreationForm
 from django.shortcuts                       import render, redirect,reverse
-from .forms import UserRegisterForm, ProfileUpdateForm, ProfileVerificationForm, ContactForm, DataListForm
-from .models import User, NewsLetter, DataList, Profile
+from .forms                                 import UserRegisterForm, ProfileUpdateForm, ProfileVerificationForm, ContactForm, ListingDataListForm, LookingDataListForm
+from .models                                import User, NewsLetter, ListingDataList, Profile, LookingDataList
 from rentanything.models                    import Listing
 from buyandsell.models                      import Posting
 from django.contrib.auth.decorators         import login_required
 from django.contrib                         import messages
-from django.views.generic import ListView, UpdateView, DetailView, CreateView
+from django.views.generic                   import ListView, UpdateView, DetailView, CreateView
 from django.db.models                       import Q
 from rentals.models                         import House
 from memberships.views                      import get_user_membership,get_user_subscription
@@ -72,14 +72,28 @@ def home(request):
     return render(request,'accounts/home.html',{'services':service_list, 'memberships':memberships})
 
 # START TEMPORARY VIEW
-class DataListCreateView(SuccessMessageMixin, CreateView):
-    model = DataList
+class ListingDataListCreateView(SuccessMessageMixin, CreateView):
+    model = ListingDataList
     success_message = 'Thank you for your response!'
-    form_class = DataListForm
+    form_class = ListingDataListForm
 
     def get_success_url(self):
         self.object.phone = self.object.get_phone_number
         self.object.price = self.object.get_price_range
+        self.object.save()
+
+        if self.request.META.get('HTTP_REFERER'):
+            return self.request.META.get('HTTP_REFERER')
+        else:
+            return reverse('home')
+
+class LookingDataListCreateView(SuccessMessageMixin, CreateView):
+    model = LookingDataList
+    success_message = 'Thank you for your response!'
+    form_class = LookingDataListForm
+
+    def get_success_url(self):
+        self.object.phone = self.object.get_phone_number
         self.object.save()
 
         if self.request.META.get('HTTP_REFERER'):
