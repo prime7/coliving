@@ -41,6 +41,7 @@
             <a class="nav-item nav-link m-2" href="{% url 'services' %}">Services</a>
             <a class="nav-item nav-link m-2" href="{% url 'category-list' %}">Rent Anything</a>
             <a class="nav-item nav-link m-2" href="{% url 'buyandsell-category-list' %}">Buy & Sell</a>
+            <a class="nav-item nav-link m-2" href="{% url 'deliver-anything' %}">Deliver Anything</a>
             <a class="nav-item nav-link m-2" data-toggle="modal" data-target="#staticBackdrop2" href="#">Listings</a>
             <li class="nav-item dropdown">
                 <img src="{{ user.profile.profile_pic.url }}" alt="Profile Picture" width="60" height="60" class="rounded-circle nav-item nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="false" aria-expanded="true"/>
@@ -80,6 +81,7 @@
             </li>
           {% else %}
             <a class="nav-item nav-link m-2" href="{% url 'category-list' %}">Rent Anything</a>
+            <a class="nav-item nav-link m-2" href="{% url 'deliver-anything' %}">Deliver Anything</a>
             <a class="nav-item nav-link m-2" href="{% url 'memberships:select' %}">Membership</a>
             <a class="nav-item nav-link m-2" href="#" data-toggle="modal" data-target="#staticBackdrop2">Listings</a>
             <a class="nav-item nav-link m-2" href="{% url 'login' %}">Login</a>

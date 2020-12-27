@@ -199,6 +199,29 @@ class Profile(models.Model):
 
         return chatrooms
 
+    @property
+    def is_business(self):
+        try:
+            return self.user.business
+        except:
+            return None
+
+    @property
+    def is_deliverer(self):
+        try:
+            if self.user.tasker.services == 4:
+                return True
+        except:
+            return None
+
+    @property
+    def has_vehicle(self):
+        try:
+            if self.user.tasker.vehicle:
+                return True
+        except:
+            return False
+
     @receiver(post_save, sender=User)
     def create_profile(sender, instance, created, *args, **kwargs):
         if created:

@@ -1,6 +1,8 @@
 from django import forms
-from .models import Business, Address
+from .models import Business, Address, Delivery, DeliveryImage, Vehicle
 
+class DateTimeInput(forms.DateTimeInput):
+    input_type = 'date'
 
 class AddressForm(forms.ModelForm):
 
@@ -32,3 +34,43 @@ class BusinessCreationForm(forms.ModelForm):
         labels = {
             'business_name': "Business Name",
         }
+
+
+class VehicleForm(forms.ModelForm):
+
+    class Meta:
+        model = Vehicle
+        fields = (
+            'drivers_licence_number',
+            'registration',
+            'make',
+            'model',
+            'year',
+            'color',
+        )
+        labels = {
+            'drivers_licence_number': 'Drivers Licence Number',
+            'registration': 'Registration Number'
+        }
+
+
+class DeliveryForm(forms.ModelForm):
+
+    class Meta:
+        model = Delivery
+        fields = (
+            'pickup',
+            'dropoff',
+            'time',
+            'description',
+            'length',
+            'width',
+            'height'
+        )
+        labels = {
+            'time': "Date"
+        }
+        widgets = {
+            'time': DateTimeInput()
+        }
+

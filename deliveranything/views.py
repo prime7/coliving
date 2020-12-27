@@ -8,13 +8,60 @@ from django.utils.http import urlsafe_base64_encode
 from accounts.forms import UserRegisterForm
 from accounts.tokens import account_activation_token
 from deliveranything.forms import BusinessCreationForm, AddressForm
+from .forms import DeliveryForm, VehicleForm
+from .models import DeliveryImage
 
 import config.easypost as ep
 import easypost
 
 easypost.api_key = ep.EASYPOST_KEY
 
+def index(request):
+
+    context = {
+        'deliveryform': DeliveryForm(),
+        'vehicleform': VehicleForm()
+    }
+
+    if request.method == 'POST':
+        deliverform = DeliveryForm(request.POST, request.FILES)
+
+        if deliverform.is_valid():
+            delivery = deliverform.save(commit=False)
+            if request.user.profile.is_business:
+                delivery.pickup = request.user.business.address.get_address
+
+            delivery.user = request.user
+            delivery.save()
+
+            files = request.FILES.getlist('images')
+            for f in files:
+                DeliveryImage.objects.create(delivery=delivery, image=f)
+
+            messages.success(request, "Your delivery request has been recieved. You will recieve a quote shortly")
+            return render(request, 'deliveranything/index.html', context)
+
+
+    return render(request, 'deliveranything/index.html', context)
+
+def registerVehicle(request):
+
+    if request.method == 'POST':
+        form = VehicleForm(request.POST)
+        for errors in form.errors:
+            print(errors)
+        if form.is_valid():
+            vehicle = form.save(commit=False)
+            vehicle.driver = request.user.tasker
+            vehicle.save()
+            messages.success(request, f"Your {vehicle.year} {vehicle.make} {vehicle.model} has been registered.")
+
+    return redirect('deliver-anything')
+
+
+
 def signupBusiness(request):
+
     if request.method == 'POST':
         u_form = UserRegisterForm(request.POST)
         b_form = BusinessCreationForm(request.POST,request.FILES)
