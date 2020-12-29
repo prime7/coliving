@@ -1,8 +1,7 @@
 from django import forms
-from .models import Business, Address, Delivery, DeliveryImage, Vehicle
+from django.core.validators import MinValueValidator
 
-class DateTimeInput(forms.DateTimeInput):
-    input_type = 'date'
+from .models import Business, Address, Delivery, DeliveryImage, Vehicle, year_choices, current_year
 
 class AddressForm(forms.ModelForm):
 
@@ -37,6 +36,7 @@ class BusinessCreationForm(forms.ModelForm):
 
 
 class VehicleForm(forms.ModelForm):
+    year = forms.IntegerField(min_value=1984, max_value=current_year())
 
     class Meta:
         model = Vehicle
@@ -55,22 +55,34 @@ class VehicleForm(forms.ModelForm):
 
 
 class DeliveryForm(forms.ModelForm):
+    date = forms.DateTimeField(widget=forms.DateInput(
+        attrs={
+            'type': 'date'
+        }),
+        required=True,
+    )
+    date_time = forms.TimeField(widget=forms.TimeInput(
+        attrs={
+            'type': 'time'
+            }),
+        label='Time',
+        required=True,
+        help_text='Hr-Min-AM/PM'
+    )
 
     class Meta:
         model = Delivery
         fields = (
             'pickup',
             'dropoff',
-            'time',
+            'date',
+            'date_time',
             'description',
             'length',
             'width',
             'height'
         )
         labels = {
-            'time': "Date"
-        }
-        widgets = {
-            'time': DateTimeInput()
+            'date_time': "Time"
         }
 

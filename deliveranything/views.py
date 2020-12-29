@@ -10,11 +10,13 @@ from accounts.tokens import account_activation_token
 from deliveranything.forms import BusinessCreationForm, AddressForm
 from .forms import DeliveryForm, VehicleForm
 from .models import DeliveryImage
+import datetime
 
 import config.easypost as ep
-import easypost
+#import easypost
 
-easypost.api_key = ep.EASYPOST_KEY
+#easypost.api_key = ep.EASYPOST_KEY
+
 
 def index(request):
 
@@ -32,24 +34,29 @@ def index(request):
                 delivery.pickup = request.user.business.address.get_address
 
             delivery.user = request.user
+            t = deliverform.cleaned_data['date_time']
+            d = deliverform.cleaned_data['date']
+            delivery.time = datetime.datetime.combine(d, t)
             delivery.save()
 
             files = request.FILES.getlist('images')
             for f in files:
-                DeliveryImage.objects.create(delivery=delivery, image=f)
+                img = DeliveryImage()
+                img.delivery = delivery
+                img.image = f
+                img.save()
 
-            messages.success(request, "Your delivery request has been recieved. You will recieve a quote shortly")
+            messages.success(request, "Your delivery request has been receive. You will receive a quote shortly")
             return render(request, 'deliveranything/index.html', context)
 
 
     return render(request, 'deliveranything/index.html', context)
 
+
 def registerVehicle(request):
 
     if request.method == 'POST':
         form = VehicleForm(request.POST)
-        for errors in form.errors:
-            print(errors)
         if form.is_valid():
             vehicle = form.save(commit=False)
             vehicle.driver = request.user.tasker
@@ -57,7 +64,6 @@ def registerVehicle(request):
             messages.success(request, f"Your {vehicle.year} {vehicle.make} {vehicle.model} has been registered.")
 
     return redirect('deliver-anything')
-
 
 
 def signupBusiness(request):
@@ -76,17 +82,17 @@ def signupBusiness(request):
             b_form.user = user
             b_form.save()
 
-            address = easypost.Address.create(
-                verify=["delivery"],
-                street1=a_form.cleaned_data['street_address'],
-                street2=a_form.cleaned_data['apartment_address'],
-                zip=a_form.cleaned_data['postal_code'],
-                city=a_form.cleaned_data['business_city'],
-                country=a_form.cleaned_data['business_country'],
-            )
+            #address = easypost.Address.create(
+            #    verify=["delivery"],
+            #    street1=a_form.cleaned_data['street_address'],
+            #    street2=a_form.cleaned_data['apartment_address'],
+            #    zip=a_form.cleaned_data['postal_code'],
+            #    city=a_form.cleaned_data['business_city'],
+            #    country=a_form.cleaned_data['business_country'],
+            #)
             a_form = a_form.save(commit=False)
             a_form.business = b_form
-            a_form.verified = address.verifications["delivery"]["success"]
+            #a_form.verified = address.verifications["delivery"]["success"]
             a_form.save()
 
             current_site = get_current_site(request)

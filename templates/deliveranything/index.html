@@ -40,7 +40,8 @@
                          {{ deliveryform.pickup|as_crispy_field }}
                         {% endif %}
                         {{ deliveryform.dropoff|as_crispy_field }}
-                        {{ deliveryform.time|as_crispy_field }}
+                        {{ deliveryform.date|as_crispy_field }}
+                        {{ deliveryform.date_time|as_crispy_field }}
                         {{ deliveryform.description|as_crispy_field }}
                         <div class="form-group">
                             <h4 class="mb-4">DIM Weight <small>(Enter Values as Inches)</small></h4>

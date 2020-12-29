@@ -37,10 +37,16 @@ urlpatterns = [
     path('rentanything/applications/all', dashboard_views.dashboard_rentanything, name='rentanything_applications'),
     path('rentanything/applications/accepted', dashboard_views.dashboard_rentanything, name='rentanything_applications_accepted'),
 
-    #RentAnything
+    #BuyAndSell
     path('buyandsell', dashboard_views.dashboard_buyandsell, name='dashboard_buyandsell'),
     path('buyandsell/applications/all', dashboard_views.dashboard_buyandsell, name='buyandsell_applications'),
     path('buyandsell/applications/accepted', dashboard_views.dashboard_buyandsell, name='buyandsell_applications_accepted'),
+
+    #DeliverAnything
+    path('deliveranything',dashboard_views.dashboard_deliveranything, name='dashboard_deliveranything'),
+    path('deliveranything/completed',dashboard_views.dashboard_deliveranything, name='deliveranything_completed'),
+    path('deliveranything/jobs', dashboard_views.dashboard_deliveranything, name='deliveranything_jobs'),
+    path('deliveranything/jobs/accept/<int:pk>', dashboard_views.accept_job, name='deliveranything_accept'),
 
     #Chats
     path('chats/' , dashboard_views.chats, name='chats'),

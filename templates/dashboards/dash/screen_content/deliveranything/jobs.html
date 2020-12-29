@@ -1,0 +1,19 @@
+{% extends './base.html' %}
+
+
+{% block screen_content %}
+<div class='land-listing-pane'>
+  <div>  <div class='dash-font3'> Jobs </div> </div>
+  <div>
+    {% if request.user.profile.has_vehicle %}
+        {% for job in jobs %}
+            {% if not job.completed and not job.deliverer and job.quote and job.user != request.user %}
+                {% include "dashboards/dash/screen_content/includes/dash-deliveranything-job.html" with job=job %}
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <a class="btn btn-lg btn-success" href="{% url 'vehicle-register' %}">Register Your Vehicle First</a>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

@@ -3,5 +3,5 @@ from deliveranything import views
 
 urlpatterns = [
     path('', views.index, name="deliver-anything"),
-    path('vehicke/', views.registerVehicle, name="vehicle-register")
+    path('vehicle/', views.registerVehicle, name="vehicle-register")
 ]

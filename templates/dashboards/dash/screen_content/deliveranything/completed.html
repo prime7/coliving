@@ -1,0 +1,15 @@
+{% extends './base.html' %}
+
+
+{% block screen_content %}
+<div class='land-listing-pane'>
+  <div>  <div class='dash-font3'> Completed </div> </div>
+  <div>
+    {% for delivery in deliveries %}
+        {% if delivery.completed %}
+            {% include "dashboards/dash/screen_content/includes/dash-deliveranything-ad.html" with delivery=delivery %}
+        {% endif %}
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

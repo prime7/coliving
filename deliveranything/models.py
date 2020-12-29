@@ -108,9 +108,12 @@ class Delivery(models.Model):
     width = models.IntegerField(blank=True)
     height = models.IntegerField(blank=True)
 
+    # Admin Use
+    quote = models.IntegerField(blank=True, null=True)
+
     @property
     def get_dim(self):
-        return (self.length * self.width * self.height) / 139
+        return round((self.length * self.width * self.height) / 139, 2)
 
     def __str__(self):
         return f"{self.user}'s Delivery"

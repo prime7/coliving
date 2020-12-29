@@ -22,6 +22,8 @@
                 Rent Anything
              {% elif dashboard_type == 'buyandsell' %}
                 Buy & Sell
+             {% elif dashboard_type == 'deliveranything' %}
+                Deliver Anything
              {% endif %}
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -30,6 +32,7 @@
                <a class='dropdown-item'  href="{% url 'dashboard_tasker' %}"> Tasker </a>
                <a class='dropdown-item'  href="{% url 'dashboard_rentanything' %}"> Rent Anything </a>
                <a class='dropdown-item'  href="{% url 'dashboard_buyandsell' %}"> Buy & Sell </a>
+               <a class='dropdown-item'  href="{% url 'dashboard_deliveranything' %}"> Deliver Anything </a>
             </div>
           </div>
 
@@ -55,6 +58,8 @@
              {% include "dashboards/dash/dashnav3/dashnav3-rentanything1.html" %}
          {% elif dashboard_type == 'buyandsell' %}
              {% include "dashboards/dash/dashnav3/dashnav3-buyandsell1.html" %}
+         {% elif dashboard_type == 'deliveranything' %}
+             {% include "dashboards/dash/dashnav3/dashnav3-deliveranything1.html" %}
          {% endif %}
       </div>
 

@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 
 from buyandsell.models import Offer, Posting
+from deliveranything.models import Delivery, DeliveryImage
 from memberships.views import get_user_membership
 from rentanything.models import Listing, Booking
 from .forms import CurrentDashForm
@@ -255,6 +256,96 @@ def dashboard_buyandsell(request):
         "offers"            : Offer.objects.all(),
     }
     return render(request, template, context)
+
+@login_required
+def dashboard_deliveranything(request):
+    user            = request.user
+    membership_type = get_user_membership(request).membership
+    current_url     = resolve(request.path_info).url_name
+    template        = None
+    context         = None
+    dash_active1    = 'dash'
+    dash_active2    = None
+    dashboard_type   = 'deliveranything'
+
+    form = CurrentDashForm()
+    form.fields['dashboard_types'].initial = dashboard_type
+
+
+    if current_url == 'dashboard_deliveranything':
+            dash_active2 = 'deliveranything_main'
+            template = 'dashboards/dash/screen_content/deliveranything/deliveries.html'
+
+    elif current_url == 'deliveranything_completed':
+            dash_active2 = 'deliveranything_delivery_completed'
+            template = 'dashboards/dash/screen_content/deliveranything/completed.html'
+
+    elif current_url == 'deliveranything_jobs':
+            dash_active2 = 'deliveranything_delivery_jobs'
+            template = 'dashboards/dash/screen_content/deliveranything/jobs.html'
+
+    context = {
+        "dashboard_type"      : dashboard_type,
+        "membership_type"     : membership_type,
+        'form'                : form,
+        "dash_active1"        : dash_active1,
+        "dash_active2"        : dash_active2,
+        "deliveries"            : Delivery.objects.filter(user=user)
+    }
+
+    if user.profile.is_deliverer:
+        context['jobs'] = Delivery.objects.filter(deliverer=None)
+
+    return render(request, template, context)
+
+
+@login_required
+def accept_job(request, pk):
+    job = Delivery.objects.get(pk=pk)
+    if job.deliverer:
+        messages.error(request, "This Job Is Already Taken")
+        return redirect('deliveranything_jobs')
+    else:
+        job.deliverer = request.user.tasker
+        job.save()
+        chatroom = ChatRoom.objects.create(topic=f"Delivery {job.time}")
+        chatroom.users.add(request.user, job.user)
+        Notification.objects.create(
+            user=request.user,
+            title=f"You have been added to a chatroom with {job.user.username}",
+            text=f"Since you have accepted the job at {job.time} for {job.user.username}, you have been added to a chatroom with them. More Details are located in the chatroom."
+        )
+        Notification.objects.create(
+            user=job.user,
+            title=f"We have found a deliverer for you!",
+            text=f"{request.user} has been chosen to complete your {job.time} order. You have been added to a chatroom with them and more details are located in it. Order description: {job.description}"
+        )
+        job.user.email_user(
+            subject=f"We have found a deliverer for you!",
+            message=f"{request.user} has been chosen to complete your {job.time} order. You have been added to a chatroom with them and more details are located in it. Order description: {job.description}"
+        )
+        ChatRoomMessage.objects.create(
+            chatroom=chatroom,
+            sender=job.user,
+            text=f"INFORMATION\n Pickup Address: {job.pickup}\n Drop Off: {job.dropoff}\n Time: {job.time}\n DIM Weight: {job.get_dim}lbs\n Price: ${job.quote}"
+        )
+
+        images = "IMAGES"
+        for image in DeliveryImage.objects.filter(delivery=job):
+            images += f"\nhttps://meetquoteshack.com/{image.image.url}"
+
+        ChatRoomMessage.objects.create(
+            chatroom=chatroom,
+            sender=job.user,
+            text=images
+        )
+        ChatRoomMessage.objects.create(
+            chatroom=chatroom,
+            sender=request.user,
+            text=f"VEHICLE\n Color: {request.user.tasker.vehicle.color}\n Make: {request.user.tasker.vehicle.make}\n Model: {request.user.tasker.vehicle.year}\n Year: {request.user.tasker.vehicle.year}"
+        )
+        messages.success(request, "Job Accepted! Check Your Notifications.")
+        return redirect('deliveranything_jobs')
 
 @login_required
 def chats(request, pk=None):

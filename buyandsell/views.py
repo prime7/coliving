@@ -110,7 +110,7 @@ def ApplicationAcceptView(request, postingpk, offerpk):
         )
         offer.applicant.email_user(
             subject=f"Your offer for {posting.title} has been accepted!",
-            message=f"{request.user} has accepted your offer of ${offer.offering_price} for their posting! Head to https://meetquoteshack.com/user/chatrooms to coordinate the rental process with them!",
+            message=f"{request.user} has accepted your offer of ${offer.offering_price} for their posting! Head to https://meetquoteshack.com/dashboard/chats/ to coordinate the rental process with them!",
         )
 
     return redirect('buyandsell_applications_accepted')
