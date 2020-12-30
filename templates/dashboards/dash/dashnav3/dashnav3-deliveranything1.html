@@ -1,0 +1,53 @@
+{% load static %}
+<div>
+    <a  class="dash-button1" type="button" style="font-size:10px; text-decoration:none; color:black;" href="{% url 'deliver-anything' %}"> Create Delivery </a>
+</div>
+{% if user.profile.is_deliverer %}
+<div class='dashnav3-updown'>
+      <div>
+          <img id="dashnavbar3_click" style="display:none" src="{% static 'img/cright.svg' %}">
+          <img id="dashnavbar3_click" src="{% static 'img/cdown.svg' %}">
+         <div class="dash-font1"> Deliverer </div>
+      </div>
+
+       <div class='dn3-ud-r2'>
+
+                 {% if dash_active2 == 'deliveranything_delivery_jobs' %}
+                      {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='Available' lurl='deliveranything_jobs' da2=True %}
+                 {% else %}
+                      {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='Available' lurl='deliveranything_jobs' da2=False %}
+                 {% endif %}
+
+       </div>
+</div>
+{% endif %}
+
+<div class='dashnav3-updown'>
+      <div>
+          <img id="dashnavbar3_click" style="display:none" src="{% static 'img/cright.svg' %}">
+          <img id="dashnavbar3_click" src="{% static 'img/cdown.svg' %}">
+         <div class="dash-font1"> Your Deliveries </div>
+      </div>
+
+       <div class='dn3-ud-r2'>
+
+             {% if user.profile.is_deliverer %}
+                 {% if dash_active2 == 'deliveranything_jobs' %}
+                 {% else %}
+                 {% endif %}
+             {% endif %}
+
+             {% if dash_active2 == 'deliveranything_main' %}
+                  {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All' lurl='dashboard_deliveranything' da2=True %}
+             {% else %}
+                  {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='All' lurl='dashboard_deliveranything' da2=False %}
+             {% endif %}
+
+             {% if dash_active2 == 'deliveranything_delivery_completed' %}
+                  {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='Completed' lurl='deliveranything_completed' da2=True %}
+             {% else %}
+                  {% include "dashboards/dash/dashnav3/dashnav3_updown_element.html" with list_element='Completed' lurl='deliveranything_completed' da2=False %}
+             {% endif %}
+
+       </div>
+</div>

@@ -1,0 +1,18 @@
+{% load static %}
+
+
+<div class='dash-listing-ad'>
+    <div>
+        <div style="display:none"> {{ job.id}} </div>
+        <div>{{ job.time }}</div>
+        <div> <small>{{ job.description|truncatewords:12 }}</small> </div>
+    </div>
+    <div>
+        <div class="btn btn-primary btn-block">
+            DIM Weight: {{ job.get_dim }}lbs
+        </div>
+        <a class="btn btn-success btn-block" href="{% url 'deliveranything_accept' pk=job.pk %}">
+            Accept Job
+        </a>
+    </div>
+</div>

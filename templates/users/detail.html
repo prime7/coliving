@@ -2,6 +2,11 @@
 {% load crispy_forms_tags %}
 
 {% block content_block %}
+    {% if user.business %}
+        <i class="fas fa-user-tie text-success"></i> Business Account<br>
+        <small class="text-secondary">Business : {{ user.business.business_name }}</small><br>
+        <small class="text-secondary">Address: {{ user.business.address.street_address }}, {{ user.business.address.business_city }}, {{ user.business.address.business_country }} {{ user.business.address.postal_code }}</small>{% if user.business.address.verified %} <i class="fas fa-check-circle text-success"></i>{% else %} <i class="fas fa-times-circle text-danger"></i>{% endif %}<br>
+    {% endif %}
     <small class="text-secondary">Username : {{ user.username }}</small><br>
     <small class="text-secondary">Email : {{ user.email }}</small>
     <form method="POST" enctype="multipart/form-data">
@@ -16,6 +21,18 @@
     </form>
     <hr>
     <div class='form-group mt4'>
+        {% if user.business %}
+            <form method="POST" action="{% url 'address-form' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Address</legend>
+                    {{ a_form|crispy }}
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-success" type="submit">Update</button>
+                </div>
+            </form>
+        {% else %}
         <label for="referralcode">Referral Code:</label>
         <div class="input-group">
             <input class='form-control col-6' type='text' name='referralcode' id='referralcode' value={{ user.profile.referral_code }} placeholder={{ user.profile.referral_code }} />
@@ -24,6 +41,7 @@
             </span>
         </div>
         <br>Referred Members: {{ user.profile.referred_users.all|length }}
+        {% endif %}
     </div>
     <script>
         function copyToClipboard() {

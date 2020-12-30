@@ -1,9 +1,12 @@
+import easypost
 from django.contrib.messages.views          import SuccessMessageMixin
 from django.core.paginator                  import Paginator, PageNotAnInteger, EmptyPage
 from django.http                            import HttpResponse,HttpResponseRedirect
 from django.contrib.auth                    import login, authenticate
 from django.contrib.auth.forms              import UserCreationForm
 from django.shortcuts                       import render, redirect,reverse
+
+from deliveranything.forms import AddressForm
 from .forms                                 import UserRegisterForm, ProfileUpdateForm, ProfileVerificationForm, ContactForm, ListingDataListForm, LookingDataListForm
 from .models                                import User, NewsLetter, ListingDataList, Profile, LookingDataList
 from rentanything.models                    import Listing
@@ -30,6 +33,7 @@ from accounts.models                        import Notification, ChatRoom, ChatR
 from memberships.models                     import Membership
 from itertools                              import chain
 from django.urls                            import resolve
+from deliveranything.models                 import Address, Business
 
 def home(request):
     services = Service.objects.all()
@@ -142,11 +146,46 @@ def userDetail(request):
 
     else:
         p_form = ProfileUpdateForm(instance=request.user.profile)
+        business = Business.objects.filter(user=request.user).first()
+        address = Address.objects.filter(business=business).first()
+        if address:
+            a_form = AddressForm(instance=request.user.business.address)
+        else:
+            a_form = AddressForm()
 
     context = {
-        'p_form': p_form
+        'p_form': p_form,
+        'a_form': a_form,
     }
+
     return render(request, 'users/detail.html', context)
+
+@login_required
+def addressForm(request):
+    if request.method == 'POST':
+        a_form = AddressForm(request.POST, instance=request.user.business.address)
+        if a_form.is_valid():
+            messages.success(request, 'Your address has been updated!')
+            #address = easypost.Address.create(
+            #    verify=["delivery"],
+            #    street1=a_form.cleaned_data['street_address'],
+            #    street2=a_form.cleaned_data['apartment_address'],
+            #    zip=a_form.cleaned_data['postal_code'],
+            #    city=a_form.cleaned_data['business_city'],
+            #    country=a_form.cleaned_data['business_country'],
+            #)
+            a_form = a_form.save(commit=False)
+            #a_form.verified = address.verifications["delivery"]["success"]
+            a_form.save()
+            return redirect('user-detail')
+
+
+    context = {
+        'a_form': a_form,
+    }
+
+    return render(request, 'users/detail.html', context)
+
 
 @login_required
 def userVerification(request):

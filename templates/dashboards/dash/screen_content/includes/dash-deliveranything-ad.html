@@ -1,0 +1,26 @@
+{% load static %}
+
+
+<div class='dash-listing-ad'>
+    <div>
+        <div style="display:none"> {{ delivery.id}} </div>
+        <div>{{ delivery.time }}</div>
+        <div> <small>{{ delivery.description|truncatewords:12 }}</small> </div>
+    </div>
+    <div>
+        <div class="btn btn-primary btn-block">
+            {% if delivery.quote %}
+                Quote: ${{ delivery.quote }}
+            {% else %}
+                Quote Still Pending
+            {% endif %}
+        </div>
+        <div class="btn btn-success btn-block">
+            {% if delivery.deliverer %}
+                Deliverer: {{ delivery.deliverer }}
+            {% else %}
+                No Deliverer Yet
+            {% endif %}
+        </div>
+    </div>
+</div>
