@@ -12,12 +12,6 @@ from .forms import DeliveryForm, VehicleForm
 from .models import DeliveryImage
 import datetime
 
-import config.easypost as ep
-#import easypost
-
-#easypost.api_key = ep.EASYPOST_KEY
-
-
 def index(request):
 
     context = {
@@ -41,10 +35,10 @@ def index(request):
 
             files = request.FILES.getlist('images')
             for f in files:
-                img = DeliveryImage()
-                img.delivery = delivery
-                img.image = f
-                img.save()
+                DeliveryImage.objects.create(
+                    delivery=delivery,
+                    image=f
+                )
 
             messages.success(request, "Your delivery request has been receive. You will receive a quote shortly")
             return render(request, 'deliveranything/index.html', context)
@@ -82,17 +76,8 @@ def signupBusiness(request):
             b_form.user = user
             b_form.save()
 
-            #address = easypost.Address.create(
-            #    verify=["delivery"],
-            #    street1=a_form.cleaned_data['street_address'],
-            #    street2=a_form.cleaned_data['apartment_address'],
-            #    zip=a_form.cleaned_data['postal_code'],
-            #    city=a_form.cleaned_data['business_city'],
-            #    country=a_form.cleaned_data['business_country'],
-            #)
             a_form = a_form.save(commit=False)
             a_form.business = b_form
-            #a_form.verified = address.verifications["delivery"]["success"]
             a_form.save()
 
             current_site = get_current_site(request)

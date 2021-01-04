@@ -19,7 +19,7 @@ from django.http import HttpResponse
 @login_required
 def dashboard_landlord(request):
     user            = request.user
-    print(user)
+
     is_tasker       = False
     membership_type = get_user_membership(request).membership
     current_url     = resolve(request.path_info).url_name
@@ -37,7 +37,7 @@ def dashboard_landlord(request):
     dashboard_type               = 'landlord'
 
     form = CurrentDashForm()
-    print('2')
+
     form.fields['dashboard_types'].initial = dashboard_type
 
 
@@ -76,7 +76,7 @@ def dashboard_landlord(request):
             template = 'dashboards/dash/screen_content/landlord/listings.html'
             dash_active2 = 'landlord_listing_all'
 
-    print('4')
+
     context = {
         "dashboard_type"      : dashboard_type,
         "membership_type"     : membership_type,
@@ -84,7 +84,7 @@ def dashboard_landlord(request):
         "dash_active1"        : dash_active1,
         "dash_active2"        : dash_active2,
     }
-    print('5' , template, dash_active2)
+
     return render(request, template, context)
 
 
@@ -123,21 +123,21 @@ def dashboard_tenant(request):
             template = 'dashboards/dash/screen_content/landlord/listings.html'
             dash_active2 = 'tenant_applications_all'
 
-    print('4')
+
     context = {
         "dashboard_type"      : dashboard_type,
         "membership_type"     : membership_type,
         "dash_active1"        : dash_active1,
         "dash_active2"        : dash_active2,
     }
-    print('5' , template)
+
     return render(request, template, context)
 
 
 
 @login_required
 def dashboard_tasker(request):
-    print("1")
+
     user            = request.user
     is_tasker       = False
     membership_type = get_user_membership(request).membership
@@ -149,7 +149,7 @@ def dashboard_tasker(request):
     dashboard_type   = 'tasker'
 
     form = CurrentDashForm()
-    print('2')
+
     form.fields['dashboard_types'].initial = dashboard_type
 
 
@@ -170,7 +170,6 @@ def dashboard_tasker(request):
             dash_active2 - 'tasker_tasks_all'
             template = 'dashboards/dash/screen_content/tasker/tasks.html'
 
-    print('4')
     context = {
         "dashboard_type"      : dashboard_type,
         "membership_type"     : membership_type,
@@ -178,7 +177,6 @@ def dashboard_tasker(request):
         "dash_active1"        : dash_active1,
         "dash_active2"        : dash_active2,
     }
-    print('5' , template)
     return render(request, template, context)
 
 @login_required
@@ -311,11 +309,6 @@ def accept_job(request, pk):
         chatroom = ChatRoom.objects.create(topic=f"Delivery {job.time}")
         chatroom.users.add(request.user, job.user)
         Notification.objects.create(
-            user=request.user,
-            title=f"You have been added to a chatroom with {job.user.username}",
-            text=f"Since you have accepted the job at {job.time} for {job.user.username}, you have been added to a chatroom with them. More Details are located in the chatroom."
-        )
-        Notification.objects.create(
             user=job.user,
             title=f"We have found a deliverer for you!",
             text=f"{request.user} has been chosen to complete your {job.time} order. You have been added to a chatroom with them and more details are located in it. Order description: {job.description}"
@@ -332,8 +325,15 @@ def accept_job(request, pk):
 
         images = "IMAGES"
         for image in DeliveryImage.objects.filter(delivery=job):
-            images += f"\nhttps://meetquoteshack.com/{image.image.url}"
+            images += f"\nhttps://meetquoteshack.com{image.image.url}"
 
+        Notification.objects.create(
+            user=request.user,
+            title=f"You have been added to a chatroom with {job.user.username}",
+            text=f"""Since you have accepted the job at {job.time} for {job.user.username}, you have been added to a chatroom with them. More Details are located in the chatroom.
+            {images}
+            """
+        )
         ChatRoomMessage.objects.create(
             chatroom=chatroom,
             sender=job.user,
@@ -446,7 +446,6 @@ def sfv_day_select(request):
             return HttpResponse("error")
 
 
-    print(sfv_day)
     sfv_application = sfv_day.sfv_application
 
     #Deselect everything.
@@ -504,7 +503,6 @@ def tenant_verification(request):
     tv_phone = request.GET.get('tv_phone')
     tv_address = request.GET.get('tv_address')
     tv_notes = request.GET.get('tv_notes')
-    print(tv_name, tv_phone, tv_address, tv_notes)
 
     TenantVerification.objects.create(landlord=request.user.landlord, name=tv_name, phone_number=tv_phone, notes=tv_notes, address=tv_address)
 

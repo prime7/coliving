@@ -9,7 +9,7 @@
             {{ notification.title }}<br>
             <small class="text-muted">{{ notification.date_created }} UTC</small>
             <hr>
-            {{ notification.text }}
+            {{ notification.text|safe|linebreaks }}
         </div>
         {% else %}
             <h2>Select A Notification</h2>
