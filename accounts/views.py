@@ -260,3 +260,7 @@ def newsletter_signup(request):
                 messages.warning(request, 'Email could not be entered into News Letter at this time. Please try again.')
 
     return render(request, 'accounts/home.html', )
+
+
+def about_us(request):
+    return render(request, 'accounts/about-us.html')
