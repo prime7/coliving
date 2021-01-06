@@ -1,8 +1,5 @@
 from django.contrib.messages.views          import SuccessMessageMixin
-from django.core.paginator                  import Paginator, PageNotAnInteger, EmptyPage
-from django.http                            import HttpResponse,HttpResponseRedirect
-from django.contrib.auth                    import login, authenticate
-from django.contrib.auth.forms              import UserCreationForm
+from django.contrib.auth                    import login
 from django.shortcuts                       import render, redirect,reverse
 
 from deliveranything.forms import AddressForm
@@ -12,7 +9,7 @@ from rentanything.models                    import Listing
 from buyandsell.models                      import Posting
 from django.contrib.auth.decorators         import login_required
 from django.contrib                         import messages
-from django.views.generic                   import ListView, UpdateView, DetailView, CreateView
+from django.views.generic                   import ListView, CreateView
 from django.db.models                       import Q
 from rentals.models                         import House
 from memberships.views                      import get_user_membership,get_user_subscription
@@ -26,12 +23,10 @@ from django.utils.encoding                  import force_text
 from django.utils.http                      import urlsafe_base64_decode
 from django.shortcuts                       import render_to_response
 from django.template                        import RequestContext
-from django.contrib.auth                    import logout
 from services.models                        import Service
-from accounts.models                        import Notification, ChatRoom, ChatRoomMessage, Landlord
+from accounts.models                        import Notification, Landlord
 from memberships.models                     import Membership
 from itertools                              import chain
-from django.urls                            import resolve
 from deliveranything.models                 import Address, Business
 
 def home(request):

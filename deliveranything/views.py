@@ -12,7 +12,6 @@ from .forms import DeliveryForm, VehicleForm
 from .models import DeliveryImage
 import datetime
 
-
 def index(request):
 
     context = {
@@ -36,10 +35,10 @@ def index(request):
 
             files = request.FILES.getlist('images')
             for f in files:
-                img = DeliveryImage()
-                img.delivery = delivery
-                img.image = f
-                img.save()
+                DeliveryImage.objects.create(
+                    delivery=delivery,
+                    image=f
+                )
 
             messages.success(request, "Your delivery request has been receive. You will receive a quote shortly")
             return render(request, 'deliveranything/index.html', context)
