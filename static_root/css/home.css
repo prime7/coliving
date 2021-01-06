@@ -129,6 +129,7 @@
 
 .au-r2{
   padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .au-sec1, .au-sec2{
@@ -177,12 +178,73 @@
 .au-sec1 > div:nth-child(2) , .au-sec2 > div:nth-child(2){
   margin-top: 10px;
   font-family: 'Roboto', sans-serif;
-  font-size: 20px;
+  font-size: 18px;
   color:grey;
 }
 
 .au-sec3{
-  border:2px solid red;
   display: flex;
   flex-direction: column;
+  padding: 10px;
+  border-radius: 20px;
+  align-items: center;
+}
+
+.au-sec3 > div:nth-child(1){
+  font-size: 40px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: 20px;
+  display: flex;
+  letter-spacing: 10px;
+}
+
+.au-sec3 > div:nth-child(2){
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.au-sec3 > div:nth-child(2) > div {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.au-sec3 > div:nth-child(2) > div > div:nth-child(1){
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  font-size: 25px;
+  font-weight: bolder;
+  color: #5e5e5e;
+  letter-spacing: 2px;
+}
+
+.au-sec3 > div:nth-child(2) > div > div:nth-child(2){
+  color: #19b53e;
+  width: 100%;
+  display: flex;
+  font-size: 20px;
+  margin-top: 2px;
+  justify-content: center;
+  letter-spacing: 1px;
+  font-family: 'Roboto', sans-serif;
+  
+}
+
+.au-divider1{
+  border-bottom:2px solid #cccccc;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.au-span1{
+  margin-left: 5px;
+  margin-right: 5px;
+  color:black;
+  font-weight: bold;
 }
