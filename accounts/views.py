@@ -1,4 +1,3 @@
-import easypost
 from django.contrib.messages.views          import SuccessMessageMixin
 from django.core.paginator                  import Paginator, PageNotAnInteger, EmptyPage
 from django.http                            import HttpResponse,HttpResponseRedirect
@@ -166,16 +165,7 @@ def addressForm(request):
         a_form = AddressForm(request.POST, instance=request.user.business.address)
         if a_form.is_valid():
             messages.success(request, 'Your address has been updated!')
-            #address = easypost.Address.create(
-            #    verify=["delivery"],
-            #    street1=a_form.cleaned_data['street_address'],
-            #    street2=a_form.cleaned_data['apartment_address'],
-            #    zip=a_form.cleaned_data['postal_code'],
-            #    city=a_form.cleaned_data['business_city'],
-            #    country=a_form.cleaned_data['business_country'],
-            #)
             a_form = a_form.save(commit=False)
-            #a_form.verified = address.verifications["delivery"]["success"]
             a_form.save()
             return redirect('user-detail')
 
