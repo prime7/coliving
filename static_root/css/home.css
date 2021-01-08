@@ -67,14 +67,16 @@
 }
 
 .tos-h3{
-  font-size: 12px;
+  font-size: 17px;
   font-weight: bold;
 }
 
 .tos-p1{
-  color:blue;
   text-transform: lowercase;
-  color:grey;
+  color:black;
+  font-weight: normal;
+  font-size: 16px;
+  letter-spacing: 0px;
 }
 
 .tos-p1::first-letter{
@@ -92,6 +94,14 @@
   text-transform: uppercase;
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.tos-p4{
+  font-size: 16px;
+  text-transform: uppercase;
+  color:black;
+  font-weight: normal;
+  letter-spacing: 0px;
 }
 
 .tos-s1{
