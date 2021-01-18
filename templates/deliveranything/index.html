@@ -34,15 +34,15 @@
             <div class="card topborder">
                 <div class="card-body">
                     <h2 class="mb-4">Create A Delivery</h2>
-                    <form name="deliveryform" method="POST" enctype="multipart/form-data">
+                    <form name="deliveryform" id="deliveryform" method="POST" enctype="multipart/form-data" action="{% url 'deliver-anything' %}">
                         {% csrf_token %}
-                        {% if not user.business %}
                          {{ deliveryform.pickup|as_crispy_field }}
-                        {% endif %}
                         {{ deliveryform.dropoff|as_crispy_field }}
                         {{ deliveryform.date|as_crispy_field }}
                         {{ deliveryform.date_time|as_crispy_field }}
+                        {{ deliveryform.wait_time|as_crispy_field }}
                         {{ deliveryform.description|as_crispy_field }}
+                        {{ deliveryform.weight|as_crispy_field }}
                         <div class="form-group">
                             <h4 class="mb-4">DIM Weight <small>(Enter Values as Inches)</small></h4>
                             {{ deliveryform.length|as_crispy_field }}
@@ -55,22 +55,22 @@
                                 <input class="form-group" type="file" name="images" accept="image/*" multiple>
                             </div>
                         </div>
-                        <button class="btn btn-success" type="submit">Submit</button>
+                        <a class="btn btn-success" id="quoteBtn" style="color: white;" data-toggle="modal" data-target="#quoteModal">Get Quote</a>
                     </form>
                 </div>
             </div>
         {% else %}
-            <div class="text-center">
-                <a href="{% url 'login' %}" class="btn btn-lg btn-success btn-success">
-                Login To Use The Service
-                </a>
+            <div class="card topborder">
+                <div class="card-body">
+                    {% include 'includes/anonymous_delivery_form.html' %}
+                </div>
             </div>
         {% endif %}
-        <div class="modal fade" id="vehicleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="vehicleModal" tabindex="-1" role="dialog" aria-labelledby="quoteModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="quoteModalLabel">Register Vehicle</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -90,4 +90,107 @@
         </div>
     </div>
 </div>
+    
+<div class="modal fade" id="quoteModal" tabindex="-1" role="dialog" aria-labelledby="quoteModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="quoteModalLabel">Delivery</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="append">
+            <div class="loader mx-auto"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-success" id="acceptBtn" style="display: none;" data-dismiss="modal">Accept</button>
+        <button type="submit" class="btn btn-primary" id="payBtn" style="display: none;">Make Payment</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 {% endblock %}
+
+{% block js %}
+    <script>
+
+    $("#acceptBtn").click(function () {
+        $("#deliveryform").submit();
+    })
+
+    $("#payBtn").click(function () {
+        var quote = $("#payBtn").val();
+        $("#payBtn").hide();
+        var values = {};
+        $.each($('#deliveryform').serializeArray(), function (i, field) {
+            values[field.name] = field.value;
+        });
+        values["quote"] = quote
+        $.ajax({
+            url: `{% url 'ajax-accept' %}?values=${JSON.stringify(values)}`,
+            method: 'POST',
+            success: function (response) {
+                var del = response;
+                $.ajax({
+                    url: `{% url 'payment-methods' %}`,
+                    method: 'POST',
+                    success: function (response) {
+                        var cards = `<h5>Select A Payment Method ($${quote})</h5><ul class="list-group mx-auto m-2">`;
+
+                        for (var obj in response["data"]) {
+                            cards += `<li class="list-group-item"><i class="fab fa-cc-${response["data"][obj]["card"]["brand"]}"></i> •••• •••• •••• ${response["data"][obj]["card"]["last4"]} | ${JSON.stringify(response["data"][obj]["card"]["exp_month"])}/${JSON.stringify(response["data"][obj]["card"]["exp_year"])}<a href="{% url 'deliver-payment' %}?card=${response["data"][obj]["id"]}&quote=${quote}&id=${del}" class="fas fa-check text-success ml-4"></a></li>`
+                        }
+                        cards += `</li>`
+                        $("#append").html(cards);
+                    }
+                })
+
+            }
+        })
+    })
+
+    $("#quoteBtn").click(function () {
+        var values = {};
+        $.each($('#deliveryform').serializeArray(), function (i, field) {
+           values[field.name] = field.value;
+        });
+        $.ajax({
+            url: `{% url 'quote-creator' %}?values=${JSON.stringify(values)}`,
+            method: 'POST',
+            success: function (response) {
+                var json_response = JSON.parse(response);
+                if (json_response["error"]) {
+                    $("#append").html(json_response["error"]);
+                    if (json_response["error"].startsWith("Since you have not provided")) {
+                        $("#acceptBtn").show();
+                        $("#payBtn").hide();
+                    } else if (json_response["error"].startsWith("Since you do not have an account")) {
+                        $("#acceptBtn").show();
+                        $("#payBtn").hide();
+                    } else {
+                        $("#acceptBtn").hide();
+                        $("#payBtn").hide();
+                    }
+
+                } else {
+                    if (json_response["pickup"] && json_response["dropoff"]) {
+                        if (json_response["quote"]) {
+                            $("#acceptBtn").hide();
+                            $("#append").html("Delivery Price: $" + json_response["quote"]);
+                            $("#payBtn").val(json_response["quote"]);
+                            $("#payBtn").show();
+                        }
+                    } else {
+                        $("#append").html("Invalid Dropoff and/or Pickup address. Try again.");
+                    }
+                }
+            }
+            })
+    })
+    </script>
+{% endblock js %}

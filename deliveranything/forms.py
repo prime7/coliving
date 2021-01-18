@@ -1,7 +1,7 @@
 from django import forms
 from django.core.validators import MinValueValidator
 
-from .models import Business, Address, Delivery, DeliveryImage, Vehicle, year_choices, current_year
+from .models import Business, Address, Delivery, AnonymousDelivery, Vehicle, year_choices, current_year
 
 class AddressForm(forms.ModelForm):
 
@@ -54,6 +54,45 @@ class VehicleForm(forms.ModelForm):
         }
 
 
+class AnonymousDeliveryForm(forms.ModelForm):
+    date = forms.DateTimeField(widget=forms.DateInput(
+        attrs={
+            'type': 'date'
+        }),
+        required=True,
+    )
+    date_time = forms.TimeField(widget=forms.TimeInput(
+        attrs={
+            'type': 'time'
+        }),
+        label='Time',
+        required=True,
+        help_text='Hr-Min-AM/PM'
+    )
+
+    class Meta:
+        model = AnonymousDelivery
+        fields = (
+            'user',
+            'pickup',
+            'dropoff',
+            'date',
+            'date_time',
+            'description',
+            'weight',
+            'length',
+            'width',
+            'height',
+            'wait_time'
+        )
+        labels = {
+            'user': "Email",
+            'date_time': "Time",
+            'wait_time': "Expected Wait Time"
+        }
+
+
+
 class DeliveryForm(forms.ModelForm):
     date = forms.DateTimeField(widget=forms.DateInput(
         attrs={
@@ -78,11 +117,14 @@ class DeliveryForm(forms.ModelForm):
             'date',
             'date_time',
             'description',
+            'weight',
             'length',
             'width',
-            'height'
+            'height',
+            'wait_time'
         )
         labels = {
-            'date_time': "Time"
+            'date_time': "Time",
+            'wait_time': "Expected Wait Time"
         }
 

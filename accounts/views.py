@@ -1,3 +1,4 @@
+import easypost
 from django.contrib.messages.views          import SuccessMessageMixin
 from django.contrib.auth                    import login
 from django.shortcuts                       import render, redirect,reverse
@@ -7,6 +8,7 @@ from .forms                                 import UserRegisterForm, ProfileUpda
 from .models                                import User, NewsLetter, ListingDataList, Profile, LookingDataList
 from rentanything.models                    import Listing
 from buyandsell.models                      import Posting
+from django.conf                            import settings
 from django.contrib.auth.decorators         import login_required
 from django.contrib                         import messages
 from django.views.generic                   import ListView, CreateView
@@ -28,6 +30,11 @@ from accounts.models                        import Notification, Landlord
 from memberships.models                     import Membership
 from itertools                              import chain
 from deliveranything.models                 import Address, Business
+import stripe
+
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
+
 
 def home(request):
     services = Service.objects.all()
@@ -160,7 +167,16 @@ def addressForm(request):
         a_form = AddressForm(request.POST, instance=request.user.business.address)
         if a_form.is_valid():
             messages.success(request, 'Your address has been updated!')
+            address = easypost.Address.create(
+                verify=["delivery"],
+                street1=a_form.cleaned_data['street_address'],
+                street2=a_form.cleaned_data['apartment_address'],
+                zip=a_form.cleaned_data['postal_code'],
+                city=a_form.cleaned_data['business_city'],
+                country=a_form.cleaned_data['business_country'],
+            )
             a_form = a_form.save(commit=False)
+            a_form.verified = address.verifications["delivery"]["success"]
             a_form.save()
             return redirect('user-detail')
 
@@ -170,6 +186,91 @@ def addressForm(request):
     }
 
     return render(request, 'users/detail.html', context)
+
+
+@login_required
+def userPayment(request):
+
+    context = {}
+
+    if request.method == "POST":
+        if request.POST["name"] and request.POST["number"] and request.POST["cvc"] and request.POST["expiry"]:
+            try:
+                expiry = request.POST["expiry"].split("/")
+                user_card = stripe.PaymentMethod.create(
+                    type="card",
+                    card={
+                        "number": request.POST["number"],
+                        "exp_month": int(expiry[0].strip()),
+                        "exp_year": int(expiry[1].strip()),
+                        "cvc": request.POST["cvc"]
+                    }
+                )
+                stripe.PaymentMethod.attach(
+                    user_card["id"],
+                    customer=request.user.profile.customer_code
+                )
+            except stripe.error.CardError as e:
+                messages.info(request, "Card type not supported.")
+
+                print('Status is: %s' % e.http_status)
+                print('Code is: %s' % e.code)
+                # param is '' in this case
+                print('Param is: %s' % e.param)
+                print('Message is: %s' % e.user_message)
+            except stripe.error.RateLimitError as e:
+                # Too many requests made to the API too quickly
+                messages.info("You have sent too many requests too quickly. Try again later.")
+            except stripe.error.InvalidRequestError as e:
+                # Invalid parameters were supplied to Stripe's API
+                messages.info("An unexpected error occured. Try again.")
+            except stripe.error.AuthenticationError as e:
+                # Authentication with Stripe's API failed
+                # (maybe you changed API keys recently)
+                messages.info("An unexpected error occured. Try again.")
+            except stripe.error.APIConnectionError as e:
+                # Network communication with Stripe failed
+                messages.info("A network error occured. Try again.")
+            except stripe.error.StripeError as e:
+                # Display a very generic error to the user
+                messages.info("An unexpected error occured. Try again.")
+                print('Status is: %s' % e.http_status)
+                print('Code is: %s' % e.code)
+                # param is '' in this case
+                print('Param is: %s' % e.param)
+                print('Message is: %s' % e.user_message)
+
+            except Exception as e:
+                # Something else happened, completely unrelated to Stripe
+
+                messages.info("An unexpected error occured. Try again.")
+
+                print('Status is: %s' % e.http_status)
+                print('Code is: %s' % e.code)
+                # param is '' in this case
+                print('Param is: %s' % e.param)
+                print('Message is: %s' % e.user_message)
+
+        else:
+            messages.info(request, "Please fill all the fields.")
+
+    methods = stripe.PaymentMethod.list(
+        customer=request.user.profile.customer_code,
+        type="card"
+    )
+    context["methods"] = methods
+
+    return render(request, "users/payments.html", context)
+
+
+@login_required
+def removeCard(request, id):
+    stripe.PaymentMethod.detach(
+        id
+    )
+    messages.success(request, "Card Removed.")
+
+    return redirect('user-payment')
 
 
 @login_required

@@ -19,6 +19,8 @@
 
 
     <script src="https://kit.fontawesome.com/7521df1375.js" crossorigin="anonymous"></script>
+    {% block headscript %}
+    {% endblock headscript %}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <title>{% block title %}{% endblock %}</title>
@@ -135,6 +137,8 @@
     <script type="text/javascript" src="{% static 'js/dashboard.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/listing.js' %}"></script>
 
+    {% block js %}
+    {% endblock js %}
 
   </body>
 </html>

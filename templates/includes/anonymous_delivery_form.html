@@ -1,0 +1,27 @@
+{% load crispy_forms_tags %}
+
+<h2 class="mb-4">Create A Delivery</h2>
+<form name="deliveryform" id="deliveryform" method="POST" enctype="multipart/form-data" action="{% url 'deliver-anything' %}">
+    {% csrf_token %}
+    {{ deliveryform.user|as_crispy_field }}
+    {{ deliveryform.pickup|as_crispy_field }}
+    {{ deliveryform.dropoff|as_crispy_field }}
+    {{ deliveryform.date|as_crispy_field }}
+    {{ deliveryform.date_time|as_crispy_field }}
+    {{ deliveryform.wait_time|as_crispy_field }}
+    {{ deliveryform.description|as_crispy_field }}
+    {{ deliveryform.weight|as_crispy_field }}
+    <div class="form-group">
+        <h4 class="mb-4">DIM Weight <small>(Enter Values as Inches)</small></h4>
+        {{ deliveryform.length|as_crispy_field }}
+        {{ deliveryform.width|as_crispy_field }}
+        {{ deliveryform.height|as_crispy_field }}
+    </div>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="images">Upload Images</label><br>
+            <input class="form-group" type="file" name="images" accept="image/*" multiple>
+        </div>
+    </div>
+    <a class="btn btn-success" id="quoteBtn" style="color: white;" data-toggle="modal" data-target="#quoteModal">Get Quote</a>
+</form>
