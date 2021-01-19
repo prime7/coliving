@@ -19,6 +19,7 @@
       <div class="list-group topborder">
         <a href="{% url 'user-detail'%}"><button type="button" class="list-group-item list-group-item-action {% if request.resolver_match.view_name == 'user-detail' %}active{% endif %}">Profile</button></a>
         <a href="{% url 'user-verification'%}"><button type="button" class="list-group-item list-group-item-action {% if request.resolver_match.view_name == 'user-verification' %}active{% endif %}">Verify</button></a>
+        <a href="{% url 'user-payment'%}"><button type="button" class="list-group-item list-group-item-action {% if request.resolver_match.view_name == 'user-payment' %}active{% endif %}">Payment Information</button></a>
       </div>
     </div>
     <div class="col-md-7 offset-1">

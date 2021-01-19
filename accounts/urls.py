@@ -16,6 +16,8 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(next_page='/'), name='logout'),
     path('user/detail/', views.userDetail, name='user-detail'),
     path('user/verification/', views.userVerification, name='user-verification'),
+    path('user/payments/', views.userPayment, name='user-payment'),
+    path('user/payments/remove/<str:id>/', views.removeCard, name='remove-card'),
     path('user/notifications/<pk>/delete/', views.notificationDelete, name='notification-delete'),
     path('user/address/', views.addressForm, name='address-form'),
     path('user/membership/', views.userMembership, name='user-membership'),

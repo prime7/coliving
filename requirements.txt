@@ -12,6 +12,9 @@ django-robots==4.0
 django-storages==1.9.1
 djangorestframework==3.11.0
 docutils==0.15.2
+easypost==5.0.0
+geographiclib==1.50
+geopy==2.1.0
 idna==2.10
 Pillow==7.1.2
 psycopg2-binary==2.8.3

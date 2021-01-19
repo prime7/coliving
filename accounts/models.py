@@ -9,6 +9,11 @@ from django_resized import ResizedImageField
 from django.core.mail import send_mail
 from django.conf import settings
 import re
+import stripe
+
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
+
 
 PHONE_REGEX = RegexValidator(regex='\d{9,13}$',message="Phone Number must be without +")
 VERIFICATION_STATUS = (
@@ -136,6 +141,9 @@ class Profile(models.Model):
 
     referred_users = models.ManyToManyField('accounts.User', related_name='referred_users', blank=True)
 
+    # Payment Information
+    customer_code = models.CharField(max_length=50, blank=True, null=True)
+
     @property
     def is_profile_ready(self):
         return self.verified == 3
@@ -226,6 +234,14 @@ class Profile(models.Model):
     def create_profile(sender, instance, created, *args, **kwargs):
         if created:
             profile = Profile(user=instance)
+
+        if not instance.profile.customer_code:
+            get = stripe.Customer.create(
+                email=instance.email,
+                name=instance.username
+            )
+            instance.profile.customer_code = get["id"]
+            instance.profile.save()
 
         if not instance.profile.referral_code:
             upper_alpha = "ABCDEFGHJKLMNPQRSTVWXYZ"

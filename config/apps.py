@@ -24,7 +24,8 @@ INSTALLED_APPS = [
     'storages',
     'meta',
     'robots',
-    'rest_framework'
+    'rest_framework',
+    'easypost'
 ]
 
 SITE_ID = 1

@@ -88,6 +88,62 @@ class Vehicle(models.Model):
         return f"{self.driver}'s {self.year} {self.make} {self.model}"
 
 
+wait_options = (
+    ("0", "None"),
+    ("5", "5 Minutes"),
+    ("10", "10 Minutes"),
+    ("15", "15 Minutes"),
+    ("20", "20 Minutes"),
+    ("25", "25 Minutes"),
+    ("30", "30 Minutes"),
+    ("30+", "30+ Minutes")
+)
+
+
+class AnonymousDelivery(models.Model):
+    """
+    Delivery Model, used for people without accounts
+    """
+
+    user = models.EmailField(max_length=255)
+    deliverer = models.ForeignKey('services.Tasker', on_delete=models.SET_NULL, null=True, blank=True)
+
+    completed = models.BooleanField(default=False)
+    paid = models.BooleanField(default=False)
+
+    pickup = models.CharField(max_length=100, help_text="", blank=True)
+    dropoff = models.CharField(max_length=100, blank=True)
+    time = models.DateTimeField(blank=True)
+    description = models.TextField(max_length=500, blank=True)
+    wait_time = models.CharField(choices=wait_options, max_length=12)
+
+    # DIM (Divisor = 139 or 166)
+    length = models.IntegerField(blank=True, null=True)
+    width = models.IntegerField(blank=True, null=True)
+    height = models.IntegerField(blank=True, null=True)
+
+    weight = models.IntegerField(blank=True, null=True, help_text="Pounds (lbs)")
+
+    # Admin Use
+    quote = models.IntegerField(blank=True, null=True)
+
+    @property
+    def get_dim(self):
+        return round((self.length * self.width * self.height) / 139, 2)
+
+    def __str__(self):
+        return f"{self.user}'s Delivery"
+
+
+class AnonymousDeliveryImage(models.Model):
+    """
+    Image for Anonymous Delivery Model, used so multiple images can be uploaded
+    """
+
+    delivery = models.ForeignKey('deliveranything.AnonymousDelivery', on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='delivery', null=True, blank=True, help_text="")
+
+
 class Delivery(models.Model):
     """
     Delivery Model, holds pickup/dropoff address', etc
@@ -97,19 +153,25 @@ class Delivery(models.Model):
     deliverer = models.ForeignKey('services.Tasker', on_delete=models.SET_NULL, null=True, blank=True)
 
     completed = models.BooleanField(default=False)
+    paid = models.BooleanField(default=False)
 
     pickup = models.CharField(max_length=100, help_text="", blank=True)
     dropoff = models.CharField(max_length=100, blank=True)
     time = models.DateTimeField(blank=True)
     description = models.TextField(max_length=500, blank=True)
+    wait_time = models.CharField(choices=wait_options, max_length=12)
 
-    # DIM (Divisor = 139)
-    length = models.IntegerField(blank=True)
-    width = models.IntegerField(blank=True)
-    height = models.IntegerField(blank=True)
+    # DIM (Divisor = 139 or 166)
+    length = models.IntegerField(blank=True, null=True)
+    width = models.IntegerField(blank=True, null=True)
+    height = models.IntegerField(blank=True, null=True)
+
+    weight = models.IntegerField(blank=True, null=True, help_text="Pounds (lbs)")
 
     # Admin Use
     quote = models.IntegerField(blank=True, null=True)
+
+    intent = models.CharField(max_length=100, null=True, blank=True)
 
     @property
     def get_dim(self):
