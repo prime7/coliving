@@ -25,11 +25,14 @@
               Register Your Vehicle
             </button>
         {% endif %}
+        <button class="btn btn-lg btn-success btn-icon mt-3" id="faqBtn">
+          FAQ
+        </button>
       </p>
   </div>
 </section> 
 <div class="py-5 bg-light">
-    <div class="container">
+    <div class="container" id="mainContainer">
         {% if user.is_authenticated %}
             <div class="card topborder">
                 <div class="card-body">
@@ -89,6 +92,154 @@
           </div>
         </div>
     </div>
+    <div class="container" id="faqContainer" style="display: none;">
+        <div class="card topborder">
+            <div class="card-body">
+                <h1>FAQ</h1>
+                <div id="accordion">
+                  <div class="card">
+                    <div class="card-header" id="headingOne">
+                      <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                          How does it work?
+                        </button>
+                      </h5>
+                    </div>
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                      <div class="card-body">
+                        <ul>
+                            <li>First, enter where and when you want the delivery.</li>
+                            <li>Second, add any special instructions & details about the product in the description field.</li>
+                            <li>Third, add pictures of the product, any receipts, or required documents.</li>
+                            <li>Submit for estimation, and choose payment option</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-header" id="headingTwo">
+                      <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseOne">
+                          Where is the service available?
+                        </button>
+                      </h5>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                      <div class="card-body">
+                          Our services are currently only available in Vancouver, Burnaby, Richmond, & Surrey.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-header" id="headingThree">
+                      <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseOne">
+                          How is the service charged?
+                        </button>
+                      </h5>
+                    </div>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                      <div class="card-body">
+                          Our system calculates based on either weight in pounds or DIM weight added with a formula that calculates a distance cost.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-header" id="headingFour">
+                      <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseOne">
+                          How is the service charged?
+                        </button>
+                      </h5>
+                    </div>
+                    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+                      <div class="card-body">
+                          Our system calculates based on either weight in pounds or DIM weight added with a formula that calculates a distance cost.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-header" id="headingFive">
+                      <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseOne">
+                          What is excluded from delivery?
+                        </button>
+                      </h5>
+                    </div>
+                    <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+                      <div class="card-body">
+                          <ul>
+                              <li>All kinds of marijuana</li>
+                              <li>Animals</li>
+                              <li>Super sensitive & soft items</li>
+                              <li>Super expensive & rare items</li>
+                              <li>Illegal items, products, and substances</li>
+                              <li>Any kinds of dangerous goods, explosives, firearms, flammables, chemicals, stolen items</li>
+                              <li>And Items or products that you do not have clearance/authorized to send.</li>
+                          </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-header" id="headingSix">
+                      <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseOne">
+                          How to identify our delivery drivers?
+                        </button>
+                      </h5>
+                    </div>
+                    <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
+                      <div class="card-body">
+                          We will send your the driver's vehicle information in our dashboard's chatroom feature.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-header" id="headingSeven">
+                      <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseOne">
+                          What is the service?
+                        </button>
+                      </h5>
+                    </div>
+                    <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordion">
+                      <div class="card-body">
+                          We will provide a delivery of your product(s) from one place to another. This place can be a store, marketplace, house, warehouse, etc.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-header" id="headingEight">
+                      <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseEight" aria-expanded="true" aria-controls="collapseOne">
+                          What are the followed instructions?
+                        </button>
+                      </h5>
+                    </div>
+                    <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordion">
+                      <div class="card-body">
+                          Due to Covid-19 we are strictly following contactless delivery protocols, so the delivery drivers will provide our service following strict guidelines.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-header" id="headingNine">
+                      <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseNine" aria-expanded="true" aria-controls="collapseOne">
+                          How do tips work?
+                        </button>
+                      </h5>
+                    </div>
+                    <div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#accordion">
+                      <div class="card-body">
+                          You can give tips to our delivery driver's in cash, of whatever amount you want. Tips are not required.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
     
 <div class="modal fade" id="quoteModal" tabindex="-1" role="dialog" aria-labelledby="quoteModalLabel" aria-hidden="true">
@@ -119,6 +270,18 @@
 {% block js %}
     <script>
 
+    $("#faqBtn").click(function () {
+        if ($("#faqContainer").is(":hidden")) {
+            $("#mainContainer").hide();
+            $("#faqContainer").show();
+            $("#faqBtn").html("See Form");
+        } else {
+            $("#faqContainer").hide();
+            $("#mainContainer").show();
+            $("#faqBtn").html("FAQ");
+        }
+    })
+
     $("#acceptBtn").click(function () {
         $("#deliveryform").submit();
     })
@@ -141,11 +304,16 @@
                     method: 'POST',
                     success: function (response) {
                         var cards = `<h5>Select A Payment Method ($${quote})</h5><ul class="list-group mx-auto m-2">`;
-
+                        var i = 0;
                         for (var obj in response["data"]) {
+                            i++;
                             cards += `<li class="list-group-item"><i class="fab fa-cc-${response["data"][obj]["card"]["brand"]}"></i> •••• •••• •••• ${response["data"][obj]["card"]["last4"]} | ${JSON.stringify(response["data"][obj]["card"]["exp_month"])}/${JSON.stringify(response["data"][obj]["card"]["exp_year"])}<a href="{% url 'deliver-payment' %}?card=${response["data"][obj]["id"]}&quote=${quote}&id=${del}" class="fas fa-check text-success ml-4"></a></li>`
                         }
-                        cards += `</li>`
+                        if (i === 0) {
+                            cards += `<li class="list-group-item">You do not have a saved payment method. Add one <a href="{% url 'user-payment' %}">here.</a></li>`
+                        }
+
+                        cards += `</ul>`
                         $("#append").html(cards);
                     }
                 })

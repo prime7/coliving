@@ -125,11 +125,14 @@ class AnonymousDelivery(models.Model):
     weight = models.IntegerField(blank=True, null=True, help_text="Pounds (lbs)")
 
     # Admin Use
-    quote = models.IntegerField(blank=True, null=True)
+    quote = models.DecimalField(max_digits=6, decimal_places=2, blank=True, null=True)
 
     @property
     def get_dim(self):
-        return round((self.length * self.width * self.height) / 139, 2)
+        if self.length and self.width and self.height:
+            return round((self.length * self.width * self.height) / 139, 2)
+        else:
+            return 0
 
     def __str__(self):
         return f"{self.user}'s Delivery"
@@ -169,13 +172,16 @@ class Delivery(models.Model):
     weight = models.IntegerField(blank=True, null=True, help_text="Pounds (lbs)")
 
     # Admin Use
-    quote = models.IntegerField(blank=True, null=True)
+    quote = models.DecimalField(max_digits=6, decimal_places=2, blank=True, null=True)
 
     intent = models.CharField(max_length=100, null=True, blank=True)
 
     @property
     def get_dim(self):
-        return round((self.length * self.width * self.height) / 139, 2)
+        if self.length and self.width and self.height:
+            return round((self.length * self.width * self.height) / 139, 2)
+        else:
+            return 0
 
     def __str__(self):
         return f"{self.user}'s Delivery"

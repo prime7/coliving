@@ -22,6 +22,6 @@ class LoanCreateAPIView(generics.CreateAPIView):
         message = render_to_string('emails/loan_form_receive.html', {
             'user': serializer.data['email'],
         })
-        send_mail('Thank you for using meetquoteshack',message,settings.EMAIL_HOST_USER, [serializer.data['email']],  fail_silently=False,)
+        send_mail('Thank you for using rntdel',message,settings.EMAIL_HOST_USER, [serializer.data['email']],  fail_silently=False,)
         
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
