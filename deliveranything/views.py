@@ -95,14 +95,14 @@ def ajax_accept(request):
                 time=datetime.datetime.combine(datetime.datetime.strptime(values["date"], '%Y-%m-%d').date(), datetime.datetime.strptime(values["date_time"], '%H:%M').time()),
                 wait_time=values["wait_time"],
                 description=values["description"],
-                quote=int(values["quote"])
+                quote=float(values["quote"])
             )
             if values["width"]:
                 delivery.width = int(values["width"])
             if values["length"]:
-                delivery.width = int(values["length"])
+                delivery.length = int(values["length"])
             if values["height"]:
-                delivery.width = int(values["height"])
+                delivery.height = int(values["height"])
             if values["weight"]:
                 delivery.weight = int(values["weight"])
 
@@ -216,7 +216,7 @@ def payment(request):
         delivery = Delivery.objects.get(pk=int(request.GET.get('id')))
         card = stripe.PaymentMethod.retrieve(request.GET.get('card'))
         intent = stripe.PaymentIntent.create(
-            amount=int(request.GET.get('quote')) * 100,
+            amount=int(float(request.GET.get('quote')) * 100),
             customer=request.user.profile.customer_code,
             currency="cad",
             payment_method=card,
@@ -287,7 +287,7 @@ def quote_ajax(request):
 
                     elif data["weight"]:
                         if 0 < int(data["weight"]) and 66 >= int(data["weight"]):
-                            quote = 55
+                            quote = 56
                             response["quote"] = round(quote + d_price, 2)
                             response_data = json.dumps(response)
                             return HttpResponse(response_data)

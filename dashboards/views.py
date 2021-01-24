@@ -325,7 +325,7 @@ def accept_job(request, pk):
 
         images = "IMAGES"
         for image in DeliveryImage.objects.filter(delivery=job):
-            images += f"\nhttps://meetquoteshack.com{image.image.url}"
+            images += f"\nhttps://rntdel.com{image.image.url}"
 
         Notification.objects.create(
             user=request.user,

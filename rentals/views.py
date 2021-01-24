@@ -117,7 +117,7 @@ class LeaseDetailView(FormView,DetailView):
             if settings.DEBUG:
                 link = "http://127.0.0.1:8000"
             else:
-                link = "https://www.meetquoteshack.ca"
+                link = "https://www.rntdel.ca"
 
             link += request.get_full_path()
 
