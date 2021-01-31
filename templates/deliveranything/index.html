@@ -10,8 +10,11 @@
 <section class="jumbotron text-center m-0">
   <div class="container">
       <h1>Deliver Anything</h1>
-      <p class="lead text-muted">Rent items on our online person-to-person system.</p>
-      <p class="lead text-muted">Email us at admin@meetquoteshack.com for any kind of help.</p>
+      <p class="lead text-muted text-center">
+          Save Your Time, Do Your Work. Let us do the delivery/pickup for you.
+          Enjoy a fast, affordable and convenient service.
+
+      </p>
       <p class="lead">
         {% if not user.is_authenticated %}
         <a href="{% url 'business-signup' %}" class="btn btn-lg btn-success btn-icon mt-3 mb-sm-0">
@@ -107,12 +110,57 @@
                     </div>
                     <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                       <div class="card-body">
-                        <ul>
-                            <li>First, enter where and when you want the delivery.</li>
-                            <li>Second, add any special instructions & details about the product in the description field.</li>
-                            <li>Third, add pictures of the product, any receipts, or required documents.</li>
-                            <li>Submit for estimation, and choose payment option</li>
-                        </ul>
+                          <ul>
+                              <li>
+                                  Delivering Used Products
+                                  <ul>
+                                      <li>rntdel will delivery/pickup any kind of used products. Just order and let us know where to deliver/pickup</li>
+                                  </ul>
+                              </li>
+                              <li>
+                                  Equipment/Machinery
+                                  <ul>
+                                      <li>rntdel can also deliver/pickup any required machinery or equipment for your home/business.</li>
+                                  </ul>
+                              </li>
+                              <li>
+                                  Restaurants/Groceries/Stores
+                                  <ul>
+                                      <li>rntdel will also help you pickup foods, groceries, and other products from your favorite restaurants or stores.</li>
+                                  </ul>
+                              </li>
+                              <li>
+                                  Business to Business/Customer
+                                  <ul>
+                                      <li>rntdel will also do sameday delivery/pickup of essential documents or other business related items to other business or customers.</li>
+                                  </ul>
+                              </li>
+                              <li>
+                                  Customer to Customer
+                                  <ul>
+                                      <li>rntdel will also do sameday delivery/pickup of any approved items from customer to customer</li>
+                                  </ul>
+                              </li>
+                          </ul>
+
+                          <ol>
+                              <b class="text-success">For Individuals</b>
+                              <ol>
+                                  <li>Enter where & when you want us to pick up the products/items & where you want us to deliver</li>
+                                  <li>Enter any special details you want to the deliverer to know in the description field</li>
+                                  <li>Describe the product, upload any receipts or required documents, and make sure all details are filled</li>
+                                  <li>Submit for estimation</li>
+                              </ol>
+                          </ol>
+
+                          <ol>
+                              <b class="text-success">For Businesses</b>
+                              <ol>
+                                  <li>Enter where & when you want us to pick up the products/items & where you want us to deliver</li>
+                                  <li>Enter product descriptions, handling information, or special details you want to the deliverer to know in the description field</li>
+                                  <li>Submit for estimation</li>
+                              </ol>
+                          </ol>
                       </div>
                     </div>
                   </div>
@@ -232,7 +280,68 @@
                     </div>
                     <div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#accordion">
                       <div class="card-body">
-                          You can give tips to our delivery driver's in cash, of whatever amount you want. Tips are not required.
+                          100% of tips go to our delivery people, and you can give it to them directly.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-header" id="headingTen">
+                      <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseTen" aria-expanded="true" aria-controls="collapseOne">
+                          What Are Delivery Driver Requirements?
+                        </button>
+                      </h5>
+                    </div>
+                    <div id="collapseTen" class="collapse" aria-labelledby="headingTen" data-parent="#accordion">
+                      <div class="card-body">
+                          <ul>
+                              <li>Class 5 Driver's License</li>
+                              <li>Vehicle with valid insurance</li>
+                              <li>Smart phone with camera and data plan</li>
+                              <li>International Students can also sign up if they are full-time students with valid student id card of the university and a valid driver's license</li>
+                          </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-header" id="headingEleven">
+                      <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseEleven" aria-expanded="true" aria-controls="collapseOne">
+                          How long does it take to become a delivery driver?
+                        </button>
+                      </h5>
+                    </div>
+                    <div id="collapseEleven" class="collapse" aria-labelledby="headingEleven" data-parent="#accordion">
+                      <div class="card-body">
+                          Generally onboarding takes 3 to 5 business days.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-header" id="headingTwelve">
+                      <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseTwelve" aria-expanded="true" aria-controls="collapseOne">
+                          How is vehicle wear and tear dealt with?
+                        </button>
+                      </h5>
+                    </div>
+                    <div id="collapseTwelve" class="collapse" aria-labelledby="headingTwelve" data-parent="#accordion">
+                      <div class="card-body">
+                          The vehicle must be registered nder your own name, and have valid insurance. Any damage of wear and tear of your vehicle is completely your responsibility.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-header" id="headingTwelve">
+                      <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseTwelve" aria-expanded="true" aria-controls="collapseOne">
+                          What if an accident occurs?
+                        </button>
+                      </h5>
+                    </div>
+                    <div id="collapseTwelve" class="collapse" aria-labelledby="headingTwelve" data-parent="#accordion">
+                      <div class="card-body">
+                          Insure your safety and call 911 if required. Contact us immediately when safe.
                       </div>
                     </div>
                   </div>

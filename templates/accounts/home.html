@@ -12,8 +12,7 @@
     <div class="container">
       <div class="row section-margin">
         <div class="col-xl-9 mx-auto mb4">
-          <h1 class="mb-1">Fastest Way To Rent Anything</h1>
-          <h5 class="mt-2">Start Renting with Confidence & Safety</h5>
+          <h2 class="mb-2">Whatever You Want, Whenever You Want,<br><span class="text-center">Wherever You Want</span></h2>
           <div class="col-md-12 col-lg-12 col-xl-12 mx-auto mt4">
               <form method='GET'>
                 {% csrf_token %}
@@ -34,6 +33,35 @@
     </div>
 </section>
 <section class="bg-light">
+  <div class="container">
+      <div class="row ma4">
+          <div class="mx-auto text-center">
+              <h1 class="text-success"><b>Deliver Anything to Anywhere</b></h1>
+              <h4 class="mt4">
+                  <p>
+                      Start using our delivery & pick-up service, which will help you deliver anything to anywhere. Our service will cover delivery or pickup of used products, new products, orders from restaurants/groceries and courier from business-to-business. This service is only available in Vancouver, Burnaby, Surrey & Richmond. Whatever you want, whenever you want, wherever you want.
+                  </p>
+              </h4>
+          </div>
+      </div>
+      <div class="row mb4">
+          <div class="mx-auto text-center">
+              <a href="{% url 'deliver-anything' %}" class="btn btn-lg btn-success">Let's Get Started</a>
+          </div>
+      </div>
+      <div class="row mb4">
+          <div class="mx-auto text-center">
+              <a href="{% url 'business-signup' %}" class="btn btn-lg btn-success">Register Your Businesses</a>
+          </div>
+      </div>
+      <div class="row mb4">
+          <div class="mx-auto text-center">
+              <a href="{% url 'tasker-signup' %}" class="btn btn-lg btn-success">Become A Driver</a>
+          </div>
+      </div>
+  </div>
+</section>
+<section class="gbground">
   <div class="container">
       <div class="row ma4">
           <div class="mx-auto text-center">
@@ -71,40 +99,16 @@
                       </div>
                   </div>
               </div>
+              <div class="row text-center ma-4">
+                  <div class="col-12 lead">
+                      Don't let your unused products, equipment, machinery, books, or others sit around. List them on rntdel and turn them into a passive income stream. Convert your devaluing asset int oa fresh source of income and rent with confidence & security.
+                  </div>
+              </div>
           </div>
       </div>
       <div class="row mb4">
           <div class="mx-auto text-center">
               <a href="{% url 'category-list' %}" class="btn btn-lg btn-success">Let's Get Started</a>
-          </div>
-      </div>
-  </div>
-</section>
-<section class="gbground">
-  <div class="container">
-      <div class="row ma4">
-          <div class="mx-auto text-center">
-              <h1 class="text-success"><b>Deliver Anything to Anywhere</b></h1>
-              <h4 class="mt4">
-                  <p>
-                      Start using our delivery & pick-up service, which will help you deliver anything to anywhere. Our service will cover delivery or pickup of used products, new products, orders from restaurants/groceries and courier from business-to-business. This service is only available in Vancouver, Burnaby, Surrey & Richmond. Whatever you want, whenever you want, wherever you want.
-                  </p>
-              </h4>
-          </div>
-      </div>
-      <div class="row mb4">
-          <div class="mx-auto text-center">
-              <a href="{% url 'deliver-anything' %}" class="btn btn-lg btn-success">Let's Get Started</a>
-          </div>
-      </div>
-      <div class="row mb4">
-          <div class="mx-auto text-center">
-              <a href="{% url 'business-signup' %}" class="btn btn-lg btn-success">Register Your Businesses</a>
-          </div>
-      </div>
-      <div class="row mb4">
-          <div class="mx-auto text-center">
-              <a href="{% url 'tasker-signup' %}" class="btn btn-lg btn-success">Become A Driver</a>
           </div>
       </div>
   </div>
@@ -185,11 +189,11 @@
                     <h1 class="text-success" style="margin-bottom: 20%;">
                         <b>Move Out Of Your Lease</b>
                     </h1>
-                    <h3>
-                        <b>$15</b> /month
-                    </h3>
-                    <span class="badge badge-pill badge-success">Cancel Anytime</span>
+                    <div>
+                        The fastest and cheapest way to get out of a lease. Generally, if someone wants to get out of lease early, they need to pay a breakage fee. So, transferring or subletting the lease to an equally qualified tenant can be an easy way out.
+                    </div>
                     <div style="margin-top: 15%;">
+                        <a href="http://blog.meetquoteshack.com/move-out-of-your-lease/" class="box-shadow btn-btn btn-lg btn-block btn-success mb-2">Learn More</a>
                         <a href="{% url 'memberships:select' %}" class="box-shadow btn btn-lg btn-block btn-success">Move Out</a>
                     </div>
                 </div>
@@ -197,70 +201,25 @@
             <div class="col-8">
                 <div style="margin: 8%;">
                     <h4 class="text-success">
-                        <b><i class="fas fa-running text-success home-icons" style="font-size: 35px;"></i> Move Out On Your Own Wish</b>
+                        <b><i class="fas fa-clipboard-check text-success home-icons" style="font-size: 35px;"></i> Check Eligibility</b>
                     </h4>
-                    <p>Our digital lockbox will help you move whenever you want & will help the new renter move-in smoothly and safely.</p>
+                    <p>After getting information on your lease, we will contact your landlord and confirm policies and process so you don't have to do any heavy lifting. If you are not eligible, you can cancel your plan and get a full refund.</p>
                 </div>
                 <div style="margin-top: 8%; margin-left: 8%;">
                     <h4 class="text-success">
-                        <b><i class="fas fa-laugh-beam text-success home-icons" style="font-size: 35px;"></i> Enjoy Your Life</b>
+                        <b><i class="fas fa-search-location text-success home-icons" style="font-size: 35px;"></i> Finding A Replacement</b>
                     </h4>
-                    <p>Through our web-portal you can select the most qualified renter with easy landlord approval.</p>
+                    <p>We will find a replacement, start marketing your place, and arrange for viewings. You can receive our digital lock in case you want to applicants to view on their own.<br>(Note: All Covid-19 Restrictions must be strictly followed)</p>
                 </div>
                 <div style="margin-top: 8%; margin-left: 8%;">
                     <h4 class="text-success">
-                        <b><i class="fas fa-bed text-success home-icons" style="font-size: 35px;"></i> Don't Worry About Your Lease</b>
+                        <b><i class="fas fa-bed text-success home-icons" style="font-size: 35px;"></i> Sit Back And Relax</b>
                     </h4>
-                    <p>If the sub-tenant leaves early, then you can re-rent again & use our rental insurance to cover any damages.</p>
+                    <p>We will make the process super simple, so that you can focus on your life. All paperwork can be done digitally, following rent payouts and damage deposits.</p>
                 </div>
             </div>
          </div>
     </div>
-</section>
-<section class="mb4">
-    <div class="container">
-         <div class="row">
-            <div class="col-8">
-                <div style="margin-top: 8%;">
-                    <h4 class="text-success">
-                        <b><i class="fas fa-hand-holding-heart text-success home-icons" style="font-size: 35px;"></i> List Your Space For Free</b>
-                    </h4>
-                    <p>Share your space, house, or apartment for long or short term without sign-up charges. You can share as many places as you want without any charges.</p>
-                </div>
-                <div>
-                    <h4 class="text-success">
-                        <b><i class="fas fa-money-bill-wave text-success home-icons" style="font-size: 35px;"></i> Increase Your Rental Revenue</b>
-                    </h4>
-                    <p>Our marketing platform will help you to manage and market multiple properties, providing you with the option of long and short term renting, at a fraction of the cost with added technology in comparison to management firms.</p>
-                </div>
-                <div>
-                    <h4 class="text-success">
-                        <b><i class="fas fa-business-time text-success home-icons" style="font-size: 35px;"></i> Grow Your Portfolio</b>
-                    </h4>
-                    <p>Our technology is here to help you along your long and short term renting journey, so that you can focus on growing your rental portfolio.</p>
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="text-center" style="margin-top: 20%; margin-bottom: 8%;">
-                    <h1 class="text-success" style="margin-bottom: 20%;">
-                        <b>Rent Out Your Space</b>
-                    </h1>
-                    <h3>
-                        <b>$63</b> /month
-                    </h3>
-                    <span class="badge badge-pill badge-success mr-6">Cancel Anytime</span>
-                    <div style="margin-top: 15%;">
-                        <a href="{% url 'memberships:select' %}" class="box-shadow btn btn-lg btn-block btn-success text-center">Start Listing</a>
-                    </div>
-                </div>
-            </div>
-         </div>
-    </div>
-    <div class="row mt4">
-          <div class="mx-auto text-center">
-              <a href="#" class="btn btn-lg btn-success mt3 mx-auto" data-toggle="modal" data-target="#staticBackdrop">What Are You Looking For?</a>
-          </div>
-      </div>
 </section>
 <section class="bg-white">
     <div class="container">

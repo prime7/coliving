@@ -64,6 +64,10 @@ def index(request):
                 delivery.time = datetime.datetime.combine(d, t)
                 delivery.save()
 
+                if delivery.phone:
+                    delivery.phone = delivery.get_phone_number
+                    delivery.save()
+
                 files = request.FILES.getlist('images')
                 for f in files:
                     AnonymousDeliveryImage.objects.create(
