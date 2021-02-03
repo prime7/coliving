@@ -55,6 +55,8 @@ class VehicleForm(forms.ModelForm):
 
 
 class AnonymousDeliveryForm(forms.ModelForm):
+    phone = forms.CharField(min_length=14, max_length=14, label='Your Phone Number', required=False,
+                            widget=forms.TextInput(attrs={'data-mask': "(000)-000-0000"}))
     date = forms.DateTimeField(widget=forms.DateInput(
         attrs={
             'type': 'date'
@@ -73,7 +75,9 @@ class AnonymousDeliveryForm(forms.ModelForm):
     class Meta:
         model = AnonymousDelivery
         fields = (
+            'name',
             'user',
+            'phone',
             'pickup',
             'dropoff',
             'date',
@@ -86,6 +90,8 @@ class AnonymousDeliveryForm(forms.ModelForm):
             'wait_time'
         )
         labels = {
+            'name': "Full Name",
+            'phone': "Phone Number",
             'user': "Email",
             'date_time': "Time",
             'wait_time': "Expected Wait Time"

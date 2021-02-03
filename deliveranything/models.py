@@ -1,3 +1,5 @@
+import re
+
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django_resized import ResizedImageField
@@ -108,6 +110,9 @@ class AnonymousDelivery(models.Model):
     user = models.EmailField(max_length=255)
     deliverer = models.ForeignKey('services.Tasker', on_delete=models.SET_NULL, null=True, blank=True)
 
+    phone = models.CharField(max_length=14, blank=True, null=True)
+    name = models.CharField(max_length=100, blank=True, null=True)
+
     completed = models.BooleanField(default=False)
     paid = models.BooleanField(default=False)
 
@@ -133,6 +138,10 @@ class AnonymousDelivery(models.Model):
             return round((self.length * self.width * self.height) / 139, 2)
         else:
             return 0
+
+    @property
+    def get_phone_number(self):  # Cleans phone number field for usage
+        return re.sub('[^0-9]', '', self.phone)
 
     def __str__(self):
         return f"{self.user}'s Delivery"

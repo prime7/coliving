@@ -3,7 +3,9 @@
 <h2 class="mb-4">Create A Delivery</h2>
 <form name="deliveryform" id="deliveryform" method="POST" enctype="multipart/form-data" action="{% url 'deliver-anything' %}">
     {% csrf_token %}
+    {{ deliveryform.name|as_crispy_field }}
     {{ deliveryform.user|as_crispy_field }}
+    {{ deliveryform.phone|as_crispy_field }}
     {{ deliveryform.pickup|as_crispy_field }}
     {{ deliveryform.dropoff|as_crispy_field }}
     {{ deliveryform.date|as_crispy_field }}

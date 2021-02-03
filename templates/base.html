@@ -84,9 +84,17 @@
               </div>
             </li>
           {% else %}
-            <a class="nav-item nav-link m-2" href="{% url 'category-list' %}">Rent Anything</a>
+            <li class="nav-item nav-link m-2 dropdown">
+                <a class="nav-bar-toggle" role="button" id="marketplaceDropdown" data-toggle="dropdown" aria-haspopup="false" aria-expanded="true">
+                    Marketplace
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="marketplaceDropdown">
+                    <a class="dropdown-item" href="{% url 'category-list' %}">Rent Anything</a>
+                    <a class="dropdown-item" href="{% url 'buyandsell-category-list' %}">Buy & Sell</a>
+                    <a class="dropdown-item" href="{% url 'memberships:select' %}">Membership</a>
+                </div>
+            </li>
             <a class="nav-item nav-link m-2" href="{% url 'deliver-anything' %}">Deliver Anything</a>
-            <a class="nav-item nav-link m-2" href="{% url 'memberships:select' %}">Membership</a>
             <a class="nav-item nav-link m-2" href="#" data-toggle="modal" data-target="#staticBackdrop2">Listings</a>
             <a class="nav-item nav-link m-2" href="{% url 'login' %}">Login</a>
             <a class="nav-item nav-link m-2" href="{% url 'signup' %}">Register</a>
