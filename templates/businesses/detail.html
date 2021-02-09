@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Business | {{ store.name }}
+{% endblock %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="container mt-3 mb-5 box-shadow">
+        <div class="row">
+            <div class="card col-md-12 topborder">
+                <div class="row mb4">
+                    <div class="col-md-8 col-sm-12">
+                        <div class="m-4">
+                            <h3 id="storeID" data-id="{{ store.id }}">{{ store.name }}</h3>
+                            {{ store.description }}
+                        </div>
+                        <div class="row m-4">
+                            {% for product in store.product_set.all %}
+                            <div class="col-md-4 col-sm-12">
+                                <div class="card mb-4 shadow-sm topborder">
+                                    <img src="{{ product.image.url }}" height="200" alt="Product Picture">
+                                    <div class="card-body">
+                                        <div class="title"><span class="h5">{{ product.title }}</span> <span class="badge badge-success small float-right">${{ product.price }}</span></div>
+                                        <p class="card-text">{{ product.description|truncatewords:12 }}</p>
+                                    </div>
+                                    {% if user.is_authenticated %}
+                                    <div class="card-footer">
+                                        <div class="float-right" id="cartButtons">
+                                            <i class="fas fa-plus-circle text-success addTo" data-pk="{{ product.pk }}" data-url="{% url 'cart-add' %}"></i> <i class="fas fa-minus-circle text-danger removeFrom" data-pk="{{ product.pk }}" data-url="{% url 'cart-remove' %}"></i>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-12">
+                        <div class="card p-4">
+                            <h3>{{ store.business.address.get_address }}</h3>
+                        </div>
+                        {% if user.is_authenticated %}
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="text-center">Cart</h4>
+                                {% for product in cart.products.all %}
+                                    <div class="text-center mt-2">
+                                        {{ product.amount }} {{ product.product }} <span class="badge badge-success">${{ product.get_cost }}</span>
+                                        {% if forloop.last %}
+                                            <br><button data-toggle="modal" data-target="#addressModal" class="btn btn-success mt-2"><i class="fas fa-shopping-cart"></i> Checkout</button>
+                                        {% endif %}
+                                    </div>
+                                {% empty %}
+                                    <div class="text-center mt-4" id="cartContent" data-empty="true">Cart Is Empty</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endif %}
+                        <div class="card">
+                            <div class="card-body">
+                                {% include "rentals/social_share.html" %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addressModal" tabindex="-1" role="dialog" aria-labelledby="addressModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form id="addressForm" data-url="{% url 'cart-create' %}">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addressModalLabel">Where do you want the delivery?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="inputAddress">Address</label>
+                            <input type="text" class="form-control" id="inputAddress">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputAddress2">Address Line 2</label>
+                            <input type="text" class="form-control" id="inputAddress2">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputCity">City</label>
+                                <input type="text" class="form-control" id="inputCity" >
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputProvince">Province</label>
+                                <input type="text" class="form-control" id="inputProvince" value="BC" disabled>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputPostal">Postal Code</label>
+                                <input type="text" class="form-control" id="inputPostal" >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+{% block js %}
+<script src="{% static 'js/businesses.js' %}"></script>
+{% endblock js %}

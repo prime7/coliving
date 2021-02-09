@@ -3,7 +3,9 @@ from django.contrib.messages.views          import SuccessMessageMixin
 from django.contrib.auth                    import login
 from django.shortcuts                       import render, redirect,reverse
 
+from businesses.models import Store
 from deliveranything.forms import AddressForm
+from businesses.forms import StoreForm, ProductForm
 from .forms                                 import UserRegisterForm, ProfileUpdateForm, ProfileVerificationForm, ContactForm, ListingDataListForm, LookingDataListForm
 from .models                                import User, NewsLetter, ListingDataList, Profile, LookingDataList
 from rentanything.models                    import Listing
@@ -160,6 +162,59 @@ def userDetail(request):
     }
 
     return render(request, 'users/detail.html', context)
+
+
+@login_required
+def userBusiness(request):
+    business = Business.objects.get(user=request.user)
+    store = Store.objects.filter(business=business).first()
+
+    if store:
+        s_form = StoreForm(instance=business.store)
+    else:
+        s_form = StoreForm()
+
+    context = {
+        'business': business,
+        's_form': s_form,
+        'p_form': ProductForm()
+    }
+
+    return render(request, 'users/business.html', context)
+
+
+@login_required
+def productForm(request):
+    if request.method == 'POST':
+        business = Business.objects.get(user=request.user)
+        store = Store.objects.filter(business=business).first()
+
+        p_form = ProductForm(request.POST, request.FILES)
+        if p_form.is_valid():
+            messages.success(request, 'Your store has been updated!')
+            p_form = p_form.save(commit=False)
+            p_form.store = store
+            p_form.save()
+
+        return redirect('user-business')
+
+@login_required
+def storeForm(request):
+    if request.method == 'POST':
+        business = Business.objects.get(user=request.user)
+        store = Store.objects.filter(business=business).first()
+        if store:
+            s_form = StoreForm(request.POST, instance=request.user.business.store)
+        else:
+            s_form = StoreForm(request.POST)
+        if s_form.is_valid():
+            messages.success(request, 'Your store has been updated!')
+            s_form = s_form.save(commit=False)
+            s_form.business = request.user.business
+            s_form.save()
+
+            return redirect('user-business')
+
 
 @login_required
 def addressForm(request):

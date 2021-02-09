@@ -177,7 +177,7 @@ def signupBusiness(request):
 
             a_form = a_form.save(commit=False)
             a_form.business = b_form
-            a_form.verified = address.a_form.verified = address.verifications["delivery"]["success"]
+            a_form.verified = address.verifications["delivery"]["success"]
             a_form.save()
 
             current_site = get_current_site(request)

@@ -19,6 +19,7 @@ INSTALLED_APPS = [
     'rentanything',
     'buyandsell',
     'deliveranything',
+    'businesses',
 
     'crispy_forms',
     'storages',
