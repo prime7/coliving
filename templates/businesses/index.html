@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+  Coliving | Businesses
+{% endblock %}
+
+{% block content %}
+<section class="jumbotron text-center m-0">
+  <div class="container">
+      <h1>Businesses</h1>
+  </div>
+</section>
+<div class="album py-5 bg-light">
+  <div class="container">
+    <div class="row justify-content-center ma4">
+        {% include "includes/search.html" %}
+    </div>
+    <div class="row">
+        <div class="card" style="width: 100%;">
+            <div class="card-body topborder">
+                <ul class="list-group list-group-flush">
+                    {% for store in stores %}
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-6 col-md-4">
+                                <div class="ma4"><h3><a href="{% url 'business-detail' pk=store.pk %}" class="text-dark">{{ store.name }}</a></h3></div>
+                                <h6 class="ma4 text-muted">{{ store.description }}</h6>
+                            </div>
+                            <div class="col-12 col-md-8">
+                                <div class="col" style="margin-left: 80%;">
+                                    <div class="row ma4">
+                                        <a class="btn btn-success" style="color: white;" href="{% url 'business-detail' pk=store.pk %}">
+                                            <b>See Listing</b>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <hr>
+            {% if stores.has_other_pages %}
+              <ul class="pagination ml-4">
+                {% if stores.has_previous %}
+                  <li class="page-item"><a class="page-link" href="?page={{ stores.previous_page_number }}">&laquo;</a></li>
+                {% else %}
+                  <li class="disabled page-item"><span class="page-link">&laquo;</span></li>
+                {% endif %}
+                {% for i in stores.paginator.page_range %}
+                  {% if stores.number == i %}
+                    <li class="active page-item"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span></li>
+                  {% else %}
+                    <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                  {% endif %}
+                {% endfor %}
+                {% if stores.has_next %}
+                  <li class="page-item"><a class="page-link" href="?page={{ stores.next_page_number }}">&raquo;</a></li>
+                {% else %}
+                  <li class="disabled page-item"><span class="page-link">&raquo;</span></li>
+                {% endif %}
+              </ul>
+            {% endif %}
+        </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

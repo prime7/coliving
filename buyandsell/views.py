@@ -13,7 +13,7 @@ from accounts.models import Notification, ChatRoom
 
 def CategoryList(request):
     categories = Category.objects.all()
-    return render(request,'buyandsell/index.html',{'categories':categories})
+    return render(request, 'buyandsell/index.html',{'categories':categories})
 
 class CategoryDetail(ListView):
     paginate_by = 25

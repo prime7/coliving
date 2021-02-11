@@ -1,0 +1,57 @@
+{% extends "users/users_base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content_block %}
+    {% if user.business %}
+        <i class="fas fa-user-tie text-success"></i> Business Account<br>
+        <small class="text-secondary">Business : {{ user.business.business_name }}</small><br>
+        <small class="text-secondary">Address: {{ user.business.address.street_address }}, {{ user.business.address.business_city }}, {{ user.business.address.business_country }} {{ user.business.address.postal_code }}</small>{% if user.business.address.verified %} <i class="fas fa-check-circle text-success"></i>{% else %} <i class="fas fa-times-circle text-danger"></i>{% endif %}<br>
+    {% endif %}
+    <small class="text-secondary">Username : {{ user.username }}</small><br>
+    <small class="text-secondary">Email : {{ user.email }}</small>
+    <div class='form-group mt4'>
+        <form method="POST" action="{% url 'store-form' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Store</legend>
+                {{ s_form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-success" type="submit">Update</button>
+            </div>
+        </form>
+    </div>
+    {% if business.store %}
+        <legend class="border-bottom mb-4">Menu <a data-toggle="modal" data-target="#productModal" class="text-success float-right small"><i class="fas fa-plus-circle"></i> Add Product</a></legend>
+        <ul class="list-group list-group-flush">
+        {% for product in business.store.product_set.all %}
+            <li class="list-group-item">{{ product.title }} <span class="badge badge-success">${{ product.price }}</span></li>
+        {% empty %}
+            <li class="list-group-item">No Products Yet.</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+
+    <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <form method="POST" action="{% url 'store-product' %}" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="modal-header">
+            <h5 class="modal-title" id="productModalLabel">{{ business.store }} | New Product</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              {{ p_form|crispy }}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-success">Add Product</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+{% endblock %}
