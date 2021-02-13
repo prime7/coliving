@@ -16,7 +16,7 @@ def verify_address(street1, zip, city, street2=None):
         country="Canada",
     )
 
-    return address.verifications["delivery"]["success"]
+    return address.verifications["delivery"]
 
 
 class IntegerRangeField(models.IntegerField):

@@ -34,8 +34,20 @@ nav{
     margin-top: 3%;
 }
 
+.mb3 {
+    margin-bottom: 3%;
+}
+
 .ma8 {
     margin: 8%;
+}
+
+.pt3 {
+    padding-top: 3%;
+}
+
+.pb3 {
+    padding-bottom: 3%;
 }
 
 .gbground {

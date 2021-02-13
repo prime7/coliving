@@ -25,8 +25,15 @@
                   </div>
                 </div>
               </form>
-              <a href="#" class="btn btn-lg btn-success" style="margin-top: 15%;" data-toggle="modal" data-target="#staticBackdrop2">What You Are Looking For?</a><br>
-              <a href="{% url 'deliver-anything' %}" class="btn btn-lg btn-success" style="margin-top: 5%;" >Need Something Delivered?</a>
+              <div>
+                    <a href="#" class="btn btn-lg btn-success" style="margin-top: 15%;" data-toggle="modal" data-target="#staticBackdrop2">What You Are Looking For?</a><br>
+              </div>
+              <div>
+                    <a href="{% url 'deliver-anything' %}" class="btn btn-lg btn-success" style="margin-top: 5%;">Need Something Delivered?</a>
+              </div>
+              <div>
+                    <a href="{% url 'business-signup' %}" style="margin-top: 5%;" class="btn btn-lg btn-success">Start Your Own Online store</a>
+              </div>
           </div>
         </div>
       </div>
@@ -65,10 +72,39 @@
   <div class="container">
       <div class="row ma4">
           <div class="mx-auto text-center">
-              <h1 class="text-success"><b>Rent Anything</b></h1>
+              <h1 class="text-success"><b>Retail</b></h1>
+              <h4 class="mt-4">
+                  <p>
+                      Perfect for Small/Medium/Home Businesses with Delivery Service. Great for your eCommerce.
+                  </p>
+              </h4>
               <h4 class="mt4">
                   <p>
-                      Our platform will allow for online person-to-person renting in an easy and secure way. You can post and/or rent anything you'd like.
+                      Our platform will allow business-to-person, business-to-business, or person-to-person online sales and marketing. Create your own online store and start selling your products and use oru delivery/pick-up service to delivery/pickup anything from anywhere.
+                  </p>
+              </h4>
+          </div>
+      </div>
+      <div class="row mb4">
+          <div class="mx-auto text-center">
+              <a href="{% url 'business-signup' %}" class="btn btn-lg btn-success">Start Your Own Online Store</a>
+          </div>
+      </div>
+      <div class="row mb4">
+          <div class="mx-auto text-center">
+              <a href="{% url 'businesses-home' %}" class="btn btn-lg btn-success">Start Shopping Now</a>
+          </div>
+      </div>
+  </div>
+</section>
+<section class="bg-light">
+  <div class="container">
+      <div class="row ma4">
+          <div class="mx-auto text-center">
+              <h1 class="text-success"><b>Reditus</b></h1>
+              <h4 class="mt4">
+                  <p>
+                      Our platform will convert your unused goods, products, equipment, machinery, books, etc. into an ongoing income stream. In simple, converting your devaluing assets into fresh sources of income. Start listing/renting with confidence and safety.
                   </p>
               </h4>
               <div class="row text-center ma4">
@@ -95,13 +131,13 @@
                   <div class="col-6">
                       <div class="mx-auto">
                           <h3><b class="text-success"><i class="fas fa-th-list text-success home-icons" style="font-size: 35px;"></i> Many Options</b></h3>
-                          <p class="lead mb-0">Whether it be for products or potential rentees, Rent Anything will provide you with many options to pick from to make your experience as hands on as possible.</p>
+                          <p class="lead mb-0">Whether it be for products or potential rentees, Reditus will provide you with many options to pick from to make your experience as hands on as possible.</p>
                       </div>
                   </div>
               </div>
               <div class="row text-center ma-4">
                   <div class="col-12 lead">
-                      Don't let your unused products, equipment, machinery, books, or others sit around. List them on rntdel and turn them into a passive income stream. Convert your devaluing asset int oa fresh source of income and rent with confidence & security.
+                      Our platform will allow person-to-person, business-to-person, or business-business renting in an easy and secure way. You can post/rent anything you'd like.
                   </div>
               </div>
           </div>
@@ -113,7 +149,7 @@
       </div>
   </div>
 </section>
-<section class="mt3 bg-light">
+<section class="pt3 gbground pb3">
     <div class="container">
         <div class="row">
             <div class="card-deck">
@@ -179,46 +215,6 @@
               </div>
             </div>
         </div>
-    </div>
-</section>
-<section class="mt3 gbground">
-    <div class="container">
-         <div class="row mb4">
-            <div class="col-4">
-                <div class="text-center" style="margin-top: 20%;">
-                    <h1 class="text-success" style="margin-bottom: 20%;">
-                        <b>Move Out Of Your Lease</b>
-                    </h1>
-                    <div>
-                        The fastest and cheapest way to get out of a lease. Generally, if someone wants to get out of lease early, they need to pay a breakage fee. So, transferring or subletting the lease to an equally qualified tenant can be an easy way out.
-                    </div>
-                    <div style="margin-top: 15%;">
-                        <a href="http://blog.meetquoteshack.com/move-out-of-your-lease/" class="box-shadow btn-btn btn-lg btn-block btn-success mb-2">Learn More</a>
-                        <a href="{% url 'memberships:select' %}" class="box-shadow btn btn-lg btn-block btn-success">Move Out</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-8">
-                <div style="margin: 8%;">
-                    <h4 class="text-success">
-                        <b><i class="fas fa-clipboard-check text-success home-icons" style="font-size: 35px;"></i> Check Eligibility</b>
-                    </h4>
-                    <p>After getting information on your lease, we will contact your landlord and confirm policies and process so you don't have to do any heavy lifting. If you are not eligible, you can cancel your plan and get a full refund.</p>
-                </div>
-                <div style="margin-top: 8%; margin-left: 8%;">
-                    <h4 class="text-success">
-                        <b><i class="fas fa-search-location text-success home-icons" style="font-size: 35px;"></i> Finding A Replacement</b>
-                    </h4>
-                    <p>We will find a replacement, start marketing your place, and arrange for viewings. You can receive our digital lock in case you want to applicants to view on their own.<br>(Note: All Covid-19 Restrictions must be strictly followed)</p>
-                </div>
-                <div style="margin-top: 8%; margin-left: 8%;">
-                    <h4 class="text-success">
-                        <b><i class="fas fa-bed text-success home-icons" style="font-size: 35px;"></i> Sit Back And Relax</b>
-                    </h4>
-                    <p>We will make the process super simple, so that you can focus on your life. All paperwork can be done digitally, following rent payouts and damage deposits.</p>
-                </div>
-            </div>
-         </div>
     </div>
 </section>
 <section class="bg-white">

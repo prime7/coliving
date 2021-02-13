@@ -6,5 +6,6 @@ urlpatterns = [
     path('detail/<int:pk>/', views.BusinessDetailView.as_view(), name="business-detail"),
     path('cart/add/', views.cart_add, name="cart-add"),
     path('cart/remove/', views.cart_remove, name="cart-remove"),
-    path('cart/create/', views.business_delivery, name="cart-create")
+    path('cart/create/', views.business_delivery, name="cart-create"),
+    path('cart/quote/', views.retail_quote, name="retail-quote")
 ]

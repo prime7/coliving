@@ -109,7 +109,7 @@ def ApplicationAcceptView(request, listingpk, bookingpk):
         )
         booking.rentee.email_user(
             subject=f"Your booking request for {listing.title} has been accepted!",
-            message=f"{request.user} has accepted your booking request! Head to https://rntdel.com/dashboard/chats/ to coordinate the rental process with them!",
+            message=f"{request.user} has accepted your booking request! Head to https://incuman.com/dashboard/chats/ to coordinate the rental process with them!",
         )
 
     return redirect('rentanything-listing', pk=listingpk)
