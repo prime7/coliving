@@ -1,14 +1,13 @@
-from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db.models import Q
-from django.forms import model_to_dict
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView, DetailView
 
 from .models import Store, Product, Cart, CartProduct
 from config.functions import verify_address
+import geopy.distance
 
 class BusinessIndex(ListView):
     paginate_by = 25
@@ -110,5 +109,39 @@ def business_delivery(request):
             request.GET['address2']
         )
 
-        return HttpResponse(value)
+        return HttpResponse(value["success"])
 
+@csrf_exempt
+def retail_quote(request):
+    if request.is_ajax:
+        dropoff = verify_address(
+            request.GET['address1'],
+            request.GET['zip'],
+            request.GET['city'],
+            request.GET['address2']
+        )
+
+        cart = Cart.objects.get(pk=int(request.GET['cartID']))
+        store = Store.objects.get(pk=int(request.GET['storeID']))
+
+        pickup = verify_address(
+            store.business.address.street_address,
+            store.business.address.postal_code,
+            store.business.address.business_city,
+            store.business.address.apartment_address
+        )
+
+        coords_1 = (pickup["details"]["latitude"],
+                    pickup["details"]["longitude"])
+        coords_2 = (dropoff["details"]["latitude"],
+                    dropoff["details"]["longitude"])
+
+        distance = geopy.distance.distance(coords_1, coords_2).km
+
+        c_price = cart.get_cost
+
+        d_price = round(distance * 1.7, 2)
+
+        quote = round(float(c_price) + d_price, 2)
+
+        return HttpResponse(quote)

@@ -124,7 +124,7 @@ def signup(request):
                     referrer.referred_users.add(user)
 
             current_site = get_current_site(request)
-            subject = 'Welcome to rntdel <3 Activate your account'
+            subject = 'Welcome to incuman <3 Activate your account'
             message = render_to_string('accounts/account_activation_email.html', {
                 'user': user,
                 'domain': current_site.domain,

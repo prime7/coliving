@@ -76,7 +76,11 @@ class Cart(models.Model):
 
     @property
     def get_cost(self):
-        return self.products.all().aggregate(Sum('price'))
+        cost = 0
+        for product in self.products.all():
+            cost += product.get_cost
+
+        return cost
 
 
 class CartProduct(models.Model):

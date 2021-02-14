@@ -2,16 +2,16 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.sites.shortcuts import get_current_site
 from django.conf import settings
-from django.core import serializers
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from django.views.decorators.csrf import csrf_exempt
-
+from datetime import datetime, timedelta
 from accounts.forms import UserRegisterForm
 from accounts.tokens import account_activation_token
+from businesses.models import Cart
 from deliveranything.forms import BusinessCreationForm, AddressForm
 from .forms import DeliveryForm, VehicleForm, AnonymousDeliveryForm
 from .models import DeliveryImage, AnonymousDeliveryImage, Delivery
@@ -230,6 +230,45 @@ def payment(request):
 
         messages.success(request, "Pre-Authorization made. A charge will be made when the delivery is made.")
         return redirect('deliver-anything')
+    elif request.GET.get('card') and request.GET.get('quote') and request.GET.get('pickup') and request.GET.get('dropoff') and request.GET.get('cartID'):
+        description = "Order"
+        cart = Cart.objects.get(pk=int(request.GET.get('cartID')))
+        for product in cart.products.all():
+            description += f"\n{product.amount}x {product.product.title} - ${product.get_cost}"
+
+        description += f"\n\nTotal: ${cart.get_cost}"
+
+        delivery = Delivery.objects.create(
+            user=request.user,
+            pickup=request.GET.get('pickup'),
+            dropoff=request.GET.get('dropoff'),
+            time=datetime.datetime.now() + timedelta(hours=4),
+            wait_time="10",
+            description=description,
+            quote=float(request.GET.get('quote'))
+        )
+
+        card = stripe.PaymentMethod.retrieve(request.GET.get('card'))
+
+        intent = stripe.PaymentIntent.create(
+            amount=int(float(request.GET.get('quote')) * 100),
+            customer=request.user.profile.customer_code,
+            currency="cad",
+            payment_method=card,
+        )
+        delivery.intent = intent["id"]
+        delivery.save()
+
+        subject = 'New Delivery Order'
+        message = "A new order has been created.\n"
+        message += description
+
+        cart.store.business.user.email_user(subject, message, fail_silently=False)
+
+        messages.success(request, "Pre-Authorization made. A charge will be made when the delivery is made.")
+        cart.delete()
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
 
     messages.error(request, "An unexpected error occured. Please try again.")
     return redirect('deliver-anything')
