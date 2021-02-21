@@ -236,6 +236,18 @@ def payment(request):
         for product in cart.products.all():
             description += f"\n{product.amount}x {product.product.title} - ${product.get_cost}"
 
+        if request.GET.get('coupon'):
+            list = stripe.PromotionCode.list(code=request.GET.get('coupon'))['data']
+            if len(list) > 0:
+                off = list[0]["coupon"]["percent_off"]
+                price = float(request.GET.get('quote'))
+                discount = price * float(off) / 100
+                price = float(request.GET.get('quote')) - float(discount)
+            else:
+                price = float(request.GET.get('quote'))
+        else:
+            price = float(request.GET.get('quote'))
+
         description += f"\n\nTotal: ${cart.get_cost}"
 
         delivery = Delivery.objects.create(
@@ -245,13 +257,13 @@ def payment(request):
             time=datetime.datetime.now() + timedelta(hours=4),
             wait_time="10",
             description=description,
-            quote=float(request.GET.get('quote'))
+            quote=price
         )
 
         card = stripe.PaymentMethod.retrieve(request.GET.get('card'))
 
         intent = stripe.PaymentIntent.create(
-            amount=int(float(request.GET.get('quote')) * 100),
+            amount=int(float(price) * 100),
             customer=request.user.profile.customer_code,
             currency="cad",
             payment_method=card,
@@ -264,8 +276,10 @@ def payment(request):
         message += description
 
         cart.store.business.user.email_user(subject, message, fail_silently=False)
-
-        messages.success(request, "Pre-Authorization made. A charge will be made when the delivery is made.")
+        if request.GET.get('coupon'):
+            messages.success(request, f"Promo code used for ${discount} off!")
+        else:
+            messages.success(request, "Pre-Authorization made. A charge will be made when the delivery is made.")
         cart.delete()
         return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
