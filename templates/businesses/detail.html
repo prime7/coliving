@@ -13,7 +13,7 @@
                 <div class="row mb4">
                     <div class="col-md-8 col-sm-12">
                         <div class="m-4">
-                            <h3 id="storeID" data-id="{{ store.id }}">{{ store.name }}</h3>
+                            <h3 id="storeID" data-id="{{ store.id }}" data-user="{% if user.is_authenticated %}auth{% else %}anon{% endif %}">{{ store.name }}</h3>
                             {{ store.description }}
                         </div>
                         <div class="row m-4">
@@ -25,7 +25,7 @@
                                         <div class="title"><span class="h5">{{ product.title }}</span> <span class="badge badge-success small float-right">${{ product.price }}</span></div>
                                         <p class="card-text">{{ product.description|truncatewords:12 }}</p>
                                     </div>
-                                    {% if user.is_authenticated %}
+                                    {% if cart %}
                                     <div class="card-footer">
                                         <div class="float-right" id="cartButtons">
                                             <i class="fas fa-plus-circle text-success addTo" data-pk="{{ product.pk }}" data-url="{% url 'cart-add' %}"></i> <i class="fas fa-minus-circle text-danger removeFrom" data-pk="{{ product.pk }}" data-url="{% url 'cart-remove' %}"></i>
@@ -41,10 +41,11 @@
                         <div class="card p-4">
                             <h3 id="storeAddress">{{ store.business.address.get_address }}</h3>
                         </div>
-                        {% if user.is_authenticated %}
                         <div class="card">
                             <div class="card-body">
+                                {% if cart %}
                                 <h4 class="text-center" id="cartTitle" data-id="{{ cart.pk }}">Cart</h4>
+                                <input class="form-control" type="text" id="couponCode" name="coupon" placeholder="Enter Coupon Code" />
                                 {% for product in cart.products.all %}
                                     <div class="text-center mt-2">
                                         {{ product.amount }}x {{ product.product.title }} <span class="badge badge-success">${{ product.get_cost }}</span>
@@ -59,9 +60,23 @@
                                 {% empty %}
                                     <div class="text-center mt-4" id="cartContent" data-empty="true">Cart Is Empty</div>
                                 {% endfor %}
+                                {% else %}
+                                    <form method="POST" action="{% url 'business-detail' pk=store.id %}">
+                                        {% csrf_token %}
+                                        <div class="input-group">
+                                            <input type="hidden" name="next" value="{{ request.path }}" />
+
+                                            <input type="email" class="form-control" name="{{ a_form.email.html_name }}" id="{{ a_form.email.id_for_label  }}" placeholder="Enter your email to start shopping" aria-label="Enter your email to start shopping" />
+                                            <div class="input-group-append">
+                                                <button class="btn btn-success" type="submit">
+                                                    <i class="fas fa-arrow-right"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                {% endif %}
                             </div>
                         </div>
-                        {% endif %}
                         <div class="card">
                             <div class="card-body">
                                 {% include "rentals/social_share.html" %}
@@ -85,6 +100,31 @@
                     <div class="modal-body">
                         <div id="messageBox"></div>
                         <div id="paymentDiv"></div>
+                        <div id="cardDiv" class="mb-2">
+                            <form action="{% url 'user-payment' %}" name="cardform" id="cardID" method="POST">
+                          {% csrf_token %}
+                            <div class='card-wrapper mb-4'></div>
+                            <script src="{% static 'js/card.js' %}"></script>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <label>Credit Card Number </label>
+                                    <input type="text" class="form-control" id="number" name="number" />
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Expiration</label>
+                                    <input type="text" class="form-control" id="exp" placeholder="MM/YY" name="expiry"/>
+                                </div>
+                                <div class="col-md-8">
+                                    <label>Name</label>
+                                    <input type="text" class="form-control" id="name" name="name" />
+                                </div>
+                                <div class="col-md-4">
+                                    <label>CVV/CVC </label>
+                                    <input type="text" class="form-control" id="cvc" name="cvc" />
+                                </div>
+                            </div>
+                        </form>
+                        </div>
                         <div id="formDiv">
                             <div class="form-group">
                                 <label for="inputAddress">Address</label>
@@ -114,6 +154,7 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeBtn" data-url="{% url 'payment-methods' %}" data-accept="{% url 'ajax-accept' %}" data-payment="{% url 'user-payment' %}" data-final="{% url 'deliver-payment' %}">Close</button>
                             <button type="submit" class="btn btn-success" id="quoteSubmit" data-url="{% url 'retail-quote' %}">Submit</button>
+                            <button type="submit" class="btn btn-success" id="payBtn" data-url="{% url 'card-payment' %}"><i class="fas fa-credit-card"></i> Pay</button>
                         </div>
                     </div>
                 </form>
@@ -123,4 +164,40 @@
 {% endblock content %}
 {% block js %}
 <script src="{% static 'js/businesses.js' %}"></script>
+    <script>
+
+    var card = new Card({
+    // a selector or DOM element for the form where users will
+    // be entering their information
+    form: 'form', // *required*
+    // a selector or DOM element for the container
+    // where you want the card to appear
+    container: '.card-wrapper', // *required*
+
+    formSelectors: {
+        numberInput: 'input[name="number"]', // optional — default input[name="number"]
+        expiryInput: 'input[name="expiry"]', // optional — default input[name="expiry"]
+        cvcInput: 'input[name="cvc"]', // optional — default input[name="cvc"]
+        nameInput: 'input[name="name"]' // optional - defaults input[name="name"]
+    },
+
+    // Strings for translation - optional
+    messages: {
+        validDate: 'valid\ndate', // optional - default 'valid\nthru'
+        monthYear: 'mm/yyyy', // optional - default 'month/year'
+    },
+
+    // Default placeholders for rendered fields - optional
+    placeholders: {
+        number: '•••• •••• •••• ••••',
+        name: 'Full Name',
+        expiry: '••/••',
+        cvc: '•••'
+    },
+
+    // if true, will log helpful messages for setting up Card
+    debug: false // optional - default false
+});
+
+    </script>
 {% endblock js %}

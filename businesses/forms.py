@@ -1,5 +1,15 @@
 from django import forms
-from .models import Store, Product
+from .models import Store, Product, Cart
+
+
+class AnonymousCartForm(forms.ModelForm):
+
+    class Meta:
+        model = Cart
+        fields = ('email',)
+        labels = {
+            'email': 'Enter Your Email To Start Shopping'
+        }
 
 
 class StoreForm(forms.ModelForm):

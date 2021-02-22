@@ -67,12 +67,18 @@ class Product(models.Model):
 
 
 class Cart(models.Model):
-    user = models.ForeignKey('accounts.User', on_delete=models.CASCADE, related_name='customer')
+    user = models.ForeignKey('accounts.User', on_delete=models.CASCADE, related_name='customer', blank=True, null=True)
+
+    email = models.EmailField(max_length=255, null=True, blank=True)  # Used for Anonymous User
+
     store = models.ForeignKey('businesses.Store', on_delete=models.CASCADE,  related_name='store')
     products = models.ManyToManyField('businesses.CartProduct', blank=True, related_name='products')
 
     def __str__(self):
-        return f"{self.user}'s cart at {self.store}"
+        if self.email:
+            return f"{self.email}'s cart at {self.store} (Anonymous User)"
+        else:
+            return f"{self.user}'s cart at {self.store}"
 
     @property
     def get_cost(self):

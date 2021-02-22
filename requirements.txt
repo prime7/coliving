@@ -16,6 +16,7 @@ easypost==5.0.0
 geographiclib==1.50
 geopy==2.1.0
 idna==2.10
+jmespath==0.10.0
 Pillow==7.1.2
 psycopg2-binary==2.8.3
 python-dateutil==2.8.1
@@ -26,6 +27,6 @@ requests==2.25.1
 s3transfer==0.3.3
 six==1.15.0
 soupsieve==2.1
-stripe==2.48.0
+stripe==2.55.2
 urllib3==1.25.11
 zope.interface==5.2.0
