@@ -87,6 +87,7 @@ local_settings.py
 .env
 db.sqlite3
 test.txt
+production.env
 
 # DOC: https://stackoverflow.com/questions/4308610/how-to-ignore-certain-files-in-git
 # git rm --cached -r name_of_file
