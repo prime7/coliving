@@ -3,7 +3,7 @@ from django.contrib.messages.views          import SuccessMessageMixin
 from django.contrib.auth                    import login
 from django.shortcuts                       import render, redirect,reverse
 
-from businesses.models import Store
+from businesses.models import Store, Product
 from deliveranything.forms import AddressForm
 from businesses.forms import StoreForm, ProductForm
 from .forms                                 import UserRegisterForm, ProfileUpdateForm, ProfileVerificationForm, ContactForm, ListingDataListForm, LookingDataListForm
@@ -184,6 +184,15 @@ def userBusiness(request):
 
 
 @login_required
+def productDelete(request, pk):
+    product = Product.objects.get(pk=pk)
+    product.delete()
+    messages.success(request, 'Product Deleted!')
+
+    return redirect('user-business')
+
+
+@login_required
 def productForm(request):
     if request.method == 'POST':
         business = Business.objects.get(user=request.user)
@@ -275,20 +284,20 @@ def userPayment(request):
                 print('Message is: %s' % e.user_message)
             except stripe.error.RateLimitError as e:
                 # Too many requests made to the API too quickly
-                messages.info("You have sent too many requests too quickly. Try again later.")
+                messages.info(request, "You have sent too many requests too quickly. Try again later.")
             except stripe.error.InvalidRequestError as e:
                 # Invalid parameters were supplied to Stripe's API
-                messages.info("An unexpected error occured. Try again.")
+                messages.info(request, "An unexpected error occured. Try again.")
             except stripe.error.AuthenticationError as e:
                 # Authentication with Stripe's API failed
                 # (maybe you changed API keys recently)
-                messages.info("An unexpected error occured. Try again.")
+                messages.info(request, "An unexpected error occured. Try again.")
             except stripe.error.APIConnectionError as e:
                 # Network communication with Stripe failed
-                messages.info("A network error occured. Try again.")
+                messages.info(request, "A network error occured. Try again.")
             except stripe.error.StripeError as e:
                 # Display a very generic error to the user
-                messages.info("An unexpected error occured. Try again.")
+                messages.info(request, "An unexpected error occured. Try again.")
                 print('Status is: %s' % e.http_status)
                 print('Code is: %s' % e.code)
                 # param is '' in this case

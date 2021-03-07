@@ -23,6 +23,7 @@ urlpatterns = [
     path('user/business/', views.userBusiness, name='user-business'),
     path('user/business/form', views.storeForm, name='store-form'),
     path('user/business/product', views.productForm, name='store-product'),
+    path('user/business/product/delete/<int:pk>/', views.productDelete, name='delete-product'),
     path('user/membership/', views.userMembership, name='user-membership'),
     path('user/lease/', views.UserLease.as_view(), name='user-lease'),
     path('user/agreements/', AgreementListView.as_view(),name='user-agreements'),
