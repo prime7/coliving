@@ -251,6 +251,14 @@ class Profile(models.Model):
 
     @receiver(post_save, sender=User)
     def save_profile(sender, instance, created, *args, **kwargs):
+        if not instance.profile.customer_code:
+            get = stripe.Customer.create(
+                email=instance.email,
+                name=instance.username
+            )
+            instance.profile.customer_code = get["id"]
+            instance.profile.save()
+
         instance.profile.save()
 
     def __str__(self):

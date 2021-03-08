@@ -157,7 +157,7 @@ def payment_method(request):
 
                 context["card"] = user_card
             except stripe.error.CardError as e:
-                errors.append("Card type not supported.")
+                errors.append("Card type not supported or incorrect details.")
 
                 print('Status is: %s' % e.http_status)
                 print('Code is: %s' % e.code)
