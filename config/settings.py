@@ -82,3 +82,5 @@ LOGIN_URL = '/login'
 DJANGORESIZED_DEFAULT_FORMAT_EXTENSIONS = {'PNG': ".png"}
 
 handler404 = 'accounts.views.page_not_found_view'
+
+SECURE_SSL_REDIRECT = True
