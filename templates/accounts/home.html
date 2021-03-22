@@ -7,120 +7,187 @@ Incuman - The Digital Marketplace
 {% endblock %}
 
 {% block content %}
-<div class="bg-light">
-<section class="text-white text-center bg">
-    <div class="container">
-      <div class="row section-margin">
-        <div class="col-xl-9 mx-auto mb4">
-          <h2 class="mb-2">Whatever You Want, Whenever You Want,<br><span class="text-center">Wherever You Want</span></h2>
-          <div class="col-md-12 col-lg-12 col-xl-12 mx-auto mt4">
-              <form method='GET'>
-                {% csrf_token %}
-                <div class="form-row">
-                  <div class="col-12 col-md-9 mb-2 mb-md-0">
-                    <input type='text' class="form-control form-control-lg" name='q' placeholder='&#xF002; Search Listings' value='{{ request.GET.q }}' style="font-family: Arial, FontAwesome;">
-                  </div>
-                  <div class="col-12 col-md-3">
-                    <button type="submit" class="btn btn-block btn-lg btn-success">Search</button>
-                  </div>
-                </div>
-              </form>
-              <div>
-                    <a href="#" class="btn btn-lg btn-success" style="margin-top: 15%;" data-toggle="modal" data-target="#staticBackdrop2">What You Are Looking For?</a><br>
-              </div>
-              <div>
-                    <a href="{% url 'deliver-anything' %}" class="btn btn-lg btn-success" style="margin-top: 5%;">Need Something Delivered?</a>
-              </div>
-              <div>
-                    <a href="{% url 'business-signup' %}" style="margin-top: 5%;" class="btn btn-lg btn-success">Start Your Own Online store</a>
-              </div>
+    <section id="hero" class="d-flex align-items-center">
+        <div class="container" data-aos="zoom-out" data-aos-delay="100">
+            <h1>Welcome to <span class="text-success">incuman</span></h1>
+            <h2>Whatever You Want, Whenever You Want, Wherever You Want</h2>
+            <div class="d-flex">
+                <a class="btn btn-lg btn-success" href="#" data-toggle="modal" data-target="#staticBackdrop2">Get Started</a>
+                <a href="https://www.youtube.com/watch?v=24O9aTPEhnc" class="venobox btn-watch-video" data-vbtype="video" data-autoplay="true"> Watch Video <i class="icofont-play-alt-2 theme" ></i></a>
+            </div>
+        </div>
+    </section>
+
+    <main id="main">
+
+    <!-- ======= Featured Services Section ======= -->
+    <section id="featured-services" class="featured-services">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row">
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
+              <div class="icon"><i class="bx bx-package"></i></div>
+              <h4 class="title"><a href="">Flexible Deliveries</a></h4>
+              <p class="description">Get anything delivered to and from anywhere you want at any time</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
+              <div class="icon"><i class="bx bx-timer"></i></div>
+              <h4 class="title"><a href="">Blazing Fast Service</a></h4>
+              <p class="description">Get your deliveries completed quickly at a time of your own choosing</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
+              <div class="icon"><i class="bx bx-store"></i></div>
+              <h4 class="title"><a href="">Support Local Businesses</a></h4>
+              <p class="description">By shopping on our retail section, support your favorite local businesses</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box" data-aos="fade-up" data-aos-delay="400">
+              <div class="icon"><i class="bx bx-network-chart"></i></div>
+              <h4 class="title"><a href="">Grow Your Business</a></h4>
+              <p class="description">Using our online platform, grow your businesses by reaching new clients and areas</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Featured Services Section -->
+
+    <section id="delivery" class="delivery section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Delivery</h2>
+          <h3>Deliver <span>Anything</span> to <span>Anywhere</span></h3>
+          <p>Our service will cover delivery or pickup of used products, new products, orders from restaurants/groceries and courier from business-to-business.</p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6" data-aos="zoom-out" data-aos-delay="100">
+            <img src="{% static 'img/delivery.png' %}" class="img-fluid" alt="">
+          </div>
+          <div class="col-lg-6 content d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="100">
+            <h3>Our online platform will allow your business to quickly adapt and allow for deliveries.</h3>
+            <p class="font-italic">
+              Register as a business, list your products, and watch as your business skyrockets.
+            </p>
+          </div>
+        </div>
+        <div class="row text-center mt-4">
+            <div class="col-md-4 mt-4">
+                <a class="btn btn-lg btn-success" href="{% url 'deliver-anything' %}">Let's Get Started</a>
+            </div>
+            <div class="col-md-4 mt-4">
+                <a class="btn btn-lg btn-success" href="{% url 'business-signup' %}">Register Businesses</a>
+            </div>
+            <div class="col-md-4 mt-4">
+                <a class="btn btn-lg btn-success" href="{% url 'tasker-signup' %}">Become A Driver</a>
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="retail" class="retail">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Retail</h2>
+          <h3>Perfect for <span>Small Businesses</span> and great for <span>eCommerce</span></h3>
+          <p>Our platform will allow business-to-person, business-to-business, or person-to-person online sales and marketing.</p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6 content d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="100">
+            <h3>Create your own online store and start selling your products while using our delivery/pick-up service.</h3>
+            <p class="font-italic">
+              Take your business to new horizons using our easy to use online platform.
+            </p>
+          </div>
+          <div class="col-lg-6" data-aos="zoom-out" data-aos-delay="100">
+            <img src="{% static 'img/retail.png' %}" class="img-fluid" alt="">
+          </div>
+        </div>
+        <div class="row text-center mt-4">
+            <div class="col-md-6 mt-4">
+                <a class="btn btn-lg btn-success" href="{% url 'businesses-home' %}">Start Shopping Now</a>
+            </div>
+            <div class="col-md-6 mt-4">
+                <a class="btn btn-lg btn-success" href="{% url 'business-signup' %}">Start Your Online Store</a>
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="services section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Services</h2>
+          <h3>Check out our <span>Services</span></h3>
+          <p>Our online platform provides various different services for your home and business.</p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100" style="width: 100%;">
+            <div class="icon-box" style="cursor: pointer;" onclick="window.location={% url 'deliver-anything' %};">
+              <div class="icon"><i class="bx bx-package"></i></div>
+              <h4><a href="{% url 'deliver-anything' %}">Deliver Anything</a></h4>
+              <p>Deliver Anything To Anywhere Using Our Online Platform</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200" style="width: 100%;">
+            <div class="icon-box" style="cursor: pointer;" onclick="window.location={% url 'businesses-home' %};">
+              <div class="icon"><i class="bx bx-store"></i></div>
+              <h4><a href="{% url 'businesses-home' %}">Retail</a></h4>
+              <p>Great For Your Small Business And Great For eCommerce</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="300" style="width: 100%;">
+            <div class="icon-box" style="cursor: pointer;" onclick="window.location={% url 'category-list' %};">
+              <div class="icon"><i class="bx bx-tachometer"></i></div>
+              <h4><a href="{% url 'category-list' %}">Reditus</a></h4>
+              <p>Rent Anything From Anyone At Anytime With Our Platform</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-</section>
-<section class="bg-light pl-2 pr-2">
-  <div class="container">
-      <div class="row ma4">
-          <div class="mx-auto text-center">
-              <h1 class="text-success"><b>Deliver Anything to Anywhere</b></h1>
-              <h4 class="mt4">
-                  <p>
-                      Start using our delivery & pick-up service, which will help you deliver anything to anywhere. Our service will cover delivery or pickup of used products, new products, orders from restaurants/groceries and courier from business-to-business. This service is only available in Vancouver, Burnaby, Surrey & Richmond. Whatever you want, whenever you want, wherever you want.
-                  </p>
-              </h4>
-          </div>
-      </div>
-      <div class="row mb4">
-          <div class="mx-auto text-center">
-              <a href="{% url 'deliver-anything' %}" class="btn btn-lg btn-success">Let's Get Started</a>
-          </div>
-      </div>
-      <div class="row mb4">
-          <div class="mx-auto text-center">
-              <a href="{% url 'business-signup' %}" class="btn btn-lg btn-success">Register Your Businesses</a>
-          </div>
-      </div>
-      <div class="row mb4">
-          <div class="mx-auto text-center">
-              <a href="{% url 'tasker-signup' %}" class="btn btn-lg btn-success">Become A Driver</a>
-          </div>
-      </div>
-  </div>
-</section>
-<section class="gbground pl-2 pr-2">
-  <div class="container">
-      <div class="row ma4">
-          <div class="mx-auto text-center">
-              <h1 class="text-success"><b>Retail</b></h1>
-              <h4 class="mt-4">
-                  <p>
-                      Perfect for Small/Medium/Home Businesses with Delivery Service. Great for your eCommerce.
-                  </p>
-              </h4>
-              <h4 class="mt4">
-                  <p>
-                      Our platform will allow business-to-person, business-to-business, or person-to-person online sales and marketing. Create your own online store and start selling your products and use oru delivery/pick-up service to delivery/pickup anything from anywhere.
-                  </p>
-              </h4>
-          </div>
-      </div>
-      <div class="row mb4">
-          <div class="mx-auto text-center">
-              <a href="{% url 'business-signup' %}" class="btn btn-lg btn-success">Start Your Own Online Store</a>
-          </div>
-      </div>
-      <div class="row mb4">
-          <div class="mx-auto text-center">
-              <a href="{% url 'businesses-home' %}" class="btn btn-lg btn-success">Start Shopping Now</a>
-          </div>
-      </div>
-  </div>
-</section>
-<section class="bg-white pl-2 pr-2">
-    <div class="container">
-        <div class="mx-auto text-center ma4">
-            <h3 class="text-success">What Are You Looking For?</h3>
-            <div class="mx-auto text-center" style="margin-bottom:6%;">
-               <a href="#" class="btn btn-lg btn-success mt3" data-toggle="modal" data-target="#staticBackdrop2">Let Us Help You Find It</a>
-            </div>
-            <h3 class="text-success">Newsletter</h3>
-            <h5 class="mt3">Subscribe to our Newsletter to stay up to date.</h5>
-            <div class="col-md-10 col-lg-8 col-xl-7 mx-auto mt3">
-              <form method='POST' action="{% url 'newsletter-signup' %}">
-                {% csrf_token %}
-                <div class="form-row">
-                  <div class="col-12 col-md-9 mb-2 mb-md-0">
-                    <input type='email' class="form-control form-control-lg" name='newsletter' placeholder='your@email.com'>
-                  </div>
-                  <div class="col-12 col-md-3">
-                    <button type="submit" class="btn btn-block btn-lg btn-success">Subscribe</button>
-                  </div>
+    </section><!-- End Services Section -->
+    <section id="newsletter" class="newsletter">
+        <div class="container">
+            <div class="mx-auto text-center ma4">
+                <h3 class="text-success">What Are You Looking For?</h3>
+                <div class="mx-auto text-center" style="margin-bottom:6%;">
+                   <a href="#" class="btn btn-lg btn-success mt3" data-toggle="modal" data-target="#staticBackdrop2">Let Us Help You Find It</a>
                 </div>
-              </form>
+                <h3 class="text-success">Newsletter</h3>
+                <h5 class="mt3">Subscribe to our Newsletter to stay up to date.</h5>
+                <div class="col-md-10 col-lg-8 col-xl-7 mx-auto mt3">
+                  <form method='POST' action="{% url 'newsletter-signup' %}">
+                    {% csrf_token %}
+                    <div class="form-row">
+                      <div class="col-12 col-md-9 mb-2 mb-md-0">
+                        <input type='email' class="form-control form-control-lg" name='newsletter' placeholder='your@email.com'>
+                      </div>
+                      <div class="col-12 col-md-3">
+                        <button type="submit" class="btn btn-block btn-lg btn-success">Subscribe</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
             </div>
         </div>
-    </div>
-</section>
-</div>
+    </section>
+
+  </main>
 {% endblock content %}
