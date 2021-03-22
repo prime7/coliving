@@ -68,6 +68,10 @@ nav{
     border-top: #5cb85c 8px solid !important;
 }
 
+.theme {
+    color: #5cb85c !important;
+}
+
 .loader {
   border: 8px solid #f3f3f3;
   border-radius: 50%;
